@@ -1,12 +1,69 @@
 @font-face {
     font-family: 'Revue';
-    src: url('../fonts/Revue-Thin.woff2') format('woff2'),
-        url('../fonts/Revue-Thin.woff') format('woff');
+    src: url('../fonts/Revue-Thin.woff2') format('woff2'), url('../fonts/Revue-Thin.woff') format('woff');
     font-weight: 100;
     font-style: normal;
     font-display: swap;
 }
 
-h1{
+header {
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../images/slide_1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgb(0, 0, 0, 0.31);
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.31) 0%, rgba(0, 0, 0, 0.31) 0%);
+    z-index: 0;
+}
+
+.header-top{
+    margin-top: 40px;
+    position: inherit;
+    z-index: 9;
+}
+
+.container{
+    max-width: 1170px;
+    margin: auto;
+}
+
+.header-top-social{
+    color: white;
+    font-size: 20px;
+}
+
+.header-top-social a{
+    color: white;
+    margin-right: 10px;
+}
+
+.logo-unit h1{
     font-family: Revue;
+    font-size: 30px;
+    color: white;
+}
+
+.logo-unit img{
+    margin-right: -21px;
+    width: 85px;
+    height: auto;
+}
+
+.phone-icon img{
+    width: 25px;
+    margin-right: 5px;
+}
+
+.header-top-phone h3{
+    color: white;
+    font-size: 20px;
 }

@@ -3,5 +3,18 @@
     padding: 0%;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
+    font-family: 'Quicksand', sans-serif;
+    overflow: hidden;
 }
 
+.d-flex{
+    display: flex;
+}
+
+.justify-content-between{
+    justify-content: space-between;
+}
+
+.align-items-centre{
+    align-items: center;
+}
