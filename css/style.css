@@ -25,45 +25,73 @@ header::before {
     z-index: 0;
 }
 
-.header-top{
+.header-top {
     margin-top: 40px;
+    margin-bottom: 38px;
     position: inherit;
-    z-index: 9;
+    z-index: 1;
 }
 
-.container{
-    max-width: 1170px;
-    margin: auto;
-}
-
-.header-top-social{
+.header-top-social {
     color: white;
     font-size: 20px;
 }
 
-.header-top-social a{
+.header-top-social a {
     color: white;
     margin-right: 10px;
 }
 
-.logo-unit h1{
+.logo-unit h1 {
     font-family: Revue;
     font-size: 30px;
     color: white;
 }
 
-.logo-unit img{
+.logo-unit img {
     margin-right: -21px;
     width: 85px;
     height: auto;
 }
 
-.phone-icon img{
+.phone-icon img {
     width: 25px;
     margin-right: 5px;
 }
 
-.header-top-phone h3{
+.header-top-phone h3 {
     color: white;
     font-size: 20px;
 }
+
+.navbar {
+    position: relative;
+    z-index: 2;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    font-family: Quicksand;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 2px;
+    padding: 6px 0;
+}
+
+.navbar {
+    position: relative;
+    padding: 19px 15%;
+    text-align: center;
+    margin: 0;
+    z-index: 200;
+    background-color: #053f81ab;
+    border-radius: 10px;
+}
+
+.navbar li a:hover{
+    color: #FF5161;
+}
+

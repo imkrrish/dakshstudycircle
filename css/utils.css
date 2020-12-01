@@ -7,6 +7,11 @@
     overflow: hidden;
 }
 
+.container{
+    max-width: 1170px;
+    margin: auto;
+}
+
 .d-flex{
     display: flex;
 }
