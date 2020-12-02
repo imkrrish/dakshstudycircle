@@ -79,6 +79,7 @@ header::before {
     color: white;
     letter-spacing: 2px;
     padding: 6px 0;
+    transition: 0.25s ease-in-out;
 }
 
 .navbar {
@@ -91,7 +92,43 @@ header::before {
     border-radius: 10px;
 }
 
-.navbar li a:hover{
+.navbar li a:hover {
     color: #FF5161;
 }
 
+.magic-line {
+    position: absolute;
+    width: 200px;
+    margin-bottom: -9px;
+    bottom: 9px;
+    height: 3px;
+    z-index: 18;
+    border-bottom: 3.5px solid #FF5161;
+    visibility: hidden;
+}
+
+.magic-triangle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    display: block;
+    top: 53px;
+    left: 17%;
+    margin-left: -3px;
+    border-style: solid;
+    border-width: 0 3px 4px 3px;
+    border-color: transparent transparent #ff5162 transparent;
+    line-height: 0px;
+    border-color: #00000000 #00000000 #ff5162 #00000000;
+    visibility: hidden;
+}
+
+.magic-triangle.triangle-visible{
+    visibility: visible;
+}
+
+
+.magic-line.line-visible {
+    visibility: visible;
+    opacity: .9
+}
