@@ -43,9 +43,14 @@ header::before {
 }
 
 .logo-unit h1 {
+    margin-top: 7px;
+    font-size: 35px;
+    color: #ED151F;
+}
+
+.logo-unit h1 span {
     font-family: Revue;
-    font-size: 30px;
-    color: white;
+    font-weight: 400;
 }
 
 .logo-unit img {
@@ -93,7 +98,7 @@ header::before {
 }
 
 .navbar li a:hover {
-    color: #FF5161;
+    color: #ED151F;
 }
 
 .magic-line {
@@ -103,7 +108,7 @@ header::before {
     bottom: 9px;
     height: 3px;
     z-index: 18;
-    border-bottom: 3.5px solid #FF5161;
+    border-bottom: 3.5px solid #ED151F;
     visibility: hidden;
 }
 
@@ -117,18 +122,86 @@ header::before {
     margin-left: -3px;
     border-style: solid;
     border-width: 0 3px 4px 3px;
-    border-color: transparent transparent #ff5162 transparent;
+    border-color: transparent transparent #ED151F transparent;
     line-height: 0px;
-    border-color: #00000000 #00000000 #ff5162 #00000000;
+    border-color: #00000000 #00000000 #ED151F #00000000;
     visibility: hidden;
 }
 
-.magic-triangle.triangle-visible{
+.magic-triangle.triangle-visible {
     visibility: visible;
 }
-
 
 .magic-line.line-visible {
     visibility: visible;
     opacity: .9
+}
+
+.intro {
+    margin-top: 11%;
+    position: relative;
+}
+
+.intro h1 {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bolder;
+    text-transform: uppercase;
+    font-size: 65px;
+    line-height: 70px;
+    color: white;
+}
+
+.intro h3 {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 35px;
+    line-height: 40px;
+    color: #ED151F;
+}
+
+.intro h3 span {
+    font-family: Revue;
+}
+
+.explore-btn {
+    position: relative;
+    left: 50%;
+    margin-top: 4%;
+    transform: translateX(-50%);
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 100;
+    padding: 20px 39px;
+    background-color: #ED151F;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.explore-btn a {
+    position: inherit;
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    z-index: 21;
+}
+
+.explore-btn::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #F48018;
+    transform: translateX(-100%);
+    z-index: 20;
+    transition: 0.25s linear;
+}
+
+.explore-btn:hover::before{
+    transform: translateX(0);
 }
