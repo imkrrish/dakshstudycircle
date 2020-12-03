@@ -266,6 +266,7 @@ header::before {
     transform: translateY(-15px);
 }
 
+/* directors-message */
 
 .directors-message{
     margin-top: 100px;
@@ -287,14 +288,23 @@ header::before {
     text-align: left;
     font-weight: 700;
     color: #333;
+    margin: 25px 0;
+    opacity: 0.9;
+}
+
+.directors-message .message h3{
+    color: rgba(80, 77, 77, 0.8);
 }
 
 .directors-message .message p{
-    font-size: 15px;
-    line-height: 22px;
+    font-size: 17px;
+    line-height: 30px;
+    margin-top: 50px;
     text-align: left;
     font-weight: 600;
     color: #555;
+    letter-spacing: 1px;
+    opacity: .8;
 }
 
 .directors-message .message{
@@ -306,6 +316,17 @@ header::before {
 
 .explore-btn-message{
     left: 0%;
-    margin-top: 100px;
+    margin-top: 50px;
     transform: translateX(0);
+}
+
+/* Gallery section */
+
+.gallery-container h1{
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 50px;
 }
