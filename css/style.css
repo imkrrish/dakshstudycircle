@@ -6,6 +6,10 @@
     font-display: swap;
 }
 
+body{
+    overflow-x: hidden;
+}
+
 header {
     width: 100vw;
     height: 100vh;
@@ -13,6 +17,7 @@ header {
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
+    overflow: hidden;
 }
 
 header::before {
@@ -30,6 +35,7 @@ header::before {
     margin-bottom: 38px;
     position: inherit;
     z-index: 1;
+    overflow: hidden;
 }
 
 .header-top-social {
@@ -72,6 +78,10 @@ header::before {
 .navbar {
     position: relative;
     z-index: 2;
+}
+
+.navbar ul li {
+    list-style: none;
 }
 
 .navbar ul li a {
@@ -179,6 +189,7 @@ header::before {
     background-color: #ED151F;
     display: inline-block;
     cursor: pointer;
+    overflow: hidden;
 }
 
 .explore-btn a {
@@ -203,5 +214,98 @@ header::before {
 }
 
 .explore-btn:hover::before{
+    transform: translateX(0);
+}
+
+/* Courses */
+
+.courses{
+    padding: 50px;
+    position: relative;
+}
+
+.cards{
+    border-radius: 10px;
+    width: 211px;
+    height: 250px;
+    transition: 0.25s ease-in-out;
+}
+
+.cards a img{
+    width: 85px;
+}
+
+.cards a {
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    flex-direction: column;
+}
+
+.cards a h3{
+    font-size: 25px;
+    line-height: 50px;
+}
+
+.courses h1{
+    text-align: center;
+    text-transform: capitalize;
+    margin: 20px 0 60px 0;
+    font-size: 40px;
+    font-weight: bold;
+}
+/* .paddinglr{
+    padding-left: 100px;
+    padding-right: 100px;
+} */
+
+.cards:hover{
+    transform: translateY(-15px);
+}
+
+
+.directors-message{
+    margin-top: 100px;
+    height: 90vh;
+    width: 100vw;
+}
+
+
+.director-img{
+    height: 90vh;
+    width: 45vw;
+    background-image: url(../images/photo_2020-12-03_20-51-05.jpg);
+    background-size: cover;
+}
+
+.directors-message .message h1{
+    font-size: 45px;
+    line-height: 55px;
+    text-align: left;
+    font-weight: 700;
+    color: #333;
+}
+
+.directors-message .message p{
+    font-size: 15px;
+    line-height: 22px;
+    text-align: left;
+    font-weight: 600;
+    color: #555;
+}
+
+.directors-message .message{
+    height: 90vh;
+    width: 65vw;
+    background-color: #f2f3f7;
+    padding: 100px 200px 0 100px;
+}
+
+.explore-btn-message{
+    left: 0%;
+    margin-top: 100px;
     transform: translateX(0);
 }

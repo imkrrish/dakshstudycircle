@@ -4,7 +4,6 @@
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     font-family: 'Quicksand', sans-serif;
-    overflow: hidden;
 }
 
 .container{
@@ -26,4 +25,16 @@
 
 .text-centre{
     text-align: center;
+}
+
+.green{
+    background-color: #10c45c;
+}
+
+.light-blue{
+    background-color: #1ec1d9;
+}
+
+.yellow{
+    background-color: #eab830;
 }
