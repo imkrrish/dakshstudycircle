@@ -296,7 +296,7 @@ header::before {
     color: rgba(80, 77, 77, 0.8);
 }
 
-.directors-message .message p, .topic-text p {
+.directors-message .message p, .topic-text p, .testimonials .review p {
     font-size: 17px;
     line-height: 30px;
     margin-top: 50px;
@@ -479,6 +479,130 @@ header::before {
     color: #333;
 }
 
-.about-us-container{
+.about-us-container {
     padding-bottom: 75px;
+}
+
+/* Testimonials Section  */
+
+.testimonials h1.testimonials-heading {
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 35px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 50px;
+}
+
+.testimonials h1.sub-heading {
+    text-align: center;
+    margin-top: 41px;
+    margin-bottom: 47px;
+    text-transform: capitalize;
+    font-weight: 500;
+    font-size: 31px;
+}
+
+.testimonials h1.sub-heading span {
+    font-weight: 700;
+}
+
+.testimonials .review img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    /* border: 4px solid #bbb; */
+}
+
+.testimonials .review {
+    height: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 200px 100px 200px;
+    text-align: center;
+    display: block;
+}
+
+.testimonials .review h4 {
+    margin-top: 15px;
+}
+
+.testimonials .review p {
+    margin: 0;
+    text-align: center;
+    color: black;
+    letter-spacing: 0.5px;
+}
+
+/* contact section  */
+
+.contact-us {
+    position: relative;
+}
+
+.contact-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #053F81;
+    width: 100%;
+    border-radius: 10px;
+    top: 371px;
+}
+
+.contact-container h1 {
+    text-align: left;
+    margin-top: 41px;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 27px;
+    color: white;
+    margin-left: 37px;
+}
+
+.info .circle {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background-color: #ED151F;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.info .circle .icon {
+    position: absolute;
+    color: white;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 37px;
+}
+
+.info .contact-text {
+    width: 67%;
+    margin-left: 20px;
+    color: white;
+}
+
+.loaction, .phone, .email {
+    display: flex;
+    width: 34%;
+}
+
+.info {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 45px 52px 45px;
+}
+
+.phone .contact-text, .email .contact-text{
+    margin-top: 11px;
+}
+
+.phone .contact-text p strong, .email .contact-text p strong {
+    line-height: 27px;
 }
