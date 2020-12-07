@@ -541,13 +541,14 @@ header::before {
 
 .contact-us {
     position: relative;
+    margin-bottom: 237px;
 }
 
 .contact-container {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #053F81;
+    background-color: #053f81;
     width: 100%;
     border-radius: 10px;
     top: 371px;
@@ -596,13 +597,89 @@ header::before {
 .info {
     display: flex;
     justify-content: space-around;
-    padding: 0 45px 52px 45px;
+    padding: 0 87px 52px 87px;
 }
 
-.phone .contact-text, .email .contact-text{
+.phone .contact-text, .email .contact-text {
     margin-top: 11px;
 }
 
 .phone .contact-text p strong, .email .contact-text p strong {
     line-height: 27px;
+}
+
+/* footer section  */
+
+.footer {
+    margin-bottom: 27px;
+}
+
+.footer h1 {
+    color: #555;
+    margin-bottom: 27px;
+    font-size: 22px;
+}
+
+.footer ul {
+    color: #717171;
+    margin-left: 17px;
+}
+
+.footer ul li {
+    margin-top: 10px;
+}
+
+.footer ul li a {
+    color: #717171;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 500;
+    transition: 00.25s ease-in-out;
+}
+
+.footer ul li a:hover {
+    color: #333;
+}
+
+.footer .social-networks ul li a {
+    color: white;
+    font-size: 20px;
+}
+
+.footer .social-networks ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 7px 11px;
+    grid-template-areas: ". . ." ". . .";
+    margin-left: 0;
+}
+
+.footer .social-networks ul li {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ED151F;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 00.35s ease;
+}
+
+.footer .social-networks ul li:hover{
+    transform: rotateY(180deg);
+}
+
+footer{
+    width: 100vw;
+    background-color: #053F81;
+}
+
+footer .copyright-text h1{
+    text-align: center;
+    color: white;
+    font-size: 17px;
+    padding: 20px;
+    font-weight: 100;
 }
