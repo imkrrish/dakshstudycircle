@@ -31,8 +31,8 @@ header::before {
 }
 
 .header-top {
-    margin-top: 40px;
-    margin-bottom: 38px;
+    margin-top: 0px;
+    margin-bottom: 0px;
     position: inherit;
     z-index: 1;
     overflow: hidden;
@@ -48,7 +48,7 @@ header::before {
     margin-right: 10px;
 }
 
-.logo-unit h1 {
+/* .logo-unit h1 {
     margin-top: 7px;
     font-size: 35px;
     color: #ED151F;
@@ -57,11 +57,11 @@ header::before {
 .logo-unit h1 span {
     font-family: Revue;
     font-weight: 400;
-}
+} */
 
 .logo-unit img {
-    margin-right: -21px;
-    width: 85px;
+    margin-right: 0px;
+    width: 175px;
     height: auto;
 }
 
@@ -105,6 +105,7 @@ header::before {
     z-index: 200;
     background-color: #053f81ab;
     border-radius: 10px;
+    top: -8px;
 }
 
 .navbar li a:hover {
@@ -122,7 +123,7 @@ header::before {
     visibility: hidden;
 }
 
-.magic-triangle {
+/* .magic-triangle {
     position: absolute;
     width: 0;
     height: 0;
@@ -140,7 +141,7 @@ header::before {
 
 .magic-triangle.triangle-visible {
     visibility: visible;
-}
+} */
 
 .magic-line.line-visible {
     visibility: visible;
@@ -148,7 +149,7 @@ header::before {
 }
 
 .intro {
-    margin-top: 11%;
+    margin-top: 9%;
     position: relative;
 }
 
@@ -165,7 +166,7 @@ header::before {
     font-family: 'Quicksand', sans-serif;
     font-weight: 500;
     text-transform: uppercase;
-    font-size: 35px;
+    font-size: 47px;
     line-height: 40px;
     color: #ED151F;
 }
