@@ -1,0 +1,63 @@
+.contact-form {
+    position: absolute;
+    top: 30%;
+    right: 11%;
+    background-color: #F2F3F7;
+    width: 31rem;
+    border-radius: 30px;
+    padding: 0rem 2rem 2rem;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 50px rgba(0, 0, 0, 0.2);
+}
+
+.contact-form h2 {
+    text-transform: uppercase;
+    color: #464747;
+    margin-top: 30px;
+}
+
+.contact-form .inputBox {
+    width: 100%;
+    margin-top: 20px;
+    background-color: white;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.contact-form .inputBox input, .contact-form .inputBox textarea {
+    width: 90%;
+    padding: 10px 0;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    resize: none;
+    font-weight: 600;
+    color: #555;
+    letter-spacing: 1px;
+    opacity: .8;
+}
+
+.contact-form .inputBox input::placeholder, .contact-form .inputBox textarea::placeholder {
+    font-size: 16px;
+    pointer-events: none;
+    transition: 0.5s;
+    font-weight: 600;
+    color: #555;
+    letter-spacing: 1px;
+    opacity: .8;
+}
+
+.contact-form .inputBox input[type="submit"] {
+    width: 100%;
+    background: #ed151f;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 18px;
+    transition: 0.6s ease-in-out;
+}
+
+.contact-form .inputBox input[type="submit"]:hover{
+    background: #F48018;
+}

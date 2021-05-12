@@ -8,6 +8,10 @@
     <!-- LINK CSS  -->
     <link rel="stylesheet" href="./css/utils.css">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/gallery.css">
+    <link rel="stylesheet" href="./css/lightbox.min.css">
+    <link rel="stylesheet" href="./css/testimonials.css">
+    <link rel="stylesheet" href="./css/contact.css">
 
     <!-- font awesome  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
@@ -23,7 +27,7 @@
 </head>
 
 <body>
-    <header>
+    <header id="home">
         <div class="overlay"></div>
         <div class="header-top">
             <div class="container">
@@ -40,7 +44,10 @@
                     </div>
                     <div class="header-top-phone d-flex justify-content-between align-items-centre">
                         <i class="phone-icon"><img src="./images/phone-call.svg" alt="daksh-contact"></i>
-                        <h3>+91 9818824279</h3>
+                        <div>
+                            <h3>+91 9818824279</h3>
+                            <h3>+91 9953005312</h3>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -50,23 +57,23 @@
         <div class="container">
             <nav class="navbar">
                 <ul class="d-flex justify-content-between align-items-centre">
-                    <li><a href="#">Home</a>
+                    <li><a href="#home">Home</a>
                         <div class="magic-line line-visible" style="max-width: 48.3px;"></div>
                         <div class="magic-triangle triangle-visible"></div>
                     </li>
-                    <li><a href="#">Courses</a>
+                    <li><a href="#courses">Courses</a>
                         <div class="magic-line" style="max-width: 77.19px;"></div>
                         <div class="magic-triangle" style="left: 37%;"></div>
                     </li>
-                    <li><a href="#">Gallery</a>
+                    <li><a href="#gallery">Gallery</a>
                         <div class="magic-line" style="max-width: 73.10px;"></div>
                         <div class="magic-triangle" style="left: 26.5%;"></div>
                     </li>
-                    <li><a href="#">Video</a>
+                    <li><a href="#video">Video</a>
                         <div class="magic-line" style="max-width: 51.73px;"></div>
                         <div class="magic-triangle" style="left: 46.5%;"></div>
                     </li>
-                    <li><a href="#">About Us</a>
+                    <li><a href="#about">About Us</a>
                         <div class="magic-line" style="max-width: 85.04px;"></div>
                         <div class="magic-triangle" style="left: 56.5%;"></div>
                     </li>
@@ -74,7 +81,7 @@
                         <div class="magic-line" style="max-width: 86.08px;"></div>
                         <div class="magic-triangle" style="left: 68%;"></div>
                     </li> -->
-                    <li><a href="#">Contact Us</a>
+                    <li><a href="#contact">Contact Us</a>
                         <div class="magic-line" style="max-width: 106.03px;"></div>
                         <div class="magic-triangle" style="left: 80.5%;"></div>
                     </li>
@@ -87,18 +94,18 @@
         <div class="container">
             <div class="intro text-centre">
                 <h3>Welcome to <span>DAKSH</span></h3>
-                <h1>Take the first step</h1>
-                <h1> to knowledge with us </h1>
+                <h1> Ur Quest for Knowledge </h1>
+                <h1> Ends Here !!! </h1>
             </div>
             <div class="explore-btn text-centre">
-                <a href="#"><span>Explore Courses</span></a>
+                <a href="#"><span>Contact Us</span></a>
             </div>
         </div>
     </header>
 
     <!-- Courses -->
 
-    <div class="courses">
+    <div class="courses" id="courses">
         <h1>Choose your class or stream</h1>
         <div class="container d-flex justify-content-between align-items-centre paddinglr">
             <div class="cards yellow">
@@ -134,6 +141,8 @@
         </div>
     </div>
 
+    <!-- Director message section -->
+
     <div class="directors-message d-flex justify-content-between">
         <div class="director-img"></div>
         <div class="message">
@@ -145,14 +154,14 @@
                 Deserunt officia aperiam maiores nisi inventore architecto laborum nulla suscipit alias.
             </p>
             <div class="explore-btn explore-btn-message text-centre">
-                <a href="#"><span>Explore Courses</span></a>
+                <a href="#"><span> Contact Us</span></a>
             </div>
         </div>
     </div>
 
     <!-- Gallery section  -->
 
-    <div class="container gallery-container">
+    <div class="container gallery-container" id="gallery">
         <h1>Gallery</h1>
 
         <!-- Slideshow container -->
@@ -161,27 +170,163 @@
             <a class="next" id="nextBtn">&#10095;</a>
             <div class="carousel-slide">
                 <div>
-                    <div class="numbertext">3 / 3</div>
-                    <img src="./images/New folder/winter-4727156_1280.jpg" id="lastClone" alt="">
+
+                    <!-- <div class="numbertext">3 / 3</div> -->
+                    <div class="img img-gallery" id="lastClone">
+                        <a href="./images/daksh-images/17-img.jpeg" class="img-17">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/18-img.jpg" class="img-18">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/19-img.jpg" class="img-19">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/20-img.jpeg" class="img-20">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/21-img.jpg" class="img-21">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/22-img.jpeg" class="img-22">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/23-img.jpeg" class="img-23">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/24-img.jpeg" class="img-24">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                    </div>
                 </div>
+
+
                 <div>
-                    <div class="numbertext">1 / 3</div>
-                    <img src="./images/New folder/geometry-1023846_1280.jpg" alt="">
+                    <!-- <div class="numbertext">1 / 3</div> -->
+                    <div class="img img-gallery">
+                        <a href="./images/daksh-images/1-img.jpeg" data-lightbox="mygallery" class="img-1">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/2-img.jpeg" data-lightbox="mygallery" class="img-2">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/3-img.jpeg" data-lightbox="mygallery" class="img-3">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/4-img.png" data-lightbox="mygallery" class="img-4">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/5-img.jpg" data-lightbox="mygallery" class="img-5">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/6-img.jpg" data-lightbox="mygallery" class="img-6">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/7-img.jpeg" data-lightbox="mygallery" class="img-7">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/8-img.jpg" data-lightbox="mygallery" class="img-8">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                    </div>
                 </div>
+
+
                 <div>
-                    <div class="numbertext">2 / 3</div>
-                    <img src="./images/New folder/narrative-794978_1280.jpg" alt="">
+                    <!-- <div class="numbertext">2 / 3</div> -->
+                    <div class="img img-gallery">
+                        <a href="./images/daksh-images/9-img.jpeg" data-lightbox="mygallery" class="img-9">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/10-img.jpeg" data-lightbox="mygallery" class="img-10">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/11-img.jpg" data-lightbox="mygallery" class="img-11">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/12-img.jpg" data-lightbox="mygallery" class="img-12">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/13-img.jpg" data-lightbox="mygallery" class="img-13">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/14-img.jpg" data-lightbox="mygallery" class="img-14">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/15-img.jpg" data-lightbox="mygallery" class="img-15">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/16-img.jpeg" data-lightbox="mygallery" class="img-16">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                    </div>
                 </div>
+
+
                 <div>
-                    <div class="numbertext">3 / 3</div>
-                    <img src="./images/New folder/winter-4727156_1280.jpg" alt="">
+                    <!-- <div class="numbertext">3 / 3</div> -->
+                    <div class="img img-gallery">
+                        <a href="./images/daksh-images/17-img.jpeg" data-lightbox="mygallery" class="img-17">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/18-img.jpg" data-lightbox="mygallery" class="img-18">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/19-img.jpg" data-lightbox="mygallery" class="img-19">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/20-img.jpeg" data-lightbox="mygallery" class="img-20">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/21-img.jpg" data-lightbox="mygallery" class="img-21">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/22-img.jpeg" data-lightbox="mygallery" class="img-22">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/23-img.jpeg" data-lightbox="mygallery" class="img-23">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/24-img.jpeg" data-lightbox="mygallery" class="img-24">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                    </div>
                 </div>
+
+
                 <div>
-                    <div class="numbertext">1 / 3</div>
-                    <img src="./images/New folder/geometry-1023846_1280.jpg" id="firstClone" alt="">
+                    <!-- <div class="numbertext">1 / 3</div> -->
+                    <div class="img" id="firstClone">
+                        <a href="./images/daksh-images/1-img.jpeg" class="img-1">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/2-img.jpeg" class="img-2">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/3-img.jpeg" class="img-3">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/4-img.png" class="img-4">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/5-img.jpg" class="img-5">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/6-img.jpg" class="img-6">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/7-img.jpeg" class="img-7">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        <a href="./images/daksh-images/8-img.jpg" class="img-8">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                    </div>
                 </div>
+
             </div>
         </div>
+
         <!-- The dots/circles -->
         <div class="controls">
             <ul class="dots" style="text-align: center;">
@@ -197,27 +342,27 @@
 
     <!-- youtube video section  -->
 
-    <div class="container playlist-container">
+    <div class="container playlist-container" id="video">
         <div class="yt-playlists">
             <h1>Youtube Video Playlists</h1>
             <div class="playlist">
-                <iframe width="500" height="250"
-                    src="https://www.youtube.com/embed/videoseries?list=PL1U-FkOAme7YhCHy2Lf5rd1m1QjDQ5H5A"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen></iframe>
-                <iframe width="500" height="250"
-                    src="https://www.youtube.com/embed/videoseries?list=PL1U-FkOAme7Z8fDk2XWvn-iGSdglsVkQy"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen></iframe>
-                <iframe width="500" height="250"
+                <iframe width="575" height="275"
                     src="https://www.youtube.com/embed/videoseries?list=PL1U-FkOAme7ZKO5pLGJ11gvRWwgPKHy3g"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
-                <iframe width="500" height="250"
+                <iframe width="575" height="275"
                     src="https://www.youtube.com/embed/videoseries?list=PL1U-FkOAme7Zfuf7cDorbDMLDxJfEc6pM"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+                <iframe width="575" height="275"
+                    src="https://www.youtube.com/embed/videoseries?list=PL1U-FkOAme7YhCHy2Lf5rd1m1QjDQ5H5A"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+                <iframe width="575" height="275"
+                    src="https://www.youtube.com/embed/videoseries?list=PL1U-FkOAme7Z8fDk2XWvn-iGSdglsVkQy"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
@@ -226,7 +371,7 @@
     </div>
 
     <!-- About US Section   -->
-    <div class="about-us">
+    <div class="about-us" id="about">
         <div class="container about-us-container">
             <h1>Why choose us</h1>
             <div class="topics topics-grid">
@@ -285,50 +430,112 @@
         </div>
     </div>
 
+
+    <!-- Testimonials Section  -->
     <div class="testimonials">
-        <div class="container">
+        <div class="testimonials-container">
             <h1 class="testimonials-heading">Testimonials</h1>
             <h1 class="sub-heading">Student <span>reviews</span></h1>
-            <div class="carousel-reviews-container">
-                <!-- <a class="prev-review" id="prevReviewBtn">&#10094;</a>
-                <a class="next-review" id="nextReviewBtn">&#10095;</a> -->
-                <div class="review-slide">
-                    <div class="slide">
-                        <div class="review">
-                            <img src="https://www.georgiancollege.ca/wp-content/uploads/georgian-stores-get-your-textbooks-new-student-guide-georgian-college-2020-09-10.jpg"
+
+            <!-- Slideshow container -->
+            <div class="tCarousel-container">
+                <a class="tPrev" id="tPrevBtn">&#10094;</a>
+                <a class="tNext" id="tNextBtn">&#10095;</a>
+                <div class="tCarousel-slide">
+
+                    <div>
+                        <!-- <div class="numbertext">3 / 3</div> -->
+                        <div class="review-slide" id="tLastClone">
+                            <img src="data:image/png;base64,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"
                                 alt="">
-                            <p><span>"</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto,
-                                praesentium!
-                                Lorem ipsum, dolor
-                                sit amet consectetur adipisicing elit. Illum, nulla! <span>"</span></p>
-                            <h4>-Aakash Sharma</h4>
-                            <div class="controls">
-                                <ul class="dots review-dots" style="text-align: center;">
-                                    <li class="dot active"></li>
-                                    <li class="dot"></li>
-                                    <li class="dot"></li>
-                                </ul>
-                            </div>
+                            <p><span>"</span> Good institue for study all the subject. A high quality and comfertable
+                                teacher who are very close to student. <span>"</span></p>
+                            <h4>-ROHIT SINGH</h4>
                         </div>
                     </div>
+
+                    <div>
+                        <!-- <div class="numbertext">1 / 3</div> -->
+                        <div class="review-slide">
+                            <img src="https://lh3.googleusercontent.com/a-/AOh14GgE0VBGQwai2H-U6_oDzfeeRMkYmPEOpthl4KwA=s40-c0x00000000-cc-rp-ba3"
+                                alt="">
+                            <p><span>"</span> Institutes encompasses affirmative and amicable teachers and environment
+                                created by teachers here very much student learning inculcate to excel in examination.
+                                Especially Anil Sir who is both magnanimous person and tutor. <span>"</span></p>
+                            <h4>-tapas r Mohanty</h4>
+                        </div>
+                    </div>
+
+                    <div>
+                        <!-- <div class="numbertext">2 / 3</div> -->
+                        <div class="review-slide">
+                            <img src="https://lh3.googleusercontent.com/a/AATXAJxxSpuiCkclM1y0nPWion_x6lEOxSs4XMmmAUsc=s40-c0x00000000-cc-rp-mo"
+                                alt="">
+                            <p><span>"</span> Have been studying there for two years now...the teachers are amazing and
+                                the interiors and facilities are of top quality.. <span>"</span></p>
+                            <h4>-Divya Hsk</h4>
+                        </div>
+                    </div>
+
+                    <div>
+                        <!-- <div class="numbertext">3 / 3</div> -->
+                        <div class="review-slide">
+                            <img src="data:image/png;base64,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"
+                                alt="">
+                            <p><span>"</span> Good institue for study all the subject. A high quality and comfertable
+                                teacher who are very close to student. <span>"</span></p>
+                            <h4>-ROHIT SINGH</h4>
+                        </div>
+                    </div>
+
+                    <div>
+                        <!-- <div class="numbertext">1 / 3</div> -->
+                        <div class="review-slide" id="tFirstClone">
+                            <img src="https://lh3.googleusercontent.com/a-/AOh14GgE0VBGQwai2H-U6_oDzfeeRMkYmPEOpthl4KwA=s40-c0x00000000-cc-rp-ba3"
+                                alt="">
+                            <p><span>"</span> Institutes encompasses affirmative and amicable teachers and environment
+                                created by teachers here very much student learning inculcate to excel in examination.
+                                Especially Anil Sir who is both magnanimous person and tutor. <span>"</span></p>
+                            <h4>-tapas r Mohanty</h4>
+                        </div>
+                    </div>
+
                 </div>
             </div>
+
+            <!-- The ttDots/circles -->
+            <div class="tControls">
+                <ul class="ttDots" style="text-align: center;">
+                    <li class="tDot tActive"></li>
+                    <li class="tDot"></li>
+                    <li class="tDot"></li>
+                </ul>
+            </div>
+
         </div>
+
     </div>
 
-    <div class="contact-us">
+
+    <div class="contact-us" id="contact">
         <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1290963.3750223448!2d75.73213696225011!3d27.622853543028135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1cbee151d107%3A0x80c040699612d134!2sDaksh%20Study%20Circle!5e0!3m2!1sen!2sin!4v1607246564698!5m2!1sen!2sin"
             width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
             tabindex="0"></iframe>
         <div class="container contact-container">
-            <h1>Contact Information</h1>
+            <h1>Contact Us</h1>
+            <p class="contact-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla itaque
+                adipisci
+                illum. Magni dicta
+                voluptatem dolor temporibus enim itaque, placeat accusamus consequuntur, harum laborum iure
+            </p>
             <div class="info container">
                 <div class="loaction">
                     <div class="circle"><a class="icon" href=""><i class="fas fa-map-marker-alt"></i></a></div>
                     <div class="contact-text">
                         <p><span><strong>Daksh Study Circle</strong></span><br>
-                            Shop No.H-2,Kalpatru Complex,Delhi Cantt, Sadar Bazaar, Delhi Cantonment, New Delhi, Delhi
+                            Shop No.H-2,Kalpatru Complex,Delhi Cantt, Sadar Bazaar, Delhi Cantonment, New Delhi,
+                            Delhi
                             110010
                         </p>
                     </div>
@@ -348,8 +555,31 @@
                     </div>
                 </div>
             </div>
+
+            <div class="contact-form">
+                <form action="email" autocomplete="off">
+                    <h2>Send Us A Message</h2>
+                    <div class="inputBox">
+                        <input type="text" name="" required="required" placeholder="Full Name">
+                    </div>
+                    <div class="inputBox">
+                        <input type="email" name="" required="required" placeholder="Email">
+                    </div>
+                    <div class="inputBox">
+                        <input type="text" name="" required="required" placeholder="Phone">
+                    </div>
+                    <div class="inputBox">
+                        <textarea required="required" placeholder="Type Your Message..." rows="5"></textarea>
+                    </div>
+                    <div class="inputBox">
+                        <input type="submit" name="" value="Send">
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
+
+    <!-- footer section  -->
 
     <div class="footer">
         <div class="container d-flex justify-content-between">
@@ -376,9 +606,11 @@
             <div class="quick-links">
                 <h1>Quick links</h1>
                 <ul>
+                    <li><a href="">Home</a></li>
+                    <li><a href="">Courses</a></li>
+                    <li><a href="">Gallery</a></li>
+                    <li><a href="">Video</a></li>
                     <li><a href="">About Us</a></li>
-                    <li><a href="">Contact Us</a></li>
-                    <!-- <li><a href=""></a></li> -->
                 </ul>
             </div>
             <div class="social-networks">
@@ -397,11 +629,17 @@
     <footer>
         <div class="container">
             <div class="copyright-text">
-                <h1>Copyright © 2020 Daksh Study Circle.</h1>
+                <h1>Copyright ©
+                    <span id="copyright">
+                        <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script>
+                    </span> Daksh Study Circle.
+                </h1>
             </div>
         </div>
     </footer>
+    <script src="./js/testimonial.js"></script>
     <script src="./js/index.js"></script>
+    <script src="./js/lightbox-plus-jquery.min.js"></script>
 </body>
 
 </html>

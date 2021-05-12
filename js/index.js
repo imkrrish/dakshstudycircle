@@ -1,6 +1,6 @@
 // Gallery Carousel 
 const carouselSlide = document.querySelector('.carousel-slide');
-const carouselImages = document.querySelectorAll('.carousel-slide img');
+const carouselImages = document.querySelectorAll('.carousel-slide .img');
 const dot_parents = document.querySelector('.controls ul');
 
 // Buttons 
@@ -20,9 +20,9 @@ function dot_next(count) {
   if (count === 4) {
     dot_parents.children[2].classList.remove('active');
     dot_parents.children[0].classList.add('active');
-  }else{
-    dot_parents.children[count-2].classList.remove('active');
-    dot_parents.children[count-1].classList.add('active');
+  } else {
+    dot_parents.children[count - 2].classList.remove('active');
+    dot_parents.children[count - 1].classList.add('active');
   }
 }
 
@@ -30,9 +30,9 @@ function dot_prev(count) {
   if (count === 0) {
     dot_parents.children[0].classList.remove('active');
     dot_parents.children[2].classList.add('active');
-  }else{
+  } else {
     dot_parents.children[count].classList.remove('active');
-    dot_parents.children[count-1].classList.add('active');
+    dot_parents.children[count - 1].classList.add('active');
   }
 }
 
@@ -71,9 +71,9 @@ carouselSlide.addEventListener('transitionend', () => {
 
 // dots listners
 
-document.querySelectorAll('.controls li').forEach(function(indicator , ind){
-  indicator.addEventListener('click', function(){
-    counter = ind+1;
+document.querySelectorAll('.controls li').forEach(function (indicator, ind) {
+  indicator.addEventListener('click', function () {
+    counter = ind + 1;
     document.querySelector('.controls .active').classList.remove('active');
     indicator.classList.add('active');
     carouselSlide.style.transition = '0.6s ease-in-out';

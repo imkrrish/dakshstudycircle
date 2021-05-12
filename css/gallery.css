@@ -1,0 +1,174 @@
+.img-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: .5rem;
+    grid-template-areas: 'img-1 img-2 img-3 img-3' 'img-1 img-4 img-5 img-6' 'img-7 img-7 img-8 img-6';
+}
+
+.img-gallery a {
+    width: 100%;
+    height: 11rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.img-gallery a i {
+    color: rgba(225, 225, 225, .6);
+    font-size: 3rem;
+    position: relative;
+    z-index: 100;
+    padding: 1rem 3rem;
+    border: 2px solid rgba(225, 225, 225, .6);
+    border-radius: .4rem;
+    opacity: 0;
+    transition: opactiy .5s;
+}
+
+.img-gallery a::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    transition: opacity .5s;
+}
+
+.img-gallery a:hover i, .img-gallery a:hover::before {
+    opacity: 1;
+}
+
+.img-1 {
+    grid-area: img-1;
+    min-height: 22rem;
+    background-image: url("../images/daksh-images/1-img.jpeg");
+}
+
+.img-2 {
+    grid-area: img-2;
+    background-image: url("../images/daksh-images/2-img.jpeg");
+}
+
+.img-3 {
+    grid-area: img-3;
+    background-image: url("../images/daksh-images/3-img.jpeg");
+}
+
+.img-4 {
+    grid-area: img-4;
+    background-image: url("../images/daksh-images/4-img.png");
+}
+
+.img-5 {
+    grid-area: img-5;
+    background-image: url("../images/daksh-images/5-img.jpg");
+}
+
+.img-6 {
+    grid-area: img-6;
+    min-height: 22rem;
+    background-image: url("../images/daksh-images/6-img.jpg");
+}
+
+.img-7 {
+    grid-area: img-7;
+    background-image: url("../images/daksh-images/7-img.jpeg");
+}
+
+.img-8 {
+    grid-area: img-8;
+    background-image: url("../images/daksh-images/8-img.jpg");
+}
+
+.img-9 {
+    grid-area: img-1;
+    min-height: 22rem;
+    background-image: url("../images/daksh-images/9-img.jpeg");
+}
+
+.img-10 {
+    grid-area: img-2;
+    background-image: url("../images/daksh-images/10-img.jpeg");
+}
+
+.img-11 {
+    grid-area: img-3;
+    background-image: url("../images/daksh-images/11-img.jpg");
+}
+
+.img-12 {
+    grid-area: img-4;
+    background-image: url("../images/daksh-images/12-img.jpg");
+}
+
+.img-13 {
+    grid-area: img-5;
+    background-image: url("../images/daksh-images/13-img.jpg");
+}
+
+.img-14 {
+    grid-area: img-6;
+    min-height: 22rem;
+    background-image: url("../images/daksh-images/14-img.jpg");
+}
+
+.img-15 {
+    grid-area: img-7;
+    background-image: url("../images/daksh-images/15-img.jpg");
+}
+
+.img-16 {
+    grid-area: img-8;
+    background-image: url("../images/daksh-images/16-img.jpeg");
+}
+
+.img-17 {
+    grid-area: img-1;
+    min-height: 22rem;
+    background-image: url("../images/daksh-images/17-img.jpeg");
+}
+
+.img-18 {
+    grid-area: img-2;
+    background-image: url("../images/daksh-images/18-img.jpg");
+}
+
+.img-19 {
+    grid-area: img-3;
+    background-image: url("../images/daksh-images/19-img.jpg");
+}
+
+.img-20 {
+    grid-area: img-4;
+    background-image: url("../images/daksh-images/20-img.jpeg");
+}
+
+.img-21 {
+    grid-area: img-5;
+    background-image: url("../images/daksh-images/21-img.jpg");
+}
+
+.img-22 {
+    grid-area: img-6;
+    min-height: 22rem;
+    background-image: url("../images/daksh-images/22-img.jpeg");
+}
+
+.img-23 {
+    grid-area: img-7;
+    background-image: url("../images/daksh-images/23-img.jpeg");
+}
+
+.img-24 {
+    grid-area: img-8;
+    background-image: url("../images/daksh-images/24-img.jpeg");
+}

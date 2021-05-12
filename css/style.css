@@ -31,7 +31,7 @@ header::before {
 }
 
 .header-top {
-    margin-top: 0px;
+    margin-top: 10px;
     margin-bottom: 0px;
     position: inherit;
     z-index: 1;
@@ -48,6 +48,14 @@ header::before {
     margin-right: 10px;
 }
 
+.header-top-social a i {
+    transition: 0.4s ease-in-out;
+}
+
+.header-top-social a i:hover {
+    transform: scale(1.4);
+}
+
 /* .logo-unit h1 {
     margin-top: 7px;
     font-size: 35px;
@@ -61,12 +69,12 @@ header::before {
 
 .logo-unit img {
     margin-right: 0px;
-    width: 175px;
+    width: 130px;
     height: auto;
 }
 
 .phone-icon img {
-    width: 25px;
+    width: 35px;
     margin-right: 5px;
 }
 
@@ -105,7 +113,6 @@ header::before {
     z-index: 200;
     background-color: #053f81ab;
     border-radius: 10px;
-    top: -8px;
 }
 
 .navbar li a:hover {
@@ -149,7 +156,7 @@ header::before {
 }
 
 .intro {
-    margin-top: 9%;
+    margin-top: 11%;
     position: relative;
 }
 
@@ -157,8 +164,9 @@ header::before {
     font-family: 'Quicksand', sans-serif;
     font-weight: bolder;
     text-transform: uppercase;
+    margin-top: 10px;
     font-size: 65px;
-    line-height: 70px;
+    line-height: 65px;
     color: white;
 }
 
@@ -166,7 +174,7 @@ header::before {
     font-family: 'Quicksand', sans-serif;
     font-weight: 500;
     text-transform: uppercase;
-    font-size: 47px;
+    font-size: 55px;
     line-height: 40px;
     color: #ED151F;
 }
@@ -357,9 +365,9 @@ header::before {
     position: relative;
 }
 
-.carousel-slide img {
+.carousel-slide .img {
     width: 1170px;
-    height: 500px;
+    height: 550px;
 }
 
 .carousel-slide {
@@ -417,6 +425,13 @@ header::before {
     text-transform: uppercase;
     font-weight: 600;
     font-size: 50px;
+}
+
+.playlist {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 1rem;
 }
 
 /* about-us  */
@@ -484,60 +499,6 @@ header::before {
     padding-bottom: 75px;
 }
 
-/* Testimonials Section  */
-
-.testimonials h1.testimonials-heading {
-    text-align: center;
-    margin-top: 100px;
-    margin-bottom: 35px;
-    text-transform: uppercase;
-    font-weight: 600;
-    font-size: 50px;
-}
-
-.testimonials h1.sub-heading {
-    text-align: center;
-    margin-top: 41px;
-    margin-bottom: 47px;
-    text-transform: capitalize;
-    font-weight: 500;
-    font-size: 31px;
-}
-
-.testimonials h1.sub-heading span {
-    font-weight: 700;
-}
-
-.testimonials .review img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 20px;
-    /* border: 4px solid #bbb; */
-}
-
-.testimonials .review {
-    height: auto;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 0 200px 100px 200px;
-    text-align: center;
-    display: block;
-}
-
-.testimonials .review h4 {
-    margin-top: 15px;
-}
-
-.testimonials .review p {
-    margin: 0;
-    text-align: center;
-    color: black;
-    letter-spacing: 0.5px;
-}
-
 /* contact section  */
 
 .contact-us {
@@ -556,24 +517,35 @@ header::before {
 }
 
 .contact-container h1 {
-    text-align: left;
+    text-align: center;
     margin-top: 41px;
-    margin-bottom: 50px;
+    margin-bottom: 15px;
     text-transform: uppercase;
     font-weight: 700;
     font-size: 27px;
     color: white;
-    margin-left: 37px;
+}
+
+.contact-container p.contact-content {
+    text-align: center;
+    padding: 0px 25px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    font-weight: 400;
+    font-size: 16px;
+    color: white;
 }
 
 .info .circle {
-    width: 75px;
-    height: 75px;
+    width: 65px;
+    height: 65px;
+    margin: 20px 0;
     border-radius: 50%;
     background-color: #ED151F;
     position: relative;
     display: flex;
     align-items: center;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 50px rgba(0, 0, 0, 0.2);
 }
 
 .info .circle .icon {
@@ -581,7 +553,11 @@ header::before {
     color: white;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 37px;
+    font-size: 25px;
+}
+
+.info .circle:hover {
+    background-color: #F48018;
 }
 
 .info .contact-text {
@@ -592,18 +568,20 @@ header::before {
 
 .loaction, .phone, .email {
     display: flex;
+    align-items: center;
     width: 34%;
 }
 
 .info {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    margin-top: 50px;
     padding: 0 87px 52px 87px;
 }
 
-.phone .contact-text, .email .contact-text {
-    margin-top: 11px;
-}
+/* .phone .contact-text, .email .contact-text {
+    margin-top: 20px;
+} */
 
 .phone .contact-text p strong, .email .contact-text p strong {
     line-height: 27px;
@@ -613,6 +591,7 @@ header::before {
 
 .footer {
     margin-bottom: 27px;
+    margin-top: 625px;
 }
 
 .footer h1 {
@@ -662,22 +641,24 @@ header::before {
     height: 50px;
     border-radius: 50%;
     background-color: #ED151F;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 50px rgba(0, 0, 0, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
     transition: 00.35s ease;
 }
 
-.footer .social-networks ul li:hover{
-    transform: rotateY(180deg);
+.footer .social-networks ul li:hover {
+    /* transform: rotateY(180deg); */
+    background-color: #F48018;
 }
 
-footer{
+footer {
     width: 100vw;
     background-color: #053F81;
 }
 
-footer .copyright-text h1{
+footer .copyright-text h1 {
     text-align: center;
     color: white;
     font-size: 17px;
