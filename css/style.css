@@ -6,6 +6,10 @@
     font-display: swap;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     overflow-x: hidden;
 }
@@ -56,17 +60,6 @@ header::before {
     transform: scale(1.4);
 }
 
-/* .logo-unit h1 {
-    margin-top: 7px;
-    font-size: 35px;
-    color: #ED151F;
-}
-
-.logo-unit h1 span {
-    font-family: Revue;
-    font-weight: 400;
-} */
-
 .logo-unit img {
     margin-right: 0px;
     width: 130px;
@@ -103,6 +96,21 @@ header::before {
     letter-spacing: 2px;
     padding: 6px 0;
     transition: 0.25s ease-in-out;
+    position: relative;
+}
+
+.navbar ul li a::before {
+    content: '';
+    position: absolute;
+    border-bottom: 3px solid #ED151F;
+    width: 0%;
+    left: 0%;
+    bottom: 0%;
+    transition: 0.5s linear;
+}
+
+.navbar ul li a:hover:before {
+    width: 100%;
 }
 
 .navbar {
@@ -116,43 +124,7 @@ header::before {
 }
 
 .navbar li a:hover {
-    color: #ED151F;
-}
-
-.magic-line {
-    position: absolute;
-    width: 200px;
-    margin-bottom: -9px;
-    bottom: 9px;
-    height: 3px;
-    z-index: 18;
-    border-bottom: 3.5px solid #ED151F;
-    visibility: hidden;
-}
-
-/* .magic-triangle {
-    position: absolute;
-    width: 0;
-    height: 0;
-    display: block;
-    top: 53px;
-    left: 17%;
-    margin-left: -3px;
-    border-style: solid;
-    border-width: 0 3px 4px 3px;
-    border-color: transparent transparent #ED151F transparent;
-    line-height: 0px;
-    border-color: #00000000 #00000000 #ED151F #00000000;
-    visibility: hidden;
-}
-
-.magic-triangle.triangle-visible {
-    visibility: visible;
-} */
-
-.magic-line.line-visible {
-    visibility: visible;
-    opacity: .9
+    font-weight: 700;
 }
 
 .intro {
@@ -546,6 +518,7 @@ header::before {
     display: flex;
     align-items: center;
     box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 50px rgba(0, 0, 0, 0.2);
+    transition: 0.35s ease-in-out;
 }
 
 .info .circle .icon {
@@ -614,11 +587,12 @@ header::before {
     text-decoration: none;
     font-size: 17px;
     font-weight: 500;
-    transition: 00.25s ease-in-out;
+    transition: 00.35s ease-in-out;
 }
 
 .footer ul li a:hover {
     color: #333;
+    font-weight: 700;
 }
 
 .footer .social-networks ul li a {
@@ -645,7 +619,7 @@ header::before {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: 00.35s ease;
+    transition: 00.35s ease-in-out;
 }
 
 .footer .social-networks ul li:hover {
