@@ -29,7 +29,7 @@
 <body>
     <header id="home">
         <div class="overlay"></div>
-        <div class="header-top">
+        <div class="header-top" id="header">
             <div class="container">
                 <div class="d-flex justify-content-between align-items-centre">
                     <div class="header-top-social top">
@@ -59,7 +59,12 @@
 
         <!-- navigation -->
         <div class="container">
-            <nav class="navbar">
+            <nav class="navbar" id="navbar">
+                <a href="#home" id="sticky-logo">
+                    <div class="logo-unit-sticky">
+                        <img src="./images/daksh-logo.png" alt="daksh-logo">
+                    </div>
+                </a>
                 <ul class="d-flex justify-content-between align-items-centre">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#expertise">Expertise</a></li>
@@ -73,7 +78,7 @@
 
         <!-- hero intro  -->
 
-        <div class="container">
+        <div class="container" id="hero">
             <div class="intro text-centre">
                 <h3>Welcome to <span>DAKSH</span></h3>
                 <h1> Ur Quest for Knowledge </h1>
@@ -628,8 +633,9 @@
             </div>
         </div>
     </footer>
-    <script src="./js/testimonial.js"></script>
     <script src="./js/index.js"></script>
+    <script src="./js/nav.js"></script>
+    <script src="./js/testimonial.js"></script>
     <script src="./js/lightbox-plus-jquery.min.js"></script>
 </body>
 
