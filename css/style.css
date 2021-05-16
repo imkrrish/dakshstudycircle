@@ -1,3 +1,11 @@
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Quicksand', sans-serif;
+}
+
 @font-face {
     font-family: 'Revue';
     src: url('../fonts/Revue-Thin.woff2') format('woff2'), url('../fonts/Revue-Thin.woff') format('woff');
@@ -14,13 +22,37 @@ body {
     overflow-x: hidden;
 }
 
+.container {
+    max-width: 75vw;
+    margin: auto;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.align-items-centre {
+    align-items: center;
+}
+
+.text-centre {
+    text-align: center;
+}
+
 header {
     width: 100vw;
     height: 100vh;
     background-image: url("../images/slide_1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
     position: relative;
+    top: 0;
+    left: 0;
     overflow: hidden;
 }
 
@@ -115,7 +147,6 @@ header::before {
 }
 
 .navbar {
-    position: relative;
     padding: 19px 15%;
     text-align: center;
     margin: 0;
@@ -148,7 +179,7 @@ header::before {
     font-weight: 500;
     text-transform: uppercase;
     font-size: 55px;
-    line-height: 40px;
+    line-height: 45px;
     color: #ED151F;
 }
 
@@ -245,7 +276,7 @@ nav.sticky a .logo-unit-sticky img {
 
 .cards {
     border-radius: 20px;
-    width: 220px;
+    width: 14%;
     height: 325px;
     transition: 0.25s ease-in-out;
     background-color: #F2F3F7;
@@ -455,6 +486,11 @@ nav.sticky a .logo-unit-sticky img {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
     grid-gap: 1rem;
+}
+
+div.playlist iframe {
+    width: 37vw;
+    height: 275px;
 }
 
 /* about-us  */
@@ -690,3 +726,9 @@ footer .copyright-text h1 {
     padding: 20px;
     font-weight: 100;
 }
+
+@media screen and (max-width: 500px) {
+    .footer .d-flex{
+        flex-direction: column;
+    }
+  }
