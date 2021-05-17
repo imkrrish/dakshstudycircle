@@ -13,7 +13,12 @@ const nextBtn = document.querySelector('#nextBtn');
 let counter = 1;
 const size = carouselImages[0].clientWidth;
 
-carouselSlide.style.transform = 'translateX(' + (-1170 * counter) + 'px)';
+let width = document.getElementById('img-slide').getBoundingClientRect().width;
+window.addEventListener('resize', function () {
+  width = document.getElementById('img-slide').getBoundingClientRect().width;
+})
+
+carouselSlide.style.transform = 'translateX(' + (-width * counter) + 'px)';
 
 // dot active class 
 function dot_next(count) {
@@ -43,7 +48,7 @@ nextBtn.addEventListener('click', () => {
   carouselSlide.style.transition = '0.6s ease-in-out';
   counter++;
   dot_next(counter);
-  carouselSlide.style.transform = 'translateX(' + (-1170 * counter) + 'px)';
+  carouselSlide.style.transform = 'translateX(' + (-width * counter) + 'px)';
 });
 
 prevBtn.addEventListener('click', () => {
@@ -51,20 +56,20 @@ prevBtn.addEventListener('click', () => {
   carouselSlide.style.transition = '0.6s ease-in-out';
   counter--;
   dot_prev(counter)
-  carouselSlide.style.transform = 'translateX(' + (-1170 * counter) + 'px)';
+  carouselSlide.style.transform = 'translateX(' + (-width * counter) + 'px)';
 });
 
 carouselSlide.addEventListener('transitionend', () => {
   if (carouselImages[counter].id === 'lastClone') {
     carouselSlide.style.transition = 'none';
     counter = carouselImages.length - 2;
-    carouselSlide.style.transform = 'translateX(' + (-1170 * counter) + 'px)';
+    carouselSlide.style.transform = 'translateX(' + (-width * counter) + 'px)';
   }
 
   if (carouselImages[counter].id === 'firstClone') {
     carouselSlide.style.transition = 'none';
     counter = carouselImages.length - counter;
-    carouselSlide.style.transform = 'translateX(' + (-1170 * counter) + 'px)';
+    carouselSlide.style.transform = 'translateX(' + (-width * counter) + 'px)';
   }
 });
 
@@ -77,6 +82,6 @@ document.querySelectorAll('.controls li').forEach(function (indicator, ind) {
     document.querySelector('.controls .active').classList.remove('active');
     indicator.classList.add('active');
     carouselSlide.style.transition = '0.6s ease-in-out';
-    carouselSlide.style.transform = 'translateX(' + (-1170 * counter) + 'px)';
+    carouselSlide.style.transform = 'translateX(' + (-width * counter) + 'px)';
   });
 });

@@ -276,11 +276,10 @@ nav.sticky a .logo-unit-sticky img {
 
 .cards {
     border-radius: 20px;
-    width: 14%;
+    width: 21%;
     height: 325px;
     transition: 0.25s ease-in-out;
     background-color: #F2F3F7;
-    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 25px rgba(0, 0, 0, 0.2);
 }
 
 .cards img {
@@ -328,6 +327,7 @@ nav.sticky a .logo-unit-sticky img {
 
 .cards:hover {
     transform: translateY(-15px);
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 25px rgba(0, 0, 0, 0.2);
 }
 
 /* directors-message */
@@ -486,6 +486,7 @@ nav.sticky a .logo-unit-sticky img {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
     grid-gap: 1rem;
+    justify-items: center;
 }
 
 div.playlist iframe {

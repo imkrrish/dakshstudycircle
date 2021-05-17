@@ -16,7 +16,13 @@ const tNextBtn = document.querySelector('#tNextBtn');
 let tCounter = 1;
 const tSize = tCarouselImages[0].clientWidth;
 
-tCarouselSlide.style.transform = 'translateX(' + (-1170 * tCounter) + 'px)';
+let twidth = document.getElementById('tCSlide').getBoundingClientRect().width;
+window.addEventListener('resize', function () {
+    twidth = document.getElementById('tCSlide').getBoundingClientRect().width;
+})
+
+
+tCarouselSlide.style.transform = 'translateX(' + (-twidth * tCounter) + 'px)';
 
 // tDot tActive class 
 function tDot_next(count) {
@@ -46,7 +52,7 @@ tNextBtn.addEventListener('click', () => {
     tCarouselSlide.style.transition = '0.6s ease-in-out';
     tCounter++;
     tDot_next(tCounter);
-    tCarouselSlide.style.transform = 'translateX(' + (-1170 * tCounter) + 'px)';
+    tCarouselSlide.style.transform = 'translateX(' + (-twidth * tCounter) + 'px)';
 });
 
 tPrevBtn.addEventListener('click', () => {
@@ -54,20 +60,20 @@ tPrevBtn.addEventListener('click', () => {
     tCarouselSlide.style.transition = '0.6s ease-in-out';
     tCounter--;
     tDot_prev(tCounter)
-    tCarouselSlide.style.transform = 'translateX(' + (-1170 * tCounter) + 'px)';
+    tCarouselSlide.style.transform = 'translateX(' + (-twidth * tCounter) + 'px)';
 });
 
 tCarouselSlide.addEventListener('transitionend', () => {
     if (tCarouselImages[tCounter].id === 'tLastClone') {
         tCarouselSlide.style.transition = 'none';
         tCounter = tCarouselImages.length - 2;
-        tCarouselSlide.style.transform = 'translateX(' + (-1170 * tCounter) + 'px)';
+        tCarouselSlide.style.transform = 'translateX(' + (-twidth * tCounter) + 'px)';
     }
 
     if (tCarouselImages[tCounter].id === 'tFirstClone') {
         tCarouselSlide.style.transition = 'none';
         tCounter = tCarouselImages.length - tCounter;
-        tCarouselSlide.style.transform = 'translateX(' + (-1170 * tCounter) + 'px)';
+        tCarouselSlide.style.transform = 'translateX(' + (-twidth * tCounter) + 'px)';
     }
 });
 
@@ -80,6 +86,6 @@ document.querySelectorAll('.tControls li').forEach(function (indicator, ind) {
         document.querySelector('.tControls .tActive').classList.remove('tActive');
         indicator.classList.add('tActive');
         tCarouselSlide.style.transition = '0.6s ease-in-out';
-        tCarouselSlide.style.transform = 'translateX(' + (-1170 * tCounter) + 'px)';
+        tCarouselSlide.style.transform = 'translateX(' + (-twidth * tCounter) + 'px)';
     });
 });
