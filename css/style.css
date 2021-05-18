@@ -334,24 +334,24 @@ nav.sticky a .logo-unit-sticky img {
 
 .directors-message {
     margin-top: 100px;
-    height: 90vh;
+    height: 41vw;
     width: 100vw;
 }
 
 .director-img {
-    height: 90vh;
+    height: 42.4vw;
     width: 45vw;
     background-image: url(../images/photo_2020-12-03_20-51-05.jpg);
     background-size: cover;
 }
 
 .directors-message .message h1 {
-    font-size: 45px;
-    line-height: 55px;
+    font-size: 3.06vw;
+    line-height: 4vw;
     text-align: left;
     font-weight: 700;
     color: #333;
-    margin: 25px 0;
+    margin: 2vw 0;
     opacity: 0.9;
 }
 
@@ -360,9 +360,9 @@ nav.sticky a .logo-unit-sticky img {
 }
 
 .directors-message .message p, .topic-text p, .testimonials .review p {
-    font-size: 17px;
-    line-height: 30px;
-    margin-top: 50px;
+    font-size: 1.2vw;
+    line-height: 2vw;
+    margin-top: 3vw;
     text-align: left;
     font-weight: 600;
     color: #555;
@@ -371,16 +371,21 @@ nav.sticky a .logo-unit-sticky img {
 }
 
 .directors-message .message {
-    height: 90vh;
+    height: 42.5vw;
     width: 65vw;
     background-color: #f2f3f7;
-    padding: 100px 200px 0 100px;
+    padding: 6.5vw 13vw 0 100px;
 }
 
 .explore-btn-message {
     left: 0%;
-    margin-top: 50px;
+    margin-top: 1.5vw;
     transform: translateX(0);
+    -webkit-border-radius: 3vw;
+    -moz-border-radius: 3vw;
+    border-radius: 3vw;
+    font-size: 1.4vw;
+    padding: 1.4vw 3vw;
 }
 
 /* Gallery section */
@@ -729,7 +734,7 @@ footer .copyright-text h1 {
 }
 
 @media screen and (max-width: 500px) {
-    .footer .d-flex{
+    .footer .d-flex {
         flex-direction: column;
     }
-  }
+}

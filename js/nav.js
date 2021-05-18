@@ -21,7 +21,7 @@ function scrollFunction() {
         document.getElementById("navbar").classList.remove("sticky");
         document.getElementById("hero").classList.remove("marginTop");
         document.getElementById("sticky-logo").style.display = "none";
-        if (window.innerWidth < 860) {
+        if (window.innerWidth < 992) {
             document.getElementById("sticky-logo").style.display = "contents";
         }
     }
@@ -34,7 +34,7 @@ window.addEventListener('resize', function () {
 
 
 function addRequiredClass() {
-    if (window.innerWidth < 860) {
+    if (window.innerWidth < 992) {
         document.getElementById("navbar").classList.add("mobile");
         document.getElementById("sticky-logo").style.display = "contents";
     } else {
