@@ -1,5 +1,96 @@
 @media (max-width: 575.98px) {}
 
+/* Large devices (desktops, less than 1200px) */
+
+@media (max-width: 1200px) {
+    .container {
+        max-width: 100vw;
+    }
+    .header-top {
+        padding: 0% 2%;
+    }
+    .navbar {
+        border-radius: 0%;
+    }
+    .marginTop {
+        margin-top: 9.9vw;
+    }
+    .intro {
+        margin-top: 6%;
+    }
+    .explore-btn {
+        margin-top: 4.5%;
+    }
+    .expertise-container {
+        padding: 0% 20px;
+    }
+    .directors-message {
+        margin-top: 100px;
+        height: 45vw;
+        width: 100vw;
+    }
+    .director-img {
+        height: 45vw;
+        width: 45vw;
+    }
+    .directors-message .message {
+        height: 45vw;
+        width: 65vw;
+        padding: 6.5vw 13vw 0 100px;
+    }
+    div.playlist iframe {
+        width: 47vw;
+        /* margin-top: 2%; */
+    }
+    .topics-grid {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+    /* Testimonials Section  */
+    .tCarousel-container {
+        max-width: 100vw;
+    }
+    .tCarousel-slide .review-slide {
+        width: 100vw;
+        height: 35vw;
+    }
+    .contact-container {
+        width: 100%;
+        top: 435px;
+        border-radius: 0px;
+        left: 0;
+        transform: translateX(0);
+    }
+    .contact-form {
+        right: 5%;
+    }
+    .footer {
+        margin-top: 700px;
+    }
+    .footer-container {
+        display: grid;
+        justify-items: center;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 4%;
+        grid-template-areas: ' . . .' ' s s s ';
+    }
+    .footer-container .social-networks {
+        grid-area: s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .footer-container .social-networks ul {
+        display: flex;
+        align-items: center;
+    }
+    .footer h1 {
+        margin-bottom: 15px;
+    }
+}
+
 /* Medium devices (tablets, less than 992px) */
 
 @media (max-width: 991.98px) {
@@ -19,7 +110,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 1% 3%;
+        padding: 1px 3%;
     }
     .navbar.mobile {
         background-color: #053f81;
@@ -254,6 +345,13 @@
     }
 }
 
+@media (max-width: 890px) {
+    .contact-form {
+        top: 59vw;
+        width: 31rem;
+    }
+}
+
 /* Small devices (landscape phones, less than 768px) */
 
 @media (max-width: 769px) {
@@ -316,7 +414,3 @@
         margin-bottom: 90vh;
     }
 }
-
-/* Large devices (desktops, less than 1200px) */
-
-@media (max-width: 1200px) {}
