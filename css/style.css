@@ -732,9 +732,3 @@ footer .copyright-text h1 {
     padding: 20px;
     font-weight: 100;
 }
-
-@media screen and (max-width: 500px) {
-    .footer .d-flex {
-        flex-direction: column;
-    }
-}
