@@ -414,3 +414,70 @@
         margin-bottom: 90vh;
     }
 }
+
+@media (max-width: 700px) {
+    .directors-message {
+        height: 105vw;
+    }
+    .contact-container {
+        height: 111vw;
+    }
+    .contact-form {
+        top: 85vw;
+        width: 75vw;
+    }
+    .footer {
+        margin-top: 160vw;
+    }
+}
+
+@media (max-width: 625px) {
+    .expertise-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-items: center;
+    }
+    .directors-message {
+        height: 135vw;
+    }
+    .cards {
+        width: 60%;
+        height: 450px;
+        box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 25px rgba(0, 0, 0, 0.2);
+        justify-content: space-evenly;
+        margin-bottom: 20px;
+    }
+    .topics-grid {
+        display: flex;
+        flex-direction: column;
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+    .contact-container {
+        height: 120vw;
+    }
+    .contact-form {
+        top: 100vw;
+        width: 75vw;
+    }
+    .footer {
+        margin-top: 185vw;
+    }
+}
+
+@media (max-width: 545px) {
+    .directors-message {
+        height: 135vw;
+    }
+    .contact-container {
+        height: 135vw;
+    }
+    .contact-form {
+        top: 111vw;
+        width: 75vw;
+    }
+    .footer {
+        margin-top: 225vw;
+    }
+}
