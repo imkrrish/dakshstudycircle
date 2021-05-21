@@ -110,7 +110,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 1px 3%;
+        padding: 2px 3%;
     }
     .navbar.mobile {
         background-color: #053f81;
@@ -158,10 +158,10 @@
         display: contents;
     }
     .mobile #sticky-logo img {
-        width: 9vw;
+        width: 10vw;
     }
     nav.sticky a .logo-unit-sticky img {
-        width: 9vw;
+        width: 10vw;
         transform: scale(1);
     }
     .navbar.sticky {
@@ -466,9 +466,15 @@
     }
 }
 
+@media (max-width: 539px) {
+    .directors-message {
+        height: 155vw;
+    }
+}
+
 @media (max-width: 545px) {
     .directors-message {
-        height: 135vw;
+        height: 170vw;
     }
     .contact-container {
         height: 135vw;
@@ -482,12 +488,27 @@
     }
 }
 
-@media (max-width: 475px) {
+@media (max-width: 476px) {
     header {
         height: 100vw;
     }
+    .phone-icon img {
+        width: 28px;
+    }
+    .header-top-phone h3 {
+        font-size: 15px;
+    }
+    .marginTop {
+        margin-top: 31vw;
+    }
+    .mobile #sticky-logo img {
+        width: 12vw;
+    }
+    .mobile .nav-list {
+        width: 45%;
+    }
     .intro {
-        margin-top: 11%;
+        margin-top: 17%;
     }
     .intro h1 {
         margin-top: 10px;
@@ -499,7 +520,7 @@
         line-height: 40px;
     }
     .explore-btn {
-        margin-top: 4%;
+        margin-top: 8%;
         -webkit-border-radius: 100px;
         -moz-border-radius: 100px;
         border-radius: 100px;
@@ -542,13 +563,6 @@
         width: 100vw;
         height: 65vh;
     }
-    .img-gallery {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-template-rows: auto;
-        grid-gap: 0.5rem;
-        grid-template-areas: 'img-1 img-2 img-3 img-3' 'img-1 img-4 img-5 img-6' 'img-7 img-7 img-8 img-6';
-    }
     .img-gallery a i {
         display: none;
     }
@@ -581,7 +595,7 @@
         margin-top: -10px;
     }
     .tCarousel-slide .review-slide {
-        height: 50vh;
+        height: 80vw;
     }
     .review-slide p {
         font-size: 15px;
@@ -599,14 +613,14 @@
         font-size: 17px;
     }
     .contact-container {
-        height: 90vh;
+        height: 185vw;
     }
     .contact-form {
-        top: 77vh;
+        top: 150vw;
         width: 95vw;
     }
     .footer {
-        margin-top: 145vh;
+        margin-top: 275vw;
         padding: 0 1%;
     }
     .footer h1 {
@@ -630,9 +644,15 @@
     }
 }
 
-@media (max-width: 376px) {
+@media (max-width: 409px) {
+    .directors-message {
+        height: 175vw;
+    }
+    .contact-form {
+        top: 155vw;
+    }
     .footer {
-        margin-top: 135vh;
+        margin-top: 285vw;
     }
     .footer h1 {
         font-size: 15px;
@@ -644,19 +664,241 @@
         margin-bottom: 35px;
     }
     footer .copyright-text h1 {
-        text-align: center;
-        color: white;
         font-size: 17px;
         padding: 20px;
-        font-weight: 100;
+    }
+}
+
+@media (max-width: 376px) {
+    header {
+        height: 110vw;
     }
     .directors-message {
-        height: 175vw;
+        height: 195vw;
     }
     .img-gallery a {
         height: 10rem;
     }
     .img-1, .img-6, .img-9, .img-14, .img-17, .img-22 {
         min-height: 21rem;
+    }
+    .tCarousel-slide .review-slide {
+        height: auto;
+    }
+    .contact-container {
+        height: 235vw;
+    }
+    .contact-form {
+        top: 175vw;
+    }
+    .footer {
+        margin-top: 315vw;
+    }
+    .footer h1 {
+        font-size: 12px;
+    }
+    .footer ul li a {
+        font-size: 13px;
+    }
+    .footer .social-networks ul {
+        margin-bottom: 35px;
+    }
+    footer .copyright-text h1 {
+        font-size: 17px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 353px) {
+    .directors-message .message {
+        padding: 30px 15px 0 30px;
+    }
+    .directors-message .message h1 {
+        font-size: 30px;
+        line-height: 35px;
+    }
+    .directors-message .message p {
+        font-size: 14px;
+        line-height: 25px;
+    }
+    .yt-playlists h1 {
+        font-size: 35px;
+    }
+    .contact-container {
+        height: 245vw;
+    }
+    .contact-form {
+        top: 185vw;
+    }
+    .footer {
+        margin-top: 335vw;
+    }
+}
+
+@media (max-width: 320px) {
+    header {
+        height: 115vw;
+    }
+    .mobile .nav-list {
+        width: 50%;
+    }
+    .courses h1 {
+        font-size: 30px;
+    }
+    .gallery-container h1 {
+        font-size: 35px;
+    }
+    .about-us h1 {
+        font-size: 35px;
+    }
+    div.playlist iframe {
+        height: 170px;
+    }
+    .topics .topic i {
+        font-size: 20px;
+    }
+    .topics .topic .circle {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+    }
+    .topic-text p {
+        margin-top: 10px;
+        font-size: 12px;
+        line-height: 17px;
+    }
+    .topic-text h3 {
+        font-size: 14px;
+    }
+    .topic>div {
+        margin-top: 25px;
+    }
+    .topic-text {
+        width: 75%;
+    }
+    .testimonials-container h1.testimonials-heading {
+        font-size: 35px;
+    }
+    .testimonials h1.sub-heading {
+        font-size: 25px;
+    }
+    .cards h3 {
+        font-size: 20px;
+    }
+    .cards p {
+        font-size: 16px;
+    }
+    .cards img {
+        margin-bottom: 15px;
+    }
+    .contact-container h1 {
+        margin-bottom: 10px;
+        font-size: 25px;
+    }
+    .contact-container p.contact-content {
+        font-size: 12px;
+    }
+    .info .circle .icon {
+        font-size: 20px;
+    }
+    .info .circle {
+        width: 55px;
+        height: 55px;
+    }
+    .contact-container {
+        height: 265vw;
+    }
+    .contact-form {
+        top: 200vw;
+    }
+    .contact-form .inputBox input, .contact-form .inputBox textarea {
+        padding: 10px 0;
+        font-size: 13px;
+    }
+    .contact-form .inputBox input::placeholder, .contact-form .inputBox textarea::placeholder {
+        font-size: 13px;
+    }
+    .contact-form h2 {
+        font-size: 20px;
+    }
+    .contact-form .inputBox input[type="submit"] {
+        font-size: 15px;
+    }
+    .footer {
+        margin-top: 375vw;
+    }
+    .footer h1 {
+        font-size: 12px;
+    }
+    .footer ul li {
+        font-size: 10px;
+    }
+    .footer ul li a {
+        font-size: 10px;
+    }
+    .footer .social-networks ul {
+        margin-bottom: 25px;
+    }
+    footer .copyright-text h1 {
+        font-size: 15px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 311px) {
+    .header-top-social {
+        font-size: 15px;
+    }
+    .phone-icon img {
+        width: 25px;
+    }
+    .header-top-phone h3 {
+        font-size: 15px;
+    }
+    .intro {
+        margin-top: 11%;
+    }
+    .intro h1 {
+        line-height: 20px;
+    }
+    .intro h3 {
+        font-size: 7.5vw;
+        line-height: 30px;
+    }
+    .explore-btn {
+        font-size: 15px;
+        padding: 10px 20px;
+    }
+    .cards {
+        width: 95%;
+        height: 300px;
+    }
+}
+
+@media (max-width: 296px) {
+    .directors-message .message {
+        padding: 20px 10px 0 20px;
+    }
+    .directors-message .message h1 {
+        font-size: 25px;
+    }
+    .directors-message .message p {
+        font-size: 13px;
+        line-height: 20px;
+    }
+    .yt-playlists h1 {
+        font-size: 25px;
+    }
+    .contact-text {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 284px) {
+    header {
+        height: 125vw;
+    }
+    .mobile .nav-list {
+        width: 56%;
     }
 }

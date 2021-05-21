@@ -732,3 +732,7 @@ footer .copyright-text h1 {
     padding: 20px;
     font-weight: 100;
 }
+
+footer .copyright-text h1 a {
+    color: white;
+}
