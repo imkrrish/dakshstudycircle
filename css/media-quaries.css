@@ -249,12 +249,12 @@
         width: 100vw;
         height: 85vw;
     }
-    .img-gallery a {
+    /* .img-gallery a {
         height: 17rem;
     }
     .img-1, .img-6, .img-9, .img-14, .img-17, .img-22 {
         min-height: 35rem;
-    }
+    } */
     /* yt playlist section  */
     .playlist {
         display: flex;
@@ -375,12 +375,12 @@
     .directors-message {
         height: 85vw;
     }
-    .img-gallery a {
+    /* .img-gallery a {
         height: 13rem;
     }
     .img-1, .img-6, .img-9, .img-14, .img-17, .img-22 {
         min-height: 27rem;
-    }
+    } */
     div.playlist iframe {
         width: 75vw;
         height: 275px;
@@ -566,12 +566,12 @@
     .img-gallery a i {
         display: none;
     }
-    .img-gallery a {
+    /* .img-gallery a {
         height: 9rem;
     }
     .img-1, .img-6, .img-9, .img-14, .img-17, .img-22 {
         min-height: 19rem;
-    }
+    } */
     div.playlist iframe {
         width: 95vw;
         height: 225px;
@@ -676,12 +676,12 @@
     .directors-message {
         height: 195vw;
     }
-    .img-gallery a {
+    /* .img-gallery a {
         height: 10rem;
     }
     .img-1, .img-6, .img-9, .img-14, .img-17, .img-22 {
         min-height: 21rem;
-    }
+    } */
     .tCarousel-slide .review-slide {
         height: auto;
     }
