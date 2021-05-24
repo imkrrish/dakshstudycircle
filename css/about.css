@@ -1,0 +1,203 @@
+body {
+    background-color: #F2F3F7;
+}
+
+header {
+    height: auto;
+    background-image: url("../images/books-1245690_1280.jpg");
+}
+
+.navbar {
+    margin-bottom: 4%;
+}
+
+.navbar ul li a.aboutactive::before {
+    width: 100%;
+}
+
+.navbar ul li a.aboutactive {
+    font-weight: 700;
+}
+
+.footer {
+    margin-bottom: 27px;
+    margin-top: 0px;
+}
+
+.about-us-container {
+    padding: 5% 10%;
+    position: relative;
+    z-index: -100;
+}
+
+.about-us-container h1, h2, h3 {
+    text-align: center;
+}
+
+.about-us-container p {
+    margin-top: 2%;
+    font-size: 16px;
+    line-height: 30px;
+    text-align: justify;
+    font-weight: 600;
+    color: black;
+    letter-spacing: .5px;
+    opacity: 1;
+}
+
+.about-us-container h1 {
+    width: 100%;
+    letter-spacing: 2px;
+    padding: 4px;
+    background-color: #053f81;
+    color: white;
+}
+
+.about-us-container h3 {
+    margin: 10px 0;
+}
+
+.about-us-container h2, .about-us-container h3.bottom {
+    position: relative;
+    color: #ED151F;
+}
+
+.about-us-container h2::before, .about-us-container h3.bottom::before {
+    content: '';
+    position: absolute;
+    width: 41%;
+    border: 2px solid black;
+    border-radius: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0%;
+    background-color: black;
+}
+
+.about-us-container h2::after, .about-us-container h3.bottom::after {
+    content: '';
+    position: absolute;
+    width: 41%;
+    border: 2px solid black;
+    border-radius: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0%;
+    background-color: black;
+}
+
+.explore-btn {
+    margin: -4% 0 4% 0;
+}
+
+.banner-container {
+    padding: 0 10% 5% 10%;
+}
+
+.container .banner {
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 991.98px) {
+    header {
+        overflow: visible;
+    }
+    .header-top {
+        margin-top: 0%;
+        padding-top: 10px;
+    }
+}
+
+@media (max-width: 951px) {
+    .about-us-container h2::before, .about-us-container h3.bottom::before {
+        width: 38%;
+    }
+    .about-us-container h2::after, .about-us-container h3.bottom::after {
+        width: 38%;
+    }
+}
+
+@media (max-width: 701px) {
+    .about-us-container p {
+        font-size: 14px;
+        line-height: 25px;
+        letter-spacing: .5px;
+    }
+    .about-us-container h2::before, .about-us-container h3.bottom::before {
+        width: 36%;
+    }
+    .about-us-container h2::after, .about-us-container h3.bottom::after {
+        width: 36%;
+    }
+}
+
+@media (max-width: 625px) {
+    .about-us-container {
+        padding: 5%;
+    }
+    .banner-container {
+        padding: 0 5% 5% 5%;
+    }
+}
+
+@media (max-width: 539px) {
+    .about-us-container h2::before, .about-us-container h3.bottom::before {
+        width: 34%;
+    }
+    .about-us-container h2::after, .about-us-container h3.bottom::after {
+        width: 34%;
+    }
+    .about-us-container h1 {
+        font-size: 21px;
+    }
+}
+
+@media (max-width: 476px) {
+    .about-us-container h2 {
+        font-size: 20px;
+    }
+    .about-us-container h3 {
+        font-size: 16px;
+    }
+    .about-us-container p {
+        font-size: 12px;
+        line-height: 21px;
+        letter-spacing: .25px;
+    }
+}
+
+@media (max-width: 376px) {
+    .about-us-container h2 {
+        font-size: 17px;
+    }
+    .about-us-container h3 {
+        font-size: 14px;
+    }
+    .about-us-container p {
+        font-size: 10px;
+        line-height: 18px;
+        letter-spacing: .15px;
+    }
+}
+
+@media (max-width: 320px) {
+    .about-us-container h2::before, .about-us-container h3.bottom::before {
+        width: 30%;
+    }
+    .about-us-container h2::after, .about-us-container h3.bottom::after {
+        width: 30%;
+    }
+    .about-us-container h1 {
+        font-size: 19px;
+    }
+}
+
+@media (max-width: 296px) {
+    .about-us-container h3 {
+        font-size: 12px;
+    }
+    .about-us-container h2 {
+        font-size: 13px;
+    }
+}

@@ -1,5 +1,3 @@
-@media (max-width: 575.98px) {}
-
 /* Large devices (desktops, less than 1200px) */
 
 @media (max-width: 1200px) {
@@ -243,18 +241,12 @@
     /* Gallery section */
     .carousel-container {
         max-width: 100vw;
-        height: 85vw;
+        height: 55vw;
     }
     .carousel-slide .img {
         width: 100vw;
-        height: 85vw;
+        height: 55vw;
     }
-    /* .img-gallery a {
-        height: 17rem;
-    }
-    .img-1, .img-6, .img-9, .img-14, .img-17, .img-22 {
-        min-height: 35rem;
-    } */
     /* yt playlist section  */
     .playlist {
         display: flex;
@@ -375,12 +367,6 @@
     .directors-message {
         height: 85vw;
     }
-    /* .img-gallery a {
-        height: 13rem;
-    }
-    .img-1, .img-6, .img-9, .img-14, .img-17, .img-22 {
-        min-height: 27rem;
-    } */
     div.playlist iframe {
         width: 75vw;
         height: 275px;
@@ -392,6 +378,9 @@
     }
     .tCarousel-slide .review-slide {
         height: 45vw;
+    }
+    .review-slide {
+        padding: 0 100px;
     }
     .contact-us {
         margin-bottom: 90vh;
@@ -418,6 +407,9 @@
 @media (max-width: 700px) {
     .directors-message {
         height: 105vw;
+    }
+    .tCarousel-slide .review-slide {
+        height: 55vw;
     }
     .contact-container {
         height: 111vw;
@@ -453,6 +445,13 @@
         flex-direction: column;
         padding-left: 25px;
         padding-right: 25px;
+    }
+    .review-slide {
+        padding: 0 25px 0px 25px;
+    }
+    .review-slide p {
+        font-size: 15px;
+        line-height: 25px;
     }
     .contact-container {
         height: 120vw;
@@ -566,12 +565,6 @@
     .img-gallery a i {
         display: none;
     }
-    /* .img-gallery a {
-        height: 9rem;
-    }
-    .img-1, .img-6, .img-9, .img-14, .img-17, .img-22 {
-        min-height: 19rem;
-    } */
     div.playlist iframe {
         width: 95vw;
         height: 225px;
@@ -598,11 +591,8 @@
         height: 80vw;
     }
     .review-slide p {
-        font-size: 15px;
-        line-height: 25px;
-    }
-    .review-slide {
-        padding: 0 25px 0px 25px;
+        font-size: 14px;
+        line-height: 24px;
     }
     .topic-text p {
         margin-top: 15px;
@@ -676,12 +666,6 @@
     .directors-message {
         height: 195vw;
     }
-    /* .img-gallery a {
-        height: 10rem;
-    }
-    .img-1, .img-6, .img-9, .img-14, .img-17, .img-22 {
-        min-height: 21rem;
-    } */
     .tCarousel-slide .review-slide {
         height: auto;
     }
@@ -900,5 +884,8 @@
     }
     .mobile .nav-list {
         width: 56%;
+    }
+    footer .copyright-text h1 {
+        font-size: 13px;
     }
 }

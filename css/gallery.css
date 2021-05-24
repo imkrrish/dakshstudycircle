@@ -166,3 +166,17 @@
     grid-area: img-8;
     background-image: url("../images/daksh-images-small/img-24-compressed.jpg");
 }
+
+.banner-container {
+    width: 100vw;
+    margin-top: 5%;
+}
+
+.banner-container img {
+    width: 100%;
+    height: auto;
+}
+
+.banner {
+    background-color: #f2f3f7;
+}
