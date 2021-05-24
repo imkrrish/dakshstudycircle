@@ -26,8 +26,6 @@ header {
 
 .about-us-container {
     padding: 5% 10%;
-    position: relative;
-    z-index: -100;
 }
 
 .about-us-container h1, h2, h3 {
