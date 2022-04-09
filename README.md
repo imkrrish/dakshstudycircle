@@ -41,7 +41,7 @@ git clone
 2. Enter the project directory
 
 ```
-cd SelfieSegmentation_video
+cd dakshstudycircle
 ```
 
 3. Open With Live Server
