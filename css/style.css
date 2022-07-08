@@ -339,7 +339,7 @@ nav.sticky a .logo-unit-sticky img {
 }
 
 .director-img {
-    height: 42.4vw;
+    height: 44.4vw;
     width: 45vw;
     background-image: url("../images/anildaksh.jpg");
     background-size: cover;
@@ -371,7 +371,7 @@ nav.sticky a .logo-unit-sticky img {
 }
 
 .directors-message .message {
-    height: 42.5vw;
+    height: 44.5vw;
     width: 65vw;
     background-color: #f2f3f7;
     padding: 6.5vw 13vw 0 100px;
@@ -545,7 +545,7 @@ div.playlist iframe {
 }
 
 .topic-text {
-    width: 71%;
+    width: 72%;
 }
 
 .topic-text p {
@@ -680,7 +680,7 @@ div.playlist iframe {
     text-decoration: none;
     font-size: 17px;
     font-weight: 500;
-    transition: 00.35s ease-in-out;
+    transition: 0.2s ease-in-out;
 }
 
 .footer ul li a:hover {
