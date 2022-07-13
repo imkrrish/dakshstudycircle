@@ -46,7 +46,7 @@ body {
 header {
     width: 100vw;
     height: 100vh;
-    background-image: url("../images/home-background.jpg");
+    background-image: url("../images/home-background.avif");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -341,7 +341,7 @@ nav.sticky a .logo-unit-sticky img {
 .director-img {
     height: 44.4vw;
     width: 45vw;
-    background-image: url("../images/anildaksh.jpg");
+    background-image: url("../images/anildaksh.avif");
     background-size: cover;
 }
 
