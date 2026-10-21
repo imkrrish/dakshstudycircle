@@ -57,7 +57,9 @@
       "Bash(pnpm typecheck)",
       "Bash(pnpm build)",
       "Bash(pnpm dlx shadcn@latest add *)",
-      "Bash(playwright-cli *)"
+      "Bash(playwright-cli *)",
+      "Write(./reference/content/_research.md)",
+      "Edit(./reference/content/_research.md)"
     ],
     "ask": [
       "Bash(pnpm add *)",

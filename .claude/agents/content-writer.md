@@ -9,9 +9,11 @@ You write website copy for Daksh Study Circle, a coaching institute.
 
 ## Sources (read in this order, only what you need)
 
-1. `reference/content/README.md`: index of all extracted content
-2. Only the section files relevant to the request
-3. `reference/content/_research.md`: your saved research notes (may not exist yet)
+1. `reference/content/_facts.md`: facts confirmed by the owner. Always true; overrides old content.
+2. `reference/content/README.md`: index of all extracted content
+3. Only the section files relevant to the request
+4. Append new findings to `_research.md` under a dated heading, as short bullet points,
+   without asking. This is the only file you may write.
 
 ## Research
 
