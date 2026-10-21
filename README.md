@@ -1,51 +1,36 @@
-<div align="center">
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-# Daksh Study Circle
+## Getting Started
 
-Templete for Educational Institutes.
+First, run the development server:
 
-<a href="https://imkrrish.github.io/dakshstudycircle/" target="blank">Live Demo</a>
-
-_Loved the project? Show your love to the developer by starring this repo._
-
-<br />
-
-<img src="https://github.com/imkrrish/imkrrish.github.io/blob/master/content/featured/DakshStudyCircle/Daksh.png" style="width: 80%"/>
-
-</div>
-
----
-
-Template for Coaching institutes and Educational Institutes.
-
----
-
-## Tech Stack 💻
-
-- HTML
-- CSS
-- JavaScript
-
-## 🚀 Getting started
-
-This project is already deployed on <a href="https://imkrrish.github.io/dakshstudycircle/" target="blank">https://imkrrish.github.io/dakshstudycircle/</a>
-
-Instructions for local deployment:
-
-1. Clone the repository
-
-```
-git clone
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-2. Enter the project directory
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-```
-cd dakshstudycircle
-```
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-3. Open With Live Server
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## 🤩Feel free to give this repo a ⭐ if you like this repo and want to appreciate efforts
+## Learn More
 
-Contributions are welcomed!
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
