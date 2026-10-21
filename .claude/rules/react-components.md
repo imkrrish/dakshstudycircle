@@ -50,3 +50,12 @@ export default function AboutPage() {
   return <main>...</main>
 }
 ```
+
+## Animation
+
+- Simple fades and slides: CSS (Tailwind / tw-animate-css). SVG drawing and sequences: anime.js.
+- Never use motion or framer-motion.
+- anime.js lives in small "use client" wrappers; pass content as children so it stays server-rendered.
+- Content must be visible without JavaScript; animation only enhances it.
+- Never animate the hero headline in on page load (hurts LCP). Animate decorations instead.
+- Respect `prefers-reduced-motion`.

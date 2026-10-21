@@ -52,6 +52,12 @@ MVP, frontend only. No backend, database, or auth yet.
 - Use `playwright-cli` against http://localhost:3000.
 - Read the page snapshot first. Take a screenshot only when judging visual design (layout, spacing, colors).
 
+## Content
+
+- Site copy comes from the `content-writer` agent. Never read `reference/` directly.
+- Results and testimonials are MOCK data until launch: obviously fake, marked `MOCK`.
+
 ## Before saying a task is done
 
 - Run `pnpm lint` and `pnpm typecheck`, and fix what they report.
+- If routes were added or changed, run `pnpm build` and confirm every route shows `○` (static).
