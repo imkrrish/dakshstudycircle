@@ -17,6 +17,14 @@ MVP, frontend only. No backend, database, or auth yet.
 
 - Everything lives under `src/`: routes in `src/app/`, UI in `src/components/`, helpers in `src/lib/`.
 
+## Architecture
+
+- Pages are built from data: each page is `{ seo, sections: [] }` in `src/content/pages/`,
+  read only through `getPage()` / `getSite()` in `src/lib/content.ts`. Later this becomes a
+  CMS fetched at build time, so components never import content files directly.
+- Sections are modular components controlled by props. The order of the sections array is
+  the order on the page.
+
 ## Commands
 
 - pnpm only. Never npm or yarn.

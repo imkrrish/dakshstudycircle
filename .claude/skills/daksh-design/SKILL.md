@@ -54,3 +54,5 @@ Inspiration is sarvam.ai (clean, minimal, subtle Indian motifs). Inspiration onl
 - The title is always more prominent than any decoration around it.
 
 Animation rules live in `.claude/rules/react-components.md`.
+
+When building or changing a section, read `sections.md` in this skill's folder.
