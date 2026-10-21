@@ -23,7 +23,17 @@ MVP, frontend only. No backend, database, or auth yet.
 - pnpm only. Never npm or yarn.
 - Dev: `pnpm dev`. Assume it's already running on :3000.
 - Lint: `pnpm lint` · Typecheck: `pnpm typecheck`
-- Add shadcn component: `pnpm dlx shadcn@latest add <name>`
+
+## Before creating a component
+
+1. Check `src/components/` and `src/components/ui/`. If it exists, reuse or extend it.
+2. Otherwise, if shadcn provides it, add it with `pnpm dlx shadcn@latest add <name>`. Never hand-write a shadcn component.
+3. Only then create a new one, following `.claude/rules/react-components.md`.
+
+## Git
+
+- Never commit, push, or change git history. The user does all commits.
+- If a task changed files, end your reply with a suggested commit message (Conventional Commits, e.g. `feat: add contact page`).
 
 ## Conventions
 

@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "includeGitInstructions": false,
+  "permissions": {
+    "allow": [
+      "Bash(pnpm lint)",
+      "Bash(pnpm typecheck)",
+      "Bash(pnpm build)",
+      "Bash(pnpm dlx shadcn@latest add *)"
+    ],
+    "ask": [
+      "Bash(pnpm add *)",
+      "Bash(pnpm remove *)",
+      "Edit(./src/components/ui/**)"
+    ],
+    "deny": [
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(git merge *)",
+      "Bash(git rebase *)",
+      "Bash(git revert *)",
+      "Bash(git cherry-pick *)",
+      "Bash(git reset *)",
+      "Bash(git restore *)",
+      "Bash(git checkout .)",
+      "Bash(git checkout -- *)",
+      "Bash(git clean *)",
+      "Bash(git branch -D *)",
+      "Bash(git stash drop *)",
+      "Bash(git stash clear)",
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(./.next/**)",
+      "Read(./pnpm-lock.yaml)"
+    ]
+  }
+}
