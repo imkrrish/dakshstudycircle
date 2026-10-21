@@ -40,11 +40,11 @@ const source = roots
   .join("\n")
 
 const missing = components.filter(
-  (name) => !new RegExp(`/ui/${name}["']`).test(source)
+  (name) => !new RegExp(`/ui/${name}["']`).test(source),
 )
 
 console.log(
-  `${components.length - missing.length}/${components.length} components shown.`
+  `${components.length - missing.length}/${components.length} components shown.`,
 )
 
 if (missing.length > 0) {

@@ -19,8 +19,8 @@ paths:
 - Icon inside a Button: add `data-icon="inline-start"` or `data-icon="inline-end"` to the icon
 
 ```tsx
-import type { ComponentProps } from "react";
-import { cn } from "cn";
+import type { ComponentProps } from "react"
+import { cn } from "cn"
 
 function CourseCard({
   title,
@@ -35,10 +35,10 @@ function CourseCard({
     >
       {title}
     </div>
-  );
+  )
 }
 
-export { CourseCard };
+export { CourseCard }
 ```
 
 ## Route files (`page.tsx`, `layout.tsx`, `loading.tsx`, `error.tsx`)
@@ -47,6 +47,6 @@ export { CourseCard };
 
 ```tsx
 export default function AboutPage() {
-  return <main>...</main>;
+  return <main>...</main>
 }
 ```

@@ -51,7 +51,7 @@ export function ColorPair({
 }) {
   const ref = React.useRef<HTMLDivElement>(null)
   const [info, setInfo] = React.useState<{ ratio: number; bg: string } | null>(
-    null
+    null,
   )
 
   React.useEffect(() => {
@@ -92,7 +92,7 @@ export function ColorPair({
     <div
       className={cn(
         "flex flex-col overflow-hidden rounded-xl border",
-        className
+        className,
       )}
     >
       <div
