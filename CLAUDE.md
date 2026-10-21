@@ -39,8 +39,7 @@ MVP, frontend only. No backend, database, or auth yet.
 - Server Components by default; "use client" only for state, effects, or browser APIs.
 - Use theme tokens (`bg-primary`, `text-muted-foreground`). No hard-coded colors.
 - Never edit `src/components/ui/` directly. Wrap or extend instead.
-- Color balance: mostly neutral. Primary red only for main buttons and key highlights. Navy only inside dark bands (ink → navy gradient). `flame` + `saffron` for gradients and motifs only, never text. Navbar is light, not navy.
-- Fonts: Newsreader for h1/h2 (font-heading), Inter for everything else. Eyebrow text is muted, not red.
+- Design system: the `daksh-design` skill (loads automatically for UI work). Follow it for colors, fonts, spacing and motifs.
 
 ## Where to look things up
 
