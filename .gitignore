@@ -45,4 +45,5 @@ next-env.d.ts
 .claude/settings.local.json
 # Playwright CLI output (may contain credentials)
 .playwright-cli/
+.playwright-mcp/
 .claude/worklog/
