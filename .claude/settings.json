@@ -57,9 +57,6 @@
     ]
   },
   "includeGitInstructions": false,
-  // "skillOverrides": {
-  //   "apple-design": "user-invocable-only"
-  // },
   "permissions": {
     "allow": [
       "Bash(pnpm lint)",
