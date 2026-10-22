@@ -12,14 +12,22 @@ export const site: Site = {
   contact: {
     phones: [
       {
-        label: "PLACEHOLDER",
-        e164: "+910000000000",
-        display: "PLACEHOLDER 00000 00000",
-        whatsapp: false,
+        label: "PLACEHOLDER: Office",
+        e164: "+919818824279",
+        display: "+91 98188 24279",
+        whatsapp: true,
+      },
+      {
+        label: "PLACEHOLDER: Director",
+        e164: "+919953005312",
+        display: "+91 99530 05312",
+        whatsapp: true,
       },
     ],
     emails: ["placeholder@example.com"],
-    hours: "PLACEHOLDER hours",
+    hours: "PLACEHOLDER: Mon–Sat, 10 am – 7 pm",
+    whatsappMessage:
+      "Hello, I'd like to know about classes at Daksh Study Circle.",
     address: {
       line1: "PLACEHOLDER line 1",
       locality: "PLACEHOLDER locality",

@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Geist_Mono, Inter, Newsreader } from "next/font/google"
 
 import "./globals.css"
+import { ContactDialog } from "@/components/shared/contact-dialog"
 import { getSite } from "@/lib/content"
 import { cn } from "@/lib/utils"
 
@@ -36,7 +37,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         newsreader.variable,
       )}
     >
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        {children}
+        <ContactDialog />
+      </body>
     </html>
   )
 }

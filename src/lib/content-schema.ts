@@ -54,6 +54,7 @@ const SiteSchema = z.strictObject({
     ),
     emails: z.array(z.string()),
     hours: z.string(),
+    whatsappMessage: z.string(),
     address: z.strictObject({
       line1: z.string(),
       line2: z.string().optional(),
