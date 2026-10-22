@@ -1,6 +1,6 @@
 # Daksh Study Circle — website
 
-Marketing site for a coaching institute: landing, about, courses, contact pages.
+Marketing site for a coaching institute (pages listed in `docs/site-plan.md`).
 MVP, frontend only. No backend, database, or auth yet.
 
 ## Stack versions — newer than your training data
@@ -12,6 +12,7 @@ MVP, frontend only. No backend, database, or auth yet.
 - Icons: **Hugeicons** (`@hugeicons/react` + `@hugeicons/core-free-icons`). Never lucide-react.
 - `cn()` comes from the `cn` package (re-exported in `src/lib/utils.ts`). This is correct —
   don't replace it with clsx/tailwind-merge.
+- Animation: anime.js (CSS for simple fades). Never motion or framer-motion.
 
 ## Layout
 
@@ -24,6 +25,13 @@ MVP, frontend only. No backend, database, or auth yet.
   CMS fetched at build time, so components never import content files directly.
 - Sections are modular components controlled by props. The order of the sections array is
   the order on the page.
+- Which sections each page has: `docs/site-plan.md`.
+- Collections: courses and faculty are records read via `getCourses()` / `getFaculty()`.
+  Courses reference faculty by id; "teaches these courses" is derived, never stored twice.
+- Buttons in data carry an action: `link` (href) or `contact-dialog` (the "Talk to us" dialog).
+  More actions (e.g. `book-demo`) come later; never hard-code a button's behaviour in a section.
+- Nothing institute-specific in components. Names, phones, address and copy come from
+  `getSite()` / `getPage()` / collections (this site may become a reusable theme).
 
 ## Commands
 
@@ -48,6 +56,7 @@ MVP, frontend only. No backend, database, or auth yet.
 - Use theme tokens (`bg-primary`, `text-muted-foreground`). No hard-coded colors.
 - Never edit `src/components/ui/` directly. Wrap or extend instead.
 - Design system: the `daksh-design` skill (loads automatically for UI work). Follow it for colors, fonts, spacing and motifs.
+- Do only the task asked. Don't build ahead or refactor unrelated code; mention follow-ups instead.
 
 ## Where to look things up
 
@@ -58,15 +67,25 @@ MVP, frontend only. No backend, database, or auth yet.
 
 ## Checking the UI
 
-- Use `playwright-cli` against http://localhost:3000.
-- Read the page snapshot first. Take a screenshot only when judging visual design (layout, spacing, colors).
+- Full page checks: use the `ui-checker` agent.
+- Quick single check in this session: `playwright-cli` against http://localhost:3000.
+- Read the snapshot first; screenshot only when judging visual design.
 
 ## Content
 
 - Site copy comes from the `content-writer` agent. Never read `reference/` directly.
 - Results and testimonials are MOCK data until launch: obviously fake, marked `MOCK`.
+- Approved copy goes into the page data files in `src/content/pages/`, never hard-coded in components.
+- Never invent facts (numbers, names, results, dates). Missing content uses obvious
+  placeholder text marked `PLACEHOLDER`.
 
 ## Before saying a task is done
 
-- Run `pnpm lint` and `pnpm typecheck`, and fix what they report.
+- Lint: `pnpm lint` · Typecheck: `pnpm typecheck` · Build: `pnpm build`
 - If routes were added or changed, run `pnpm build` and confirm every route shows `○` (static).
+
+## Work log
+
+- After a task that created, edited or deleted files, append a summary:
+  `node .claude/hooks/worklog.mjs note "<task and why, 1–2 lines>"`. File changes are logged automatically.
+- Read the log only when debugging a failure, and then only recent entries: `tail -n 80 .claude/worklog/<YYYY-MM>.md`.
