@@ -167,6 +167,7 @@ type Seo = z.infer<typeof SeoSchema>
 type Site = z.infer<typeof SiteSchema>
 type Section = z.infer<typeof SectionSchema>
 type SectionType = Section["type"]
+type SectionOf<T extends SectionType> = Extract<Section, { type: T }>
 type Page = z.infer<typeof PageSchema>
 type Course = z.infer<typeof CourseSchema>
 type Faculty = z.infer<typeof FacultySchema>
@@ -192,6 +193,7 @@ export type {
   Site,
   Section,
   SectionType,
+  SectionOf,
   Page,
   Course,
   Faculty,

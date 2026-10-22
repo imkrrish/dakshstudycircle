@@ -1,0 +1,31 @@
+import type { ReactNode } from "react"
+import type { Section, SectionOf, SectionType } from "@/lib/content-schema"
+import { CardGridSection } from "./card-grid-section"
+import { CtaBandSection } from "./cta-band-section"
+import { HeroSection } from "./hero-section"
+import { SplitSection } from "./split-section"
+
+type SectionComponents = {
+  [T in SectionType]: (props: { section: SectionOf<T> }) => ReactNode
+}
+
+// A missing key here is a type error.
+const sectionComponents = {
+  hero: HeroSection,
+  split: SplitSection,
+  "card-grid": CardGridSection,
+  "cta-band": CtaBandSection,
+} satisfies SectionComponents
+
+function SectionRenderer({ sections }: { sections: Section[] }) {
+  return sections.map((section) => {
+    // TS can't correlate section.type with the matching component through the
+    // lookup. Safe: the lookup is keyed by that same `type` discriminant.
+    const Component = sectionComponents[section.type] as (props: {
+      section: Section
+    }) => ReactNode
+    return <Component key={section.id} section={section} />
+  })
+}
+
+export { SectionRenderer }
