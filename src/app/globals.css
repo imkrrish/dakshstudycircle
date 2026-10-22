@@ -53,6 +53,7 @@
 }
 
 :root {
+  --navbar-height: 4rem; /* sticky header box; same in both navbar states */
   --radius: 0.625rem;
   --background: oklch(0.99 0.003 255);
   --foreground: oklch(0.22 0.045 258);

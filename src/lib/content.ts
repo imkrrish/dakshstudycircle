@@ -7,6 +7,7 @@ import {
   SiteSchema,
   type Course,
   type Faculty,
+  type NavItem,
   type Page,
   type Section,
   type Site,
@@ -125,6 +126,12 @@ async function getSite(): Promise<Site> {
   return content.site
 }
 
+// Nav items whose feature is switched off are dropped (the footer reuses this).
+async function getNav(): Promise<NavItem[]> {
+  const { nav, features } = content.site
+  return nav.filter((item) => !item.feature || features[item.feature])
+}
+
 async function getPage(slug: PageSlug): Promise<Page> {
   const page = content.pages.get(slug)
   if (!page) {
@@ -164,6 +171,7 @@ async function getCoursesForFaculty(id: string): Promise<Course[]> {
 
 export {
   getSite,
+  getNav,
   getPage,
   getCourses,
   getCourse,

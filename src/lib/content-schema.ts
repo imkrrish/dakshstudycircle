@@ -33,6 +33,15 @@ const SeoSchema = z.strictObject({
 
 // ---------- Site ----------
 
+const FeaturesSchema = z.strictObject({ showFaculty: z.boolean() })
+
+// `feature` hides the item when that site feature is off.
+const NavItemSchema = z.strictObject({
+  label: z.string().min(1),
+  href: z.string().min(1),
+  feature: FeaturesSchema.keyof().optional(),
+})
+
 const SiteSchema = z.strictObject({
   name: z.string().min(1),
   tagline: z.string(),
@@ -67,9 +76,9 @@ const SiteSchema = z.strictObject({
     mapEmbedUrl: z.string().optional(),
   }),
   socials: z.array(z.strictObject({ platform: z.string(), url: z.string() })),
-  nav: z.array(z.strictObject({ label: z.string(), href: z.string() })),
+  nav: z.array(NavItemSchema),
   navCta: ButtonSchema,
-  features: z.strictObject({ showFaculty: z.boolean() }),
+  features: FeaturesSchema,
 })
 
 // ---------- Sections ----------
@@ -166,6 +175,7 @@ type Action = z.infer<typeof ActionSchema>
 type Button = z.infer<typeof ButtonSchema>
 type Seo = z.infer<typeof SeoSchema>
 type Site = z.infer<typeof SiteSchema>
+type NavItem = z.infer<typeof NavItemSchema>
 type Section = z.infer<typeof SectionSchema>
 type SectionType = Section["type"]
 type SectionOf<T extends SectionType> = Extract<Section, { type: T }>
@@ -192,6 +202,7 @@ export type {
   Button,
   Seo,
   Site,
+  NavItem,
   Section,
   SectionType,
   SectionOf,

@@ -1,7 +1,7 @@
 import type { Site } from "@/lib/content-schema"
 
 export const site: Site = {
-  name: "PLACEHOLDER site name",
+  name: "Daksh Study Circle",
   tagline: "PLACEHOLDER tagline",
   foundedYear: 2000,
   url: "https://example.com",
@@ -37,10 +37,17 @@ export const site: Site = {
     },
   },
   socials: [],
-  nav: [],
+  nav: [
+    { label: "Courses", href: "/courses" },
+    { label: "Results", href: "/results" },
+    { label: "Faculty", href: "/faculty", feature: "showFaculty" },
+    { label: "About", href: "/about" },
+    { label: "Contact", href: "/contact" },
+  ],
   navCta: {
-    label: "PLACEHOLDER CTA",
+    label: "Talk to us",
+    variant: "primary",
     action: { type: "contact-dialog" },
   },
-  features: { showFaculty: false },
+  features: { showFaculty: true },
 }
