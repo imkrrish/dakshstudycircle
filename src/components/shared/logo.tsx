@@ -17,12 +17,14 @@ function Logo({
   name,
   variant = "emblem",
   preload = false,
+  sizes = "48px",
   className,
   ...props
 }: Omit<ComponentProps<typeof Link>, "href" | "children"> & {
   name: string
   variant?: LogoVariant
   preload?: boolean
+  sizes?: string
 }) {
   const { src, size } = logoVariants[variant]
 
@@ -43,7 +45,7 @@ function Logo({
         alt={name}
         width={size}
         height={size}
-        sizes="48px"
+        sizes={sizes}
         preload={preload}
         className="size-full object-contain"
       />

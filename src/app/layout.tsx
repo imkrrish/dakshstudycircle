@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Geist_Mono, Inter, Newsreader } from "next/font/google"
 
 import "./globals.css"
+import { Footer } from "@/components/layout/footer"
 import { Navbar } from "@/components/layout/navbar"
 import { ContactDialog } from "@/components/shared/contact-dialog"
 import { getSite } from "@/lib/content"
@@ -46,9 +47,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <Navbar />
-        <main id="main" tabIndex={-1} className="flex-1 outline-none">
+        <main
+          id="main"
+          tabIndex={-1}
+          className="relative z-10 flex-1 overflow-clip rounded-b-[2.5rem] border-b border-border bg-background outline-none md:rounded-b-[3rem]"
+        >
           {children}
         </main>
+        <Footer />
         <ContactDialog />
       </body>
     </html>

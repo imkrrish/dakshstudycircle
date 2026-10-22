@@ -42,6 +42,13 @@ const NavItemSchema = z.strictObject({
   feature: FeaturesSchema.keyof().optional(),
 })
 
+const LinkSchema = z.strictObject({
+  label: z.string().min(1),
+  href: z.string().min(1),
+})
+
+const SOCIAL_PLATFORMS = ["facebook", "x", "instagram", "youtube"] as const
+
 const SiteSchema = z.strictObject({
   name: z.string().min(1),
   tagline: z.string(),
@@ -75,7 +82,13 @@ const SiteSchema = z.strictObject({
     mapUrl: z.string().optional(),
     mapEmbedUrl: z.string().optional(),
   }),
-  socials: z.array(z.strictObject({ platform: z.string(), url: z.string() })),
+  socials: z.array(
+    z.strictObject({ platform: z.enum(SOCIAL_PLATFORMS), url: z.string() }),
+  ),
+  footer: z.strictObject({
+    exploreExtra: z.array(LinkSchema),
+    legal: z.array(LinkSchema),
+  }),
   nav: z.array(NavItemSchema),
   navCta: ButtonSchema,
   features: FeaturesSchema,
@@ -176,6 +189,8 @@ type Button = z.infer<typeof ButtonSchema>
 type Seo = z.infer<typeof SeoSchema>
 type Site = z.infer<typeof SiteSchema>
 type NavItem = z.infer<typeof NavItemSchema>
+type Link = z.infer<typeof LinkSchema>
+type SocialPlatform = (typeof SOCIAL_PLATFORMS)[number]
 type Section = z.infer<typeof SectionSchema>
 type SectionType = Section["type"]
 type SectionOf<T extends SectionType> = Extract<Section, { type: T }>
@@ -203,6 +218,8 @@ export type {
   Seo,
   Site,
   NavItem,
+  Link,
+  SocialPlatform,
   Section,
   SectionType,
   SectionOf,
