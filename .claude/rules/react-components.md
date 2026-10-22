@@ -41,6 +41,13 @@ function CourseCard({
 export { CourseCard }
 ```
 
+## Units
+
+- Sizes, spacing, font sizes and layout heights: Tailwind scale classes first (Tailwind v4 accepts any number, e.g. `h-18`, `size-24`). If an arbitrary value is unavoidable, use rem (`1rem` = 16px).
+- px is allowed only for: borders/outlines/ring offsets (hairlines), shadows, the `sizes` attribute on images, and media-query-like values where px is standard.
+- `next/image` `width`/`height` props are intrinsic pixel numbers, not CSS. Leave them.
+- anime.js numbers are px: give unit strings (`"0.375rem"`) for distances.
+
 ## Route files (`page.tsx`, `layout.tsx`, `loading.tsx`, `error.tsx`)
 
 - Next.js requires a default export. Name it after the route: `AboutPage`, `ContactPage`, `RootLayout`

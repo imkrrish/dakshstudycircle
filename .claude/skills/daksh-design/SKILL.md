@@ -38,6 +38,12 @@ Inspiration is sarvam.ai (clean, minimal, subtle Indian motifs). Inspiration onl
 - Cards: white `card` on `background`, subtle `border`, padding `p-6 md:p-8`, preset radius.
 - Mobile-first. Everything must work at 375px wide.
 
+## Units
+
+- Sizes, spacing, font sizes and layout heights: Tailwind scale classes first (Tailwind v4 accepts any number, e.g. `h-18`, `size-24`). If an arbitrary value is unavoidable, use rem.
+- px is allowed only for: borders/outlines/ring offsets (hairlines), shadows, the `sizes` attribute on images, and media-query-like values where px is standard.
+- `next/image` `width`/`height` are intrinsic pixel numbers, not CSS. Leave them.
+
 ## Motifs (src/components/motifs/)
 
 - The current set is a placeholder and may be redesigned. Don't create new motifs unless asked.

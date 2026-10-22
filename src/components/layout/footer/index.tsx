@@ -6,18 +6,11 @@ import { getCourses, getNav, getSite } from "@/lib/content"
 import { FooterBrand } from "./footer-brand"
 import { FooterColumn, footerLinkClass } from "./footer-column"
 
-// Cached so the year is fixed at build time (Date isn't allowed in a dynamic render).
-async function getBuildYear() {
-  "use cache"
-  return new Date().getFullYear()
-}
-
 async function Footer() {
-  const [site, nav, courses, year] = await Promise.all([
+  const [site, nav, courses] = await Promise.all([
     getSite(),
     getNav(),
     getCourses(),
-    getBuildYear(),
   ])
   const { phones, emails, hours } = site.contact
   const explore = [...nav, ...site.footer.exploreExtra]
@@ -30,7 +23,10 @@ async function Footer() {
     >
       <Container className="pt-16 md:pt-20">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,2fr)] lg:gap-16">
-          <FooterBrand site={site} year={year} />
+          <FooterBrand
+            site={site}
+            year={Number(process.env.NEXT_PUBLIC_BUILD_YEAR)}
+          />
           <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:flex sm:flex-wrap sm:gap-x-12">
             <FooterColumn
               title="Explore"

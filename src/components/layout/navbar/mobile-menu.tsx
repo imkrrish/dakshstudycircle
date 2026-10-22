@@ -86,7 +86,7 @@ function MobileMenu({
       if (!self || self.matches.reduceMotion) return
       animate("[data-menu-item]", {
         opacity: [0, 1],
-        y: [-6, 0],
+        y: ["-0.375rem", "0rem"],
         delay: stagger(40),
         duration: 220,
         ease: "out(3)",
