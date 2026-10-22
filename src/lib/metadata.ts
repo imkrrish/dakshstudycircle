@@ -16,7 +16,7 @@ function buildMetadata(seo: Seo, site: Site, path: string): Metadata {
     : undefined
 
   return {
-    title: seo.title,
+    title: seo.absoluteTitle ? { absolute: seo.title } : seo.title,
     description: seo.description,
     alternates: { canonical: path },
     openGraph: {

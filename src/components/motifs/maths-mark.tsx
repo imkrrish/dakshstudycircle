@@ -21,6 +21,12 @@ function MathsMark({ className, ...props }: ComponentProps<"svg">) {
       <path vectorEffect="non-scaling-stroke" d="M53.45 15.73L76.38 74.68" />
       <path vectorEffect="non-scaling-stroke" d="M78.71 73.77L80 84L74.05 75.59Z" />
       <path vectorEffect="non-scaling-stroke" d="M79.46 91.79A56 56 0 0 0 72.5 56" />
+      {/* Protractor */}
+      <path vectorEffect="non-scaling-stroke" d="M28 96A22 22 0 0 1 72 96" />
+      <path vectorEffect="non-scaling-stroke" d="M28 96H72" />
+      <path vectorEffect="non-scaling-stroke" d="M62.73 83.27L65.56 80.44" />
+      <path vectorEffect="non-scaling-stroke" d="M50 78V74" />
+      <path vectorEffect="non-scaling-stroke" d="M37.27 83.27L34.44 80.44" />
     </svg>
   )
 }

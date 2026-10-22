@@ -15,7 +15,7 @@ function PhysicsMark({ className, ...props }: ComponentProps<"svg">) {
       className={cn("shrink-0", className)}
       {...props}
     >
-      <circle vectorEffect="non-scaling-stroke" cx="50" cy="50" r="4" />
+      <circle vectorEffect="non-scaling-stroke" className="fill-saffron" cx="50" cy="50" r="4" />
       <ellipse vectorEffect="non-scaling-stroke" cx="50" cy="50" rx="42" ry="16" transform="rotate(45 50 50)" />
       <ellipse vectorEffect="non-scaling-stroke" cx="50" cy="50" rx="42" ry="16" transform="rotate(135 50 50)" />
       <circle vectorEffect="non-scaling-stroke" cx="70.06" cy="81.38" r="2.5" />
