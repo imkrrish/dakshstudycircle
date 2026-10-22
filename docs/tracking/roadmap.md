@@ -10,11 +10,11 @@ Rule: one step per Claude Code session. `/clear` between steps. I review the pla
 
 ## Phase 1 · Foundation
 
-- [ ] 1.1 Content layer: types (Site, Page, Section union, Course, Faculty, Button action), `getSite` / `getPage` / `getCourses` / `getFaculty`, validation (unique ids, max one dark band)
-- [ ] 1.2 Section renderer + layout primitives (Container, Section, SectionHeading)
-- [ ] 1.3 Navbar (logo, 5 links, "Talk to us") + mobile menu
-- [ ] 1.4 "Talk to us" dialog + button action system
-- [ ] 1.5 Footer (name, address, phones, links incl. Gallery, socials)
+- [x] 1.1 Content layer: types (Site, Page, Section union, Course, Faculty, Button action), `getSite` / `getPage` / `getCourses` / `getFaculty`, validation (unique ids, max one dark band)
+- [x] 1.2 Section renderer + layout primitives (Container, Section, SectionHeading)
+- [x] 1.3 Navbar (logo, 5 links, "Talk to us") + mobile menu
+- [x] 1.4 "Talk to us" dialog + button action system
+- [x] 1.5 Footer (name, address, phones, links incl. Gallery, socials)
 
 ## Phase 2 · Core sections → Home v1
 
