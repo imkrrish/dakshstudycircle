@@ -31,5 +31,41 @@ export const home: Page = {
         },
       ],
     },
+    {
+      id: "director",
+      type: "split",
+      tone: "band",
+      eyebrow: "From the director",
+      heading: "Meet Anil Sir, director of Daksh",
+      body: [
+        "I teach Maths to Classes 8–12 myself. At Daksh Study Circle, we look after everything around your child's learning: the classroom atmosphere, the lectures, the study material and the test series.",
+        "We also guide you as parents, because you are part of this too. If you would like to know how we can help your child, please come and meet us at our centre in Sadar Bazaar.",
+      ],
+      attribution: "Anil Kumar · Director, teaches Maths for Classes 8–12",
+      // PLACEHOLDER: AI-generated development image, cropped (Gemini watermark
+      // removed) from public/anildaksh-potrait-img.jpg. Replace with a real
+      // photo before launch. The other anildaksh-* files in public/ are AI
+      // development placeholders too (anildaksh-cutout.png,
+      // anildaksh-teaching-in-classroom.jpg).
+      image: {
+        src: "/anildaksh-portrait-crop.jpg",
+        alt: "Anil Kumar, Director of Daksh Study Circle",
+        width: 960,
+        height: 1200,
+      },
+      imagePosition: "left",
+      actions: [
+        {
+          label: "Get directions",
+          variant: "outline",
+          action: { type: "directions" },
+        },
+        {
+          label: "Read our story",
+          variant: "quiet",
+          action: { type: "link", href: "/about" },
+        },
+      ],
+    },
   ],
 }

@@ -159,8 +159,8 @@ Always use tokens (`bg-primary`, `text-muted-foreground`). No hard-coded colours
 ## Layout
 
 - **Container:** `Container` is `max-w-6xl`, gutters `px-4` (1rem), `md:px-6`. Hero and navbar use the same width.
-- **Section rhythm:** `Section` is `py-20 md:py-28`, `scroll-mt` equals `--navbar-height` (4rem). Alternate with `tone="muted"`. Headings sit above content via `SectionHeading` (`gap-3`; eyebrow, h2, intro).
-- **Hero:** every page starts with one (`getPage()` throws otherwise). It runs behind the transparent navbar, so its top padding is navbar height plus `--hero-pad` (1.5rem, 2.5rem from `md`). `large`: `min-h-[82svh]`, `pb-10 md:pb-14`, emblem 4.5rem (5rem from `md`). `compact`: `pt` navbar + 3rem, `pb-12 md:pb-16`. Content is centred, headline `max-w-5xl`.
+- **Section rhythm:** `Section` is `py-20 md:py-28`, `scroll-mt` equals `--navbar-height` (4rem). Alternate with `tone="muted"`. For a section that needs a visible edge against its neighbours (the director), use `tone="band"` (`bg-secondary`, paper tint): full-bleed, normal padding. At most one band among adjacent sections. On a band use `outline` (paper) or `quiet` buttons, never `secondary` (same tint). Headings sit above content via `SectionHeading` (`gap-3`; eyebrow, h2, intro).
+- **Hero:** every page starts with one (`getPage()` throws otherwise). It runs behind the transparent navbar, so its top padding is navbar height plus `--hero-pad` (1.5rem, 2.5rem from `md`). `large`: `min-h-[92svh]` (only a strip of the next section's band shows at the fold, never a portrait), `pb-10 md:pb-14`, emblem 4.5rem (5rem from `md`). `compact`: `pt` navbar + 3rem, `pb-12 md:pb-16`. Content is centred, headline `max-w-5xl`.
 - **Mobile first:** design at 375px. Buttons stack full width below `sm`, sit in a row from `sm`.
 - **Units:** Tailwind scale first, `rem` for arbitrary values. `px` only for hairlines, shadows, image `sizes`/`width`/`height`, and shadcn `ui/` internals.
 
@@ -168,7 +168,7 @@ Always use tokens (`bg-primary`, `text-muted-foreground`). No hard-coded colours
 
 Flat. Depth comes from paper tone (raised card on paper) and hairline borders, not shadows. The only shadow is `shadow-sm` on the scrolled navbar pill. Dialog and drawer sit on a warm ink scrim (`bg-foreground/30`), never black. The hero wash is layered radial gradients (yellow core, amber, orange edges) fading into paper with a mask. No `filter: blur`.
 
-**The Calm Decoration Rule.** Decoration never sits behind text and is never louder than the heading. The wash is the only background effect; it fades out before the content below the hero.
+**The Calm Decoration Rule.** Decoration never sits behind text and is never louder than the heading. The hero wash is the only background effect, and it fades out before the content below the hero. Portraits carry no glow, shadow or mask.
 
 ## Shapes
 
@@ -178,7 +178,7 @@ Soft, friendly, not bubbly. Base radius `--radius` 0.625rem; scale `sm` 0.6×, `
 
 ### Buttons
 
-Pill, Mukta 500 at `text-sm`. Hierarchy (data variant → look): `primary` = red fill, white text; `secondary` = paper tint; `outline` = paper with hairline border. Hover: primary darkens, others shift to `muted`. Focus: `focus-ring` (2px solid `ring`, 2px offset). Never hard-code behaviour; use `ActionButton` with `link` or `contact-dialog` actions.
+Pill, Mukta 500 at `text-sm`. Hierarchy (data variant → look): `primary` = red fill, white text; `secondary` = paper tint; `outline` = paper with hairline border. Hover: primary darkens, others shift to `muted`. Focus: `focus-ring` (2px solid `ring`, 2px offset). Never hard-code behaviour; use `ActionButton` with `link`, `contact-dialog` or `directions` actions. `directions` opens the site's `mapUrl` in a new tab (`rel="noopener noreferrer"`) with a Location icon. Data variant `quiet` maps to `ghost` (ink text, no fill, not red): the content-level replacement for a text link.
 
 - **Sizes and variants:** do not use the `xs` size or the `link` variant from `ui/button.tsx`; they break the type floor and the red-text rule.
 - **Touch targets:** primary actions at least 2.75rem (44px) below `lg` (touch screens); at least 2.25rem on desktop. Mobile hero CTAs are `h-11`. The visible size may be smaller (e.g. 2.25rem) when an invisible hit area brings the target to at least 2.75rem; the navbar CTA and menu toggle do this with the `hit-area` utility.
@@ -199,6 +199,10 @@ Desktop (`useIsDesktop`) uses a centred Dialog; mobile uses a bottom Drawer. Sam
 ### Footer
 
 Quiet tonal block (`bg-footer`), no red. Three groups: contact, visit, and Explore plus Courses columns (two-up at every width). Column titles are muted `text-sm`; links are ink with underline on hover/focus. Tagline in Young Serif. Social icons sit in `size-11` targets. The wordmark is decorative, tone on tone (`footer-mark`), its lower third clipped by the footer edge.
+
+### Portrait (split section)
+
+Portraits are rounded rectangles (`rounded-xl`), head-and-shoulders, `aspect-4/5`, `object-cover`, no glow, shadow or mask. The face fills about 45–50% of the frame height and the crop never cuts the forehead; crop the source file, do not zoom in CSS. Size: `max-w-80` (20rem) on mobile, centred above the text; `md:max-w-100` (25rem) on desktop. Lazy `next/image` with a `sizes` that matches.
 
 ### Cards
 

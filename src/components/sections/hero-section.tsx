@@ -17,7 +17,7 @@ const heroSectionVariants = cva(
     variants: {
       size: {
         large:
-          "min-h-[82svh] pt-[calc(var(--navbar-height)+var(--hero-pad))] pb-10 md:pb-14",
+          "min-h-[92svh] pt-[calc(var(--navbar-height)+var(--hero-pad))] pb-10 md:pb-14",
         compact: "pt-[calc(var(--navbar-height)+3rem)] pb-12 md:pb-16",
       },
     },

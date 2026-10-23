@@ -7,6 +7,7 @@ const sectionVariants = cva("scroll-mt-(--navbar-height) py-20 md:py-28", {
     tone: {
       default: "",
       muted: "bg-muted",
+      band: "bg-secondary",
     },
   },
   defaultVariants: {

@@ -16,11 +16,14 @@ const IconSchema = z.enum(iconNames)
 const ActionSchema = z.discriminatedUnion("type", [
   z.strictObject({ type: z.literal("link"), href: z.string().min(1) }),
   z.strictObject({ type: z.literal("contact-dialog") }),
+  // Opens site.contact.mapUrl in a new tab.
+  z.strictObject({ type: z.literal("directions") }),
 ])
 
 const ButtonSchema = z.strictObject({
   label: z.string().min(1),
-  variant: z.enum(["primary", "secondary", "outline"]).optional(),
+  // "quiet" is a text-style button (no fill, not red) for secondary actions.
+  variant: z.enum(["primary", "secondary", "outline", "quiet"]).optional(),
   action: ActionSchema,
 })
 
@@ -118,8 +121,12 @@ const SplitSectionSchema = z.strictObject({
   eyebrow: z.string().optional(),
   heading: z.string(),
   body: z.array(z.string()),
+  // Shown under the message: "Name · role" (text before the first " · " is the name).
+  attribution: z.string().optional(),
   image: ImageSchema,
   imagePosition: z.enum(["left", "right"]),
+  // "band": a deeper warm surface, full-bleed, to separate this section from its neighbours.
+  tone: z.enum(["default", "band"]).optional(),
   actions: z.array(ButtonSchema).optional(),
 })
 

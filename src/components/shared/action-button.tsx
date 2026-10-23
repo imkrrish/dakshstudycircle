@@ -1,16 +1,56 @@
 import type { ComponentProps } from "react"
+import { Location01Icon } from "@hugeicons/core-free-icons"
+import { HugeiconsIcon } from "@hugeicons/react"
 import { cn } from "cn"
 import Link from "next/link"
 
 import { DialogTriggerButton } from "@/components/shared/dialog-trigger-button"
 import { Button as UiButton } from "@/components/ui/button"
+import { getSite } from "@/lib/content"
 import type { Button } from "@/lib/content-schema"
 
 const variantMap = {
   primary: "default",
   secondary: "secondary",
   outline: "outline",
+  quiet: "ghost",
 } as const
+
+async function DirectionsButton({
+  button,
+  className,
+  size,
+  ...dataAttributes
+}: {
+  button: Button
+  className?: string
+  size?: ComponentProps<typeof UiButton>["size"]
+  [attribute: `data-${string}`]: string | boolean | undefined
+}) {
+  const { mapUrl } = (await getSite()).contact
+  if (!mapUrl) return null
+
+  return (
+    <UiButton
+      data-slot="action-button"
+      variant={variantMap[button.variant ?? "primary"]}
+      size={size}
+      className={cn("focus-ring", className)}
+      {...dataAttributes}
+      nativeButton={false}
+      render={<a href={mapUrl} target="_blank" rel="noopener noreferrer" />}
+    >
+      <HugeiconsIcon
+        icon={Location01Icon}
+        strokeWidth={2}
+        data-icon="inline-start"
+        aria-hidden="true"
+      />
+      {button.label}
+      <span className="sr-only"> (opens in a new tab)</span>
+    </UiButton>
+  )
+}
 
 function ActionButton({
   button,
@@ -65,6 +105,15 @@ function ActionButton({
         >
           {button.label}
         </DialogTriggerButton>
+      )
+    case "directions":
+      return (
+        <DirectionsButton
+          button={button}
+          size={size}
+          className={className}
+          {...dataAttributes}
+        />
       )
     default: {
       const unhandled: never = action
