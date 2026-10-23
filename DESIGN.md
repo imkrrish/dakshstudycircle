@@ -128,7 +128,7 @@ Always use tokens (`bg-primary`, `text-muted-foreground`). No hard-coded colours
 
 ### Named Rules
 
-**The One Red Rule.** One red (primary) button visible per screen. On pages with a hero CTA, the navbar CTA stays hidden until the hero CTA scrolls out of view.
+**The One Red Rule.** Navbar CTA: outline while the hero CTA is visible, primary after; never two red buttons on one screen.
 **The Quiet Red Rule.** Red is never body text or footer text. Eyebrows are muted, never red.
 **The Darker Hover Rule.** `primary-hover` is darker than `primary`, never lighter.
 **The Warm Paper Rule.** The cream palette is the direction, so the detector's `cream-palette` rule is ignored on purpose (`.impeccable/config.json`).
@@ -181,7 +181,7 @@ Soft, friendly, not bubbly. Base radius `--radius` 0.625rem; scale `sm` 0.6×, `
 Pill, Mukta 500 at `text-sm`. Hierarchy (data variant → look): `primary` = red fill, white text; `secondary` = paper tint; `outline` = paper with hairline border. Hover: primary darkens, others shift to `muted`. Focus: `focus-ring` (2px solid `ring`, 2px offset). Never hard-code behaviour; use `ActionButton` with `link` or `contact-dialog` actions.
 
 - **Sizes and variants:** do not use the `xs` size or the `link` variant from `ui/button.tsx`; they break the type floor and the red-text rule.
-- **Touch targets:** primary actions at least 2.75rem (44px) below `lg` (touch screens); at least 2.25rem on desktop. Mobile hero and navbar CTAs are `h-11`.
+- **Touch targets:** primary actions at least 2.75rem (44px) below `lg` (touch screens); at least 2.25rem on desktop. Mobile hero CTAs are `h-11`. The visible size may be smaller (e.g. 2.25rem) when an invisible hit area brings the target to at least 2.75rem; the navbar CTA and menu toggle do this with the `hit-area` utility.
 - Only one primary per screen (see The One Red Rule). The first primary in a hero carries `data-hero-cta`.
 
 ### Navbar
@@ -189,8 +189,8 @@ Pill, Mukta 500 at `text-sm`. Hierarchy (data variant → look): `primary` = red
 - **Top:** transparent, `h-16` (4rem), no border, logo `size-11`. Links centred on `lg` in a three-column grid; CTA and menu button right.
 - **Scrolled:** a near-opaque pill (about 90% background) with backdrop blur: `h-12`, `mt-2`, `max-w-4xl`, `rounded-4xl`, hairline border, `bg-background/90`, `backdrop-blur-md`, `shadow-sm`. The layout box stays 4rem so nothing jumps.
 - **Links:** `text-sm` 500, `text-foreground/80` rising to full ink on hover and on the current page. A single highlight pill slides between hovered links.
-- **CTA:** hidden until the hero CTA leaves view (`visibility`, so it is also out of tab order). Without JS it always shows.
-- **Mobile:** menu button `size-11`, menu rows `min-h-11`; the CTA appears in the menu as an outline button.
+- **CTA:** always visible and focusable, `h-9` with `hit-area`. Outline while the hero CTA (`data-hero-cta`) is on screen, primary once it scrolls out of view; pages without a hero CTA are primary from the start. Both tones have the same size; colours transition over 300ms (instant with reduced motion). Without JS the hero page stays outline.
+- **Mobile (below `lg`):** logo left; CTA then a round `size-9` secondary menu toggle at the far right, each with a `hit-area` (no overlap, `gap-3`). The toggle is concentric with the pill end: `--nav-inset` = (pill height − toggle height − border) / 2 on top, bottom and right. Menu rows `min-h-11`; the CTA also appears in the menu as an outline button.
 
 ### Contact dialog ("Talk to us")
 
@@ -219,7 +219,7 @@ Real photos of the institute and people only. Never AI-generated people. Decorat
 
 - WCAG AA: text 4.5:1, controls and focus 3:1 (values in Colors).
 - One focus style everywhere (`focus-ring`). Skip link is first in the tab order. `main` is focusable (`#main`).
-- Full keyboard use; the hidden navbar CTA is removed from the tab order.
+- Full keyboard use; the navbar CTA is always in the tab order.
 - Decorative images and icons use `alt=""` / `aria-hidden`.
 - Content rules: no unverified claims ("best", "top", results) per `PRODUCT.md`. Mock data is marked `MOCK`, missing facts `PLACEHOLDER`.
 
@@ -230,7 +230,7 @@ Real photos of the institute and people only. Never AI-generated people. Decorat
 - **Do** use the primary token for buttons and `primary-hover` for hover.
 - **Do** keep headings Young Serif `font-normal` and body Mukta 400/500.
 - **Do** use `text-sm` (0.9375rem) as the smallest size.
-- **Do** keep primary actions at 2.75rem below `lg` and 2.25rem on desktop.
+- **Do** keep primary actions at 2.75rem below `lg` (visible size or invisible `hit-area`) and 2.25rem on desktop.
 - **Do** start every page with a hero.
 
 ### Don't

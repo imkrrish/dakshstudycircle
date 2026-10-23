@@ -103,9 +103,9 @@ function MobileMenu({
     >
       <Button
         ref={toggleRef}
-        variant="ghost"
+        variant="secondary"
         size="icon"
-        className="size-11 focus-ring"
+        className="hit-area size-9 rounded-full focus-ring"
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
         aria-controls={panelId}

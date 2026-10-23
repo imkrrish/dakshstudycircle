@@ -60,7 +60,7 @@ function HeroSection({ section }: { section: SectionOf<"hero"> }) {
   )
 
   // The first primary button is the hero's call to action; the navbar hides its
-  // own while this one is on screen (see NavCtaReveal).
+  // own while this one is on screen (see NavCtaTone).
   const ctaIndex = actions?.findIndex(
     (button) => (button.variant ?? "primary") === "primary",
   )
@@ -104,13 +104,14 @@ function HeroSection({ section }: { section: SectionOf<"hero"> }) {
           <div className="flex flex-col items-center justify-center gap-4">
             <Image
               data-hero-ornament
-              src="/daksh-emblem-only.png"
+              src="/daksh-emblem-trimmed.png"
               alt=""
-              width={750}
-              height={750}
+              width={528}
+              height={601}
               sizes="5rem"
               loading="eager"
-              className="size-(--hero-emblem)"
+              // Trimmed to 528x601 of the old 750x750 box; margins keep the old layout.
+              className="mt-[calc(var(--hero-emblem)*0.1267)] mb-[calc(var(--hero-emblem)*0.0747)] h-[calc(var(--hero-emblem)*0.8013)] w-[calc(var(--hero-emblem)*0.704)]"
             />
             {eyebrowRow}
           </div>

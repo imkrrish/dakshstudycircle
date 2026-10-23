@@ -38,6 +38,7 @@ MVP, frontend only. No backend, database, or auth yet.
 - pnpm only. Never npm or yarn.
 - Dev: `pnpm dev`. Assume it's already running on :3000.
 - Lint: `pnpm lint` · Typecheck: `pnpm typecheck`
+- Never stop or restart the dev server on :3000. Use another port (e.g. 3100) for test servers.
 
 ## Before creating a component
 

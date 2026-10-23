@@ -167,6 +167,21 @@
   }
 }
 
+/* Invisible hit area: at least 2.75rem square, centred on the element, with no
+   layout change. Lets a control look smaller than the touch minimum. */
+@utility hit-area {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: max(100% + 2px, 2.75rem);
+    height: max(100% + 2px, 2.75rem);
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -268,13 +283,17 @@
 }
 
 /* One red button per viewport: while the page's hero CTA is on screen the
-   navbar's is hidden. visibility keeps it out of the tab order and the
-   accessibility tree; NavCtaReveal sets data-revealed once the hero CTA
-   scrolls out of view. Without JS the navbar button shows normally. */
-@media (scripting: enabled) {
-  :root:has([data-hero-cta])
-    [data-slot="nav-cta-reveal"]:not([data-revealed]) {
-    opacity: 0;
-    visibility: hidden;
+   navbar's CTA is outline; NavCtaTone sets data-solid once the hero CTA
+   scrolls out of view, and it turns primary. Unlayered so it beats the button's
+   utility classes (hover included). Same 1px border either way, so the two
+   tones are exactly the same size. Without JS the hero page stays outline. */
+:root:has([data-hero-cta])
+  [data-slot="nav-cta-tone"]:not([data-solid])
+  [data-slot="action-button"] {
+  background-color: var(--background);
+  color: var(--foreground);
+  border-color: var(--input);
+  &:hover {
+    background-color: var(--muted);
   }
 }
