@@ -14,6 +14,8 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // Old-site reference material, not part of the app
     "reference/**",
+    // Tooling skills and hooks, not part of the app
+    ".claude/**",
   ]),
 ])
 

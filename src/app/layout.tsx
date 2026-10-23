@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Geist_Mono, Mukta, Young_Serif } from "next/font/google"
+import { Mukta, Young_Serif } from "next/font/google"
 
 import "./globals.css"
 import { Footer } from "@/components/layout/footer"
@@ -9,7 +9,7 @@ import { getSite } from "@/lib/content"
 import { cn } from "@/lib/utils"
 
 const mukta = Mukta({
-  weight: ["400", "500", "600"],
+  weight: ["400", "500"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-sans",
@@ -20,11 +20,6 @@ const youngSerif = Young_Serif({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-serif",
-})
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
 })
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -43,7 +38,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={cn(
         "h-full",
         "antialiased",
-        geistMono.variable,
         "font-sans",
         mukta.variable,
         youngSerif.variable,

@@ -83,8 +83,8 @@ MVP, frontend only. No backend, database, or auth yet.
 
 ## Before saying a task is done
 
-- Lint: `pnpm lint` · Typecheck: `pnpm typecheck` · Build: `pnpm build`
-- If routes were added or changed, run `pnpm build` and confirm every route shows `○` (static).
+- Lint: `pnpm lint` · Typecheck: `pnpm typecheck` · Build: `NEXT_DIST_DIR=.next-verify pnpm build`
+- If routes were added or changed, run `NEXT_DIST_DIR=.next-verify pnpm build` and confirm every route shows `○` (static).
 
 ## Work log
 
