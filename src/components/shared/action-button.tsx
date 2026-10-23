@@ -5,7 +5,7 @@ import { cn } from "cn"
 import Link from "next/link"
 
 import { DialogTriggerButton } from "@/components/shared/dialog-trigger-button"
-import { Button as UiButton } from "@/components/ui/button"
+import { Button as UiButton, buttonVariants } from "@/components/ui/button"
 import { getSite } from "@/lib/content"
 import type { Button } from "@/lib/content-schema"
 
@@ -31,14 +31,20 @@ async function DirectionsButton({
   if (!mapUrl) return null
 
   return (
-    <UiButton
+    <a
       data-slot="action-button"
-      variant={variantMap[button.variant ?? "primary"]}
-      size={size}
-      className={cn("focus-ring", className)}
+      href={mapUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={cn(
+        buttonVariants({
+          variant: variantMap[button.variant ?? "primary"],
+          size,
+        }),
+        "focus-ring",
+        className,
+      )}
       {...dataAttributes}
-      nativeButton={false}
-      render={<a href={mapUrl} target="_blank" rel="noopener noreferrer" />}
     >
       <HugeiconsIcon
         icon={Location01Icon}
@@ -48,7 +54,7 @@ async function DirectionsButton({
       />
       {button.label}
       <span className="sr-only"> (opens in a new tab)</span>
-    </UiButton>
+    </a>
   )
 }
 
@@ -71,26 +77,31 @@ function ActionButton({
       const { href } = action
       const isInternal = href.startsWith("/") || href.startsWith("#")
       const isWeb = /^https?:\/\//.test(href)
+      const linkProps = {
+        "data-slot": "action-button",
+        className: cn(
+          buttonVariants({ variant, size }),
+          "focus-ring",
+          className,
+        ),
+        ...dataAttributes,
+      }
+      if (isInternal) {
+        return (
+          <Link href={href} {...linkProps}>
+            {button.label}
+          </Link>
+        )
+      }
       return (
-        <UiButton
-          data-slot="action-button"
-          variant={variant}
-          size={size}
-          className={cn("focus-ring", className)}
-          {...dataAttributes}
-          nativeButton={false}
-          render={
-            isInternal ? (
-              <Link href={href} />
-            ) : isWeb ? (
-              <a href={href} target="_blank" rel="noopener noreferrer" />
-            ) : (
-              <a href={href} />
-            )
-          }
+        <a
+          href={href}
+          {...(isWeb && { target: "_blank", rel: "noopener noreferrer" })}
+          {...linkProps}
         >
           {button.label}
-        </UiButton>
+          {isWeb && <span className="sr-only"> (opens in a new tab)</span>}
+        </a>
       )
     }
     case "contact-dialog":
