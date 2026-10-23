@@ -139,15 +139,15 @@ Always use tokens (`bg-primary`, `text-muted-foreground`). No hard-coded colours
 
 ### Scale (Tailwind tokens, ratio ≈1.25)
 
-| Token               | Size                       | Line height | Use                                                                                              |
-| ------------------- | -------------------------- | ----------- | ------------------------------------------------------------------------------------------------ |
-| `text-display`      | clamp 2.25–4.25rem (8.5vw) | 1.08        | Hero h1, below `sm`                                                                              |
-| `text-display-wide` | clamp 2.25–4.25rem (6.4vw) | 1.08        | Hero h1 from `sm` (two fixed lines)                                                              |
-| `text-heading`      | clamp 1.875–2.5rem         | 1.12        | Section h2                                                                                       |
-| `text-title`        | 1.625rem                   | 1.25        | Card h3, dialog title                                                                            |
-| `text-lead`         | 1.3125rem                  | 1.55        | Hero supporting line from `md`; course titles in mobile course rows (the one list-row exception) |
-| `text-base`         | 1.0625rem                  | 1.6         | Body (default on `<body>`)                                                                       |
-| `text-sm`           | 0.9375rem                  | 1.5         | Smallest text: eyebrows, captions, nav, buttons                                                  |
+| Token               | Size                       | Line height | Use                                                                                                                             |
+| ------------------- | -------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `text-display`      | clamp 2.25–4.25rem (8.5vw) | 1.08        | Hero h1, below `sm`                                                                                                             |
+| `text-display-wide` | clamp 2.25–4.25rem (6.4vw) | 1.08        | Hero h1 from `sm` (two fixed lines)                                                                                             |
+| `text-heading`      | clamp 1.875–2.5rem         | 1.12        | Section h2                                                                                                                      |
+| `text-title`        | 1.625rem                   | 1.25        | Card h3, dialog title                                                                                                           |
+| `text-lead`         | 1.3125rem                  | 1.55        | Hero supporting line from `md`; course titles in mobile course rows and reason-list titles below `md` (the list-row exceptions) |
+| `text-base`         | 1.0625rem                  | 1.6         | Body (default on `<body>`)                                                                                                      |
+| `text-sm`           | 0.9375rem                  | 1.5         | Smallest text: eyebrows, captions, nav, buttons                                                                                 |
 
 ### Named Rules
 
@@ -212,6 +212,10 @@ Portraits are rounded rectangles (`rounded-xl`), head-and-shoulders, `aspect-4/5
 
 Courses grouped under muted `text-sm` labels (a `<p>`, not a heading) with a hairline rule running right. Below `md` each group is one raised `card` panel of full-width rows (min `4rem`, hairline dividers, title `text-lead`, note, chevron). From `md` the panel dissolves into cards (`rounded-xl`, 2 columns); from `lg` every group shares one column grid (largest group, up to 4). Each course is a stretched link (`<h3><a>` with `after:inset-0`), so its accessible name is the title only. Hover (pointer devices only) is `muted`, a soft flame glow rising from the card's bottom edge and a 0.25rem arrow nudge; pressed is `accent` with the same glow and nudge, instantly. The glow is a `::before` radial gradient (`flame` 40%, `saffron` 12%, in the bottom half only), kept faint so `muted-foreground` text stays at 5:1 or better over it; it never covers the title. Under reduced motion the glow still appears (a static colour change) but nothing moves. The Classes 11–12 stream card is not a link and has no glow; its chips keep their own states. Groups with fewer than three items (Entrance and skills) use two wider columns from `lg` (`max-w-3xl`) so long titles keep to two lines. Focus is the 2px ring on the whole row or card. A stream group (Classes 11–12) is not a link: its stream chips are `h-11` outline links with a hidden group prefix. No red in the section.
 
+### Reason list
+
+A ruled `<ol>` of 3–8 reasons (`reason-list`). Numerals are CSS counters (Young Serif `font-normal`, `text-muted-foreground`, tabular figures, fixed 2.5rem column, empty alt text so screen readers hear the list, not the number). Each row: `h3` title (`text-lead`, `text-title` from `md`) and one line of muted `text-base`; hairline rules between rows only (`py-5`, `md:py-6`). No icons, cards, hover, links, chevrons, red or motion. Mobile: heading, list, then the figure (`h-56` photo, `rounded-xl`, caption). From `md`: 12-column grid by named areas; heading and figure in columns 1–5 (figure bottom aligned with the last row), list in 6–12. Default paper tone, no divider.
+
 ## Motion
 
 - CSS for simple transitions (≤300ms, `ease-out`); anime.js for sequences (the nav highlight, the hero ornament fade-up).
@@ -221,7 +225,7 @@ Courses grouped under muted `text-sm` labels (a `<p>`, not a heading) with a hai
 
 ## Imagery
 
-Real photos of the institute and people only. Never AI-generated people. Decorative illustration is allowed under The Calm Decoration Rule.
+Real photos of the institute and people only. Never AI-generated people. Decorative illustration is allowed under The Calm Decoration Rule. The classroom photo in the reason list is an AI placeholder (like the director portrait) until a real photo replaces it.
 
 ## Accessibility
 

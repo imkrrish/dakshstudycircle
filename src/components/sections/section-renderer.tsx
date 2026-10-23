@@ -8,6 +8,7 @@ import { CardGridSection } from "./card-grid-section"
 import { CourseGridSection } from "./course-grid-section"
 import { CtaBandSection } from "./cta-band-section"
 import { HeroSection } from "./hero-section"
+import { ReasonListSection } from "./reason-list-section"
 import { SplitSection } from "./split-section"
 
 type SectionComponents = {
@@ -19,6 +20,7 @@ const sectionComponents = {
   hero: HeroSection,
   split: SplitSection,
   "card-grid": CardGridSection,
+  "reason-list": ReasonListSection,
   "course-grid": CourseGridSection,
   "cta-band": CtaBandSection,
 } satisfies SectionComponents

@@ -27,7 +27,7 @@ Content marked PLACEHOLDER / MOCK until real data arrives.
 2. stats ★: real numbers only
 3. card-grid: courses overview (from courses collection)
 4. split: director's message (Anil Kumar, from faculty)
-5. card-grid (icon variant): why Daksh, 6 points
+5. reason-list: why Daksh, 6 points (ruled numbered list, photo beside)
 6. results-grid ★ (compact): highlights + link to /results
 7. testimonials ★
 8. video-grid ★: YouTube playlists (facade)

@@ -109,5 +109,54 @@ export const home: Page = {
         },
       ],
     },
+    {
+      id: "why-daksh",
+      type: "reason-list",
+      eyebrow: "Why Daksh",
+      heading: "Why families in Delhi Cantt join Daksh",
+      intro: "The things parents ask us about most, answered plainly.",
+      items: [
+        // [CONFIRM] personal attention for every child
+        {
+          title: "Attention for every child",
+          body: "Not every child learns at the same pace. We pay attention to each student's needs in class.",
+        },
+        {
+          title: "Here since July 2005",
+          body: "More than two decades of teaching CBSE students in the same neighbourhood.",
+        },
+        {
+          title: "Classes 1 to 12, one place",
+          body: "From Class 1 to Class 12, plus defence school entrance prep, your child can stay with us through school.",
+        },
+        // [CONFIRM] early syllabus completion
+        {
+          title: "Syllabus finished early",
+          body: "We aim to complete the syllabus early, so your child has more time to revise before exams.",
+        },
+        // [CONFIRM] online classes for missed classes
+        {
+          title: "Online classes when needed",
+          body: "If your child misses a class, online sessions help them keep up.",
+        },
+        // [CONFIRM] smartboards in classrooms
+        {
+          title: "Smart classrooms",
+          body: "Smartboards help teachers explain difficult topics with diagrams and visuals.",
+        },
+      ],
+      // PLACEHOLDER: AI image (cropped, Gemini watermark removed, from
+      // public/anildaksh-teaching-in-classroom.jpg). The board's triangle
+      // angles are wrong. Replace with a real photo before launch.
+      figure: {
+        image: {
+          src: "/why-daksh-classroom.jpg",
+          alt: "A teacher in a white shirt points at a triangle drawn on a large smartboard while students watch from their desks.",
+          width: 1200,
+          height: 800,
+        },
+        caption: "A teacher explains a topic on the smartboard.",
+      },
+    },
   ],
 }
