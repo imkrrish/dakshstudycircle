@@ -6,7 +6,7 @@ export const site: Site = {
   foundedYear: 2005,
   url: "https://example.com",
   seo: {
-    titleTemplate: "%s | PLACEHOLDER",
+    titleTemplate: "%s | Daksh Study Circle",
     description: "PLACEHOLDER description",
   },
   contact: {
