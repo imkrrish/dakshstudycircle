@@ -7,6 +7,7 @@ import type {
 import { CardGridSection } from "./card-grid-section"
 import { CourseGridSection } from "./course-grid-section"
 import { CtaBandSection } from "./cta-band-section"
+import { FaqSection } from "./faq-section"
 import { HeroSection } from "./hero-section"
 import { ReasonListSection } from "./reason-list-section"
 import { SplitSection } from "./split-section"
@@ -24,6 +25,7 @@ const sectionComponents = {
   "reason-list": ReasonListSection,
   "course-grid": CourseGridSection,
   "video-grid": VideoGridSection,
+  faq: FaqSection,
   "cta-band": CtaBandSection,
 } satisfies SectionComponents
 

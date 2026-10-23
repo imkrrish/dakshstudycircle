@@ -182,6 +182,66 @@ export const home: Page = {
       ],
     },
     {
+      id: "faq",
+      type: "faq",
+      eyebrow: "Before you visit",
+      heading: "Questions parents often ask",
+      intro:
+        "If your question is not here, call or WhatsApp us. We will answer it plainly.",
+      items: [
+        // [CONFIRM] nearest landmark or metro for directions
+        {
+          question: "Where is Daksh Study Circle, and how do I reach you?",
+          answer: "We are at {address}. Our office is open {hours}.",
+        },
+        {
+          question: "Which classes and subjects do you teach?",
+          answer:
+            "We teach CBSE students from Class 1 to 12. Batches are Classes 1–5, 6–8 and 9–10. For Classes 11–12 we have Science, Commerce and Humanities. We also run Spoken English.",
+        },
+        {
+          question:
+            "Do you prepare students for RMS, RIMC and Sainik School entrance?",
+          answer:
+            "Yes. We offer entrance preparation for RMS, RIMC and Sainik School. Call or WhatsApp us to ask about the batch for your child's class.",
+        },
+        {
+          question: "Can my child attend a demo class first?",
+          answer:
+            "Yes. Your child can attend a demo class before joining, so you can both see how we teach. Call or WhatsApp us on {phones} to book one.",
+        },
+        // [CONFIRM] which modes apply to which classes
+        {
+          question: "Do you have online classes or home tuition?",
+          answer:
+            "Yes. We offer group tuition, online classes, home tuition and classes at our centre. Call us to find out what suits your child's class and subject.",
+        },
+        // [CONFIRM] batch size per class, and how doubts are handled
+        {
+          question:
+            "How many students are in a batch? Will my child get personal attention?",
+          answer:
+            "Call us or visit the centre, and we will tell you the batch size for your child's class.",
+        },
+        // [CONFIRM] whether fees can be shared by phone or WhatsApp, and any instalment option
+        {
+          question: "What are the fees?",
+          answer:
+            "Fees depend on the class and course. Please call or WhatsApp us on {phones}, and we will share the details.",
+        },
+        {
+          question: "How do I enquire or get started?",
+          answer:
+            "Call or WhatsApp {phones}. You can also visit us at the centre, {hours}.",
+        },
+        {
+          question: "Who teaches Maths?",
+          answer:
+            "Director Anil Kumar teaches Maths for Classes 8 to 12. You can also watch his free Maths lessons on our YouTube channel.",
+        },
+      ],
+    },
+    {
       id: "contact-cta",
       type: "cta-band",
       variant: "dark",

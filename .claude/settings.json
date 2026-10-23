@@ -102,7 +102,9 @@
       "Read(.env.*)",
       "Read(./.next/**)",
       "Read(./pnpm-lock.yaml)",
-      "Read(./docs/tracking/**)"
+      "Read(./docs/tracking/**)",
+      "Bash(pkill *)",
+      "Bash(killall *)"
     ]
   }
 }

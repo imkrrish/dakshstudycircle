@@ -10,6 +10,7 @@ import {
   type Faculty,
   type NavItem,
   type CourseGridSection,
+  type FaqSection,
   type Video,
   type VideoGridSection,
   type ResolvedVideoGridSection,
@@ -134,6 +135,50 @@ function checkSocialActions(
   }
 }
 
+// Site facts that faq text may use as {address}, {phones} and {hours}.
+function contactPlaceholders(site: Site): Record<string, string> {
+  const { address, phones, hours } = site.contact
+  return {
+    // Same one-line format as the footer.
+    address: [
+      address.line1,
+      address.line2,
+      address.locality,
+      `${address.city}, ${address.state} ${address.postalCode}`,
+    ]
+      .filter(Boolean)
+      .join(", "),
+    phones: new Intl.ListFormat("en-IN", { type: "disjunction" }).format(
+      phones.map((p) => p.display),
+    ),
+    hours,
+  }
+}
+
+const PLACEHOLDER_PATTERN = /\{(\w+)\}/g
+
+// An unknown {name} in faq text would ship as literal braces, so it fails the build.
+function checkPlaceholders(
+  label: string,
+  sections: Section[],
+  known: Set<string>,
+  errors: string[],
+) {
+  for (const section of sections) {
+    if (section.type !== "faq") continue
+    section.items.forEach((item, i) => {
+      for (const text of [item.question, item.answer]) {
+        for (const [, name] of text.matchAll(PLACEHOLDER_PATTERN)) {
+          if (known.has(name)) continue
+          errors.push(
+            `${label}: faq "${section.id}" item ${i + 1}: unknown placeholder {${name}}. Known: ${[...known].map((k) => `{${k}}`).join(", ")}`,
+          )
+        }
+      }
+    })
+  }
+}
+
 function loadContent() {
   const errors: string[] = []
 
@@ -197,12 +242,22 @@ function loadContent() {
   const socialPlatforms = new Set<string>(
     site ? site.socials.map((s) => s.platform) : [],
   )
+  const placeholderNames = new Set(
+    site ? Object.keys(contactPlaceholders(site)) : [],
+  )
   for (const [key, page] of pages) {
+    checkPlaceholders(`pages/${key}`, page.sections, placeholderNames, errors)
     checkCourseGrids(`pages/${key}`, page.sections, courseSlugs, errors)
     checkVideoGrids(`pages/${key}`, page.sections, videoIds, errors)
     checkSocialActions(`pages/${key}`, page.sections, socialPlatforms, errors)
   }
   for (const course of courses) {
+    checkPlaceholders(
+      `courses/${course.slug}`,
+      course.sections,
+      placeholderNames,
+      errors,
+    )
     checkCourseGrids(
       `courses/${course.slug}`,
       course.sections,
@@ -317,10 +372,26 @@ function resolveVideoGrid(section: VideoGridSection): ResolvedVideoGridSection {
   }
 }
 
+function resolveFaq(section: FaqSection): FaqSection {
+  const values = contactPlaceholders(content.site)
+  // Names were validated at load, so every match has a value.
+  const fill = (text: string) =>
+    text.replace(PLACEHOLDER_PATTERN, (_, name: string) => values[name])
+  return {
+    ...section,
+    items: section.items.map(({ question, answer }) => ({
+      question: fill(question),
+      answer: fill(answer),
+    })),
+  }
+}
+
 // Fills section references to collections so components only receive plain data.
 function resolveSections(sections: Section[]): ResolvedSection[] {
   return sections.map((section) => {
     switch (section.type) {
+      case "faq":
+        return resolveFaq(section)
       case "course-grid":
         return resolveCourseGrid(section)
       case "video-grid":

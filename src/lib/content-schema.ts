@@ -171,6 +171,25 @@ const ReasonListSectionSchema = z.strictObject({
     .optional(),
 })
 
+const FaqSectionSchema = z.strictObject({
+  ...sectionBase,
+  type: z.literal("faq"),
+  eyebrow: z.string().optional(),
+  heading: z.string().min(1),
+  intro: z.string().optional(),
+  // "band": a deeper warm surface, full-bleed (same as split).
+  tone: z.enum(["default", "band"]).optional(),
+  // {address}, {phones} and {hours} in text are filled from site data by getPage().
+  items: z
+    .array(
+      z.strictObject({
+        question: z.string().min(1),
+        answer: z.string().min(1),
+      }),
+    )
+    .min(1),
+})
+
 const CtaBandSectionSchema = z.strictObject({
   ...sectionBase,
   type: z.literal("cta-band"),
@@ -288,6 +307,7 @@ const SectionSchema = z.discriminatedUnion("type", [
   ReasonListSectionSchema,
   CourseGridSectionSchema,
   VideoGridSectionSchema,
+  FaqSectionSchema,
   CtaBandSectionSchema,
 ])
 
@@ -358,6 +378,7 @@ type SocialPlatform = (typeof SOCIAL_PLATFORMS)[number]
 type Section = z.infer<typeof SectionSchema>
 type CourseGridSection = z.infer<typeof CourseGridSectionSchema>
 type ResolvedCourseGridSection = z.infer<typeof ResolvedCourseGridSectionSchema>
+type FaqSection = z.infer<typeof FaqSectionSchema>
 type VideoGridSection = z.infer<typeof VideoGridSectionSchema>
 type ResolvedVideoGridSection = z.infer<typeof ResolvedVideoGridSectionSchema>
 // Sections as components receive them (references resolved).
@@ -404,6 +425,7 @@ export type {
   Section,
   CourseGridSection,
   ResolvedCourseGridSection,
+  FaqSection,
   VideoGridSection,
   ResolvedVideoGridSection,
   ResolvedSection,

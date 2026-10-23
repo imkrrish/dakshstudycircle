@@ -39,6 +39,7 @@ MVP, frontend only. No backend, database, or auth yet.
 - Dev: `pnpm dev`. Assume it's already running on :3000.
 - Lint: `pnpm lint` · Typecheck: `pnpm typecheck`
 - Never stop or restart the dev server on :3000. Use another port (e.g. 3100) for test servers.
+- To stop a test server you started, kill only its own PID (e.g. from `lsof -ti :3100`), never by process name.
 
 ## Before creating a component
 

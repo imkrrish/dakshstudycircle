@@ -228,6 +228,18 @@ Layout: all playlists are equal cards (no lead card). Below `md`, compact rows (
 
 Thumbnails rest calm: `saturate(0.6) sepia(0.12)` so the bright YouTube art sits in the warm palette. On hover (pointer devices only) and while pressed they return to full colour (`saturate(1) sepia(0)`, 300ms) together with the course grid's flame glow (`card-styles.ts`) and a `muted`/`accent` fill. Under reduced motion the colour change is instant (`transition-none`) and the arrow does not move. Tone is `band`: why-daksh above is paper, so a paper videos section would run on without an edge; the band gives it its own surface and steps tint → ink into the CTA. The action is `outline` (never `secondary` on a band), no red.
 
+### FAQ
+
+Questions parents ask before they call (`faq`, items `{ question, answer }`). Text may use `{address}`, `{phones}` and `{hours}`; `getPage()` fills them from site data and an unknown name fails the build. No buttons: the dark CTA band follows.
+
+Layout: below `md` a single column. From `md` a 12-column grid like the reason list: heading block in columns 1–5, sticky under the navbar, questions in 6–12, so nine questions do not become one long narrow centred scroll. Default paper tone (the videos band is above, the dark CTA below). Hairline rules between items and at the top and bottom of the list. All closed by default; several can be open.
+
+Each question is a `<details>` with a full-width `<summary>` (min `2.75rem`, `focus-ring`, default marker removed). The question is an `h3` in Mukta 500 (`text-base`, 1.1875rem from `md`, one step under `text-lead` so nine rows stay calm), not Young Serif: nine serif lines in a row read as display text and compete with the h2, while Mukta medium scans as a list. This is a deliberate exception to "h3 is Young Serif". A Hugeicons chevron (`aria-hidden`, muted) rotates 180° when open (a plus would read as "close"). The answer is muted `text-base`, `max-w-prose`.
+
+Motion: a small client island (`FaqList`, anime.js) wraps the list. A click on a summary (mouse, Enter, Space) is intercepted and the answer's height and opacity animate over 250ms, with `open` set before opening and removed after closing; the chevron turns in sync (CSS, keyed to `[open]:not([data-closing])`). A click mid-animation takes over from the current height. Items the browser opens itself (find-in-page) are left alone. Without JS, and under reduced motion, the native instant toggle applies. No red.
+
+**The Native Details Exception.** The FAQ uses native `<details>`/`<summary>`, not a shadcn (Base UI) accordion, on purpose: it needs no JavaScript, every answer stays in the HTML while closed (search engines, find-in-page, no-JS), and keyboard and screen-reader behaviour is built in. An accordion would add a client island for nothing here.
+
 ## Motion
 
 - CSS for simple transitions (≤300ms, `ease-out`); anime.js for sequences (the nav highlight, the hero ornament fade-up).

@@ -32,7 +32,7 @@ Content marked PLACEHOLDER / MOCK until real data arrives.
 6. results-grid ★ (compact): highlights + link to /results
 7. testimonials ★
 8. video-grid: free Maths playlists as link-out cards to YouTube (no embed), band tone, after why-daksh (currently sits before the CTA; results and testimonials go between when built)
-9. faq ★
+9. faq: native details, 9 questions, site-data placeholders (done)
 10. cta-band (dark)
 
 ### Courses `/courses`
@@ -51,7 +51,7 @@ Slugs: classes-1-5, classes-6-8, classes-9-10, class-11-12-science, class-11-12-
 3. card-grid: subjects / batch details
 4. faculty-grid ★ (compact): who teaches this
 5. video-grid: link-out playlist cards, only if related playlists exist
-6. faq ★: course-specific
+6. faq: course-specific
 7. cta-band
    Each course needs genuinely unique copy (no find-and-replace pages).
 
@@ -87,7 +87,7 @@ Slugs: classes-1-5, classes-6-8, classes-9-10, class-11-12-science, class-11-12-
 
 1. hero (small)
 2. contact ★: details + form (submits to WhatsApp prefilled; "or email us" link) + map facade
-3. faq ★
+3. faq
 
 ### Privacy `/privacy`, 404
 
