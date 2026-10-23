@@ -18,6 +18,7 @@ export const rmsRimcSainik: Course = {
   title: "RMS, RIMC and Sainik School",
   summary:
     "Preparation for the RMS, RIMC and Sainik School entrance exams, for admission to Class 6, 8 or 9.",
+  cardNote: "Entrance prep for admission to Class 6, 8 or 9",
   classes: ["Class 5", "Class 7", "Class 8"],
   subjects: [
     "Mathematics",

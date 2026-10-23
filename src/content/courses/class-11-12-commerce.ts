@@ -11,7 +11,8 @@ export const class11To12Commerce: Course = {
   title: "Class 11–12 Commerce",
   summary:
     "Class 11 and 12 commerce students can study Accounts and Economics here, to the CBSE syllabus.",
-  classes: ["11", "12"],
+  cardNote: "Accounts and Economics",
+  classes: ["Class 11", "Class 12"],
   subjects: ["Accounts", "Economics"],
   facultyIds: [],
   order: 5,

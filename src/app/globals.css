@@ -202,6 +202,13 @@
   }
 }
 
+/* In-page anchors glide; instant when the user prefers less motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 /* Hero wash: the logo flame as the light source on warm paper. Layered radial
    gradients run yellow (core) to amber to orange (outer) and fade into the page
    background. No filter: blur. A one-time settle moves only a transform and
@@ -244,6 +251,28 @@
       color-mix(in oklch, var(--saffron) 10%, transparent),
       transparent 72%
     );
+}
+
+/* md and up the large hero centres its content in the first screen, so the
+   wash is anchored to the content block: it reaches up by navbar + padding
+   (where the page top used to be) and spans the full viewport width. */
+@media (min-width: 48rem) {
+  .hero-wash[data-anchor="content"] {
+    inset: auto;
+    top: calc(-1 * (var(--navbar-height) + var(--hero-pad)));
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    translate: -50% 0;
+    /* No page top above it any more, so it also fades in at the top. */
+    mask: linear-gradient(
+      to bottom,
+      transparent 0,
+      black 6rem,
+      black 35%,
+      transparent 100%
+    );
+  }
 }
 
 .hero-wash[data-size="compact"] {

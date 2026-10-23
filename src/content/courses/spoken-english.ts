@@ -11,6 +11,7 @@ export const spokenEnglish: Course = {
   title: "Spoken English",
   summary:
     "A course in spoken English and personality development, for learners of all ages who want to speak more confidently.",
+  cardNote: "Speaking confidence, for learners of all ages",
   classes: ["All ages"],
   subjects: ["Spoken English", "Personality development"],
   facultyIds: [],

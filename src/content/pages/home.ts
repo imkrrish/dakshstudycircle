@@ -32,6 +32,48 @@ export const home: Page = {
       ],
     },
     {
+      id: "courses",
+      type: "course-grid",
+      eyebrow: "Our courses",
+      heading: "Tuition for every class, from 1 to 12",
+      intro:
+        "Plus entrance preparation for defence schools and a Spoken English course. Choose your child's class to begin.",
+      groups: [
+        {
+          label: "School tuition",
+          items: [
+            { kind: "course", course: "classes-1-5" },
+            { kind: "course", course: "classes-6-8" },
+            { kind: "course", course: "classes-9-10" },
+            {
+              kind: "stream-group",
+              title: "Classes 11–12",
+              note: "Choose your stream",
+              courses: [
+                "class-11-12-science",
+                "class-11-12-commerce",
+                "class-11-12-humanities",
+              ],
+            },
+          ],
+        },
+        {
+          label: "Entrance and skills",
+          items: [
+            { kind: "course", course: "rms-rimc-sainik" },
+            { kind: "course", course: "spoken-english" },
+          ],
+        },
+      ],
+      actions: [
+        {
+          label: "See all courses",
+          variant: "outline",
+          action: { type: "link", href: "/courses" },
+        },
+      ],
+    },
+    {
       id: "director",
       type: "split",
       tone: "band",

@@ -8,7 +8,12 @@ import {
   type Course,
   type Faculty,
   type NavItem,
+  type CourseGridSection,
   type Page,
+  type ResolvedCourse,
+  type ResolvedCourseGridSection,
+  type ResolvedPage,
+  type ResolvedSection,
   type Section,
   type Site,
 } from "@/lib/content-schema"
@@ -50,6 +55,35 @@ function checkSections(label: string, sections: Section[], errors: string[]) {
   ).length
   if (dark > 1) {
     errors.push(`${label}: ${dark} dark cta-band sections (max 1)`)
+  }
+}
+
+// Every course-grid slug must exist, and appear once per section.
+function checkCourseGrids(
+  label: string,
+  sections: Section[],
+  courseSlugs: Set<string>,
+  errors: string[],
+) {
+  for (const section of sections) {
+    if (section.type !== "course-grid") continue
+    const where = `${label}: course-grid "${section.id}"`
+    const seen = new Set<string>()
+    for (const group of section.groups) {
+      for (const item of group.items) {
+        const slugs = item.kind === "course" ? [item.course] : item.courses
+        for (const slug of slugs) {
+          if (!courseSlugs.has(slug)) {
+            errors.push(
+              `${where}: unknown course "${slug}". Known: ${[...courseSlugs].join(", ")}`,
+            )
+          }
+          if (seen.has(slug))
+            errors.push(`${where}: course "${slug}" appears twice`)
+          seen.add(slug)
+        }
+      }
+    }
   }
 }
 
@@ -101,6 +135,18 @@ function loadContent() {
     courses.push(parsed)
   })
 
+  for (const [key, page] of pages) {
+    checkCourseGrids(`pages/${key}`, page.sections, courseSlugs, errors)
+  }
+  for (const course of courses) {
+    checkCourseGrids(
+      `courses/${course.slug}`,
+      course.sections,
+      courseSlugs,
+      errors,
+    )
+  }
+
   if (errors.length || !site) {
     throw new Error(
       `Invalid content:\n${errors.map((e) => `[content] ${e}`).join("\n")}`,
@@ -119,10 +165,69 @@ const content = loadContent()
 
 // ---------- Resolve ----------
 
-// Fills section references to collections (none yet) so components only
-// ever receive plain data.
-function resolveSections(sections: Section[]): Section[] {
-  return sections
+// The only place course URLs are built.
+function courseHref(slug: string) {
+  return `/courses/${slug}`
+}
+
+// Stream chip text: the course title minus the words shared by the whole group
+// ("Class 11–12 Science" → "Science").
+function streamLabels(titles: string[]): string[] {
+  const words = titles.map((t) => t.split(" "))
+  let shared = 0
+  while (
+    words.every((w) => w.length > shared + 1 && w[shared] === words[0][shared])
+  ) {
+    shared++
+  }
+  return words.map((w) => w.slice(shared).join(" "))
+}
+
+function findCourse(slug: string) {
+  const course = content.courses.find((c) => c.slug === slug)
+  if (!course) throw new Error(`[content] unknown course "${slug}"`)
+  return course
+}
+
+function resolveCourseGrid(
+  section: CourseGridSection,
+): ResolvedCourseGridSection {
+  return {
+    ...section,
+    groups: section.groups.map((group) => ({
+      label: group.label,
+      items: group.items.map((item) => {
+        if (item.kind === "course") {
+          const course = findCourse(item.course)
+          return {
+            kind: "course" as const,
+            title: course.title,
+            note: course.cardNote ?? course.subjects[0] ?? "",
+            href: courseHref(course.slug),
+          }
+        }
+        const courses = item.courses.map(findCourse)
+        const labels = streamLabels(courses.map((c) => c.title))
+        return {
+          kind: "stream-group" as const,
+          title: item.title,
+          note: item.note,
+          links: courses.map((c, i) => ({
+            title: c.title,
+            label: labels[i],
+            href: courseHref(c.slug),
+          })),
+        }
+      }),
+    })),
+  }
+}
+
+// Fills section references to collections so components only receive plain data.
+function resolveSections(sections: Section[]): ResolvedSection[] {
+  return sections.map((section) =>
+    section.type === "course-grid" ? resolveCourseGrid(section) : section,
+  )
 }
 
 // ---------- API (async so a CMS fetch can replace the body later) ----------
@@ -137,7 +242,7 @@ async function getNav(): Promise<NavItem[]> {
   return nav.filter((item) => !item.feature || features[item.feature])
 }
 
-async function getPage(slug: PageSlug): Promise<Page> {
+async function getPage(slug: PageSlug): Promise<ResolvedPage> {
   const page = content.pages.get(slug)
   if (!page) {
     throw new Error(
@@ -151,7 +256,7 @@ async function getCourses(): Promise<Course[]> {
   return content.courses
 }
 
-async function getCourse(slug: string): Promise<Course> {
+async function getCourse(slug: string): Promise<ResolvedCourse> {
   const course = content.courses.find((c) => c.slug === slug)
   if (!course) {
     throw new Error(

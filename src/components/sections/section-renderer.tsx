@@ -1,6 +1,11 @@
 import type { ReactNode } from "react"
-import type { Section, SectionOf, SectionType } from "@/lib/content-schema"
+import type {
+  ResolvedSection,
+  SectionOf,
+  SectionType,
+} from "@/lib/content-schema"
 import { CardGridSection } from "./card-grid-section"
+import { CourseGridSection } from "./course-grid-section"
 import { CtaBandSection } from "./cta-band-section"
 import { HeroSection } from "./hero-section"
 import { SplitSection } from "./split-section"
@@ -14,15 +19,16 @@ const sectionComponents = {
   hero: HeroSection,
   split: SplitSection,
   "card-grid": CardGridSection,
+  "course-grid": CourseGridSection,
   "cta-band": CtaBandSection,
 } satisfies SectionComponents
 
-function SectionRenderer({ sections }: { sections: Section[] }) {
+function SectionRenderer({ sections }: { sections: ResolvedSection[] }) {
   return sections.map((section) => {
     // TS can't correlate section.type with the matching component through the
     // lookup. Safe: the lookup is keyed by that same `type` discriminant.
     const Component = sectionComponents[section.type] as (props: {
-      section: Section
+      section: ResolvedSection
     }) => ReactNode
     return <Component key={section.id} section={section} />
   })

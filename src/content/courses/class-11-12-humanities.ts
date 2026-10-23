@@ -11,7 +11,8 @@ export const class11To12Humanities: Course = {
   title: "Class 11–12 Humanities",
   summary:
     "History and Political Science for humanities students in Classes 11 and 12, taught to the CBSE syllabus.",
-  classes: ["11", "12"],
+  cardNote: "History and Political Science",
+  classes: ["Class 11", "Class 12"],
   subjects: ["History", "Political Science"],
   facultyIds: [],
   order: 6,

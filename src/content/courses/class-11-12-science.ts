@@ -11,7 +11,8 @@ export const class11To12Science: Course = {
   title: "Class 11–12 Science",
   summary:
     "Physics, Chemistry, Maths and Biology for Classes 11 and 12, for students in the science stream.",
-  classes: ["11", "12"],
+  cardNote: "Physics, Chemistry, Maths and Biology",
+  classes: ["Class 11", "Class 12"],
   subjects: ["Physics", "Chemistry", "Maths", "Biology"],
   facultyIds: [],
   order: 4,

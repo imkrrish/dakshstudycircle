@@ -16,8 +16,10 @@ const heroSectionVariants = cva(
   {
     variants: {
       size: {
+        // From md the large hero fills the first screen and centres its content, so
+        // nothing of the next section peeks in.
         large:
-          "min-h-[92svh] pt-[calc(var(--navbar-height)+var(--hero-pad))] pb-10 md:pb-14",
+          "pt-[calc(var(--navbar-height)+var(--hero-pad))] pb-12 md:flex md:min-h-svh md:flex-col md:justify-center md:pb-(--navbar-height)",
         compact: "pt-[calc(var(--navbar-height)+3rem)] pb-12 md:pb-16",
       },
     },
@@ -98,9 +100,16 @@ function HeroSection({ section }: { section: SectionOf<"hero"> }) {
       aria-labelledby={`${id}-heading`}
       className={heroSectionVariants({ size })}
     >
-      <HeroWash size={size} />
+      <HeroWash size={size} className={large ? "md:hidden" : undefined} />
       {large ? (
-        <HeroEntrance className="mx-auto flex w-full max-w-6xl flex-col px-4 text-center md:px-6">
+        <HeroEntrance className="relative mx-auto flex w-full max-w-6xl flex-col px-4 text-center md:px-6">
+          {/* md and up the content is centred in the screen, so the wash is
+              anchored to it: same geometry as when it sat at the page top. */}
+          <HeroWash
+            size={size}
+            data-anchor="content"
+            className="hidden md:block"
+          />
           <div className="flex flex-col items-center justify-center gap-4">
             <Image
               data-hero-ornament

@@ -155,10 +155,78 @@ const CtaBandSectionSchema = z.strictObject({
   actions: z.array(ButtonSchema),
 })
 
+// Authoring shape: items refer to courses by slug. getPage() resolves them.
+const CourseGridItemSchema = z.discriminatedUnion("kind", [
+  z.strictObject({ kind: z.literal("course"), course: z.string().min(1) }),
+  // One card for several related courses (e.g. the Class 11–12 streams).
+  z.strictObject({
+    kind: z.literal("stream-group"),
+    title: z.string().min(1),
+    note: z.string().optional(),
+    courses: z.array(z.string().min(1)).min(2),
+  }),
+])
+
+const courseGridBase = {
+  ...sectionBase,
+  type: z.literal("course-grid"),
+  eyebrow: z.string().optional(),
+  heading: z.string().min(1),
+  intro: z.string().optional(),
+  actions: z.array(ButtonSchema).optional(),
+}
+
+const CourseGridSectionSchema = z.strictObject({
+  ...courseGridBase,
+  groups: z
+    .array(
+      z.strictObject({
+        label: z.string().min(1),
+        items: z.array(CourseGridItemSchema).min(1),
+      }),
+    )
+    .min(1),
+})
+
+// What the component receives: plain data, hrefs already built.
+const ResolvedCourseGridSectionSchema = z.strictObject({
+  ...courseGridBase,
+  groups: z
+    .array(
+      z.strictObject({
+        label: z.string().min(1),
+        items: z.array(
+          z.discriminatedUnion("kind", [
+            z.strictObject({
+              kind: z.literal("course"),
+              title: z.string(),
+              note: z.string(),
+              href: z.string(),
+            }),
+            z.strictObject({
+              kind: z.literal("stream-group"),
+              title: z.string(),
+              note: z.string().optional(),
+              links: z.array(
+                z.strictObject({
+                  title: z.string(),
+                  label: z.string().min(1),
+                  href: z.string(),
+                }),
+              ),
+            }),
+          ]),
+        ),
+      }),
+    )
+    .min(1),
+})
+
 const SectionSchema = z.discriminatedUnion("type", [
   HeroSectionSchema,
   SplitSectionSchema,
   CardGridSectionSchema,
+  CourseGridSectionSchema,
   CtaBandSectionSchema,
 ])
 
@@ -174,7 +242,17 @@ const CourseSchema = z.strictObject({
   slug: z.string().min(1),
   title: z.string(),
   summary: z.string(),
-  classes: z.array(z.string()),
+  // Short line for course cards; falls back to the first subject.
+  cardNote: z.string().max(60).optional(),
+  // "Class 1" … "Class 12", or "All ages".
+  classes: z
+    .array(
+      z.union([
+        z.string().regex(/^Class (1[0-2]|[1-9])$/),
+        z.literal("All ages"),
+      ]),
+    )
+    .min(1),
   subjects: z.array(z.string()),
   facultyIds: z.array(z.string()),
   order: z.number(),
@@ -204,10 +282,19 @@ type NavItem = z.infer<typeof NavItemSchema>
 type Link = z.infer<typeof LinkSchema>
 type SocialPlatform = (typeof SOCIAL_PLATFORMS)[number]
 type Section = z.infer<typeof SectionSchema>
-type SectionType = Section["type"]
-type SectionOf<T extends SectionType> = Extract<Section, { type: T }>
+type CourseGridSection = z.infer<typeof CourseGridSectionSchema>
+type ResolvedCourseGridSection = z.infer<typeof ResolvedCourseGridSectionSchema>
+// Sections as components receive them (references resolved).
+type ResolvedSection =
+  Exclude<Section, { type: "course-grid" }> | ResolvedCourseGridSection
+type SectionType = ResolvedSection["type"]
+type SectionOf<T extends SectionType> = Extract<ResolvedSection, { type: T }>
 type Page = z.infer<typeof PageSchema>
+type ResolvedPage = Omit<Page, "sections"> & { sections: ResolvedSection[] }
 type Course = z.infer<typeof CourseSchema>
+type ResolvedCourse = Omit<Course, "sections"> & {
+  sections: ResolvedSection[]
+}
 type Faculty = z.infer<typeof FacultySchema>
 
 export {
@@ -218,6 +305,7 @@ export {
   SeoSchema,
   SiteSchema,
   SectionSchema,
+  ResolvedCourseGridSectionSchema,
   PageSchema,
   CourseSchema,
   FacultySchema,
@@ -233,6 +321,11 @@ export type {
   Link,
   SocialPlatform,
   Section,
+  CourseGridSection,
+  ResolvedCourseGridSection,
+  ResolvedSection,
+  ResolvedPage,
+  ResolvedCourse,
   SectionType,
   SectionOf,
   Page,

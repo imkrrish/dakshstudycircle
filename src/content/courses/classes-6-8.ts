@@ -10,7 +10,8 @@ export const classes6To8: Course = {
   title: "Classes 6–8",
   summary:
     "CBSE tuition for the middle years, when subjects grow more detailed. A bridge between primary classes and the board years.",
-  classes: ["6", "7", "8"],
+  cardNote: "All school subjects through the middle years",
+  classes: ["Class 6", "Class 7", "Class 8"],
   subjects: ["All CBSE school subjects"],
   facultyIds: [],
   order: 2,

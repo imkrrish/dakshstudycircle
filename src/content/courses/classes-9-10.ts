@@ -11,7 +11,8 @@ export const classes9To10: Course = {
   title: "Classes 9–10",
   summary:
     "CBSE tuition across subjects for Classes 9 and 10, the two years that lead to the Class 10 board exam.",
-  classes: ["9", "10"],
+  cardNote: "All subjects, leading up to the Class 10 boards",
+  classes: ["Class 9", "Class 10"],
   subjects: ["All CBSE school subjects"],
   facultyIds: [],
   order: 3,

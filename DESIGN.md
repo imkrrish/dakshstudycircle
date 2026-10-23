@@ -139,15 +139,15 @@ Always use tokens (`bg-primary`, `text-muted-foreground`). No hard-coded colours
 
 ### Scale (Tailwind tokens, ratio ≈1.25)
 
-| Token               | Size                       | Line height | Use                                             |
-| ------------------- | -------------------------- | ----------- | ----------------------------------------------- |
-| `text-display`      | clamp 2.25–4.25rem (8.5vw) | 1.08        | Hero h1, below `sm`                             |
-| `text-display-wide` | clamp 2.25–4.25rem (6.4vw) | 1.08        | Hero h1 from `sm` (two fixed lines)             |
-| `text-heading`      | clamp 1.875–2.5rem         | 1.12        | Section h2                                      |
-| `text-title`        | 1.625rem                   | 1.25        | Card h3, dialog title                           |
-| `text-lead`         | 1.3125rem                  | 1.55        | Hero supporting line from `md`                  |
-| `text-base`         | 1.0625rem                  | 1.6         | Body (default on `<body>`)                      |
-| `text-sm`           | 0.9375rem                  | 1.5         | Smallest text: eyebrows, captions, nav, buttons |
+| Token               | Size                       | Line height | Use                                                                                              |
+| ------------------- | -------------------------- | ----------- | ------------------------------------------------------------------------------------------------ |
+| `text-display`      | clamp 2.25–4.25rem (8.5vw) | 1.08        | Hero h1, below `sm`                                                                              |
+| `text-display-wide` | clamp 2.25–4.25rem (6.4vw) | 1.08        | Hero h1 from `sm` (two fixed lines)                                                              |
+| `text-heading`      | clamp 1.875–2.5rem         | 1.12        | Section h2                                                                                       |
+| `text-title`        | 1.625rem                   | 1.25        | Card h3, dialog title                                                                            |
+| `text-lead`         | 1.3125rem                  | 1.55        | Hero supporting line from `md`; course titles in mobile course rows (the one list-row exception) |
+| `text-base`         | 1.0625rem                  | 1.6         | Body (default on `<body>`)                                                                       |
+| `text-sm`           | 0.9375rem                  | 1.5         | Smallest text: eyebrows, captions, nav, buttons                                                  |
 
 ### Named Rules
 
@@ -160,7 +160,7 @@ Always use tokens (`bg-primary`, `text-muted-foreground`). No hard-coded colours
 
 - **Container:** `Container` is `max-w-6xl`, gutters `px-4` (1rem), `md:px-6`. Hero and navbar use the same width.
 - **Section rhythm:** `Section` is `py-20 md:py-28`, `scroll-mt` equals `--navbar-height` (4rem). Alternate with `tone="muted"`. For a section that needs a visible edge against its neighbours (the director), use `tone="band"` (`bg-secondary`, paper tint): full-bleed, normal padding. At most one band among adjacent sections. On a band use `outline` (paper) or `quiet` buttons, never `secondary` (same tint). Headings sit above content via `SectionHeading` (`gap-3`; eyebrow, h2, intro).
-- **Hero:** every page starts with one (`getPage()` throws otherwise). It runs behind the transparent navbar, so its top padding is navbar height plus `--hero-pad` (1.5rem, 2.5rem from `md`). `large`: `min-h-[92svh]` (only a strip of the next section's band shows at the fold, never a portrait), `pb-10 md:pb-14`, emblem 4.5rem (5rem from `md`). `compact`: `pt` navbar + 3rem, `pb-12 md:pb-16`. Content is centred, headline `max-w-5xl`.
+- **Hero:** every page starts with one (`getPage()` throws otherwise). It runs behind the transparent navbar, so its top padding is navbar height plus `--hero-pad` (1.5rem, 2.5rem from `md`). `large`: below `md` it sizes to its content (`pb-12`, and the next section's `pt-12`, so the next section's eyebrow and heading sit fully at the bottom of a 375×812 first screen, never half a card). From `md` it fills the first screen: `min-h-svh`, content centred vertically (`pb` = navbar height, so the centre sits just below the navbar), so no part of the next section shows on the first screen at 768×1024, 1280×800, 1440×900 or 1920×1080. The next section then takes `md:pt-16` instead of `md:pt-28` (the hero's own empty space already separates them). The flame wash is anchored to the content block from `md` (`data-anchor="content"`: reaches up by navbar + padding, full viewport width, also fades in at the top) so the light stays behind the emblem wherever the content centres. Emblem 4.5rem (5rem from `md`). `compact`: `pt` navbar + 3rem, `pb-12 md:pb-16`. Content is centred, headline `max-w-5xl`.
 - **Mobile first:** design at 375px. Buttons stack full width below `sm`, sit in a row from `sm`.
 - **Units:** Tailwind scale first, `rem` for arbitrary values. `px` only for hairlines, shadows, image `sizes`/`width`/`height`, and shadcn `ui/` internals.
 
@@ -207,6 +207,10 @@ Portraits are rounded rectangles (`rounded-xl`), head-and-shoulders, `aspect-4/5
 ### Cards
 
 `card` paper, hairline border, `lg`/`xl` radius, no shadow. Title is an `h3` in `text-title`.
+
+### Course grid
+
+Courses grouped under muted `text-sm` labels (a `<p>`, not a heading) with a hairline rule running right. Below `md` each group is one raised `card` panel of full-width rows (min `4rem`, hairline dividers, title `text-lead`, note, chevron). From `md` the panel dissolves into cards (`rounded-xl`, 2 columns); from `lg` every group shares one column grid (largest group, up to 4). Each course is a stretched link (`<h3><a>` with `after:inset-0`), so its accessible name is the title only. Hover (pointer devices only) is `muted`, a soft flame glow rising from the card's bottom edge and a 0.25rem arrow nudge; pressed is `accent` with the same glow and nudge, instantly. The glow is a `::before` radial gradient (`flame` 40%, `saffron` 12%, in the bottom half only), kept faint so `muted-foreground` text stays at 5:1 or better over it; it never covers the title. Under reduced motion the glow still appears (a static colour change) but nothing moves. The Classes 11–12 stream card is not a link and has no glow; its chips keep their own states. Groups with fewer than three items (Entrance and skills) use two wider columns from `lg` (`max-w-3xl`) so long titles keep to two lines. Focus is the 2px ring on the whole row or card. A stream group (Classes 11–12) is not a link: its stream chips are `h-11` outline links with a hidden group prefix. No red in the section.
 
 ## Motion
 
