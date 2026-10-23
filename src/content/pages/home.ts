@@ -14,7 +14,7 @@ export const home: Page = {
       type: "hero",
       size: "large",
       eyebrow: "CBSE coaching in Delhi Cantt",
-      heading: "Every child learns differently. We teach that way.",
+      heading: ["Every child learns differently.", "We teach that way."],
       subheading:
         "Personal attention for every student, from Class 1 to Class 12, in the heart of Sadar Bazaar.",
       proofLine: "Since 2005 · Classes 1–12 · All subjects",
@@ -32,7 +32,7 @@ export const home: Page = {
       ],
       floatingItems: [
         "emblem",
-        "open-book",
+        "book",
         "compass",
         "atom",
         "flask",

@@ -35,6 +35,11 @@ function parseOrCollect<T>(
 }
 
 function checkSections(label: string, sections: Section[], errors: string[]) {
+  if (sections[0]?.type !== "hero") {
+    errors.push(
+      `${label}: first section must be a hero (got ${sections[0] ? `"${sections[0].type}"` : "no sections"})`,
+    )
+  }
   const seen = new Set<string>()
   for (const { id } of sections) {
     if (seen.has(id)) errors.push(`${label}: duplicate section id "${id}"`)

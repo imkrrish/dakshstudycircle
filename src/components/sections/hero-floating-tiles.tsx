@@ -2,113 +2,177 @@ import type { ComponentProps, CSSProperties, ReactNode } from "react"
 import Image from "next/image"
 import { cn } from "cn"
 
-import { ChemistryMark } from "@/components/motifs/chemistry-mark"
-import { FormulaCard } from "@/components/motifs/formula-card"
-import { MathsMark } from "@/components/motifs/maths-mark"
-import { OpenBook } from "@/components/motifs/open-book"
-import { Pencil } from "@/components/motifs/pencil"
-import { PhysicsMark } from "@/components/motifs/physics-mark"
 import type { FloatingItem } from "@/lib/content-schema"
 
-const icon = "size-3/5 text-muted-foreground"
-
-const itemContent: Record<FloatingItem, ReactNode> = {
-  emblem: (
-    <Image
-      src="/daksh-emblem-only.png"
-      alt=""
-      width={750}
-      height={750}
-      sizes="96px"
-      className="size-3/5 object-contain"
-    />
-  ),
-  "open-book": <OpenBook className={icon} />,
-  compass: <MathsMark className={icon} />,
-  atom: <PhysicsMark className={icon} />,
-  flask: <ChemistryMark className={icon} />,
-  formula: <FormulaCard className="w-4/5 text-muted-foreground" />,
-  pencil: <Pencil className={icon} />,
+const itemSize: Record<FloatingItem, string> = {
+  emblem: "size-16 lg:size-24",
+  book: "size-16 lg:size-24",
+  compass: "size-16 lg:size-24",
+  atom: "size-16 lg:size-24",
+  flask: "size-16 lg:size-24",
+  pencil: "size-16 lg:size-24",
+  globe: "size-16 lg:size-24",
+  formula: "h-16 w-28 lg:h-20 lg:w-40",
 }
 
-// Slot i holds the i-th item. Tiles live in the canvas edges and padding,
-// never in the text column: slots 0-1 show from mobile, 2-3 from md,
-// 4-5 from lg. Negative offsets let the canvas clip a tile for depth.
+function tileContent(item: FloatingItem): ReactNode {
+  if (item === "formula") {
+    return (
+      <span className="font-heading text-base whitespace-nowrap text-foreground lg:text-xl">
+        a² + b² = c²
+      </span>
+    )
+  }
+  if (item === "emblem") {
+    return (
+      <Image
+        src="/daksh-emblem-only.png"
+        alt=""
+        width={750}
+        height={750}
+        sizes="(min-width: 1024px) 96px, 64px"
+        className="size-full object-contain p-3"
+      />
+    )
+  }
+  return (
+    <Image
+      src={`/hero/${item}.webp`}
+      alt=""
+      width={256}
+      height={256}
+      sizes="(min-width: 1024px) 96px, 64px"
+      className="size-full object-cover"
+    />
+  )
+}
+
+function HeroTile({
+  item,
+  rotate,
+  duration,
+  delay,
+  className,
+  ...props
+}: ComponentProps<"div"> & {
+  item: FloatingItem
+  rotate: string
+  duration: string
+  delay: string
+}) {
+  return (
+    <div data-hero-tile className={className} {...props}>
+      <div
+        className={cn(
+          "hero-tile grid place-items-center overflow-hidden rounded-2xl bg-card",
+          itemSize[item],
+        )}
+        style={
+          {
+            "--tile-rotate": rotate,
+            "--bob-duration": duration,
+            "--bob-delay": delay,
+          } as CSSProperties
+        }
+      >
+        {tileContent(item)}
+      </div>
+    </div>
+  )
+}
+
+// Slot i holds the i-th item. Each slot lives beside one of three text bands
+// (top: eyebrow, middle: subheading, bottom: buttons), never beside the
+// headline, which fills the width. `rail` anchors the tile outside that band's
+// content, measured from the centre; `nudge` pushes it further out from lg up
+// so the sides stagger. Slots 0-3 show from md, 4-5 from lg.
 const slots = [
   {
-    position:
-      "top-5 -left-3 size-14 md:top-6 md:left-6 md:size-20 lg:top-14 lg:left-10 lg:size-24",
-    rotate: "-6deg",
+    band: "top",
+    rail: "right-[calc(50%+9.5rem)] lg:items-start",
+    nudge: "lg:mr-12",
+    rotate: "-7deg",
     duration: "7s",
     delay: "-1s",
   },
   {
-    position:
-      "top-8 -right-3 size-14 md:top-8 md:right-8 md:size-20 lg:top-20 lg:right-12 lg:size-24",
-    rotate: "5deg",
-    duration: "8s",
+    band: "top",
+    rail: "left-[calc(50%+9.5rem)] lg:items-end",
+    nudge: "lg:ml-24",
+    rotate: "6deg",
+    duration: "8.5s",
     delay: "-4s",
   },
   {
-    position:
-      "hidden md:block bottom-6 left-8 size-20 lg:bottom-auto lg:top-[46%] lg:-left-5 lg:size-24",
-    rotate: "7deg",
+    band: "bottom",
+    rail: "right-[calc(50%+11rem)] lg:items-end",
+    nudge: "lg:mr-24",
+    rotate: "8deg",
     duration: "9s",
     delay: "-2s",
   },
   {
-    position:
-      "hidden md:block bottom-8 right-6 size-20 lg:bottom-auto lg:top-[42%] lg:-right-5 lg:size-24",
+    band: "bottom",
+    rail: "left-[calc(50%+11rem)] lg:items-start",
+    nudge: "lg:ml-12",
     rotate: "-8deg",
     duration: "6.5s",
     delay: "-5s",
   },
   {
-    position: "hidden lg:block bottom-12 left-20 size-24",
+    band: "middle",
+    rail: "right-[calc(50%+19.5rem)] items-center",
+    nudge: "xl:mr-10",
     rotate: "-4deg",
-    duration: "8.5s",
+    duration: "8s",
     delay: "-3s",
   },
   {
-    position: "hidden lg:block bottom-10 right-20 h-20 w-32",
-    rotate: "4deg",
+    band: "middle",
+    rail: "left-[calc(50%+19.5rem)] items-center",
+    nudge: "xl:ml-6",
+    rotate: "5deg",
     duration: "7.5s",
     delay: "-6s",
   },
 ] as const
 
-function HeroFloatingTiles({
+type Band = (typeof slots)[number]["band"]
+
+// Side tiles for one text band. The parent band is `relative` and tall enough
+// to hold a tile, so a tile never reaches the rows above or below it.
+function HeroTileRails({
+  band,
   items,
   className,
   ...props
-}: ComponentProps<"div"> & { items: FloatingItem[] }) {
+}: ComponentProps<"div"> & { band: Band; items: FloatingItem[] }) {
   return (
     <div
-      data-slot="hero-floating-tiles"
+      data-slot="hero-tile-rails"
       aria-hidden="true"
-      className={cn("pointer-events-none absolute inset-0", className)}
+      className={cn("pointer-events-none", className)}
       {...props}
     >
-      {items.slice(0, slots.length).map((item, i) => {
-        const slot = slots[i]
+      {slots.map((slot, i) => {
+        const item = items[i]
+        if (slot.band !== band || !item) return null
         return (
           <div
             key={`${item}-${i}`}
-            data-hero-tile
-            className={cn("absolute", slot.position)}
+            className={cn(
+              "absolute inset-y-0 hidden items-center",
+              band === "middle" ? "lg:flex" : "md:flex",
+              slot.rail,
+            )}
           >
-            <div
-              className="hero-tile grid size-full place-items-center rounded-2xl border bg-card shadow-sm"
-              style={
-                {
-                  "--tile-rotate": slot.rotate,
-                  "--bob-duration": slot.duration,
-                  "--bob-delay": slot.delay,
-                } as CSSProperties
-              }
-            >
-              {itemContent[item]}
-            </div>
+            <HeroTile
+              item={item}
+              rotate={slot.rotate}
+              duration={slot.duration}
+              delay={slot.delay}
+              className={slot.nudge}
+            />
           </div>
         )
       })}
@@ -116,4 +180,33 @@ function HeroFloatingTiles({
   )
 }
 
-export { HeroFloatingTiles }
+// Below md: one row of the first three items, under the proof line.
+function HeroTileRow({
+  items,
+  className,
+  ...props
+}: ComponentProps<"div"> & { items: FloatingItem[] }) {
+  return (
+    <div
+      data-slot="hero-tile-row"
+      aria-hidden="true"
+      className={cn(
+        "pointer-events-none flex items-center justify-center gap-4 md:hidden",
+        className,
+      )}
+      {...props}
+    >
+      {items.slice(0, 3).map((item, i) => (
+        <HeroTile
+          key={`${item}-${i}`}
+          item={item}
+          rotate={slots[i].rotate}
+          duration={slots[i].duration}
+          delay={slots[i].delay}
+        />
+      ))}
+    </div>
+  )
+}
+
+export { HeroTileRails, HeroTileRow }

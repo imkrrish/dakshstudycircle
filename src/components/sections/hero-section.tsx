@@ -1,68 +1,85 @@
 import { cva } from "class-variance-authority"
-import { cn } from "cn"
 
-import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
 import { DiyaOrnament } from "@/components/motifs/diya-ornament"
 import { ActionButton } from "@/components/shared/action-button"
 import type { SectionOf } from "@/lib/content-schema"
 
 import { HeroEntrance } from "./hero-entrance"
-import { HeroFloatingTiles } from "./hero-floating-tiles"
+import { HeroTileRails, HeroTileRow } from "./hero-floating-tiles"
+import { HeroWash } from "./hero-wash"
 
-const heroSectionVariants = cva("", {
+// The hero starts at the top of the page, behind the transparent navbar, so
+// it adds the navbar height to its own top padding.
+const heroSectionVariants = cva("relative isolate overflow-clip", {
   variants: {
     size: {
-      large: "pt-4 pb-16 md:pt-6 md:pb-24",
-      compact: "py-12 md:py-16",
+      large:
+        "flex min-h-[92svh] flex-col justify-center pt-[calc(var(--navbar-height)+3rem)] pb-16 md:pb-24",
+      compact: "pt-[calc(var(--navbar-height)+3rem)] pb-12 md:pb-16",
     },
   },
   defaultVariants: { size: "large" },
 })
 
+const heroHeadingVariants = cva(
+  "font-heading leading-[1.05] font-normal tracking-tight text-balance",
+  {
+    variants: {
+      size: {
+        large: "text-4xl sm:text-5xl md:text-6xl lg:text-7xl",
+        compact: "text-4xl sm:text-5xl md:text-6xl",
+      },
+    },
+    defaultVariants: { size: "large" },
+  },
+)
+
 function HeroSection({ section }: { section: SectionOf<"hero"> }) {
   const { id, size, eyebrow, heading, subheading, proofLine, actions } = section
   const large = size === "large"
+  const tiles = large ? (section.floatingItems ?? []) : []
 
-  const copy = (
-    <div className="relative z-10 mx-auto flex max-w-2xl flex-col items-center text-center">
-      {large && (
-        <DiyaOrnament className="mb-5 h-7 w-40 text-muted-foreground/70" />
-      )}
-      {eyebrow && (
-        <p className="mb-5 flex items-center gap-3 text-sm text-muted-foreground">
-          <span aria-hidden="true" className="h-px w-8 bg-muted-foreground/40" />
-          {eyebrow}
-          <span aria-hidden="true" className="h-px w-8 bg-muted-foreground/40" />
-        </p>
-      )}
-      <h1
-        id={`${id}-heading`}
-        className="font-heading text-4xl leading-tight font-normal tracking-tight text-balance md:text-6xl"
-      >
-        {heading}
-      </h1>
-      {subheading && (
-        <p className="mt-5 max-w-prose text-base leading-relaxed text-muted-foreground md:text-lg">
-          {subheading}
-        </p>
-      )}
-      {actions && actions.length > 0 && (
-        <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-          {actions.map((button) => (
-            <ActionButton
-              key={button.label}
-              button={button}
-              size="lg"
-              className="w-full sm:w-auto"
-            />
-          ))}
-        </div>
-      )}
-      {proofLine && (
-        <p className="mt-6 text-sm text-muted-foreground">{proofLine}</p>
-      )}
+  const headline = (
+    <h1 id={`${id}-heading`} className={heroHeadingVariants({ size })}>
+      {heading.map((line, i) => (
+        <span key={line} className="sm:block">
+          {line}
+          {i < heading.length - 1 && " "}
+        </span>
+      ))}
+    </h1>
+  )
+
+  const intro = subheading && (
+    <p className="max-w-xl text-base leading-relaxed text-foreground/80 md:text-lg">
+      {subheading}
+    </p>
+  )
+
+  const buttons = actions && actions.length > 0 && (
+    <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+      {actions.map((button) => (
+        <ActionButton
+          key={button.label}
+          button={button}
+          size="lg"
+          className="w-full sm:w-auto"
+        />
+      ))}
     </div>
+  )
+
+  const proof = proofLine && (
+    <p className="text-sm text-muted-foreground">{proofLine}</p>
+  )
+
+  const eyebrowRow = eyebrow && (
+    <p className="flex items-center gap-3 text-sm text-muted-foreground">
+      <span aria-hidden="true" className="h-px w-8 bg-muted-foreground/40" />
+      {eyebrow}
+      <span aria-hidden="true" className="h-px w-8 bg-muted-foreground/40" />
+    </p>
   )
 
   return (
@@ -70,30 +87,38 @@ function HeroSection({ section }: { section: SectionOf<"hero"> }) {
       data-slot="hero-section"
       id={id}
       aria-labelledby={`${id}-heading`}
-      className={cn(heroSectionVariants({ size }))}
+      className={heroSectionVariants({ size })}
     >
-      <Container>
-        {large ? (
-          <HeroEntrance className="relative isolate overflow-hidden rounded-3xl border bg-background px-5 pt-28 pb-14 md:px-10 md:py-32 lg:py-36">
-            {/* Dot grid, faded out toward the centre so text sits on clean ground */}
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 -z-10 bg-[radial-gradient(var(--color-border)_1px,transparent_1px)] bg-size-[1.25rem_1.25rem] mask-[radial-gradient(ellipse_at_center,transparent_25%,black_80%)]"
-            />
-            {/* Colour wash, fading into the page background */}
-            <div
-              aria-hidden="true"
-              className="absolute inset-x-0 top-0 -z-10 h-2/3 bg-linear-to-b from-flame/20 via-saffron/10 to-transparent"
-            />
-            {section.floatingItems && (
-              <HeroFloatingTiles items={section.floatingItems} />
-            )}
-            {copy}
-          </HeroEntrance>
-        ) : (
-          copy
-        )}
-      </Container>
+      <HeroWash size={size} />
+      {large ? (
+        <HeroEntrance className="mx-auto flex w-full max-w-6xl flex-col px-4 text-center md:px-6">
+          {/* Each band is as tall as a tile so side tiles stay inside it */}
+          <div className="relative flex flex-col items-center justify-center gap-5 md:min-h-24 lg:min-h-32">
+            <DiyaOrnament data-hero-ornament className="h-8 w-40" />
+            {eyebrowRow}
+            <HeroTileRails band="top" items={tiles} />
+          </div>
+          <div className="mx-auto mt-6 max-w-5xl">{headline}</div>
+          <div className="relative mt-6 flex flex-col items-center justify-center lg:min-h-32">
+            {intro}
+            <HeroTileRails band="middle" items={tiles} />
+          </div>
+          <div className="relative mt-8 flex flex-col items-center justify-center gap-6 md:min-h-28 lg:min-h-32">
+            {buttons}
+            {proof}
+            <HeroTileRails band="bottom" items={tiles} />
+          </div>
+          <HeroTileRow items={tiles} className="mt-10" />
+        </HeroEntrance>
+      ) : (
+        <div className="mx-auto flex w-full max-w-6xl flex-col items-center px-4 text-center md:px-6">
+          {eyebrowRow && <div className="mb-5">{eyebrowRow}</div>}
+          <div className="mx-auto max-w-5xl">{headline}</div>
+          {intro && <div className="mt-5">{intro}</div>}
+          {buttons && <div className="mt-8 w-full sm:w-auto">{buttons}</div>}
+          {proof && <div className="mt-6">{proof}</div>}
+        </div>
+      )}
     </Section>
   )
 }

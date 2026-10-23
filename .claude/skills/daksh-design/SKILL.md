@@ -44,15 +44,18 @@ Inspiration is sarvam.ai (clean, minimal, subtle Indian motifs). Inspiration onl
 - px is allowed only for: borders/outlines/ring offsets (hairlines), shadows, the `sizes` attribute on images, and media-query-like values where px is standard.
 - `next/image` `width`/`height` are intrinsic pixel numbers, not CSS. Leave them.
 
-## Motifs (src/components/motifs/)
+## Illustrations and ornaments
 
-- The current set is a placeholder and may be redesigned. Don't create new motifs unless asked.
-- Rules for any motif: thin stroke, `fill="none"`, `stroke="currentColor"`, strokeWidth 1.25,
-  `vector-effect="non-scaling-stroke"`, each line its own path, `aria-hidden="true"`,
-  geometry computed rather than eyeballed, original designs only.
-- On light backgrounds use `text-muted-foreground` at reduced opacity; on dark bands `text-white/20`–`/30`.
-- At most one or two motif placements per section.
-- `flame-blob` stays soft (about 45% → 20% opacity) and is never the most eye-catching thing.
+- Hero and decoration illustrations are colored 3D icon images (WebP, about 256px, 10-25 KB) shown in white
+  `rounded-2xl` tiles with a soft layered shadow, tilted -8° to 8°. Rendered with `next/image`, decorative `alt=""`.
+  Originals stay out of `public/` and git.
+- Line-art motifs are only for small ornaments and dividers. Rules: thin stroke, `fill="none"`,
+  `stroke="currentColor"`, strokeWidth 1.25, `vector-effect="non-scaling-stroke"`, each line its own path,
+  `aria-hidden="true"`, geometry computed rather than eyeballed, original designs only. Muted color at reduced opacity
+  on light backgrounds; `text-white/20`-`/30` on dark bands. At most one or two placements per section.
+- Exception: the hero ornament (`src/components/motifs/diya-ornament.tsx`) is a filled symmetric shape with a
+  flame to primary gradient. Nothing else is filled.
+- Don't create new motifs unless asked.
 
 ## Decoration rules
 

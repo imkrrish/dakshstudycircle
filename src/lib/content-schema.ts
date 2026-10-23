@@ -14,12 +14,13 @@ const IconSchema = z.enum(iconNames)
 
 const FLOATING_ITEMS = [
   "emblem",
-  "open-book",
+  "book",
   "compass",
   "atom",
   "flask",
-  "formula",
   "pencil",
+  "globe",
+  "formula",
 ] as const
 const FloatingItemSchema = z.enum(FLOATING_ITEMS)
 
@@ -116,7 +117,8 @@ const HeroSectionSchema = z.strictObject({
   type: z.literal("hero"),
   size: z.enum(["large", "compact"]),
   eyebrow: z.string().optional(),
-  heading: z.string(),
+  // One entry per line from sm up (1-2 lines).
+  heading: z.array(z.string().min(1)).min(1).max(2),
   subheading: z.string().optional(),
   proofLine: z.string().optional(),
   actions: z.array(ButtonSchema).optional(),

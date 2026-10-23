@@ -158,10 +158,78 @@
   }
 }
 
-/* Home hero decoration. Final state is the default (no JS, reduced motion);
+/* Hero wash: layered radial gradients (flame, saffron, a hint of navy at the
+   sides) that fade into the page background. No filter: blur. The slow drift
+   moves only a transform and runs only when motion is allowed. */
+.hero-wash {
+  position: absolute;
+  inset: 0;
+  z-index: -10;
+  overflow: hidden;
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, black 35%, transparent 100%);
+}
+
+.hero-wash::before {
+  content: "";
+  position: absolute;
+  inset: -10%;
+  background:
+    radial-gradient(
+      55% 50% at 50% 0%,
+      color-mix(in oklch, var(--flame) 34%, transparent),
+      transparent 72%
+    ),
+    radial-gradient(
+      38% 42% at 66% 10%,
+      color-mix(in oklch, var(--saffron) 24%, transparent),
+      transparent 72%
+    ),
+    radial-gradient(
+      32% 38% at 30% 6%,
+      color-mix(in oklch, var(--flame) 20%, transparent),
+      transparent 72%
+    ),
+    radial-gradient(
+      30% 50% at 0% 30%,
+      color-mix(in oklch, var(--navy) 12%, transparent),
+      transparent 72%
+    ),
+    radial-gradient(
+      30% 50% at 100% 34%,
+      color-mix(in oklch, var(--navy) 10%, transparent),
+      transparent 72%
+    );
+}
+
+.hero-wash[data-size="compact"] {
+  opacity: 0.4;
+}
+
+@keyframes hero-drift {
+  from {
+    transform: translate3d(-2%, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(2%, 2%, 0) scale(1.06);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-wash[data-size="large"]::before {
+    animation: hero-drift 30s ease-in-out infinite alternate;
+  }
+}
+
+/* Home hero tiles. Final state is the default (no JS, reduced motion);
    motion is added only when the user allows it. */
 .hero-tile {
   transform: rotate(var(--tile-rotate, 0deg));
+  box-shadow:
+    0 0 0 1px color-mix(in oklch, var(--foreground) 5%, transparent),
+    0 1px 2px color-mix(in oklch, var(--foreground) 6%, transparent),
+    0 8px 16px -4px color-mix(in oklch, var(--foreground) 8%, transparent),
+    0 24px 40px -12px color-mix(in oklch, var(--foreground) 14%, transparent);
 }
 
 @keyframes hero-bob {
@@ -190,7 +258,7 @@
    hero-reveal is a safety net if the script never arrives. */
 @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
   [data-slot="hero-entrance"] [data-hero-tile],
-  [data-slot="hero-entrance"] [data-draw] {
+  [data-slot="hero-entrance"] [data-hero-ornament] {
     opacity: 0;
     animation: hero-reveal 0.3s ease-out 3s forwards;
   }

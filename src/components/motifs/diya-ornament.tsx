@@ -1,38 +1,55 @@
-import type { ComponentProps } from "react"
+import { useId, type ComponentProps } from "react"
 import { cn } from "cn"
 
-// Symmetric about x=80. Each path carries data-draw so the hero can "draw" it.
+// Filled, symmetric about x=80: the right half is drawn once and mirrored.
+// One gradient (flame at the top, logo red at the bottom) fills every shape.
 function DiyaOrnament({ className, ...props }: ComponentProps<"svg">) {
+  const gradientId = useId()
+  const fill = `url(#${gradientId})`
+
   return (
     <svg
       data-slot="diya-ornament"
-      viewBox="0 0 160 28"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.25}
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      viewBox="0 0 160 32"
       aria-hidden="true"
       className={cn("shrink-0", className)}
       {...props}
     >
-      {/* Diya: bowl, rim, flame */}
-      <path data-draw vectorEffect="non-scaling-stroke" d="M68 18Q80 30 92 18" />
-      <path data-draw vectorEffect="non-scaling-stroke" d="M68 18H92" />
+      <defs>
+        <linearGradient
+          id={gradientId}
+          gradientUnits="userSpaceOnUse"
+          x1="80"
+          y1="2"
+          x2="80"
+          y2="30"
+        >
+          <stop offset="0" stopColor="var(--flame)" />
+          <stop offset="1" stopColor="var(--primary)" />
+        </linearGradient>
+      </defs>
+      {/* Flame and bowl */}
       <path
-        data-draw
-        vectorEffect="non-scaling-stroke"
-        className="fill-flame/70"
-        d="M80 16C75.5 13 75.5 9 80 3C84.5 9 84.5 13 80 16Z"
+        fill={fill}
+        d="M80 2C84.5 8 85.5 12.5 80 17.5C74.5 12.5 75.5 8 80 2Z"
       />
-      {/* Right side */}
-      <path data-draw vectorEffect="non-scaling-stroke" d="M98 19C108 19 112 11 121 11C128 11 130 17 125.5 18C122 18.8 121 14.5 124.5 13.8" />
-      <path data-draw vectorEffect="non-scaling-stroke" d="M136 19H150" />
-      <circle data-draw vectorEffect="non-scaling-stroke" cx="155" cy="19" r="1" />
-      {/* Left side (mirror) */}
-      <path data-draw vectorEffect="non-scaling-stroke" d="M62 19C52 19 48 11 39 11C32 11 30 17 34.5 18C38 18.8 39 14.5 35.5 13.8" />
-      <path data-draw vectorEffect="non-scaling-stroke" d="M24 19H10" />
-      <circle data-draw vectorEffect="non-scaling-stroke" cx="5" cy="19" r="1" />
+      <path fill={fill} d="M69 20.5H91C90 27 86 30 80 30C74 30 70 27 69 20.5Z" />
+      {/* Right half, mirrored for the left */}
+      {[false, true].map((mirror) => (
+        <g key={String(mirror)} transform={mirror ? "translate(160 0) scale(-1 1)" : undefined}>
+          <path
+            fill={fill}
+            d="M95 22.5C106 22.5 112 15.5 128 15C119 21 108 25 95 22.5Z"
+          />
+          <path
+            fill={fill}
+            d="M97 19.5C104 17.5 109 12.5 118 9.5C117 15 108 19 97 19.5Z"
+          />
+          <circle fill={fill} cx="135" cy="14.5" r="1.8" />
+          <circle fill={fill} cx="143" cy="14.5" r="1.2" />
+          <circle fill={fill} cx="149.5" cy="14.5" r="0.8" />
+        </g>
+      ))}
     </svg>
   )
 }
