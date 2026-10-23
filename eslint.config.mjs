@@ -16,6 +16,7 @@ const eslintConfig = defineConfig([
     "reference/**",
     // Tooling skills and hooks, not part of the app
     ".claude/**",
+    ".next-verify/**",
   ]),
 ])
 
