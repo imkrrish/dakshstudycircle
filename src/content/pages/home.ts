@@ -17,7 +17,7 @@ export const home: Page = {
       heading: ["Every child learns differently.", "We teach that way."],
       subheading:
         "Personal attention for every student, from Class 1 to Class 12, in the heart of Sadar Bazaar.",
-      proofLine: "Since 2005 · Classes 1–12 · RMS, RIMC & Sainik School prep",
+      proofLine: "Since 2005 · RMS, RIMC & Sainik School prep",
       actions: [
         {
           label: "Talk to us",
@@ -97,14 +97,14 @@ export const home: Page = {
       },
       imagePosition: "left",
       actions: [
-        {
-          label: "Get directions",
-          variant: "outline",
-          action: { type: "directions" },
-        },
+        // {
+        //   label: "Get directions",
+        //   variant: "outline",
+        //   action: { type: "directions" },
+        // },
         {
           label: "Read our story",
-          variant: "quiet",
+          variant: "primary",
           action: { type: "link", href: "/about" },
         },
       ],

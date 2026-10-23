@@ -82,7 +82,7 @@ function HeroSection({ section }: { section: SectionOf<"hero"> }) {
   )
 
   const proof = proofLine && (
-    <p className="text-sm text-pretty text-muted-foreground">{proofLine}</p>
+    <p className="text-sm text-balance text-muted-foreground">{proofLine}</p>
   )
 
   const eyebrowRow = eyebrow && (
