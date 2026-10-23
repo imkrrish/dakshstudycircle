@@ -7,6 +7,12 @@ const nextConfig: NextConfig = {
   env: { NEXT_PUBLIC_BUILD_YEAR: String(new Date().getFullYear()) },
   cacheComponents: true,
   partialPrefetching: true,
+  images: {
+    // YouTube playlist thumbnails only; the browser never contacts YouTube.
+    remotePatterns: [
+      { protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" },
+    ],
+  },
   turbopack: {
     rules: {
       "*.css": {

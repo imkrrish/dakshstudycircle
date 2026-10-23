@@ -12,11 +12,12 @@ Content marked PLACEHOLDER / MOCK until real data arrives.
 
 - **courses**: slug, title, classes, subjects, summary, facultyIds[]
 - **faculty**: id, name, role, subjects, classes, bio, photo, isDirector
+- **videos**: id, title, youtubePlaylistId, thumbnail, class?, subject (free YouTube playlists)
 - Courses reference faculty by id. "Teaches these courses" on faculty is derived, never stored.
 
 ## Button actions
 
-- `link` (href) · `contact-dialog` (opens Talk to us dialog) · later: `book-demo`
+- `link` (href) · `contact-dialog` (opens Talk to us dialog) · `directions` (map, new tab) · `social` (platform; opens the site.socials url in a new tab) · later: `book-demo`
 - Talk to us dialog: title "Call or WhatsApp us"; per number: label, Call, WhatsApp, Copy; office hours line. Data from getSite().
 
 ## Pages
@@ -30,7 +31,7 @@ Content marked PLACEHOLDER / MOCK until real data arrives.
 5. reason-list: why Daksh, 6 points (ruled numbered list, photo beside)
 6. results-grid ★ (compact): highlights + link to /results
 7. testimonials ★
-8. video-grid ★: YouTube playlists (facade)
+8. video-grid: free Maths playlists as link-out cards to YouTube (no embed), band tone, after why-daksh (currently sits before the CTA; results and testimonials go between when built)
 9. faq ★
 10. cta-band (dark)
 
@@ -49,7 +50,7 @@ Slugs: classes-1-5, classes-6-8, classes-9-10, class-11-12-science, class-11-12-
 2. split: what's covered
 3. card-grid: subjects / batch details
 4. faculty-grid ★ (compact): who teaches this
-5. video-grid ★: only if related playlists exist
+5. video-grid: link-out playlist cards, only if related playlists exist
 6. faq ★: course-specific
 7. cta-band
    Each course needs genuinely unique copy (no find-and-replace pages).

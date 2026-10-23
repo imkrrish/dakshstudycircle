@@ -1,5 +1,12 @@
 import type { ComponentProps } from "react"
-import { Location01Icon } from "@hugeicons/core-free-icons"
+import {
+  Facebook01Icon,
+  InstagramIcon,
+  Location01Icon,
+  NewTwitterIcon,
+  YoutubeIcon,
+} from "@hugeicons/core-free-icons"
+import type { IconSvgElement } from "@hugeicons/react"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { cn } from "cn"
 import Link from "next/link"
@@ -7,7 +14,14 @@ import Link from "next/link"
 import { DialogTriggerButton } from "@/components/shared/dialog-trigger-button"
 import { Button as UiButton, buttonVariants } from "@/components/ui/button"
 import { getSite } from "@/lib/content"
-import type { Button } from "@/lib/content-schema"
+import type { Button, SocialPlatform } from "@/lib/content-schema"
+
+const socialIcons = {
+  facebook: Facebook01Icon,
+  x: NewTwitterIcon,
+  instagram: InstagramIcon,
+  youtube: YoutubeIcon,
+} satisfies Record<SocialPlatform, IconSvgElement>
 
 const variantMap = {
   primary: "default",
@@ -16,24 +30,26 @@ const variantMap = {
   quiet: "ghost",
 } as const
 
-async function DirectionsButton({
+// A button that opens an external address (map, social profile) in a new tab.
+function ExternalButton({
+  href,
+  icon,
   button,
   className,
   size,
   ...dataAttributes
 }: {
+  href: string
+  icon: IconSvgElement
   button: Button
   className?: string
   size?: ComponentProps<typeof UiButton>["size"]
   [attribute: `data-${string}`]: string | boolean | undefined
 }) {
-  const { mapUrl } = (await getSite()).contact
-  if (!mapUrl) return null
-
   return (
     <a
       data-slot="action-button"
-      href={mapUrl}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
@@ -47,7 +63,7 @@ async function DirectionsButton({
       {...dataAttributes}
     >
       <HugeiconsIcon
-        icon={Location01Icon}
+        icon={icon}
         strokeWidth={2}
         data-icon="inline-start"
         aria-hidden="true"
@@ -55,6 +71,34 @@ async function DirectionsButton({
       {button.label}
       <span className="sr-only"> (opens in a new tab)</span>
     </a>
+  )
+}
+
+async function DirectionsButton(props: {
+  button: Button
+  className?: string
+  size?: ComponentProps<typeof UiButton>["size"]
+  [attribute: `data-${string}`]: string | boolean | undefined
+}) {
+  const { mapUrl } = (await getSite()).contact
+  if (!mapUrl) return null
+  return <ExternalButton href={mapUrl} icon={Location01Icon} {...props} />
+}
+
+async function SocialButton({
+  platform,
+  ...props
+}: {
+  platform: SocialPlatform
+  button: Button
+  className?: string
+  size?: ComponentProps<typeof UiButton>["size"]
+  [attribute: `data-${string}`]: string | boolean | undefined
+}) {
+  const social = (await getSite()).socials.find((s) => s.platform === platform)
+  if (!social) return null
+  return (
+    <ExternalButton href={social.url} icon={socialIcons[platform]} {...props} />
   )
 }
 
@@ -120,6 +164,16 @@ function ActionButton({
     case "directions":
       return (
         <DirectionsButton
+          button={button}
+          size={size}
+          className={className}
+          {...dataAttributes}
+        />
+      )
+    case "social":
+      return (
+        <SocialButton
+          platform={action.platform}
           button={button}
           size={size}
           className={className}

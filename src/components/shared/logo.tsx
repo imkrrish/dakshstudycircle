@@ -34,10 +34,7 @@ function Logo({
       data-slot="logo"
       href="/"
       aria-label={`${name} home`}
-      className={cn(
-        "inline-flex shrink-0 rounded-full focus-ring",
-        className,
-      )}
+      className={cn("inline-flex shrink-0 rounded-full focus-ring", className)}
       {...props}
     >
       <Image

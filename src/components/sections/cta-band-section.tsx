@@ -38,7 +38,7 @@ async function CtaBandSection({ section }: { section: SectionOf<"cta-band"> }) {
           title={heading}
           intro={body}
           align="center"
-          className="max-w-2xl text-balance [&_p]:text-foreground/85 [&_p]:text-pretty"
+          className="max-w-2xl text-balance [&_p]:text-pretty [&_p]:text-foreground/85"
         />
         {actions.length > 0 && (
           <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">

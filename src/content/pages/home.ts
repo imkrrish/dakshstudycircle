@@ -159,6 +159,29 @@ export const home: Page = {
       },
     },
     {
+      id: "videos",
+      type: "video-grid",
+      tone: "band",
+      eyebrow: "Free video lessons",
+      heading: "Free Maths lessons with Anil Sir",
+      intro:
+        "Maths lessons for Classes 9 to 12, plus Basic Maths, free to watch at home.",
+      videos: [
+        "basic-maths",
+        "class-9-maths",
+        "class-10-maths",
+        "class-11-maths",
+        "class-12-maths",
+      ],
+      actions: [
+        {
+          label: "Visit our YouTube channel",
+          variant: "outline",
+          action: { type: "social", platform: "youtube" },
+        },
+      ],
+    },
+    {
       id: "contact-cta",
       type: "cta-band",
       variant: "dark",

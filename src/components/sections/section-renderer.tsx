@@ -10,6 +10,7 @@ import { CtaBandSection } from "./cta-band-section"
 import { HeroSection } from "./hero-section"
 import { ReasonListSection } from "./reason-list-section"
 import { SplitSection } from "./split-section"
+import { VideoGridSection } from "./video-grid-section"
 
 type SectionComponents = {
   [T in SectionType]: (props: { section: SectionOf<T> }) => ReactNode
@@ -22,6 +23,7 @@ const sectionComponents = {
   "card-grid": CardGridSection,
   "reason-list": ReasonListSection,
   "course-grid": CourseGridSection,
+  "video-grid": VideoGridSection,
   "cta-band": CtaBandSection,
 } satisfies SectionComponents
 

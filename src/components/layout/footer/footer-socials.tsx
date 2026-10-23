@@ -38,7 +38,7 @@ function FooterSocials({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${siteName} on ${name}`}
-              className="inline-flex size-11 items-center justify-center rounded-full text-foreground transition-colors focus-ring hover:bg-secondary focus-visible:bg-secondary"
+              className="inline-flex size-11 items-center justify-center rounded-full text-foreground focus-ring transition-colors hover:bg-secondary focus-visible:bg-secondary"
             >
               <HugeiconsIcon icon={icon} size={20} aria-hidden="true" />
             </a>

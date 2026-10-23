@@ -12,12 +12,19 @@ const ImageSchema = z.strictObject({
 
 const IconSchema = z.enum(iconNames)
 
+const SOCIAL_PLATFORMS = ["facebook", "x", "instagram", "youtube"] as const
+
 // Add new actions (e.g. "book-demo") here only; sections never change.
 const ActionSchema = z.discriminatedUnion("type", [
   z.strictObject({ type: z.literal("link"), href: z.string().min(1) }),
   z.strictObject({ type: z.literal("contact-dialog") }),
   // Opens site.contact.mapUrl in a new tab.
   z.strictObject({ type: z.literal("directions") }),
+  // Opens the site.socials url for that platform in a new tab.
+  z.strictObject({
+    type: z.literal("social"),
+    platform: z.enum(SOCIAL_PLATFORMS),
+  }),
 ])
 
 const ButtonSchema = z.strictObject({
@@ -51,8 +58,6 @@ const LinkSchema = z.strictObject({
   label: z.string().min(1),
   href: z.string().min(1),
 })
-
-const SOCIAL_PLATFORMS = ["facebook", "x", "instagram", "youtube"] as const
 
 const SiteSchema = z.strictObject({
   name: z.string().min(1),
@@ -244,12 +249,45 @@ const ResolvedCourseGridSectionSchema = z.strictObject({
     .min(1),
 })
 
+const videoGridBase = {
+  ...sectionBase,
+  type: z.literal("video-grid"),
+  eyebrow: z.string().optional(),
+  heading: z.string().min(1),
+  intro: z.string().optional(),
+  // "band": a deeper warm surface, full-bleed (same as split).
+  tone: z.enum(["default", "band"]).optional(),
+  actions: z.array(ButtonSchema).optional(),
+}
+
+// Authoring shape: videos are referenced by id. getPage() resolves them.
+const VideoGridSectionSchema = z.strictObject({
+  ...videoGridBase,
+  videos: z.array(z.string().min(1)).min(1),
+})
+
+// What the component receives: plain data, hrefs already built.
+const ResolvedVideoGridSectionSchema = z.strictObject({
+  ...videoGridBase,
+  items: z
+    .array(
+      z.strictObject({
+        title: z.string(),
+        href: z.string(),
+        thumbnail: ImageSchema,
+        meta: z.string(),
+      }),
+    )
+    .min(1),
+})
+
 const SectionSchema = z.discriminatedUnion("type", [
   HeroSectionSchema,
   SplitSectionSchema,
   CardGridSectionSchema,
   ReasonListSectionSchema,
   CourseGridSectionSchema,
+  VideoGridSectionSchema,
   CtaBandSectionSchema,
 ])
 
@@ -283,6 +321,19 @@ const CourseSchema = z.strictObject({
   sections: z.array(SectionSchema),
 })
 
+// A free YouTube playlist. Cards link out to it; nothing is embedded.
+const VideoSchema = z.strictObject({
+  id: z.string().min(1),
+  title: z.string().min(1),
+  youtubePlaylistId: z.string().regex(/^PL[\w-]+$/),
+  thumbnail: ImageSchema,
+  class: z
+    .string()
+    .regex(/^Class (1[0-2]|[1-9])$/)
+    .optional(),
+  subject: z.string().min(1),
+})
+
 const FacultySchema = z.strictObject({
   id: z.string().min(1),
   name: z.string(),
@@ -307,9 +358,13 @@ type SocialPlatform = (typeof SOCIAL_PLATFORMS)[number]
 type Section = z.infer<typeof SectionSchema>
 type CourseGridSection = z.infer<typeof CourseGridSectionSchema>
 type ResolvedCourseGridSection = z.infer<typeof ResolvedCourseGridSectionSchema>
+type VideoGridSection = z.infer<typeof VideoGridSectionSchema>
+type ResolvedVideoGridSection = z.infer<typeof ResolvedVideoGridSectionSchema>
 // Sections as components receive them (references resolved).
 type ResolvedSection =
-  Exclude<Section, { type: "course-grid" }> | ResolvedCourseGridSection
+  | Exclude<Section, { type: "course-grid" | "video-grid" }>
+  | ResolvedCourseGridSection
+  | ResolvedVideoGridSection
 type SectionType = ResolvedSection["type"]
 type SectionOf<T extends SectionType> = Extract<ResolvedSection, { type: T }>
 type Page = z.infer<typeof PageSchema>
@@ -318,6 +373,7 @@ type Course = z.infer<typeof CourseSchema>
 type ResolvedCourse = Omit<Course, "sections"> & {
   sections: ResolvedSection[]
 }
+type Video = z.infer<typeof VideoSchema>
 type Faculty = z.infer<typeof FacultySchema>
 
 export {
@@ -329,8 +385,10 @@ export {
   SiteSchema,
   SectionSchema,
   ResolvedCourseGridSectionSchema,
+  ResolvedVideoGridSectionSchema,
   PageSchema,
   CourseSchema,
+  VideoSchema,
   FacultySchema,
 }
 export type {
@@ -346,6 +404,8 @@ export type {
   Section,
   CourseGridSection,
   ResolvedCourseGridSection,
+  VideoGridSection,
+  ResolvedVideoGridSection,
   ResolvedSection,
   ResolvedPage,
   ResolvedCourse,
@@ -353,5 +413,6 @@ export type {
   SectionOf,
   Page,
   Course,
+  Video,
   Faculty,
 }

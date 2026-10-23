@@ -9,7 +9,9 @@ function DakshWordmark({
   fill = "brand",
   className,
   ...props
-}: Omit<ComponentProps<"svg">, "fill"> & { fill?: "brand" | "muted" | "current" }) {
+}: Omit<ComponentProps<"svg">, "fill"> & {
+  fill?: "brand" | "muted" | "current"
+}) {
   return (
     <svg
       data-slot="daksh-wordmark"

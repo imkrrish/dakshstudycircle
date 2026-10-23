@@ -5,10 +5,14 @@ import {
   FacultySchema,
   PageSchema,
   SiteSchema,
+  VideoSchema,
   type Course,
   type Faculty,
   type NavItem,
   type CourseGridSection,
+  type Video,
+  type VideoGridSection,
+  type ResolvedVideoGridSection,
   type Page,
   type ResolvedCourse,
   type ResolvedCourseGridSection,
@@ -21,6 +25,7 @@ import { site as rawSite } from "@/content/site"
 import { pages as rawPages, type PageSlug } from "@/content/pages"
 import { courses as rawCourses } from "@/content/courses"
 import { faculty as rawFaculty } from "@/content/faculty"
+import { videos as rawVideos } from "@/content/videos"
 
 // ---------- Validation (runs once, when this module loads) ----------
 
@@ -87,6 +92,48 @@ function checkCourseGrids(
   }
 }
 
+// Every video-grid id must exist, and appear once per section.
+function checkVideoGrids(
+  label: string,
+  sections: Section[],
+  videoIds: Set<string>,
+  errors: string[],
+) {
+  for (const section of sections) {
+    if (section.type !== "video-grid") continue
+    const where = `${label}: video-grid "${section.id}"`
+    const seen = new Set<string>()
+    for (const id of section.videos) {
+      if (!videoIds.has(id)) {
+        errors.push(
+          `${where}: unknown video "${id}". Known: ${[...videoIds].join(", ")}`,
+        )
+      }
+      if (seen.has(id)) errors.push(`${where}: video "${id}" appears twice`)
+      seen.add(id)
+    }
+  }
+}
+
+// A `social` button needs that platform in site.socials, or it would vanish.
+function checkSocialActions(
+  label: string,
+  sections: Section[],
+  platforms: Set<string>,
+  errors: string[],
+) {
+  for (const section of sections) {
+    if (!("actions" in section) || !section.actions) continue
+    for (const { action } of section.actions) {
+      if (action.type === "social" && !platforms.has(action.platform)) {
+        errors.push(
+          `${label}: "${section.id}" has a ${action.platform} button but site.socials has no ${action.platform}`,
+        )
+      }
+    }
+  }
+}
+
 function loadContent() {
   const errors: string[] = []
 
@@ -116,6 +163,18 @@ function loadContent() {
     faculty.push(parsed)
   })
 
+  const videos: Video[] = []
+  const videoIds = new Set<string>()
+  rawVideos.forEach((raw, i) => {
+    const parsed = parseOrCollect(VideoSchema, raw, `videos[${i}]`, errors)
+    if (!parsed) return
+    if (videoIds.has(parsed.id)) {
+      errors.push(`videos: duplicate id "${parsed.id}"`)
+    }
+    videoIds.add(parsed.id)
+    videos.push(parsed)
+  })
+
   const courses: Course[] = []
   const courseSlugs = new Set<string>()
   rawCourses.forEach((raw, i) => {
@@ -135,14 +194,26 @@ function loadContent() {
     courses.push(parsed)
   })
 
+  const socialPlatforms = new Set<string>(
+    site ? site.socials.map((s) => s.platform) : [],
+  )
   for (const [key, page] of pages) {
     checkCourseGrids(`pages/${key}`, page.sections, courseSlugs, errors)
+    checkVideoGrids(`pages/${key}`, page.sections, videoIds, errors)
+    checkSocialActions(`pages/${key}`, page.sections, socialPlatforms, errors)
   }
   for (const course of courses) {
     checkCourseGrids(
       `courses/${course.slug}`,
       course.sections,
       courseSlugs,
+      errors,
+    )
+    checkVideoGrids(`courses/${course.slug}`, course.sections, videoIds, errors)
+    checkSocialActions(
+      `courses/${course.slug}`,
+      course.sections,
+      socialPlatforms,
       errors,
     )
   }
@@ -156,6 +227,7 @@ function loadContent() {
   return {
     site,
     pages,
+    videos,
     courses: courses.sort((a, b) => a.order - b.order),
     faculty: faculty.sort((a, b) => a.order - b.order),
   }
@@ -223,11 +295,40 @@ function resolveCourseGrid(
   }
 }
 
+// The only place YouTube playlist URLs are built.
+function playlistHref(playlistId: string) {
+  return `https://www.youtube.com/playlist?list=${playlistId}`
+}
+
+function resolveVideoGrid(section: VideoGridSection): ResolvedVideoGridSection {
+  const { videos: ids, ...rest } = section
+  return {
+    ...rest,
+    items: ids.map((id) => {
+      const video = content.videos.find((v) => v.id === id)
+      if (!video) throw new Error(`[content] unknown video "${id}"`)
+      return {
+        title: video.title,
+        href: playlistHref(video.youtubePlaylistId),
+        thumbnail: video.thumbnail,
+        meta: "Playlist · YouTube",
+      }
+    }),
+  }
+}
+
 // Fills section references to collections so components only receive plain data.
 function resolveSections(sections: Section[]): ResolvedSection[] {
-  return sections.map((section) =>
-    section.type === "course-grid" ? resolveCourseGrid(section) : section,
-  )
+  return sections.map((section) => {
+    switch (section.type) {
+      case "course-grid":
+        return resolveCourseGrid(section)
+      case "video-grid":
+        return resolveVideoGrid(section)
+      default:
+        return section
+    }
+  })
 }
 
 // ---------- API (async so a CMS fetch can replace the body later) ----------

@@ -18,12 +18,12 @@ async function Navbar() {
           about half the pill height instead. */}
       <div
         data-slot="navbar"
-        className="relative mx-auto flex h-16 [--nav-h:3rem] [--nav-btn-h:2.25rem] [--nav-inset:calc((var(--nav-h)-var(--nav-btn-h)-2px)/2)] w-full max-w-6xl items-center justify-between gap-3 border border-transparent bg-background/0 px-4 backdrop-blur-0 transition-[width,max-width,height,margin,padding,background-color,border-color,box-shadow,backdrop-filter] duration-300 ease-out group-data-scrolled/navbar:mt-2 group-data-scrolled/navbar:h-(--nav-h) group-data-scrolled/navbar:pr-(--nav-inset) group-data-scrolled/navbar:pl-[calc(var(--nav-h)/2-1px)] group-data-scrolled/navbar:w-[calc(100%-1rem)] group-data-scrolled/navbar:max-w-4xl group-data-scrolled/navbar:rounded-4xl group-data-scrolled/navbar:border-border group-data-scrolled/navbar:bg-background/90 group-data-scrolled/navbar:shadow-sm group-data-scrolled/navbar:backdrop-blur-md motion-reduce:transition-none md:px-6 lg:grid lg:grid-cols-[1fr_auto_1fr]"
+        className="backdrop-blur-0 relative mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-3 border border-transparent bg-background/0 px-4 transition-[width,max-width,height,margin,padding,background-color,border-color,box-shadow,backdrop-filter] duration-300 ease-out [--nav-btn-h:2.25rem] [--nav-h:3rem] [--nav-inset:calc((var(--nav-h)-var(--nav-btn-h)-2px)/2)] group-data-scrolled/navbar:mt-2 group-data-scrolled/navbar:h-(--nav-h) group-data-scrolled/navbar:w-[calc(100%-1rem)] group-data-scrolled/navbar:max-w-4xl group-data-scrolled/navbar:rounded-4xl group-data-scrolled/navbar:border-border group-data-scrolled/navbar:bg-background/90 group-data-scrolled/navbar:pr-(--nav-inset) group-data-scrolled/navbar:pl-[calc(var(--nav-h)/2-1px)] group-data-scrolled/navbar:shadow-sm group-data-scrolled/navbar:backdrop-blur-md motion-reduce:transition-none md:px-6 lg:grid lg:grid-cols-[1fr_auto_1fr]"
       >
         <Logo
           name={site.name}
           preload
-          className="ml-[0.4rem] h-[2.2rem] transition-[height,margin] duration-300 ease-out group-data-scrolled/navbar:ml-0 lg:group-data-scrolled/navbar:h-[1.8rem] motion-reduce:transition-none"
+          className="ml-[0.4rem] h-[2.2rem] transition-[height,margin] duration-300 ease-out group-data-scrolled/navbar:ml-0 motion-reduce:transition-none lg:group-data-scrolled/navbar:h-[1.8rem]"
         />
         <NavLinks items={items} />
         <div className="flex items-center gap-3 justify-self-end">

@@ -10,7 +10,10 @@ function FooterColumn({
   className,
   children,
   ...props
-}: Omit<ComponentProps<"div">, "title"> & { title: string; listClassName?: string }) {
+}: Omit<ComponentProps<"div">, "title"> & {
+  title: string
+  listClassName?: string
+}) {
   return (
     <div data-slot="footer-column" className={cn(className)} {...props}>
       <h2 className="font-sans text-sm font-normal text-muted-foreground">
