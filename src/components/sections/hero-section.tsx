@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority"
+import Image from "next/image"
 
 import { Section } from "@/components/layout/section"
-import { DiyaOrnament } from "@/components/motifs/diya-ornament"
 import { ActionButton } from "@/components/shared/action-button"
 import type { SectionOf } from "@/lib/content-schema"
 
@@ -9,17 +9,21 @@ import { HeroEntrance } from "./hero-entrance"
 import { HeroWash } from "./hero-wash"
 
 // The hero starts at the top of the page, behind the transparent navbar, so
-// it adds the navbar height to its own top padding.
-const heroSectionVariants = cva("relative isolate overflow-clip", {
-  variants: {
-    size: {
-      large:
-        "flex min-h-[92svh] flex-col justify-center pt-[calc(var(--navbar-height)+3rem)] pb-16 md:pb-24",
-      compact: "pt-[calc(var(--navbar-height)+3rem)] pb-12 md:pb-16",
+// it adds the navbar height to its own top padding. --hero-pad and
+// --hero-emblem also place the flame wash (see .hero-wash) behind the emblem.
+const heroSectionVariants = cva(
+  "relative isolate overflow-clip [--hero-emblem:4.5rem] [--hero-pad:1.5rem] md:[--hero-emblem:5rem] md:[--hero-pad:2.5rem]",
+  {
+    variants: {
+      size: {
+        large:
+          "min-h-[82svh] pt-[calc(var(--navbar-height)+var(--hero-pad))] pb-10 md:pb-14",
+        compact: "pt-[calc(var(--navbar-height)+3rem)] pb-12 md:pb-16",
+      },
     },
+    defaultVariants: { size: "large" },
   },
-  defaultVariants: { size: "large" },
-})
+)
 
 const heroHeadingVariants = cva(
   "font-heading font-normal tracking-tight text-balance",
@@ -41,7 +45,7 @@ function HeroSection({ section }: { section: SectionOf<"hero"> }) {
   const headline = (
     <h1 id={`${id}-heading`} className={heroHeadingVariants({ size })}>
       {heading.map((line, i) => (
-        <span key={line} className="sm:block">
+        <span key={line} className="block">
           {line}
           {i < heading.length - 1 && " "}
         </span>
@@ -55,13 +59,20 @@ function HeroSection({ section }: { section: SectionOf<"hero"> }) {
     </p>
   )
 
+  // The first primary button is the hero's call to action; the navbar hides its
+  // own while this one is on screen (see NavCtaReveal).
+  const ctaIndex = actions?.findIndex(
+    (button) => (button.variant ?? "primary") === "primary",
+  )
+
   const buttons = actions && actions.length > 0 && (
     <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-      {actions.map((button) => (
+      {actions.map((button, i) => (
         <ActionButton
           key={button.label}
           button={button}
           size="lg"
+          data-hero-cta={i === ctaIndex ? "" : undefined}
           className="h-11 w-full sm:h-10 sm:w-auto"
         />
       ))}
@@ -69,7 +80,7 @@ function HeroSection({ section }: { section: SectionOf<"hero"> }) {
   )
 
   const proof = proofLine && (
-    <p className="text-sm text-muted-foreground">{proofLine}</p>
+    <p className="text-sm text-pretty text-muted-foreground">{proofLine}</p>
   )
 
   const eyebrowRow = eyebrow && (
@@ -90,15 +101,24 @@ function HeroSection({ section }: { section: SectionOf<"hero"> }) {
       <HeroWash size={size} />
       {large ? (
         <HeroEntrance className="mx-auto flex w-full max-w-6xl flex-col px-4 text-center md:px-6">
-          <div className="flex flex-col items-center justify-center gap-5">
-            <DiyaOrnament data-hero-ornament className="h-8 w-40" />
+          <div className="flex flex-col items-center justify-center gap-4">
+            <Image
+              data-hero-ornament
+              src="/daksh-emblem-only.png"
+              alt=""
+              width={750}
+              height={750}
+              sizes="5rem"
+              loading="eager"
+              className="size-(--hero-emblem)"
+            />
             {eyebrowRow}
           </div>
-          <div className="mx-auto mt-6 max-w-5xl">{headline}</div>
-          <div className="mt-6 flex flex-col items-center justify-center">
+          <div className="mx-auto mt-5 max-w-5xl">{headline}</div>
+          <div className="mt-5 flex flex-col items-center justify-center">
             {intro}
           </div>
-          <div className="mt-8 flex flex-col items-center justify-center gap-6">
+          <div className="mt-6 flex flex-col items-center justify-center gap-5">
             {buttons}
             {proof}
           </div>

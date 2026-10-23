@@ -9,7 +9,7 @@ function DakshWordmark({
   fill = "brand",
   className,
   ...props
-}: Omit<ComponentProps<"svg">, "fill"> & { fill?: "brand" | "muted" }) {
+}: Omit<ComponentProps<"svg">, "fill"> & { fill?: "brand" | "muted" | "current" }) {
   return (
     <svg
       data-slot="daksh-wordmark"
@@ -21,7 +21,13 @@ function DakshWordmark({
     >
       <path
         d={PATH_DATA}
-        fill={fill === "brand" ? "var(--primary)" : "var(--muted-foreground)"}
+        fill={
+          fill === "brand"
+            ? "var(--primary)"
+            : fill === "current"
+              ? "currentColor"
+              : "var(--muted-foreground)"
+        }
         fillOpacity={fill === "muted" ? 0.4 : undefined}
       />
     </svg>

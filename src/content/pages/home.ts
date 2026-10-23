@@ -17,7 +17,7 @@ export const home: Page = {
       heading: ["Every child learns differently.", "We teach that way."],
       subheading:
         "Personal attention for every student, from Class 1 to Class 12, in the heart of Sadar Bazaar.",
-      proofLine: "Since 2005 · Classes 1–12 · All subjects",
+      proofLine: "Since 2005 · Classes 1–12 · RMS, RIMC & Sainik School prep",
       actions: [
         {
           label: "Talk to us",

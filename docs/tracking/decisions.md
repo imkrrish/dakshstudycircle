@@ -18,3 +18,4 @@ One line per decision. Newest at the bottom. Format: date: decision. Why.
 - 2026-10-22: Main nav: Courses, Results, Faculty, About, Contact (+ Talk to us). Gallery in footer. Fits a mobile menu.
 - 2026-10-22: Phone + address in footer on every page. Consistent business details help local SEO.
 - 2026-10-22: Results are MOCK until launch. Coaching-ad guidelines; real data needs consent.
+- 2026-10-23: Detector rule cream-palette ignored project-wide. The warm paper background is the deliberate brand direction (critique 2026-10-23).

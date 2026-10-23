@@ -16,10 +16,12 @@ function ActionButton({
   button,
   className,
   size,
+  ...dataAttributes
 }: {
   button: Button
   className?: string
   size?: ComponentProps<typeof UiButton>["size"]
+  [attribute: `data-${string}`]: string | boolean | undefined
 }) {
   const variant = variantMap[button.variant ?? "primary"]
   const { action } = button
@@ -35,6 +37,7 @@ function ActionButton({
           variant={variant}
           size={size}
           className={cn("focus-ring", className)}
+          {...dataAttributes}
           nativeButton={false}
           render={
             isInternal ? (
@@ -58,6 +61,7 @@ function ActionButton({
           variant={variant}
           size={size}
           className={cn("focus-ring", className)}
+          {...dataAttributes}
         >
           {button.label}
         </DialogTriggerButton>

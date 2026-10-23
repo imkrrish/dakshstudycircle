@@ -105,7 +105,7 @@ const HeroSectionSchema = z.strictObject({
   type: z.literal("hero"),
   size: z.enum(["large", "compact"]),
   eyebrow: z.string().optional(),
-  // One entry per line from sm up (1-2 lines).
+  // One entry per line at every width (1-2 lines); a line may wrap inside itself.
   heading: z.array(z.string().min(1)).min(1).max(2),
   subheading: z.string().optional(),
   proofLine: z.string().optional(),

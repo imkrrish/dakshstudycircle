@@ -54,7 +54,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main
           id="main"
           tabIndex={-1}
-          className="relative z-10 flex-1 overflow-clip rounded-b-[2.5rem] border-b border-border bg-background outline-none md:rounded-b-[3rem]"
+          className="relative z-10 flex-1 overflow-clip border-b border-border bg-background outline-none"
         >
           {children}
         </main>

@@ -10,14 +10,7 @@ function FooterContact({
   className,
   ...props
 }: Omit<ComponentProps<"div">, "title"> & { site: Site }) {
-  const { phones, emails, hours, address, mapUrl, whatsappMessage } =
-    site.contact
-  const lines = [
-    address.line1,
-    address.line2,
-    address.locality,
-    `${address.city}, ${address.state} ${address.postalCode}`,
-  ].filter(Boolean)
+  const { phones, emails, whatsappMessage } = site.contact
 
   return (
     <FooterColumn
@@ -31,7 +24,7 @@ function FooterContact({
           <a
             href={`tel:${e164}`}
             aria-label={label ? `Call ${label}, ${display}` : `Call ${display}`}
-            className={footerLinkClass}
+            className={cn(footerLinkClass, "min-h-11")}
           >
             {display}
           </a>
@@ -55,29 +48,6 @@ function FooterContact({
           </a>
         </li>
       ))}
-      <li className="mt-2 md:mt-0">
-        <div className="flex w-full max-w-sm flex-col gap-3 rounded-lg border p-4 text-sm">
-          <address className="leading-relaxed text-foreground not-italic">
-            {lines.map((line) => (
-              <span key={line} className="block">
-                {line}
-              </span>
-            ))}
-          </address>
-          <p className="text-muted-foreground">{hours}</p>
-          {mapUrl && (
-            <a
-              href={mapUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={cn(footerLinkClass, "w-fit font-medium")}
-            >
-              Get directions
-              <span className="sr-only"> (opens in a new tab)</span>
-            </a>
-          )}
-        </div>
-      </li>
     </FooterColumn>
   )
 }

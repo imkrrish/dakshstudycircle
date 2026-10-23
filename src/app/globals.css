@@ -35,6 +35,8 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
   --color-primary-hover: var(--primary-hover);
+  --color-footer: var(--footer);
+  --color-footer-mark: var(--footer-mark);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
@@ -105,6 +107,9 @@
   --sidebar-accent-foreground: oklch(0.23 0.02 45);
   --sidebar-border: oklch(0.89 0.015 80);
   --sidebar-ring: oklch(0.5 0.13 60);
+  /* Footer paper, and the wordmark one step darker (tone on tone, not red). */
+  --footer: oklch(0.965 0.016 78);
+  --footer-mark: oklch(0.93 0.03 75);
 
   /* Flame colours from the logo: decoration only, never text. */
   --flame-light: oklch(0.92 0.13 95); /* yellow */
@@ -145,6 +150,8 @@
   --sidebar-accent-foreground: oklch(0.95 0.01 80);
   --sidebar-border: oklch(0.95 0.01 80 / 12%);
   --sidebar-ring: oklch(0.78 0.12 75);
+  --footer: oklch(0.24 0.016 50);
+  --footer-mark: oklch(0.29 0.024 55);
 
   --flame-light: oklch(0.92 0.13 95);
   --flame: oklch(0.8 0.165 72.3);
@@ -185,6 +192,10 @@
    background. No filter: blur. A one-time settle moves only a transform and
    runs only when motion is allowed. */
 .hero-wash {
+  /* Where the emblem's centre sits; set from the hero's own padding. */
+  --hero-light-y: calc(
+    var(--navbar-height) + var(--hero-pad, 3rem) + var(--hero-emblem, 0rem) / 2
+  );
   position: absolute;
   inset: 0;
   z-index: -10;
@@ -196,26 +207,16 @@
 .hero-wash::before {
   content: "";
   position: absolute;
-  inset: -10%;
+  inset: 0 -10% -10%;
   background:
     radial-gradient(
-      30% 34% at 50% 4%,
+      30% 34% at 50% var(--hero-light-y),
       color-mix(in oklch, var(--flame-light) 34%, transparent),
       transparent 72%
     ),
     radial-gradient(
-      55% 50% at 50% 0%,
-      color-mix(in oklch, var(--flame) 30%, transparent),
-      transparent 72%
-    ),
-    radial-gradient(
-      38% 42% at 66% 10%,
-      color-mix(in oklch, var(--saffron) 22%, transparent),
-      transparent 72%
-    ),
-    radial-gradient(
-      32% 38% at 30% 6%,
-      color-mix(in oklch, var(--flame) 18%, transparent),
+      55% 50% at 50% var(--hero-light-y),
+      color-mix(in oklch, var(--flame) 34%, transparent),
       transparent 72%
     ),
     radial-gradient(
@@ -263,5 +264,17 @@
   [data-slot="hero-entrance"] [data-hero-ornament] {
     opacity: 0;
     animation: hero-reveal 0.3s ease-out 3s forwards;
+  }
+}
+
+/* One red button per viewport: while the page's hero CTA is on screen the
+   navbar's is hidden. visibility keeps it out of the tab order and the
+   accessibility tree; NavCtaReveal sets data-revealed once the hero CTA
+   scrolls out of view. Without JS the navbar button shows normally. */
+@media (scripting: enabled) {
+  :root:has([data-hero-cta])
+    [data-slot="nav-cta-reveal"]:not([data-revealed]) {
+    opacity: 0;
+    visibility: hidden;
   }
 }
