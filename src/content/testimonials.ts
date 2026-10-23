@@ -7,7 +7,7 @@ import type { Testimonial } from "@/lib/content-schema"
 // Source URL is https://images.unsplash.com/photo-<id>:
 //   mother-red-sari.jpg          Prateek Jaiswal  1628477116196-48afe0d209e0
 //   teen-boy-striped-jacket.jpg  Dipen Nagani     1617966225168-276b58a35602
-//   mother-with-daughter.jpg     Vivek Kumar      1589169011402-8b2cbd1ee593
+//   mother-portrait-crop.jpg     Vivek Kumar      1589169011402-8b2cbd1ee593 (cropped to one face)
 //   father-beard-portrait.jpg    Naim Ahmed       1607346256330-dee7af15f7c5
 //   young-woman-outdoors.jpg     Kunal Goswami    1607189200597-4d0923ef98c6
 function photo(src: string, alt: string, size: [number, number]) {
@@ -68,7 +68,11 @@ export const testimonials: Testimonial[] = [
     role: "parent",
     context: "Parent of a Class 8 student",
     text: "We wanted a place where the teachers know our child by name. At Daksh they notice when she is struggling and tell us honestly. That personal attention is what we were looking for.",
-    photo: mockPhoto("mother-with-daughter.jpg", "Sunita Rawat"),
+    photo: photo(
+      "/mock/people/mother-portrait-crop.jpg",
+      "Sunita Rawat",
+      [225, 225],
+    ),
   },
   // MOCK
   {

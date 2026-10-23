@@ -90,7 +90,7 @@ export const results: Result[] = [
     class: "Entrance",
     course: "RMS/RIMC/Sainik prep",
     exam: "AISSEE",
-    outcome: { title: "Sainik School", note: "Admitted · AISSEE" },
+    outcome: { title: "Sainik", note: "School admission · AISSEE" },
     photo: photo("boy-school-uniform-tie", "Aryan Thakur"),
     highlight: true,
   },
@@ -177,7 +177,7 @@ export const results: Result[] = [
     class: "Entrance",
     course: "RMS/RIMC/Sainik prep",
     exam: "RMS CET",
-    outcome: { title: "Rashtriya Military School", note: "Admitted · RMS CET" },
+    outcome: { title: "RMS", note: "School admission · RMS CET" },
     photo: photo("boy-smiling-checked-shirt", "Kabir Chauhan"),
   },
   {
@@ -248,7 +248,7 @@ export const results: Result[] = [
     course: "RMS/RIMC/Sainik prep",
     exam: "RIMC",
     outcome: { title: "RIMC", note: "Selected · RIMC Dehradun" },
-    photo: photo("boy-school-uniform-tie", "Arnav Saini"),
+    photo: photo("boy-smiling-checked-shirt", "Arnav Saini"),
     highlight: true,
   },
 ]

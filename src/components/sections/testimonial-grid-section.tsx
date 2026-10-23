@@ -15,12 +15,12 @@ type Item = ResolvedTestimonialGridSection["items"][number]
 // said it. The avatar is decorative (the name sits beside it).
 function TestimonialItem({ item }: { item: Item }) {
   return (
-    <li>
-      <figure className="flex h-full flex-col gap-6 border-t pt-6">
+    <li className="md:row-span-2 md:grid md:grid-rows-subgrid md:gap-y-0">
+      <figure className="flex flex-col gap-6 border-t pt-6 md:row-span-2 md:grid md:grid-rows-subgrid md:gap-y-6">
         <blockquote className="text-base text-foreground">
           <p>{item.text}</p>
         </blockquote>
-        <figcaption className="mt-auto flex items-center gap-3">
+        <figcaption className="flex items-start gap-3">
           <span className="relative size-12 shrink-0 overflow-clip rounded-full bg-muted">
             {item.photo ? (
               <Image
@@ -70,7 +70,7 @@ function TestimonialGridSection({
           title={heading}
           intro={intro}
         />
-        <ul className="grid gap-10 md:grid-cols-3 md:gap-8">
+        <ul className="grid gap-10 md:grid-cols-3 md:gap-x-8 md:gap-y-0">
           {items.map((item) => (
             <TestimonialItem key={item.id} item={item} />
           ))}
