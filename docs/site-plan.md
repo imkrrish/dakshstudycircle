@@ -25,15 +25,16 @@ Content marked PLACEHOLDER / MOCK until real data arrives.
 ### Home `/`
 
 1. hero: headline, since-2005 line, "Talk to us" + secondary link to courses
-2. stats ★: real numbers only
-3. card-grid: courses overview (from courses collection)
-4. split: director's message (Anil Kumar, from faculty)
-5. reason-list: why Daksh, 6 points (ruled numbered list, photo beside)
-6. results-grid ★ (compact): highlights + link to /results
-7. testimonials ★
-8. video-grid: free Maths playlists as link-out cards to YouTube (no embed), band tone, after why-daksh (currently sits before the CTA; results and testimonials go between when built)
-9. faq: native details, 9 questions, site-data placeholders (done)
-10. cta-band (dark)
+2. course-grid: courses overview (from courses collection)
+3. split: director's message (Anil Kumar, from faculty), band tone
+4. reason-list: why Daksh, 6 points (ruled numbered list, photo beside), paper
+5. results-grid (compact): 5 highlights + link to /results, muted tone
+6. testimonial-grid: 3 testimonials from the testimonials collection, paper
+7. video-grid: free Maths playlists as link-out cards to YouTube (no embed), band tone
+8. faq: native details, 9 questions, site-data placeholders
+9. cta-band (dark)
+
+Stats ★ is not on home for now (real numbers only, none yet).
 
 ### Courses `/courses`
 

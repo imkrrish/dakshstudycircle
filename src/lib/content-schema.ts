@@ -300,6 +300,75 @@ const ResolvedVideoGridSectionSchema = z.strictObject({
     .min(1),
 })
 
+const sectionTone = z.enum(["default", "muted", "band"])
+
+const resultsGridBase = {
+  ...sectionBase,
+  type: z.literal("results-grid"),
+  eyebrow: z.string().optional(),
+  heading: z.string().min(1),
+  intro: z.string().optional(),
+  // "muted": the alternate paper tone, full-bleed.
+  tone: sectionTone.optional(),
+  // "compact": photo, score or outcome, name, meta. "full" adds subject marks.
+  variant: z.enum(["compact", "full"]),
+  actions: z.array(ButtonSchema).optional(),
+}
+
+// Authoring shape: which results to show. getPage() resolves them.
+const ResultsGridSectionSchema = z.strictObject({
+  ...resultsGridBase,
+  show: z.enum(["highlights", "all"]),
+})
+
+// What the component receives: plain data, text already built.
+const ResolvedResultsGridSectionSchema = z.strictObject({
+  ...resultsGridBase,
+  items: z
+    .array(
+      z.strictObject({
+        id: z.string(),
+        name: z.string(),
+        photo: ImageSchema.optional(),
+        headline: z.string(),
+        meta: z.string(),
+        subjects: z.string().optional(),
+      }),
+    )
+    .min(1),
+})
+
+const testimonialGridBase = {
+  ...sectionBase,
+  type: z.literal("testimonial-grid"),
+  eyebrow: z.string().optional(),
+  heading: z.string().min(1),
+  intro: z.string().optional(),
+  tone: sectionTone.optional(),
+}
+
+// Authoring shape: testimonials are referenced by id. getPage() resolves them.
+const TestimonialGridSectionSchema = z.strictObject({
+  ...testimonialGridBase,
+  testimonials: z.array(z.string().min(1)).min(1),
+})
+
+const ResolvedTestimonialGridSectionSchema = z.strictObject({
+  ...testimonialGridBase,
+  items: z
+    .array(
+      z.strictObject({
+        id: z.string(),
+        name: z.string(),
+        // Muted line under the name: context, or "Student" / "Parent".
+        byline: z.string(),
+        text: z.string(),
+        photo: ImageSchema.optional(),
+      }),
+    )
+    .min(1),
+})
+
 const SectionSchema = z.discriminatedUnion("type", [
   HeroSectionSchema,
   SplitSectionSchema,
@@ -307,6 +376,8 @@ const SectionSchema = z.discriminatedUnion("type", [
   ReasonListSectionSchema,
   CourseGridSectionSchema,
   VideoGridSectionSchema,
+  ResultsGridSectionSchema,
+  TestimonialGridSectionSchema,
   FaqSectionSchema,
   CtaBandSectionSchema,
 ])
@@ -366,6 +437,49 @@ const FacultySchema = z.strictObject({
   order: z.number(),
 })
 
+const TestimonialSchema = z.strictObject({
+  id: z.string().min(1),
+  name: z.string().min(1),
+  role: z.enum(["student", "parent"]),
+  // e.g. "Class 12, 2025" or "Parent of a Class 8 student".
+  context: z.string().min(1).optional(),
+  text: z.string().min(1),
+  photo: ImageSchema.optional(),
+})
+
+const RESULT_CLASSES = ["Class 10", "Class 12", "Entrance"] as const
+
+const ResultSchema = z.strictObject({
+  id: z.string().min(1),
+  studentName: z.string().min(1),
+  year: z.number().int().min(2000).max(2100),
+  class: z.enum(RESULT_CLASSES),
+  // Board or entrance exam: "CBSE", "AISSEE", "RMS CET", "RIMC".
+  exam: z.string().min(1),
+  // Class 12 only.
+  stream: z.enum(["Science", "Commerce", "Humanities"]).optional(),
+  percentage: z.number().min(0).max(100).optional(),
+  subjects: z
+    .array(
+      z.strictObject({
+        name: z.string().min(1),
+        marks: z.number().min(0).max(100),
+      }),
+    )
+    .optional(),
+  // Entrance results: title is the school, note the status, e.g.
+  // { title: "Sainik School", note: "Admitted · AISSEE" }.
+  outcome: z
+    .strictObject({ title: z.string().min(1), note: z.string().min(1) })
+    .optional(),
+  // The Daksh course the student took, e.g. "Classes 11–12 tuition".
+  course: z.string().min(1),
+  // Without a photo the card shows the student's initials.
+  photo: ImageSchema.optional(),
+  // Shown on the home page.
+  highlight: z.boolean().optional(),
+})
+
 type Image = z.infer<typeof ImageSchema>
 type Icon = z.infer<typeof IconSchema>
 type Action = z.infer<typeof ActionSchema>
@@ -381,11 +495,26 @@ type ResolvedCourseGridSection = z.infer<typeof ResolvedCourseGridSectionSchema>
 type FaqSection = z.infer<typeof FaqSectionSchema>
 type VideoGridSection = z.infer<typeof VideoGridSectionSchema>
 type ResolvedVideoGridSection = z.infer<typeof ResolvedVideoGridSectionSchema>
+type ResultsGridSection = z.infer<typeof ResultsGridSectionSchema>
+type ResolvedResultsGridSection = z.infer<
+  typeof ResolvedResultsGridSectionSchema
+>
+type TestimonialGridSection = z.infer<typeof TestimonialGridSectionSchema>
+type ResolvedTestimonialGridSection = z.infer<
+  typeof ResolvedTestimonialGridSectionSchema
+>
 // Sections as components receive them (references resolved).
 type ResolvedSection =
-  | Exclude<Section, { type: "course-grid" | "video-grid" }>
+  | Exclude<
+      Section,
+      {
+        type: "course-grid" | "video-grid" | "results-grid" | "testimonial-grid"
+      }
+    >
   | ResolvedCourseGridSection
   | ResolvedVideoGridSection
+  | ResolvedResultsGridSection
+  | ResolvedTestimonialGridSection
 type SectionType = ResolvedSection["type"]
 type SectionOf<T extends SectionType> = Extract<ResolvedSection, { type: T }>
 type Page = z.infer<typeof PageSchema>
@@ -396,6 +525,8 @@ type ResolvedCourse = Omit<Course, "sections"> & {
 }
 type Video = z.infer<typeof VideoSchema>
 type Faculty = z.infer<typeof FacultySchema>
+type Testimonial = z.infer<typeof TestimonialSchema>
+type Result = z.infer<typeof ResultSchema>
 
 export {
   ImageSchema,
@@ -407,12 +538,18 @@ export {
   SectionSchema,
   ResolvedCourseGridSectionSchema,
   ResolvedVideoGridSectionSchema,
+  ResolvedResultsGridSectionSchema,
+  ResolvedTestimonialGridSectionSchema,
   PageSchema,
   CourseSchema,
   VideoSchema,
   FacultySchema,
+  TestimonialSchema,
+  ResultSchema,
 }
 export type {
+  Testimonial,
+  Result,
   Image,
   Icon,
   Action,
@@ -428,6 +565,10 @@ export type {
   FaqSection,
   VideoGridSection,
   ResolvedVideoGridSection,
+  ResultsGridSection,
+  ResolvedResultsGridSection,
+  TestimonialGridSection,
+  ResolvedTestimonialGridSection,
   ResolvedSection,
   ResolvedPage,
   ResolvedCourse,

@@ -6,6 +6,14 @@ import {
   PageSchema,
   SiteSchema,
   VideoSchema,
+  TestimonialSchema,
+  ResultSchema,
+  type Testimonial,
+  type Result,
+  type ResultsGridSection,
+  type ResolvedResultsGridSection,
+  type TestimonialGridSection,
+  type ResolvedTestimonialGridSection,
   type Course,
   type Faculty,
   type NavItem,
@@ -27,6 +35,8 @@ import { pages as rawPages, type PageSlug } from "@/content/pages"
 import { courses as rawCourses } from "@/content/courses"
 import { faculty as rawFaculty } from "@/content/faculty"
 import { videos as rawVideos } from "@/content/videos"
+import { testimonials as rawTestimonials } from "@/content/testimonials"
+import { results as rawResults } from "@/content/results"
 
 // ---------- Validation (runs once, when this module loads) ----------
 
@@ -112,6 +122,50 @@ function checkVideoGrids(
       }
       if (seen.has(id)) errors.push(`${where}: video "${id}" appears twice`)
       seen.add(id)
+    }
+  }
+}
+
+// Every testimonial id must exist, and appear once per section.
+function checkTestimonialGrids(
+  label: string,
+  sections: Section[],
+  testimonialIds: Set<string>,
+  errors: string[],
+) {
+  for (const section of sections) {
+    if (section.type !== "testimonial-grid") continue
+    const where = `${label}: testimonial-grid "${section.id}"`
+    const seen = new Set<string>()
+    for (const id of section.testimonials) {
+      if (!testimonialIds.has(id)) {
+        errors.push(
+          `${where}: unknown testimonial id "${id}". Known: ${[...testimonialIds].join(", ")}`,
+        )
+      }
+      if (seen.has(id))
+        errors.push(`${where}: testimonial "${id}" appears twice`)
+      seen.add(id)
+    }
+  }
+}
+
+// A results-grid that selects nothing would render an empty section.
+function checkResultsGrids(
+  label: string,
+  sections: Section[],
+  results: Result[],
+  errors: string[],
+) {
+  for (const section of sections) {
+    if (section.type !== "results-grid") continue
+    if (section.show === "highlights" && !results.some((r) => r.highlight)) {
+      errors.push(
+        `${label}: results-grid "${section.id}" shows highlights but no result has highlight: true`,
+      )
+    }
+    if (section.show === "all" && results.length === 0) {
+      errors.push(`${label}: results-grid "${section.id}" has no results`)
     }
   }
 }
@@ -220,6 +274,64 @@ function loadContent() {
     videos.push(parsed)
   })
 
+  // Dev data must read as real copy: no "mock"/"placeholder" wording on the page.
+  const VISIBLE_TEXT_BAN = /\b(mock|placeholder|lorem)\b/i
+
+  const testimonials: Testimonial[] = []
+  const testimonialIds = new Set<string>()
+  rawTestimonials.forEach((raw, i) => {
+    const label = `testimonials[${i}]`
+    const parsed = parseOrCollect(TestimonialSchema, raw, label, errors)
+    if (!parsed) return
+    if (testimonialIds.has(parsed.id)) {
+      errors.push(`testimonials: duplicate id "${parsed.id}"`)
+    }
+    testimonialIds.add(parsed.id)
+    if (parsed.photo && !parsed.photo.src.startsWith("/")) {
+      errors.push(`${label}: photo src must start with "/"`)
+    }
+    for (const text of [parsed.name, parsed.context ?? "", parsed.text]) {
+      if (VISIBLE_TEXT_BAN.test(text)) {
+        errors.push(`${label}: visible text contains mock/placeholder wording`)
+      }
+    }
+    testimonials.push(parsed)
+  })
+
+  const results: Result[] = []
+  const resultIds = new Set<string>()
+  rawResults.forEach((raw, i) => {
+    const label = `results[${i}]`
+    const parsed = parseOrCollect(ResultSchema, raw, label, errors)
+    if (!parsed) return
+    if (resultIds.has(parsed.id)) {
+      errors.push(`results: duplicate id "${parsed.id}"`)
+    }
+    resultIds.add(parsed.id)
+    if ((parsed.percentage === undefined) === (parsed.outcome === undefined)) {
+      errors.push(`${label}: needs either a percentage or an outcome, not both`)
+    }
+    if ((parsed.class === "Class 12") !== (parsed.stream !== undefined)) {
+      errors.push(
+        `${label}: stream is required for Class 12 and only for Class 12`,
+      )
+    }
+    if (parsed.photo && !parsed.photo.src.startsWith("/")) {
+      errors.push(`${label}: photo src must start with "/"`)
+    }
+    for (const text of [
+      parsed.studentName,
+      parsed.course,
+      parsed.outcome?.title ?? "",
+      parsed.outcome?.note ?? "",
+    ]) {
+      if (VISIBLE_TEXT_BAN.test(text)) {
+        errors.push(`${label}: visible text contains mock/placeholder wording`)
+      }
+    }
+    results.push(parsed)
+  })
+
   const courses: Course[] = []
   const courseSlugs = new Set<string>()
   rawCourses.forEach((raw, i) => {
@@ -249,6 +361,8 @@ function loadContent() {
     checkPlaceholders(`pages/${key}`, page.sections, placeholderNames, errors)
     checkCourseGrids(`pages/${key}`, page.sections, courseSlugs, errors)
     checkVideoGrids(`pages/${key}`, page.sections, videoIds, errors)
+    checkTestimonialGrids(`pages/${key}`, page.sections, testimonialIds, errors)
+    checkResultsGrids(`pages/${key}`, page.sections, results, errors)
     checkSocialActions(`pages/${key}`, page.sections, socialPlatforms, errors)
   }
   for (const course of courses) {
@@ -265,6 +379,18 @@ function loadContent() {
       errors,
     )
     checkVideoGrids(`courses/${course.slug}`, course.sections, videoIds, errors)
+    checkTestimonialGrids(
+      `courses/${course.slug}`,
+      course.sections,
+      testimonialIds,
+      errors,
+    )
+    checkResultsGrids(
+      `courses/${course.slug}`,
+      course.sections,
+      results,
+      errors,
+    )
     checkSocialActions(
       `courses/${course.slug}`,
       course.sections,
@@ -283,6 +409,9 @@ function loadContent() {
     site,
     pages,
     videos,
+    testimonials,
+    // Year descending; Array.sort is stable, so data order breaks ties.
+    results: results.sort((a, b) => b.year - a.year),
     courses: courses.sort((a, b) => a.order - b.order),
     faculty: faculty.sort((a, b) => a.order - b.order),
   }
@@ -372,6 +501,54 @@ function resolveVideoGrid(section: VideoGridSection): ResolvedVideoGridSection {
   }
 }
 
+function resolveResultsGrid(
+  section: ResultsGridSection,
+): ResolvedResultsGridSection {
+  const { show, ...rest } = section
+  const chosen = content.results.filter((r) => show === "all" || r.highlight)
+  return {
+    ...rest,
+    items: chosen.map((r) => {
+      const meta = r.outcome
+        ? [`${r.outcome.note} ${r.year}`, r.course]
+        : [r.class, r.stream, `${r.exam} ${r.year}`, r.course].filter(
+            (part): part is string => Boolean(part),
+          )
+      return {
+        id: r.id,
+        name: r.studentName,
+        photo: r.photo,
+        headline: r.outcome ? r.outcome.title : `${r.percentage}%`,
+        meta: meta.join(" · "),
+        subjects:
+          section.variant === "full" && r.subjects?.length
+            ? r.subjects.map((s) => `${s.name} ${s.marks}`).join(" · ")
+            : undefined,
+      }
+    }),
+  }
+}
+
+function resolveTestimonialGrid(
+  section: TestimonialGridSection,
+): ResolvedTestimonialGridSection {
+  const { testimonials: ids, ...rest } = section
+  return {
+    ...rest,
+    items: ids.map((id) => {
+      const t = content.testimonials.find((x) => x.id === id)
+      if (!t) throw new Error(`[content] unknown testimonial "${id}"`)
+      return {
+        id: t.id,
+        name: t.name,
+        byline: t.context ?? (t.role === "parent" ? "Parent" : "Student"),
+        text: t.text,
+        photo: t.photo,
+      }
+    }),
+  }
+}
+
 function resolveFaq(section: FaqSection): FaqSection {
   const values = contactPlaceholders(content.site)
   // Names were validated at load, so every match has a value.
@@ -396,6 +573,10 @@ function resolveSections(sections: Section[]): ResolvedSection[] {
         return resolveCourseGrid(section)
       case "video-grid":
         return resolveVideoGrid(section)
+      case "results-grid":
+        return resolveResultsGrid(section)
+      case "testimonial-grid":
+        return resolveTestimonialGrid(section)
       default:
         return section
     }
@@ -442,6 +623,14 @@ async function getFaculty(): Promise<Faculty[]> {
   return content.faculty
 }
 
+async function getTestimonials(): Promise<Testimonial[]> {
+  return content.testimonials
+}
+
+async function getResults(): Promise<Result[]> {
+  return content.results
+}
+
 async function getFacultyForCourse(slug: string): Promise<Faculty[]> {
   const course = await getCourse(slug)
   return content.faculty.filter((f) => course.facultyIds.includes(f.id))
@@ -458,6 +647,8 @@ export {
   getCourses,
   getCourse,
   getFaculty,
+  getTestimonials,
+  getResults,
   getFacultyForCourse,
   getCoursesForFaculty,
 }

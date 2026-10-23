@@ -159,6 +159,32 @@ export const home: Page = {
       },
     },
     {
+      id: "results",
+      type: "results-grid",
+      tone: "muted",
+      eyebrow: "Results",
+      heading: "Recent results from our students",
+      intro:
+        "A few board results and school admissions from the last three years.",
+      show: "highlights",
+      variant: "compact",
+      actions: [
+        {
+          label: "See all results",
+          variant: "outline",
+          action: { type: "link", href: "/results" },
+        },
+      ],
+    },
+    {
+      id: "testimonials",
+      type: "testimonial-grid",
+      eyebrow: "In their words",
+      heading: "What families tell us",
+      intro: "Parents and students on learning at Daksh, in their own words.",
+      testimonials: ["vikram-negi", "sunita-rawat", "ishita-jain"],
+    },
+    {
       id: "videos",
       type: "video-grid",
       tone: "band",
