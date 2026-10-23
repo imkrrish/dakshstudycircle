@@ -57,6 +57,10 @@
     ]
   },
   "includeGitInstructions": false,
+  "skillOverrides": {
+    "apple-design": "off",
+    "daksh-design": "off"
+  },
   "permissions": {
     "allow": [
       "Bash(pnpm lint)",
