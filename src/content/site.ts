@@ -8,7 +8,8 @@ export const site: Site = {
   url: "https://example.com",
   seo: {
     titleTemplate: "%s | Daksh Study Circle",
-    description: "PLACEHOLDER description",
+    description:
+      "CBSE coaching for Classes 1–12 in Sadar Bazaar, Delhi Cantt, since 2005. RMS, RIMC and Sainik School entrance preparation and Spoken English.",
   },
   contact: {
     phones: [
