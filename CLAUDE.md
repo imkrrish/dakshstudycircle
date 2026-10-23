@@ -55,7 +55,9 @@ MVP, frontend only. No backend, database, or auth yet.
 - Server Components by default; "use client" only for state, effects, or browser APIs.
 - Use theme tokens (`bg-primary`, `text-muted-foreground`). No hard-coded colors.
 - Never edit `src/components/ui/` directly. Wrap or extend instead.
-- Design system: the `daksh-design` skill (loads automatically for UI work). Follow it for colors, fonts, spacing and motifs.
+- Design context: `PRODUCT.md` (audience, purpose, voice, constraints) and `DESIGN.md` once it
+  exists (visual system). Use the `impeccable` skill for design work; follow theme tokens in
+  `src/app/globals.css`.
 - Do only the task asked. Don't build ahead or refactor unrelated code; mention follow-ups instead.
 
 ## Where to look things up

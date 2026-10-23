@@ -59,7 +59,8 @@
   "includeGitInstructions": false,
   "skillOverrides": {
     "apple-design": "off",
-    "daksh-design": "off"
+    "daksh-design": "off",
+    "web-design-guidelines": "off"
   },
   "permissions": {
     "allow": [

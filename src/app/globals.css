@@ -35,14 +35,31 @@
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --color-navy: var(--navy);
-  --color-navy-foreground: var(--navy-foreground);
   --color-flame: var(--flame);
+  --color-flame-light: var(--flame-light);
   --color-saffron: var(--saffron);
+  /* Type scale, ratio about 1.25. Minimum text is 0.9375rem. */
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.5;
+  --text-base: 1.0625rem;
+  --text-base--line-height: 1.6;
+  --text-lead: 1.3125rem;
+  --text-lead--line-height: 1.55;
+  --text-title: 1.625rem;
+  --text-title--line-height: 1.25;
+  --text-heading: clamp(1.875rem, 1.5rem + 1.6vw, 2.5rem);
+  --text-heading--line-height: 1.12;
+  --text-display: clamp(2.25rem, 8.5vw, 4.25rem);
+  --text-display--line-height: 1.08;
+  /* From sm up the hero headline is two fixed lines, so it scales with the
+     viewport more slowly: the first line is about 14x the font size wide. */
+  --text-display-wide: clamp(2.25rem, 6.4vw, 4.25rem);
+  --text-display-wide--line-height: 1.08;
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -55,86 +72,83 @@
 :root {
   --navbar-height: 4rem; /* sticky header box; same in both navbar states */
   --radius: 0.625rem;
-  --background: oklch(0.99 0.003 255);
-  --foreground: oklch(0.22 0.045 258);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.22 0.045 258);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.22 0.045 258);
-  --primary: oklch(0.585 0.238 27.3);
+  /* Warm paper and brown-black ink. Card/popover are a lighter paper (not pure
+     white) so they lift off the page with the hairline border and stay warm. */
+  --background: oklch(0.985 0.008 85);
+  --foreground: oklch(0.23 0.02 45);
+  --card: oklch(0.995 0.004 85);
+  --card-foreground: oklch(0.23 0.02 45);
+  --popover: oklch(0.995 0.004 85);
+  --popover-foreground: oklch(0.23 0.02 45);
+  --primary: oklch(0.55 0.22 27);
+  --primary-hover: oklch(0.5 0.2 27);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.95 0.018 256);
-  --secondary-foreground: oklch(0.376 0.124 256.4);
-  --muted: oklch(0.965 0.007 255);
-  --muted-foreground: oklch(0.5 0.025 258);
-  --accent: oklch(0.95 0.018 256);
-  --accent-foreground: oklch(0.376 0.124 256.4);
-  --destructive: oklch(0.53 0.2 12);
-  --border: oklch(0.91 0.012 255);
-  --input: oklch(0.91 0.012 255);
-  --ring: oklch(0.55 0.15 256);
-  --chart-1: oklch(0.585 0.238 27.3);
-  --chart-2: oklch(0.376 0.124 256.4);
-  --chart-3: oklch(0.798 0.165 72.3);
-  --chart-4: oklch(0.71 0.177 50.9);
-  --chart-5: oklch(0.55 0.15 256);
-  --sidebar: oklch(0.975 0.006 254.6);
-  --sidebar-foreground: oklch(0.22 0.045 258);
-  --sidebar-primary: oklch(0.376 0.124 256.4);
+  --secondary: oklch(0.945 0.025 75);
+  --secondary-foreground: oklch(0.23 0.02 45);
+  --muted: oklch(0.96 0.012 80);
+  --muted-foreground: oklch(0.46 0.025 50);
+  --accent: oklch(0.945 0.025 75);
+  --accent-foreground: oklch(0.23 0.02 45);
+  --destructive: oklch(0.49 0.18 8);
+  --border: oklch(0.89 0.015 80);
+  --input: oklch(0.62 0.02 70);
+  --ring: oklch(0.5 0.13 60);
+  --chart-1: oklch(0.55 0.22 27);
+  --chart-2: oklch(0.8 0.165 72.3);
+  --chart-3: oklch(0.71 0.177 50.9);
+  --chart-4: oklch(0.5 0.13 60);
+  --chart-5: oklch(0.46 0.025 50);
+  --sidebar: oklch(0.96 0.012 80);
+  --sidebar-foreground: oklch(0.23 0.02 45);
+  --sidebar-primary: oklch(0.55 0.22 27);
   --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.95 0.018 256);
-  --sidebar-accent-foreground: oklch(0.376 0.124 256.4);
-  --sidebar-border: oklch(0.91 0.012 255);
-  --sidebar-ring: oklch(0.55 0.15 256);
+  --sidebar-accent: oklch(0.945 0.025 75);
+  --sidebar-accent-foreground: oklch(0.23 0.02 45);
+  --sidebar-border: oklch(0.89 0.015 80);
+  --sidebar-ring: oklch(0.5 0.13 60);
 
-  /* Brand */
-  --navy: oklch(0.376 0.124 256.4);
-  --navy-foreground: oklch(1 0 0);
-  --flame: oklch(
-    0.798 0.165 72.3
-  ); /* amber from the logo flame: decoration only */
-  --saffron: oklch(
-    0.71 0.177 50.9
-  ); /* orange from the logo flame: decoration only */
+  /* Flame colours from the logo: decoration only, never text. */
+  --flame-light: oklch(0.92 0.13 95); /* yellow */
+  --flame: oklch(0.8 0.165 72.3); /* amber */
+  --saffron: oklch(0.71 0.177 50.9); /* orange */
 }
 
 .dark {
-  --background: oklch(0.18 0.035 258);
-  --foreground: oklch(0.97 0.005 255);
-  --card: oklch(0.22 0.04 258);
-  --card-foreground: oklch(0.97 0.005 255);
-  --popover: oklch(0.22 0.04 258);
-  --popover-foreground: oklch(0.97 0.005 255);
-  --primary: oklch(0.585 0.238 27.3);
+  --background: oklch(0.2 0.015 50);
+  --foreground: oklch(0.95 0.01 80);
+  --card: oklch(0.24 0.016 50);
+  --card-foreground: oklch(0.95 0.01 80);
+  --popover: oklch(0.24 0.016 50);
+  --popover-foreground: oklch(0.95 0.01 80);
+  --primary: oklch(0.55 0.22 27);
+  --primary-hover: oklch(0.5 0.2 27);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.3 0.06 258);
-  --secondary-foreground: oklch(0.97 0.005 255);
-  --muted: oklch(0.26 0.04 258);
-  --muted-foreground: oklch(0.72 0.02 258);
-  --accent: oklch(0.3 0.06 258);
-  --accent-foreground: oklch(0.97 0.005 255);
-  --destructive: oklch(0.68 0.18 15);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.7 0.12 256);
-  --chart-1: oklch(0.585 0.238 27.3);
-  --chart-2: oklch(0.55 0.15 256);
-  --chart-3: oklch(0.798 0.165 72.3);
-  --chart-4: oklch(0.71 0.177 50.9);
-  --chart-5: oklch(0.7 0.12 256);
-  --sidebar: oklch(0.221 0.047 255.9);
-  --sidebar-foreground: oklch(0.97 0.005 255);
-  --sidebar-primary: oklch(0.552 0.219 27.3);
+  --secondary: oklch(0.3 0.025 55);
+  --secondary-foreground: oklch(0.95 0.01 80);
+  --muted: oklch(0.27 0.018 50);
+  --muted-foreground: oklch(0.74 0.02 70);
+  --accent: oklch(0.3 0.025 55);
+  --accent-foreground: oklch(0.95 0.01 80);
+  --destructive: oklch(0.7 0.16 10);
+  --border: oklch(0.95 0.01 80 / 12%);
+  --input: oklch(0.95 0.01 80 / 28%);
+  --ring: oklch(0.78 0.12 75);
+  --chart-1: oklch(0.62 0.21 27);
+  --chart-2: oklch(0.8 0.165 72.3);
+  --chart-3: oklch(0.71 0.177 50.9);
+  --chart-4: oklch(0.78 0.12 75);
+  --chart-5: oklch(0.74 0.02 70);
+  --sidebar: oklch(0.24 0.016 50);
+  --sidebar-foreground: oklch(0.95 0.01 80);
+  --sidebar-primary: oklch(0.55 0.22 27);
   --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.3 0.06 258);
-  --sidebar-accent-foreground: oklch(0.97 0.005 255);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.7 0.12 256);
+  --sidebar-accent: oklch(0.3 0.025 55);
+  --sidebar-accent-foreground: oklch(0.95 0.01 80);
+  --sidebar-border: oklch(0.95 0.01 80 / 12%);
+  --sidebar-ring: oklch(0.78 0.12 75);
 
-  /* Brand */
-  --navy: oklch(0.3 0.09 257);
-  --navy-foreground: oklch(1 0 0);
-  --flame: oklch(0.798 0.165 72.3);
+  --flame-light: oklch(0.92 0.13 95);
+  --flame: oklch(0.8 0.165 72.3);
   --saffron: oklch(0.71 0.177 50.9);
 }
 
@@ -152,7 +166,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-base text-foreground;
   }
   h1,
   h2 {
@@ -167,9 +181,10 @@
   }
 }
 
-/* Hero wash: layered radial gradients (flame, saffron, a hint of navy at the
-   sides) that fade into the page background. No filter: blur. A one-time settle
-   moves only a transform and runs only when motion is allowed. */
+/* Hero wash: the logo flame as the light source on warm paper. Layered radial
+   gradients run yellow (core) to amber to orange (outer) and fade into the page
+   background. No filter: blur. A one-time settle moves only a transform and
+   runs only when motion is allowed. */
 .hero-wash {
   position: absolute;
   inset: 0;
@@ -185,28 +200,33 @@
   inset: -10%;
   background:
     radial-gradient(
+      30% 34% at 50% 4%,
+      color-mix(in oklch, var(--flame-light) 34%, transparent),
+      transparent 72%
+    ),
+    radial-gradient(
       55% 50% at 50% 0%,
-      color-mix(in oklch, var(--flame) 34%, transparent),
+      color-mix(in oklch, var(--flame) 30%, transparent),
       transparent 72%
     ),
     radial-gradient(
       38% 42% at 66% 10%,
-      color-mix(in oklch, var(--saffron) 24%, transparent),
+      color-mix(in oklch, var(--saffron) 22%, transparent),
       transparent 72%
     ),
     radial-gradient(
       32% 38% at 30% 6%,
-      color-mix(in oklch, var(--flame) 20%, transparent),
+      color-mix(in oklch, var(--flame) 18%, transparent),
       transparent 72%
     ),
     radial-gradient(
       30% 50% at 0% 30%,
-      color-mix(in oklch, var(--navy) 12%, transparent),
+      color-mix(in oklch, var(--saffron) 10%, transparent),
       transparent 72%
     ),
     radial-gradient(
       30% 50% at 100% 34%,
-      color-mix(in oklch, var(--navy) 10%, transparent),
+      color-mix(in oklch, var(--saffron) 10%, transparent),
       transparent 72%
     );
 }

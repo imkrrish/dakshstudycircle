@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Geist_Mono, Inter, Newsreader } from "next/font/google"
+import { Geist_Mono, Mukta, Young_Serif } from "next/font/google"
 
 import "./globals.css"
 import { Footer } from "@/components/layout/footer"
@@ -8,9 +8,19 @@ import { ContactDialog } from "@/components/shared/contact-dialog"
 import { getSite } from "@/lib/content"
 import { cn } from "@/lib/utils"
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
+const mukta = Mukta({
+  weight: ["400", "500", "600"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-sans",
+})
 
-const newsreader = Newsreader({ subsets: ["latin"], variable: "--font-serif" })
+const youngSerif = Young_Serif({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-serif",
+})
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -35,8 +45,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         "antialiased",
         geistMono.variable,
         "font-sans",
-        inter.variable,
-        newsreader.variable,
+        mukta.variable,
+        youngSerif.variable,
       )}
     >
       <body className="flex min-h-full flex-col">

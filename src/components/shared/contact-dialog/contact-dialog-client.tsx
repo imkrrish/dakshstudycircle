@@ -53,7 +53,7 @@ function ContactDialogClient({
       <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogContent data-slot="contact-dialog" finalFocus={finalFocus}>
           <DialogHeader>
-            <DialogTitle className="font-heading text-xl font-normal">
+            <DialogTitle className="font-heading text-title font-normal">
               {TITLE}
             </DialogTitle>
             <DialogDescription>{hours}</DialogDescription>
@@ -68,7 +68,7 @@ function ContactDialogClient({
     <Drawer open={open} onOpenChange={onOpenChange}>
       <DrawerContent data-slot="contact-dialog" finalFocus={finalFocus}>
         <DrawerHeader className="relative pr-14 text-left">
-          <DrawerTitle className="font-heading text-xl font-normal">
+          <DrawerTitle className="font-heading text-title font-normal">
             {TITLE}
           </DrawerTitle>
           <DrawerDescription className="text-left">{hours}</DrawerDescription>

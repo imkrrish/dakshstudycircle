@@ -22,11 +22,11 @@ const heroSectionVariants = cva("relative isolate overflow-clip", {
 })
 
 const heroHeadingVariants = cva(
-  "font-heading leading-[1.05] font-normal tracking-tight text-balance",
+  "font-heading font-normal tracking-tight text-balance",
   {
     variants: {
       size: {
-        large: "text-4xl sm:text-5xl md:text-6xl lg:text-7xl",
+        large: "text-display sm:text-display-wide",
         compact: "text-4xl sm:text-5xl md:text-6xl",
       },
     },
@@ -50,7 +50,7 @@ function HeroSection({ section }: { section: SectionOf<"hero"> }) {
   )
 
   const intro = subheading && (
-    <p className="max-w-xl text-base leading-relaxed text-foreground/80 md:text-lg">
+    <p className="max-w-xl text-base text-foreground/80 md:text-lead">
       {subheading}
     </p>
   )

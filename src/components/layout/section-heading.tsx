@@ -36,7 +36,7 @@ function SectionHeading({
       {...props}
     >
       {eyebrow && <p className="text-sm text-muted-foreground">{eyebrow}</p>}
-      <h2 id={id} className="font-heading text-3xl font-normal md:text-4xl">
+      <h2 id={id} className="font-heading text-heading font-normal">
         {title}
       </h2>
       {intro && (

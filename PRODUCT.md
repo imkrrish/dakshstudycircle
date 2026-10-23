@@ -36,7 +36,10 @@ Open: whether nearby institutes also offer RMS/RIMC/Sainik prep. If few do, #2 l
 
 - Enquiry routes: phone call, WhatsApp, in-person visit, contact form. Office hours in site data.
 - Parents arrive from local search or word of mouth; local SEO matters.
-- MVP pages: Home, About, Contact (courses may get their own pages later; see `docs/site-plan.md` for the fuller plan).
+- MVP pages: Home, Courses, 8 course detail pages (one template), Results, Faculty, About,
+  Gallery, Contact, Privacy, 404. Full plan in `docs/site-plan.md`.
+- MVP enquiry UI: a "Talk to us" button opens a dialog with both numbers (Call / WhatsApp /
+  Copy). The contact form submits via a prefilled WhatsApp message. No backend.
 
 ## Capabilities and Constraints
 
@@ -49,12 +52,21 @@ Open: whether nearby institutes also offer RMS/RIMC/Sainik prep. If few do, #2 l
 
 ## Brand Commitments
 
-Name: Daksh Study Circle. Tagline in site data: "Your quest for knowledge ends here." Strengths to carry in voice: small groups, early syllabus completion, personal attention, online classes when needed. No other binding brand assets stated.
+Name: Daksh Study Circle. Tagline in site data: "Your quest for knowledge ends here."
+Confirmed: founded July 2005, CBSE Classes 1–12, RMS/RIMC/Sainik entrance prep, Spoken English,
+Director Anil Kumar teaches Maths (Classes 8–12).
+To confirm before use: personal attention / batch size, early syllabus completion, online
+classes when needed. Never state "small groups" unless confirmed.
 
 ## Evidence on Hand
 
 - Real: address, phones, emails, socials, offered courses, director name (Anil Kumar).
 - **None yet:** results, ranks, student numbers, testimonials. These are MOCK placeholders marked `MOCK` until real data arrives. Do not fabricate results, ranks, student numbers or years of experience.
+
+## Voice
+
+Warm, calm, confident, specific. Written for parents' trust. Simple Indian English, sentence
+case, no ALL CAPS, no "!!!", no generic coaching phrases ("360 degree", "benchmark setter").
 
 ## Product Principles
 
