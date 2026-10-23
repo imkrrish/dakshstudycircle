@@ -31,7 +31,7 @@ const heroHeadingVariants = cva(
     variants: {
       size: {
         large: "text-display sm:text-display-wide",
-        compact: "text-4xl sm:text-5xl md:text-6xl",
+        compact: "text-display",
       },
     },
     defaultVariants: { size: "large" },

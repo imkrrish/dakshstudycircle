@@ -152,7 +152,7 @@ Always use tokens (`bg-primary`, `text-muted-foreground`). No hard-coded colours
 ### Named Rules
 
 **The One Weight Rule.** Headings are Young Serif `font-normal`. No bold, no italic, no faux weights.
-**The Heading Level Rule.** `h1` only in the hero, `h2` for sections, `h3` for cards.
+**The Heading Level Rule.** `h1` only in the hero, `h2` for sections, `h3` for cards. Section headings are h2 in Young Serif. Footer and utility headings may be h2 styled as small Mukta labels.
 **The Floor Rule.** Minimum text size is 0.9375rem. Do not use `text-xs` or arbitrary smaller sizes.
 **Line length.** Intro paragraphs cap at `max-w-prose`; hero supporting line at `max-w-xl`.
 
@@ -162,7 +162,7 @@ Always use tokens (`bg-primary`, `text-muted-foreground`). No hard-coded colours
 - **Section rhythm:** `Section` is `py-20 md:py-28`, `scroll-mt` equals `--navbar-height` (4rem). Alternate with `tone="muted"`. Headings sit above content via `SectionHeading` (`gap-3`; eyebrow, h2, intro).
 - **Hero:** every page starts with one (`getPage()` throws otherwise). It runs behind the transparent navbar, so its top padding is navbar height plus `--hero-pad` (1.5rem, 2.5rem from `md`). `large`: `min-h-[82svh]`, `pb-10 md:pb-14`, emblem 4.5rem (5rem from `md`). `compact`: `pt` navbar + 3rem, `pb-12 md:pb-16`. Content is centred, headline `max-w-5xl`.
 - **Mobile first:** design at 375px. Buttons stack full width below `sm`, sit in a row from `sm`.
-- **Units:** Tailwind scale first, `rem` for arbitrary values. `px` only for hairlines, shadows and image `sizes`/`width`/`height`.
+- **Units:** Tailwind scale first, `rem` for arbitrary values. `px` only for hairlines, shadows, image `sizes`/`width`/`height`, and shadcn `ui/` internals.
 
 ## Elevation & Depth
 
@@ -180,13 +180,14 @@ Soft, friendly, not bubbly. Base radius `--radius` 0.625rem; scale `sm` 0.6×, `
 
 Pill, Mukta 500 at `text-sm`. Hierarchy (data variant → look): `primary` = red fill, white text; `secondary` = paper tint; `outline` = paper with hairline border. Hover: primary darkens, others shift to `muted`. Focus: `focus-ring` (2px solid `ring`, 2px offset). Never hard-code behaviour; use `ActionButton` with `link` or `contact-dialog` actions.
 
-- **Touch targets:** primary actions at least 2.75rem (44px). Mobile hero and navbar CTAs are `h-11`.
+- **Sizes and variants:** do not use the `xs` size or the `link` variant from `ui/button.tsx`; they break the type floor and the red-text rule.
+- **Touch targets:** primary actions at least 2.75rem (44px) below `lg` (touch screens); at least 2.25rem on desktop. Mobile hero and navbar CTAs are `h-11`.
 - Only one primary per screen (see The One Red Rule). The first primary in a hero carries `data-hero-cta`.
 
 ### Navbar
 
 - **Top:** transparent, `h-16` (4rem), no border, logo `size-11`. Links centred on `lg` in a three-column grid; CTA and menu button right.
-- **Scrolled:** an opaque pill: `h-12`, `mt-2`, `max-w-4xl`, `rounded-4xl`, hairline border, `bg-background`, `shadow-sm`. The layout box stays 4rem so nothing jumps.
+- **Scrolled:** a near-opaque pill (about 90% background) with backdrop blur: `h-12`, `mt-2`, `max-w-4xl`, `rounded-4xl`, hairline border, `bg-background/90`, `backdrop-blur-md`, `shadow-sm`. The layout box stays 4rem so nothing jumps.
 - **Links:** `text-sm` 500, `text-foreground/80` rising to full ink on hover and on the current page. A single highlight pill slides between hovered links.
 - **CTA:** hidden until the hero CTA leaves view (`visibility`, so it is also out of tab order). Without JS it always shows.
 - **Mobile:** menu button `size-11`, menu rows `min-h-11`; the CTA appears in the menu as an outline button.
@@ -229,7 +230,7 @@ Real photos of the institute and people only. Never AI-generated people. Decorat
 - **Do** use the primary token for buttons and `primary-hover` for hover.
 - **Do** keep headings Young Serif `font-normal` and body Mukta 400/500.
 - **Do** use `text-sm` (0.9375rem) as the smallest size.
-- **Do** keep touch targets at 2.75rem for primary actions.
+- **Do** keep primary actions at 2.75rem below `lg` and 2.25rem on desktop.
 - **Do** start every page with a hero.
 
 ### Don't

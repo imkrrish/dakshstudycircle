@@ -23,6 +23,7 @@ Rule: one step per Claude Code session. `/clear` between steps. I review the pla
 - [ ] 2.3 card-grid (default + icon variant)
 - [ ] 2.4 cta-band (dark / light)
 - [ ] 2.5 Home v1 assembled from these 4
+- [ ] Compact hero: own page-title size between text-heading and text-display (fix when building the first inner page)
 
 ## Phase 3 · New section types
 
