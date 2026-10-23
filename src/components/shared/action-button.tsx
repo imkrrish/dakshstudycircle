@@ -1,4 +1,5 @@
 import type { ComponentProps } from "react"
+import { cn } from "cn"
 import Link from "next/link"
 
 import { DialogTriggerButton } from "@/components/shared/dialog-trigger-button"
@@ -33,7 +34,7 @@ function ActionButton({
           data-slot="action-button"
           variant={variant}
           size={size}
-          className={className}
+          className={cn("focus-ring", className)}
           nativeButton={false}
           render={
             isInternal ? (
@@ -56,7 +57,7 @@ function ActionButton({
           dialog="contact"
           variant={variant}
           size={size}
-          className={className}
+          className={cn("focus-ring", className)}
         >
           {button.label}
         </DialogTriggerButton>

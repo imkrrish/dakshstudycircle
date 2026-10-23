@@ -3,23 +3,13 @@ import { cn } from "cn"
 
 import { Logo } from "@/components/shared/logo"
 import type { Site } from "@/lib/content-schema"
-import { footerLinkClass } from "./footer-column"
 import { FooterSocials } from "./footer-socials"
 
 function FooterBrand({
   site,
-  year,
   className,
   ...props
-}: ComponentProps<"div"> & { site: Site; year: number }) {
-  const { address, mapUrl } = site.contact
-  const lines = [
-    address.line1,
-    address.line2,
-    address.locality,
-    `${address.city}, ${address.state} ${address.postalCode}`,
-  ].filter(Boolean)
-
+}: ComponentProps<"div"> & { site: Site }) {
   return (
     <div
       data-slot="footer-brand"
@@ -40,29 +30,6 @@ function FooterBrand({
           socials={site.socials}
           className="-ml-2"
         />
-      </div>
-      <div className="flex w-full max-w-sm flex-col gap-3 rounded-lg border p-4 text-sm">
-        <address className="leading-relaxed text-foreground not-italic">
-          {lines.map((line) => (
-            <span key={line} className="block">
-              {line}
-            </span>
-          ))}
-        </address>
-        {mapUrl && (
-          <a
-            href={mapUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={cn(footerLinkClass, "w-fit font-medium")}
-          >
-            Get directions
-            <span className="sr-only"> (opens in a new tab)</span>
-          </a>
-        )}
-        <p className="text-muted-foreground">
-          © {year} {site.name}
-        </p>
       </div>
     </div>
   )

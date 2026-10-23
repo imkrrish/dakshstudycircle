@@ -27,16 +27,8 @@ export const home: Page = {
         {
           label: "Explore courses",
           variant: "outline",
-          action: { type: "link", href: "/courses" },
+          action: { type: "link", href: "#courses" },
         },
-      ],
-      floatingItems: [
-        "emblem",
-        "book",
-        "compass",
-        "atom",
-        "flask",
-        "formula",
       ],
     },
   ],

@@ -138,6 +138,15 @@
   --saffron: oklch(0.71 0.177 50.9);
 }
 
+/* One focus style for every custom interactive element: solid, 2px offset. */
+@utility focus-ring {
+  outline: none;
+  &:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -159,7 +168,7 @@
 }
 
 /* Hero wash: layered radial gradients (flame, saffron, a hint of navy at the
-   sides) that fade into the page background. No filter: blur. The slow drift
+   sides) that fade into the page background. No filter: blur. A one-time settle
    moves only a transform and runs only when motion is allowed. */
 .hero-wash {
   position: absolute;
@@ -206,58 +215,32 @@
   opacity: 0.4;
 }
 
-@keyframes hero-drift {
+@keyframes hero-settle {
   from {
-    transform: translate3d(-2%, 0, 0) scale(1);
+    transform: translate3d(0, -2%, 0) scale(1.04);
   }
   to {
-    transform: translate3d(2%, 2%, 0) scale(1.06);
+    transform: none;
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .hero-wash[data-size="large"]::before {
-    animation: hero-drift 30s ease-in-out infinite alternate;
+    animation: hero-settle 2.4s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 }
 
-/* Home hero tiles. Final state is the default (no JS, reduced motion);
-   motion is added only when the user allows it. */
-.hero-tile {
-  transform: rotate(var(--tile-rotate, 0deg));
-  box-shadow:
-    0 0 0 1px color-mix(in oklch, var(--foreground) 5%, transparent),
-    0 1px 2px color-mix(in oklch, var(--foreground) 6%, transparent),
-    0 8px 16px -4px color-mix(in oklch, var(--foreground) 8%, transparent),
-    0 24px 40px -12px color-mix(in oklch, var(--foreground) 14%, transparent);
-}
-
-@keyframes hero-bob {
-  from {
-    transform: translateY(-0.5rem) rotate(calc(var(--tile-rotate, 0deg) - 1.5deg));
-  }
-  to {
-    transform: translateY(0.5rem) rotate(calc(var(--tile-rotate, 0deg) + 1.5deg));
-  }
-}
-
+/* Hero ornament entrance. Final state is the default (no JS, reduced motion);
+   motion is added only when the user allows it. Hidden only when JS can run to
+   reveal it (anime.js); the delayed hero-reveal is a safety net if the script
+   never arrives. */
 @keyframes hero-reveal {
   to {
     opacity: 1;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .hero-tile {
-    animation: hero-bob var(--bob-duration, 7s) ease-in-out var(--bob-delay, 0s)
-      infinite alternate;
-  }
-}
-
-/* Hidden only when JS can run to reveal them (anime.js); the delayed
-   hero-reveal is a safety net if the script never arrives. */
 @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
-  [data-slot="hero-entrance"] [data-hero-tile],
   [data-slot="hero-entrance"] [data-hero-ornament] {
     opacity: 0;
     animation: hero-reveal 0.3s ease-out 3s forwards;

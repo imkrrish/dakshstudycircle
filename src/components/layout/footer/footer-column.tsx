@@ -2,7 +2,7 @@ import type { ComponentProps } from "react"
 import { cn } from "cn"
 
 const footerLinkClass =
-  "rounded-sm text-foreground underline-offset-4 outline-none hover:underline focus-visible:underline focus-visible:ring-3 focus-visible:ring-ring/30"
+  "inline-flex min-h-11 items-center rounded-sm text-foreground md:min-h-0 md:inline underline-offset-4 focus-ring hover:underline focus-visible:underline"
 
 function FooterColumn({
   title,
@@ -15,7 +15,7 @@ function FooterColumn({
       <h2 className="font-sans text-sm font-normal text-muted-foreground">
         {title}
       </h2>
-      <ul className="mt-4 flex flex-col gap-3 text-sm md:text-base">
+      <ul className="mt-2 flex flex-col text-sm md:mt-4 md:gap-3 md:text-base">
         {children}
       </ul>
     </div>

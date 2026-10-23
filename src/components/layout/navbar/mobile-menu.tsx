@@ -105,6 +105,7 @@ function MobileMenu({
         ref={toggleRef}
         variant="ghost"
         size="icon"
+        className="size-11 focus-ring"
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
         aria-controls={panelId}
@@ -131,7 +132,7 @@ function MobileMenu({
                     isActiveLink(pathname, item.href) ? "page" : undefined
                   }
                   onClick={() => setOpenFor(null)}
-                  className="block rounded-xl px-3 py-2.5 text-base text-muted-foreground outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/30 aria-[current=page]:bg-muted aria-[current=page]:text-foreground"
+                  className="flex min-h-11 items-center rounded-xl px-3 text-base text-muted-foreground focus-ring hover:bg-muted hover:text-foreground aria-[current=page]:bg-muted aria-[current=page]:text-foreground"
                 >
                   {item.label}
                 </Link>

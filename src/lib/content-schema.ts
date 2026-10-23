@@ -12,18 +12,6 @@ const ImageSchema = z.strictObject({
 
 const IconSchema = z.enum(iconNames)
 
-const FLOATING_ITEMS = [
-  "emblem",
-  "book",
-  "compass",
-  "atom",
-  "flask",
-  "pencil",
-  "globe",
-  "formula",
-] as const
-const FloatingItemSchema = z.enum(FLOATING_ITEMS)
-
 // Add new actions (e.g. "book-demo") here only; sections never change.
 const ActionSchema = z.discriminatedUnion("type", [
   z.strictObject({ type: z.literal("link"), href: z.string().min(1) }),
@@ -122,8 +110,6 @@ const HeroSectionSchema = z.strictObject({
   subheading: z.string().optional(),
   proofLine: z.string().optional(),
   actions: z.array(ButtonSchema).optional(),
-  // Decorative tiles, large size only. Placed in this order.
-  floatingItems: z.array(FloatingItemSchema).max(6).optional(),
 })
 
 const SplitSectionSchema = z.strictObject({
@@ -203,7 +189,6 @@ const FacultySchema = z.strictObject({
 
 type Image = z.infer<typeof ImageSchema>
 type Icon = z.infer<typeof IconSchema>
-type FloatingItem = z.infer<typeof FloatingItemSchema>
 type Action = z.infer<typeof ActionSchema>
 type Button = z.infer<typeof ButtonSchema>
 type Seo = z.infer<typeof SeoSchema>
@@ -221,7 +206,6 @@ type Faculty = z.infer<typeof FacultySchema>
 export {
   ImageSchema,
   IconSchema,
-  FloatingItemSchema,
   ActionSchema,
   ButtonSchema,
   SeoSchema,
@@ -234,7 +218,6 @@ export {
 export type {
   Image,
   Icon,
-  FloatingItem,
   Action,
   Button,
   Seo,

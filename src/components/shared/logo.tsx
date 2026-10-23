@@ -34,7 +34,7 @@ function Logo({
       href="/"
       aria-label={`${name} home`}
       className={cn(
-        "inline-flex shrink-0 rounded-full outline-none focus-visible:ring-3 focus-visible:ring-ring/30",
+        "inline-flex shrink-0 rounded-full focus-ring",
         className,
       )}
       {...props}

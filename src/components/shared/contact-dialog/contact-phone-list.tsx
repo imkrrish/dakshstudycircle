@@ -11,6 +11,7 @@ import {
 import { cn } from "cn"
 
 import { Button } from "@/components/ui/button"
+import { whatsappHref } from "@/lib/utils"
 import type { ContactDialogData } from "./types"
 
 const COPIED_MS = 2000
@@ -46,7 +47,6 @@ function ContactPhoneList({
     >
       <ul className="flex flex-col divide-y divide-border">
         {phones.map((phone) => {
-          const waDigits = phone.e164.replace(/\D/g, "")
           const isCopied = copied === phone.display
           return (
             <li
@@ -81,7 +81,7 @@ function ContactPhoneList({
                     nativeButton={false}
                     render={
                       <a
-                        href={`https://wa.me/${waDigits}?text=${encodeURIComponent(whatsappMessage)}`}
+                        href={whatsappHref(phone.e164, whatsappMessage)}
                         target="_blank"
                         rel="noopener noreferrer"
                         data-track="whatsapp"

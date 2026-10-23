@@ -18,17 +18,17 @@ async function Navbar() {
         <Logo
           name={site.name}
           preload
-          className="size-11 transition-[width,height] duration-300 ease-out group-data-scrolled/navbar:size-9 motion-reduce:transition-none"
+          className="size-11 transition-[width,height] duration-300 ease-out lg:group-data-scrolled/navbar:size-9 motion-reduce:transition-none"
         />
         <NavLinks items={items} />
         <div className="flex items-center gap-2 justify-self-end">
-          <ActionButton button={site.navCta} className="max-lg:h-8" />
+          <ActionButton button={site.navCta} className="max-lg:h-11" />
           <MobileMenu
             items={items}
             cta={
               <ActionButton
                 button={{ ...site.navCta, variant: "outline" }}
-                className="w-full"
+                className="h-11 w-full"
               />
             }
           />

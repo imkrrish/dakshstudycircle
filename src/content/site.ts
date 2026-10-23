@@ -3,7 +3,7 @@ import type { Site } from "@/lib/content-schema"
 export const site: Site = {
   name: "Daksh Study Circle",
   tagline: "Your quest for knowledge ends here.",
-  foundedYear: 2000,
+  foundedYear: 2005,
   url: "https://example.com",
   seo: {
     titleTemplate: "%s | PLACEHOLDER",

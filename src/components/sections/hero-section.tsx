@@ -6,7 +6,6 @@ import { ActionButton } from "@/components/shared/action-button"
 import type { SectionOf } from "@/lib/content-schema"
 
 import { HeroEntrance } from "./hero-entrance"
-import { HeroTileRails, HeroTileRow } from "./hero-floating-tiles"
 import { HeroWash } from "./hero-wash"
 
 // The hero starts at the top of the page, behind the transparent navbar, so
@@ -38,7 +37,6 @@ const heroHeadingVariants = cva(
 function HeroSection({ section }: { section: SectionOf<"hero"> }) {
   const { id, size, eyebrow, heading, subheading, proofLine, actions } = section
   const large = size === "large"
-  const tiles = large ? (section.floatingItems ?? []) : []
 
   const headline = (
     <h1 id={`${id}-heading`} className={heroHeadingVariants({ size })}>
@@ -64,7 +62,7 @@ function HeroSection({ section }: { section: SectionOf<"hero"> }) {
           key={button.label}
           button={button}
           size="lg"
-          className="w-full sm:w-auto"
+          className="h-11 w-full sm:h-10 sm:w-auto"
         />
       ))}
     </div>
@@ -92,23 +90,18 @@ function HeroSection({ section }: { section: SectionOf<"hero"> }) {
       <HeroWash size={size} />
       {large ? (
         <HeroEntrance className="mx-auto flex w-full max-w-6xl flex-col px-4 text-center md:px-6">
-          {/* Each band is as tall as a tile so side tiles stay inside it */}
-          <div className="relative flex flex-col items-center justify-center gap-5 md:min-h-24 lg:min-h-32">
+          <div className="flex flex-col items-center justify-center gap-5">
             <DiyaOrnament data-hero-ornament className="h-8 w-40" />
             {eyebrowRow}
-            <HeroTileRails band="top" items={tiles} />
           </div>
           <div className="mx-auto mt-6 max-w-5xl">{headline}</div>
-          <div className="relative mt-6 flex flex-col items-center justify-center lg:min-h-32">
+          <div className="mt-6 flex flex-col items-center justify-center">
             {intro}
-            <HeroTileRails band="middle" items={tiles} />
           </div>
-          <div className="relative mt-8 flex flex-col items-center justify-center gap-6 md:min-h-28 lg:min-h-32">
+          <div className="mt-8 flex flex-col items-center justify-center gap-6">
             {buttons}
             {proof}
-            <HeroTileRails band="bottom" items={tiles} />
           </div>
-          <HeroTileRow items={tiles} className="mt-10" />
         </HeroEntrance>
       ) : (
         <div className="mx-auto flex w-full max-w-6xl flex-col items-center px-4 text-center md:px-6">

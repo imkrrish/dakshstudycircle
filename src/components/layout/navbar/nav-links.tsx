@@ -81,7 +81,7 @@ function NavLinks({
                 if (event.pointerType !== "mouse") return
                 scopeRef.current?.methods.moveTo(event.currentTarget)
               }}
-              className="relative block rounded-4xl px-3.5 py-2 text-sm font-medium text-foreground/80 transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/30 aria-[current=page]:text-foreground motion-reduce:transition-none"
+              className="relative block rounded-4xl px-3.5 py-2 text-sm font-medium text-foreground/80 transition-colors focus-ring hover:text-foreground aria-[current=page]:text-foreground motion-reduce:transition-none"
             >
               {item.label}
             </Link>
