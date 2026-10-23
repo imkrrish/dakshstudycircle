@@ -30,7 +30,7 @@ function FooterContact({
         <li key={e164} className="flex flex-wrap items-center gap-x-4">
           <a
             href={`tel:${e164}`}
-            aria-label={`Call ${label}, ${display}`}
+            aria-label={label ? `Call ${label}, ${display}` : `Call ${display}`}
             className={footerLinkClass}
           >
             {display}

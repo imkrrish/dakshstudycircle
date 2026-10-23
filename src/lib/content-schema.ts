@@ -64,7 +64,7 @@ const SiteSchema = z.strictObject({
   contact: z.strictObject({
     phones: z.array(
       z.strictObject({
-        label: z.string(),
+        label: z.string().optional(),
         e164: z.string(),
         display: z.string(),
         whatsapp: z.boolean(),

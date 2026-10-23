@@ -16,6 +16,11 @@ import type { ContactDialogData } from "./types"
 
 const COPIED_MS = 2000
 
+type CopyState = { display: string; status: "copied" | "failed" } | null
+
+// Every action is at least 2.75rem tall (touch target).
+const action = "h-11 gap-2 px-4 text-base"
+
 function ContactPhoneList({
   phones,
   whatsappMessage,
@@ -23,47 +28,53 @@ function ContactPhoneList({
   ...props
 }: ComponentProps<"div"> &
   Pick<ContactDialogData, "phones" | "whatsappMessage">) {
-  const [copied, setCopied] = useState<string | null>(null)
+  const [copy, setCopy] = useState<CopyState>(null)
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined)
 
   useEffect(() => () => clearTimeout(timer.current), [])
 
-  async function copy(display: string) {
+  async function copyNumber(display: string) {
+    clearTimeout(timer.current)
     try {
       await navigator.clipboard.writeText(display)
     } catch {
+      // Missing API, denied permission or a throw: the number stays visible.
+      setCopy({ display, status: "failed" })
       return
     }
-    setCopied(display)
-    clearTimeout(timer.current)
-    timer.current = setTimeout(() => setCopied(null), COPIED_MS)
+    setCopy({ display, status: "copied" })
+    timer.current = setTimeout(() => setCopy(null), COPIED_MS)
   }
 
   return (
     <div
       data-slot="contact-phone-list"
-      className={cn("flex flex-col gap-4", className)}
+      className={cn("flex flex-col", className)}
       {...props}
     >
       <ul className="flex flex-col divide-y divide-border">
-        {phones.map((phone) => {
-          const isCopied = copied === phone.display
+        {phones.map((phone, index) => {
+          const state = copy?.display === phone.display ? copy.status : null
           return (
             <li
               key={phone.e164}
-              className="flex items-center justify-between gap-4 py-3 first:pt-0 last:pb-0"
+              className="flex flex-col gap-3 py-5 first:pt-0 last:pb-0"
             >
-              <div className="flex min-w-0 flex-col">
-                <span className="text-sm text-muted-foreground">
-                  {phone.label}
+              <div className="flex flex-col">
+                {phone.label && (
+                  <span className="text-sm text-muted-foreground">
+                    {phone.label}
+                  </span>
+                )}
+                <span className="text-xl font-medium tabular-nums">
+                  {phone.display}
                 </span>
-                <span className="text-base font-medium">{phone.display}</span>
               </div>
-              <div className="flex shrink-0 gap-2">
+              <div className="flex gap-2">
                 <Button
-                  variant="outline"
-                  size="icon"
+                  variant={index === 0 ? "default" : "outline"}
                   nativeButton={false}
+                  className={cn(action, "flex-1")}
                   render={
                     <a
                       href={`tel:${phone.e164}`}
@@ -73,12 +84,13 @@ function ContactPhoneList({
                   }
                 >
                   <HugeiconsIcon icon={Call02Icon} aria-hidden="true" />
+                  Call
                 </Button>
                 {phone.whatsapp && (
                   <Button
                     variant="outline"
-                    size="icon"
                     nativeButton={false}
+                    className={cn(action, "flex-1")}
                     render={
                       <a
                         href={whatsappHref(phone.e164, whatsappMessage)}
@@ -90,28 +102,36 @@ function ContactPhoneList({
                     }
                   >
                     <HugeiconsIcon icon={WhatsappIcon} aria-hidden="true" />
+                    WhatsApp
                   </Button>
                 )}
                 <Button
                   variant="outline"
-                  size="icon"
                   data-track="copy"
                   aria-label={`Copy ${phone.display}`}
-                  onClick={() => copy(phone.display)}
+                  className={cn(action, "min-w-11")}
+                  onClick={() => copyNumber(phone.display)}
                 >
                   <HugeiconsIcon
-                    icon={isCopied ? Tick02Icon : Copy01Icon}
+                    icon={state === "copied" ? Tick02Icon : Copy01Icon}
                     aria-hidden="true"
                   />
+                  {state === "copied" ? "Copied" : "Copy"}
                 </Button>
               </div>
+              <p
+                role="status"
+                aria-live="polite"
+                className={cn(state !== "failed" && "sr-only", "text-sm")}
+              >
+                {state === "copied" && `Copied ${phone.display}`}
+                {state === "failed" &&
+                  `Couldn't copy. The number is ${phone.display}`}
+              </p>
             </li>
           )
         })}
       </ul>
-      <p role="status" aria-live="polite" className="sr-only">
-        {copied ? `Copied ${copied}` : ""}
-      </p>
     </div>
   )
 }

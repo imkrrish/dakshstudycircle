@@ -12,13 +12,11 @@ export const site: Site = {
   contact: {
     phones: [
       {
-        label: "PLACEHOLDER: Office",
         e164: "+919818824279",
         display: "+91 98188 24279",
         whatsapp: true,
       },
       {
-        label: "PLACEHOLDER: Director",
         e164: "+919953005312",
         display: "+91 99530 05312",
         whatsapp: true,

@@ -6,6 +6,7 @@ import { Cancel01Icon } from "@hugeicons/core-free-icons"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -25,6 +26,17 @@ import type { ContactDialogData } from "./types"
 import { useIsDesktop } from "./use-is-desktop"
 
 const TITLE = "Call or WhatsApp us"
+
+// Warm ink instead of the ui default bg-black/30.
+const OVERLAY = "bg-foreground/30"
+
+const closeButton = (
+  <Button
+    variant="ghost"
+    size="icon-lg"
+    className="absolute top-4 right-4 size-11 bg-secondary"
+  />
+)
 
 // Read at close time so focus returns to whichever element opened the dialog.
 function finalFocus() {
@@ -51,14 +63,23 @@ function ContactDialogClient({
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent data-slot="contact-dialog" finalFocus={finalFocus}>
-          <DialogHeader>
+        <DialogContent
+          data-slot="contact-dialog"
+          finalFocus={finalFocus}
+          overlayClassName={OVERLAY}
+          showCloseButton={false}
+        >
+          <DialogHeader className="pr-14">
             <DialogTitle className="font-heading text-title font-normal">
               {TITLE}
             </DialogTitle>
             <DialogDescription>{hours}</DialogDescription>
           </DialogHeader>
           {list}
+          <DialogClose render={closeButton}>
+            <HugeiconsIcon icon={Cancel01Icon} aria-hidden="true" />
+            <span className="sr-only">Close</span>
+          </DialogClose>
         </DialogContent>
       </Dialog>
     )
@@ -66,26 +87,22 @@ function ContactDialogClient({
 
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
-      <DrawerContent data-slot="contact-dialog" finalFocus={finalFocus}>
-        <DrawerHeader className="relative pr-14 text-left">
+      <DrawerContent
+        data-slot="contact-dialog"
+        finalFocus={finalFocus}
+        overlayClassName={OVERLAY}
+      >
+        <DrawerHeader className="relative pr-16 group-data-[swipe-axis=y]/drawer-popup:text-left">
           <DrawerTitle className="font-heading text-title font-normal">
             {TITLE}
           </DrawerTitle>
-          <DrawerDescription className="text-left">{hours}</DrawerDescription>
-          <DrawerClose
-            render={
-              <Button
-                variant="ghost"
-                size="icon-sm"
-                className="absolute top-4 right-4 bg-secondary"
-              />
-            }
-          >
+          <DrawerDescription>{hours}</DrawerDescription>
+          <DrawerClose render={closeButton}>
             <HugeiconsIcon icon={Cancel01Icon} aria-hidden="true" />
             <span className="sr-only">Close</span>
           </DrawerClose>
         </DrawerHeader>
-        <div className="p-4 pb-6">{list}</div>
+        <div className="p-4 pt-6 pb-6">{list}</div>
       </DrawerContent>
     </Drawer>
   )
