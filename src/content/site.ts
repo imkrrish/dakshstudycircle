@@ -2,6 +2,7 @@ import type { Site } from "@/lib/content-schema"
 
 export const site: Site = {
   name: "Daksh Study Circle",
+  shortName: "Daksh",
   tagline: "Your quest for knowledge ends here.",
   foundedYear: 2005,
   url: "https://example.com",

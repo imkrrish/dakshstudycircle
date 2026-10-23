@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Mukta, Young_Serif } from "next/font/google"
 
 import "./globals.css"
@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/footer"
 import { Navbar } from "@/components/layout/navbar"
 import { ContactDialog } from "@/components/shared/contact-dialog"
 import { getSite } from "@/lib/content"
+import { themeColors } from "@/lib/theme-colors"
 import { cn } from "@/lib/utils"
 
 const mukta = Mukta({
@@ -21,6 +22,10 @@ const youngSerif = Young_Serif({
   display: "swap",
   variable: "--font-serif",
 })
+
+export const viewport: Viewport = {
+  themeColor: themeColors.paper,
+}
 
 export async function generateMetadata(): Promise<Metadata> {
   const site = await getSite()

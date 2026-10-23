@@ -61,6 +61,7 @@ const LinkSchema = z.strictObject({
 
 const SiteSchema = z.strictObject({
   name: z.string().min(1),
+  shortName: z.string().min(1),
   tagline: z.string(),
   foundedYear: z.number().int(),
   url: z.string().min(1),
