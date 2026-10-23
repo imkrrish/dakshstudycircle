@@ -196,6 +196,10 @@ Pill, Mukta 500 at `text-sm`. Hierarchy (data variant → look): `primary` = red
 
 Desktop (`useIsDesktop`) uses a centred Dialog; mobile uses a bottom Drawer. Same content: title in Young Serif `text-title`, hours as description, then the phone list with Call, WhatsApp and Copy actions, each `h-11` with `text-base`. Close button is `size-11` on `secondary`. Focus returns to the opener. Scrim is warm ink at 30%.
 
+### CTA band (dark)
+
+The page's one dark band, the last section, directly above the footer (`cta-band`, `variant: "dark"`; a second one fails the build). Warm ink (`foreground` value) with a faint flame glow from the top centre (`.cta-glow`: `flame-light`, `flame`, `saffron` radial gradients masked to fade out before the buttons), like a diya lit in a dark room. No blur, no motion. Centred: one short message and two actions close the page on a single focal point, and the glow sits over the centre. `data-surface="ink"` re-maps the tokens (`background`, `foreground`, `primary`, `muted`, `input`, `ring`), so `ActionButton` and `focus-ring` restyle themselves with no new button variants. "Talk to us" is data `primary`, which becomes a solid paper button with ink text (never red on dark); "Get directions" is `outline` with a paper border. The focus ring turns light (`flame-light`, 13.4:1 on ink). Buttons are `h-11` below `lg` and stack full width on mobile. Office hours come from site data (`showHours`), under the buttons in muted `text-sm`. The band runs flush into the footer: `main` drops its bottom hairline when the ink band is its last child, so the edge is one tonal step, ink to footer paper.
+
 ### Footer
 
 Quiet tonal block (`bg-footer`), no red. Three groups: contact, visit, and Explore plus Courses columns (two-up at every width). Column titles are muted `text-sm`; links are ink with underline on hover/focus. Tagline in Young Serif. Social icons sit in `size-11` targets. The wordmark is decorative, tone on tone (`footer-mark`), its lower third clipped by the footer edge.
@@ -250,6 +254,7 @@ Real photos of the institute and people only. Never AI-generated people. Decorat
 - **Don't** use #EF1A26 outside logo artwork.
 - **Don't** use red, or any flame colour, for text.
 - **Don't** show two red buttons in one viewport.
+- **Don't** put a red button on the dark CTA band; use the paper button there.
 - **Don't** use navy, pure white or pure black surfaces, or hard-coded colours.
 - **Don't** use bold or italic headings, or `h1` outside the hero.
 - **Don't** put decoration behind text or animate LCP elements.

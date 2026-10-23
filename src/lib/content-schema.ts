@@ -173,6 +173,8 @@ const CtaBandSectionSchema = z.strictObject({
   heading: z.string(),
   body: z.string().optional(),
   actions: z.array(ButtonSchema),
+  // Shows site.contact.hours under the buttons.
+  showHours: z.boolean().optional(),
 })
 
 // Authoring shape: items refer to courses by slug. getPage() resolves them.

@@ -326,3 +326,49 @@
     background-color: var(--muted);
   }
 }
+
+/* Ink surface (the dark CTA band): the page tokens re-mapped so shared
+   components (ActionButton, focus-ring) restyle themselves. Primary becomes a
+   solid paper button, never red, and the focus ring turns light. */
+[data-surface="ink"] {
+  --background: oklch(0.23 0.02 45);
+  --foreground: oklch(0.97 0.01 85);
+  --primary: oklch(0.97 0.01 85);
+  --primary-hover: oklch(0.91 0.02 80);
+  --primary-foreground: oklch(0.23 0.02 45);
+  --muted: oklch(0.31 0.025 50);
+  --muted-foreground: oklch(0.82 0.02 75);
+  --input: oklch(0.97 0.01 85 / 55%);
+  --ring: oklch(0.92 0.13 95);
+}
+
+/* CTA glow: a diya lit in a dark room. A soft saffron-to-amber bloom centred
+   behind the content, fading to nothing well inside the band, so there is no
+   edge anywhere. Saffron and flame only (no yellow: yellow over dark ink turns
+   olive). Faint so light text stays well above AA over it. No blur, no motion. */
+.cta-glow {
+  position: absolute;
+  inset: 0;
+  z-index: -10;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.cta-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse 42% 50% at 50% 50%,
+      color-mix(in oklch, var(--flame) 14%, transparent),
+      color-mix(in oklch, var(--flame) 6%, transparent) 55%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 75% 85% at 50% 50%,
+      color-mix(in oklch, var(--saffron) 14%, transparent),
+      color-mix(in oklch, var(--saffron) 6%, transparent) 50%,
+      transparent 100%
+    );
+}

@@ -158,5 +158,25 @@ export const home: Page = {
         caption: "A teacher explains a topic on the smartboard.",
       },
     },
+    {
+      id: "contact-cta",
+      type: "cta-band",
+      variant: "dark",
+      heading: "Let's find the right class for your child",
+      body: "Call or WhatsApp us, or drop by the centre. We'll help you choose the right course and batch for your child.",
+      actions: [
+        {
+          label: "Talk to us",
+          variant: "primary",
+          action: { type: "contact-dialog" },
+        },
+        {
+          label: "Get directions",
+          variant: "outline",
+          action: { type: "directions" },
+        },
+      ],
+      showHours: true,
+    },
   ],
 }
