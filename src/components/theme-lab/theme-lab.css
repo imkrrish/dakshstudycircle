@@ -1,0 +1,43 @@
+/* Fixed neutral styling for the theme-lab trigger and panel, so they stay
+   readable whatever palette or font is active. Selectors are doubled to beat
+   utility classes and the unlayered h1/h2 weight rule in globals.css. */
+.theme-lab-neutral {
+  --background: oklch(0.99 0 0);
+  --foreground: oklch(0.2 0 0);
+  --popover: oklch(0.99 0 0);
+  --popover-foreground: oklch(0.2 0 0);
+  --card: oklch(0.99 0 0);
+  --card-foreground: oklch(0.2 0 0);
+  --primary: oklch(0.2 0 0);
+  --primary-hover: oklch(0.32 0 0);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.95 0 0);
+  --secondary-foreground: oklch(0.2 0 0);
+  --muted: oklch(0.96 0 0);
+  --muted-foreground: oklch(0.45 0 0);
+  --accent: oklch(0.95 0 0);
+  --accent-foreground: oklch(0.2 0 0);
+  --border: oklch(0.88 0 0);
+  --input: oklch(0.6 0 0);
+  --ring: oklch(0.4 0 0);
+}
+
+.theme-lab-neutral.theme-lab-neutral,
+.theme-lab-neutral.theme-lab-neutral * {
+  font-family: system-ui, sans-serif;
+}
+
+.theme-lab-neutral.theme-lab-neutral h2 {
+  font-weight: 600;
+}
+
+/* Previews opt back in to the font they show. */
+.theme-lab-neutral.theme-lab-neutral [data-font-preview] {
+  font-family: var(--preview-font);
+  font-weight: var(--preview-weight, 400);
+}
+
+.theme-lab-neutral.theme-lab-sheet[data-side="right"] {
+  width: min(100vw, 26rem);
+  max-width: none;
+}

@@ -53,13 +53,19 @@
   --text-lead--line-height: 1.55;
   --text-title: 1.625rem;
   --text-title--line-height: 1.25;
-  --text-heading: clamp(1.875rem, 1.5rem + 1.6vw, 2.5rem);
+  --text-heading: calc(
+    clamp(1.875rem, 1.5rem + 1.6vw, 2.5rem) * var(--heading-scale, 1)
+  );
   --text-heading--line-height: 1.12;
-  --text-display: clamp(2.25rem, 8.5vw, 4.25rem);
+  --text-display: calc(
+    clamp(2.25rem, 8.5vw, 4.25rem) * var(--heading-scale, 1)
+  );
   --text-display--line-height: 1.08;
   /* From sm up the hero headline is two fixed lines, so it scales with the
      viewport more slowly: the first line is about 14x the font size wide. */
-  --text-display-wide: clamp(2.25rem, 6.4vw, 4.25rem);
+  --text-display-wide: calc(
+    clamp(2.25rem, 6.4vw, 4.25rem) * var(--heading-scale, 1)
+  );
   --text-display-wide--line-height: 1.08;
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
@@ -115,6 +121,13 @@
   --flame-light: oklch(0.92 0.13 95); /* yellow */
   --flame: oklch(0.8 0.165 72.3); /* amber */
   --saffron: oklch(0.71 0.177 50.9); /* orange */
+
+  /* Hero wash and CTA glow layers, so a palette can retune them. */
+  --wash-core: oklch(0.92 0.13 95);
+  --wash-mid: oklch(0.8 0.165 72.3);
+  --wash-edge: oklch(0.71 0.177 50.9);
+  --glow-inner: oklch(0.8 0.165 72.3);
+  --glow-outer: oklch(0.71 0.177 50.9);
 }
 
 .dark {
@@ -202,6 +215,12 @@
   }
 }
 
+/* Headings read their weight from a variable. Unlayered so it beats the
+   font-normal utility on h1/h2; font-sans h2s (footer columns) are exempt. */
+:is(h1, h2):not(.font-sans) {
+  font-weight: var(--heading-weight, 400);
+}
+
 /* In-page anchors glide; instant when the user prefers less motion. */
 @media (prefers-reduced-motion: no-preference) {
   html {
@@ -233,22 +252,22 @@
   background:
     radial-gradient(
       30% 34% at 50% var(--hero-light-y),
-      color-mix(in oklch, var(--flame-light) 34%, transparent),
+      color-mix(in oklch, var(--wash-core) 34%, transparent),
       transparent 72%
     ),
     radial-gradient(
       55% 50% at 50% var(--hero-light-y),
-      color-mix(in oklch, var(--flame) 34%, transparent),
+      color-mix(in oklch, var(--wash-mid) 34%, transparent),
       transparent 72%
     ),
     radial-gradient(
       30% 50% at 0% 30%,
-      color-mix(in oklch, var(--saffron) 10%, transparent),
+      color-mix(in oklch, var(--wash-edge) 10%, transparent),
       transparent 72%
     ),
     radial-gradient(
       30% 50% at 100% 34%,
-      color-mix(in oklch, var(--saffron) 10%, transparent),
+      color-mix(in oklch, var(--wash-edge) 10%, transparent),
       transparent 72%
     );
 }
@@ -361,14 +380,14 @@
   background:
     radial-gradient(
       ellipse 42% 50% at 50% 50%,
-      color-mix(in oklch, var(--flame) 14%, transparent),
-      color-mix(in oklch, var(--flame) 6%, transparent) 55%,
+      color-mix(in oklch, var(--glow-inner) 14%, transparent),
+      color-mix(in oklch, var(--glow-inner) 6%, transparent) 55%,
       transparent 100%
     ),
     radial-gradient(
       ellipse 75% 85% at 50% 50%,
-      color-mix(in oklch, var(--saffron) 14%, transparent),
-      color-mix(in oklch, var(--saffron) 6%, transparent) 50%,
+      color-mix(in oklch, var(--glow-outer) 14%, transparent),
+      color-mix(in oklch, var(--glow-outer) 6%, transparent) 50%,
       transparent 100%
     );
 }
