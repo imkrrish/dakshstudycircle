@@ -113,6 +113,16 @@ const SiteSchema = z.strictObject({
   socials: z.array(
     z.strictObject({ platform: z.enum(SOCIAL_PLATFORMS), url: z.string() }),
   ),
+  // The Google listing's rating. The rating badge is hidden when this is missing.
+  googleReviews: z
+    .strictObject({
+      rating: z.number().min(0).max(5),
+      count: z.number().int().positive(),
+      // "YYYY-MM": when rating and count were read.
+      asOf: z.string().regex(/^\d{4}-(0[1-9]|1[0-2])$/),
+      url: z.string().min(1),
+    })
+    .optional(),
   footer: z.strictObject({
     exploreExtra: z.array(LinkSchema),
     legal: z.array(LinkSchema),
@@ -363,23 +373,34 @@ const testimonialGridBase = {
   heading: z.string().min(1),
   intro: z.string().optional(),
   tone: sectionTone.optional(),
+  // "carousel": a swipeable row with arrows. "grid": all cards, no scrolling.
+  layout: z.enum(["grid", "carousel"]),
 }
 
-// Authoring shape: testimonials are referenced by id. getPage() resolves them.
+// Authoring shape: which testimonials to show. getPage() resolves them.
 const TestimonialGridSectionSchema = z.strictObject({
   ...testimonialGridBase,
-  testimonials: z.array(z.string().min(1)).min(1),
+  show: z.enum(["featured", "all"]),
 })
 
 const ResolvedTestimonialGridSectionSchema = z.strictObject({
   ...testimonialGridBase,
+  // Google rating badge; absent when site.googleReviews is not set.
+  rating: z
+    .strictObject({
+      rating: z.number(),
+      count: z.number().int(),
+      url: z.string(),
+    })
+    .optional(),
   items: z
     .array(
       z.strictObject({
         id: z.string(),
         name: z.string(),
+        source: z.enum(["institute", "google"]),
         // Muted line under the name: context, or "Student" / "Parent".
-        byline: z.string(),
+        byline: z.string().optional(),
         text: z.string(),
         photo: ImageSchema.optional(),
       }),
@@ -458,11 +479,17 @@ const FacultySchema = z.strictObject({
 const TestimonialSchema = z.strictObject({
   id: z.string().min(1),
   name: z.string().min(1),
-  role: z.enum(["student", "parent"]),
+  // Required for "institute" testimonials; a Google reviewer's role is unknown.
+  role: z.enum(["student", "parent"]).optional(),
   // e.g. "Class 12, 2025" or "Parent of a Class 8 student".
   context: z.string().min(1).optional(),
   text: z.string().min(1),
   photo: ImageSchema.optional(),
+  // "google" cards carry a small "Google review" label.
+  source: z.enum(["institute", "google"]),
+  // Shown on home. Sorted by `order`; entries without one go last.
+  featured: z.boolean().optional(),
+  order: z.number().optional(),
 })
 
 const RESULT_CLASSES = ["Class 10", "Class 12", "Entrance"] as const

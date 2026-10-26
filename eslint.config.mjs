@@ -18,6 +18,12 @@ const eslintConfig = defineConfig([
     ".claude/**",
     ".next-verify/**",
   ]),
+  {
+    // Stock shadcn carousel (don't edit ui/): it calls setState from its own
+    // embla subscription effect.
+    files: ["src/components/ui/carousel.tsx"],
+    rules: { "react-hooks/set-state-in-effect": "off" },
+  },
 ])
 
 export default eslintConfig

@@ -179,7 +179,8 @@ export const home: Page = {
       eyebrow: "In their words",
       heading: "What families tell us",
       intro: "Parents and students on learning at Daksh, in their own words.",
-      testimonials: ["lt-col-saharan", "col-mukesh", "ishita-jain"],
+      layout: "carousel",
+      show: "featured",
     },
     {
       id: "videos",

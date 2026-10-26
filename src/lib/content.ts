@@ -127,26 +127,24 @@ function checkVideoGrids(
   }
 }
 
-// Every testimonial id must exist, and appear once per section.
+// A testimonial-grid that selects nothing would render an empty section.
 function checkTestimonialGrids(
   label: string,
   sections: Section[],
-  testimonialIds: Set<string>,
+  testimonials: Testimonial[],
   errors: string[],
 ) {
   for (const section of sections) {
     if (section.type !== "testimonial-grid") continue
-    const where = `${label}: testimonial-grid "${section.id}"`
-    const seen = new Set<string>()
-    for (const id of section.testimonials) {
-      if (!testimonialIds.has(id)) {
-        errors.push(
-          `${where}: unknown testimonial id "${id}". Known: ${[...testimonialIds].join(", ")}`,
-        )
-      }
-      if (seen.has(id))
-        errors.push(`${where}: testimonial "${id}" appears twice`)
-      seen.add(id)
+    if (section.show === "featured" && !testimonials.some((t) => t.featured)) {
+      errors.push(
+        `${label}: testimonial-grid "${section.id}" shows featured but no testimonial has featured: true`,
+      )
+    }
+    if (section.show === "all" && testimonials.length === 0) {
+      errors.push(
+        `${label}: testimonial-grid "${section.id}" has no testimonials`,
+      )
     }
   }
 }
@@ -292,6 +290,9 @@ function loadContent() {
       errors.push(`testimonials: duplicate id "${parsed.id}"`)
     }
     testimonialIds.add(parsed.id)
+    if (parsed.source === "institute" && !parsed.role) {
+      errors.push(`${label}: institute testimonials need a role`)
+    }
     if (parsed.photo && !parsed.photo.src.startsWith("/")) {
       errors.push(`${label}: photo src must start with "/"`)
     }
@@ -366,7 +367,7 @@ function loadContent() {
     checkPlaceholders(`pages/${key}`, page.sections, placeholderNames, errors)
     checkCourseGrids(`pages/${key}`, page.sections, courseSlugs, errors)
     checkVideoGrids(`pages/${key}`, page.sections, videoIds, errors)
-    checkTestimonialGrids(`pages/${key}`, page.sections, testimonialIds, errors)
+    checkTestimonialGrids(`pages/${key}`, page.sections, testimonials, errors)
     checkResultsGrids(`pages/${key}`, page.sections, results, errors)
     checkSocialActions(`pages/${key}`, page.sections, socialPlatforms, errors)
   }
@@ -387,7 +388,7 @@ function loadContent() {
     checkTestimonialGrids(
       `courses/${course.slug}`,
       course.sections,
-      testimonialIds,
+      testimonials,
       errors,
     )
     checkResultsGrids(
@@ -534,23 +535,37 @@ function resolveResultsGrid(
   }
 }
 
+// The home carousel never shows more than this many cards.
+const MAX_CAROUSEL_TESTIMONIALS = 12
+
 function resolveTestimonialGrid(
   section: TestimonialGridSection,
 ): ResolvedTestimonialGridSection {
-  const { testimonials: ids, ...rest } = section
+  const { show, ...rest } = section
+  const chosen = content.testimonials
+    .filter((t) => show === "all" || t.featured)
+    // Stable sort: data order breaks ties; no `order` goes last.
+    .sort((a, b) => (a.order ?? Infinity) - (b.order ?? Infinity))
+    .slice(
+      0,
+      section.layout === "carousel" ? MAX_CAROUSEL_TESTIMONIALS : undefined,
+    )
+  const google = content.site.googleReviews
   return {
     ...rest,
-    items: ids.map((id) => {
-      const t = content.testimonials.find((x) => x.id === id)
-      if (!t) throw new Error(`[content] unknown testimonial "${id}"`)
-      return {
-        id: t.id,
-        name: t.name,
-        byline: t.context ?? (t.role === "parent" ? "Parent" : "Student"),
-        text: t.text,
-        photo: t.photo,
-      }
-    }),
+    rating: google
+      ? { rating: google.rating, count: google.count, url: google.url }
+      : undefined,
+    items: chosen.map((t) => ({
+      id: t.id,
+      name: t.name,
+      source: t.source,
+      byline:
+        t.context ??
+        (t.role === "parent" ? "Parent" : t.role ? "Student" : undefined),
+      text: t.text,
+      photo: t.photo,
+    })),
   }
 }
 

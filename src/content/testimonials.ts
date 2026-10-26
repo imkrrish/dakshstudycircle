@@ -9,6 +9,9 @@ function photo(src: string, alt: string, size: [number, number]) {
 export const testimonials: Testimonial[] = [
   {
     id: "rohit-singh",
+    source: "institute",
+    featured: true,
+    order: 6,
     name: "Rohit Singh",
     role: "student",
     text: "Good institute for study all the subject. A high quality and comfortable teacher who are very close to student.",
@@ -16,6 +19,9 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: "ishita-jain",
+    source: "institute",
+    featured: true,
+    order: 3,
     name: "Ishita Jain",
     role: "student",
     text: "Had such an amazing experience in the classes with Anil Sir. He is a best maths teacher who always guides at every step, and help solve doubts easily. Trust the Teacher, trust the Institute. Best go-to institute for better learning.",
@@ -23,6 +29,9 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: "utkarsh-sharma",
+    source: "institute",
+    featured: true,
+    order: 5,
     name: "Utkarsh Sharma",
     role: "student",
     text: "The best institute in the area, enriching studying experience along with Intrapersonal development. Had a great time while studying at Daksh and it really paid off.",
@@ -34,6 +43,9 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: "lt-col-saharan",
+    source: "institute",
+    featured: true,
+    order: 1,
     name: "Lt. Col. Saharan",
     role: "parent",
     context: "Parent, Cariappa Vihar",
@@ -41,6 +53,9 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: "vikrant-sharma",
+    source: "institute",
+    featured: true,
+    order: 4,
     name: "Vikrant Sharma",
     role: "student",
     context: "Head Boy, K.V. No. 2",
@@ -48,6 +63,9 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: "col-mukesh",
+    source: "institute",
+    featured: true,
+    order: 2,
     name: "Col. Mukesh",
     role: "parent",
     context: "Parent of Sharyat",

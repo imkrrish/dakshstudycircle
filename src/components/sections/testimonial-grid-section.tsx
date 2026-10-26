@@ -1,80 +1,107 @@
-import Image from "next/image"
-
 import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
 import { SectionHeading } from "@/components/layout/section-heading"
-import type {
-  ResolvedTestimonialGridSection,
-  SectionOf,
-} from "@/lib/content-schema"
-import { initials } from "@/lib/utils"
+import { GoogleRatingBadge } from "@/components/shared/google-rating-badge"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+import type { SectionOf } from "@/lib/content-schema"
 
-type Item = ResolvedTestimonialGridSection["items"][number]
+import { TestimonialCard } from "./testimonial-card"
 
-// A hairline-topped block, not a card: the quote verbatim in ink, then who
-// said it. The avatar is decorative (the name sits beside it).
-function TestimonialItem({ item }: { item: Item }) {
-  return (
-    <li className="md:row-span-2 md:grid md:grid-rows-subgrid md:gap-y-0">
-      <figure className="flex flex-col gap-6 border-t pt-6 md:row-span-2 md:grid md:grid-rows-subgrid md:gap-y-6">
-        <blockquote className="text-base text-foreground">
-          <p>{item.text}</p>
-        </blockquote>
-        <figcaption className="flex items-start gap-3">
-          <span className="relative size-12 shrink-0 overflow-clip rounded-full bg-muted">
-            {item.photo ? (
-              <Image
-                src={item.photo.src}
-                alt=""
-                fill
-                sizes="3rem"
-                className="object-cover object-top"
-              />
-            ) : (
-              <span
-                aria-hidden="true"
-                className="absolute inset-0 flex items-center justify-center text-sm font-medium text-muted-foreground"
-              >
-                {initials(item.name)}
-              </span>
-            )}
-          </span>
-          <span className="flex min-w-0 flex-col">
-            <span className="font-semibold">{item.name}</span>
-            <span className="text-sm text-muted-foreground">{item.byline}</span>
-          </span>
-        </figcaption>
-      </figure>
-    </li>
-  )
-}
+const tiltFor = (i: number) => (i % 2 === 0 ? "right" : "left")
+
+// Arrows are 2.75rem targets in the header row, not overlaid on the cards.
+const arrowClass = "static inset-auto my-0 size-11"
 
 function TestimonialGridSection({
   section,
 }: {
   section: SectionOf<"testimonial-grid">
 }) {
-  const { id, eyebrow, heading, intro, tone, items } = section
+  const { id, eyebrow, heading, intro, tone, layout, rating, items } = section
+  const headingId = `${id}-heading`
+
+  const headingBlock = (
+    <SectionHeading
+      id={headingId}
+      eyebrow={eyebrow}
+      title={heading}
+      intro={intro}
+    />
+  )
+  const badge = rating && (
+    <GoogleRatingBadge
+      href={rating.url}
+      rating={rating.rating}
+      count={rating.count}
+    />
+  )
 
   return (
     <Section
       data-slot="testimonial-grid-section"
       id={id}
       tone={tone}
-      aria-labelledby={`${id}-heading`}
+      aria-labelledby={headingId}
     >
-      <Container className="flex flex-col gap-10 md:gap-12">
-        <SectionHeading
-          id={`${id}-heading`}
-          eyebrow={eyebrow}
-          title={heading}
-          intro={intro}
-        />
-        <ul className="grid gap-10 md:grid-cols-3 md:gap-x-8 md:gap-y-0">
-          {items.map((item) => (
-            <TestimonialItem key={item.id} item={item} />
-          ))}
-        </ul>
+      <Container>
+        {layout === "carousel" ? (
+          <Carousel
+            opts={{ align: "start" }}
+            aria-label="Testimonials"
+            className="flex flex-col gap-8 md:gap-10"
+          >
+            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-8">
+              {headingBlock}
+              <div className="flex shrink-0 items-center justify-between gap-4">
+                {badge}
+                <div className="ml-auto flex gap-2">
+                  <CarouselPrevious
+                    className={arrowClass}
+                    focusableWhenDisabled
+                  />
+                  <CarouselNext className={arrowClass} focusableWhenDisabled />
+                </div>
+              </div>
+            </div>
+            {/* Clips 0.75rem outside the row so tilted card corners (and the
+                hover straighten) are not cut. The padding is cancelled by the
+                negative margin, and embla still measures the inner viewport, so
+                snapping stays flush with the container edge. */}
+            <div className="-m-3 overflow-hidden p-3 [&>[data-slot=carousel-content]]:overflow-visible">
+              <CarouselContent className="py-2">
+                {items.map((item, i) => (
+                  <CarouselItem
+                    key={item.id}
+                    aria-label={`${i + 1} of ${items.length}`}
+                    className="basis-[85%] md:basis-1/2 lg:basis-1/3"
+                  >
+                    <TestimonialCard item={item} tilt={tiltFor(i)} />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </div>
+          </Carousel>
+        ) : (
+          <div className="flex flex-col gap-8 md:gap-10">
+            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-8">
+              {headingBlock}
+              {badge}
+            </div>
+            <ul className="grid gap-6 py-2 md:grid-cols-3">
+              {items.map((item, i) => (
+                <li key={item.id}>
+                  <TestimonialCard item={item} tilt={tiltFor(i)} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </Container>
     </Section>
   )

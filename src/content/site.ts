@@ -58,6 +58,13 @@ export const site: Site = {
       url: "https://www.youtube.com/channel/UCkZgoRhjxTUkTyyS4XSrADw",
     },
   ],
+  // Read from the Google listing in Oct 2026; update when the numbers change.
+  googleReviews: {
+    rating: 4.8,
+    count: 197,
+    asOf: "2026-10",
+    url: "https://maps.app.goo.gl/CfvNuGANjBQsmxCi9",
+  },
   footer: {
     exploreExtra: [{ label: "Gallery", href: "/gallery" }],
     legal: [{ label: "Privacy policy", href: "/privacy" }],

@@ -407,3 +407,15 @@
       transparent 100%
     );
 }
+
+/* Without JavaScript the carousel cannot scroll by itself, so the row scrolls
+   natively and snaps to cards. */
+@media (scripting: none) {
+  [data-slot="testimonial-grid-section"] [data-slot="carousel-content"] {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+  [data-slot="testimonial-grid-section"] [data-slot="carousel-item"] {
+    scroll-snap-align: start;
+  }
+}
