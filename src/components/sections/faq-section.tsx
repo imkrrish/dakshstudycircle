@@ -8,7 +8,7 @@ import type { SectionOf } from "@/lib/content-schema"
 import { FaqList } from "./faq-list"
 
 // Native <details>: every answer stays in the HTML while closed and it works
-// without JavaScript; FaqList only adds the open/close animation. Questions are Mukta 500 (not Young Serif) so nine in a row read as a
+// without JavaScript; FaqList only adds the open/close animation. Questions are body-font 500 (not the serif) so nine in a row read as a
 // list to scan and do not compete with the section's h2.
 function FaqSection({ section }: { section: SectionOf<"faq"> }) {
   const { id, eyebrow, heading, intro, tone, items } = section

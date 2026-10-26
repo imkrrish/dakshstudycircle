@@ -22,37 +22,37 @@ colors:
   saffron: "oklch(0.71 0.177 50.9)"
 typography:
   display:
-    fontFamily: "Young Serif, serif"
-    fontSize: "clamp(2.25rem, 8.5vw, 4.25rem)"
+    fontFamily: "EB Garamond, serif"
+    fontSize: "clamp(2.7rem, 10.2vw, 5.1rem)"
     fontWeight: 400
-    lineHeight: 1.08
+    lineHeight: 1.04
   display-wide:
-    fontFamily: "Young Serif, serif"
-    fontSize: "clamp(2.25rem, 6.4vw, 4.25rem)"
+    fontFamily: "EB Garamond, serif"
+    fontSize: "clamp(2.7rem, 7.7vw, 5.1rem)"
+    fontWeight: 400
+    lineHeight: 1.04
+  heading:
+    fontFamily: "EB Garamond, serif"
+    fontSize: "clamp(2.25rem, 1.8rem + 1.9vw, 3rem)"
     fontWeight: 400
     lineHeight: 1.08
-  heading:
-    fontFamily: "Young Serif, serif"
-    fontSize: "clamp(1.875rem, 1.5rem + 1.6vw, 2.5rem)"
-    fontWeight: 400
-    lineHeight: 1.12
   title:
-    fontFamily: "Young Serif, serif"
-    fontSize: "1.625rem"
+    fontFamily: "EB Garamond, serif"
+    fontSize: "1.95rem"
     fontWeight: 400
-    lineHeight: 1.25
+    lineHeight: 1.2
   lead:
-    fontFamily: "Mukta, sans-serif"
+    fontFamily: "Nunito Sans, sans-serif"
     fontSize: "1.3125rem"
     fontWeight: 400
     lineHeight: 1.55
   body:
-    fontFamily: "Mukta, sans-serif"
+    fontFamily: "Nunito Sans, sans-serif"
     fontSize: "1.0625rem"
     fontWeight: 400
     lineHeight: 1.6
   label:
-    fontFamily: "Mukta, sans-serif"
+    fontFamily: "Nunito Sans, sans-serif"
     fontSize: "0.9375rem"
     fontWeight: 500
     lineHeight: 1.5
@@ -61,7 +61,7 @@ rounded:
   md: "0.5rem"
   lg: "0.625rem"
   xl: "0.875rem"
-  pill: "1.625rem"
+  pill: "1.95rem"
 spacing:
   section-y: "5rem"
   section-y-md: "7rem"
@@ -101,7 +101,7 @@ Parents on mid-range phones decide here. The page earns trust by being quiet, le
 **Key characteristics**
 
 - Warm neutrals only; one red (`primary`) for actions; flame colours for light, never text.
-- One serif weight for headings, Mukta for everything else.
+- EB Garamond for headings, Nunito Sans for everything else.
 - Flat surfaces, hairline borders, almost no shadow.
 - Static by default; motion is decoration and optional.
 
@@ -135,7 +135,7 @@ Always use tokens (`bg-primary`, `text-muted-foreground`). No hard-coded colours
 
 ## Typography
 
-**Headings:** Young Serif, weight 400 only (`font-heading font-normal`). **Body:** Mukta 400 and 500 (500 for buttons and nav links). Both load through `next/font` with `display: swap`.
+**Headings:** EB Garamond, weight 400 (`font-heading font-normal`); it is lighter and narrower than the old face, so heading tokens (display, heading, title) are scaled about 1.2x and 500 is available if a heading looks thin. **Body:** Nunito Sans 400, 500 (buttons, nav links) and 600. Both are variable fonts loaded through `next/font/google` (latin, `display: swap`). The typography will be rebalanced in the next step (typeset); sizes and weights here are a starting point.
 
 ### Scale (Tailwind tokens, ratio ≈1.25)
 
@@ -151,8 +151,8 @@ Always use tokens (`bg-primary`, `text-muted-foreground`). No hard-coded colours
 
 ### Named Rules
 
-**The One Weight Rule.** Headings are Young Serif `font-normal`. No bold, no italic, no faux weights.
-**The Heading Level Rule.** `h1` only in the hero, `h2` for sections, `h3` for cards. Section headings are h2 in Young Serif. Footer and utility headings may be h2 styled as small Mukta labels.
+**The Heading Weight Rule.** Headings are EB Garamond, regular by default; 500 only where a heading looks thin. No bold, no italic, no faux weights. To be reviewed in the typeset step.
+**The Heading Level Rule.** `h1` only in the hero, `h2` for sections, `h3` for cards. Section headings are h2 in EB Garamond. Footer and utility headings may be h2 styled as small Nunito Sans labels.
 **The Floor Rule.** Minimum text size is 0.9375rem. Do not use `text-xs` or arbitrary smaller sizes.
 **Line length.** Intro paragraphs cap at `max-w-prose`; hero supporting line at `max-w-xl`.
 
@@ -178,7 +178,7 @@ Soft, friendly, not bubbly. Base radius `--radius` 0.625rem; scale `sm` 0.6×, `
 
 ### Buttons
 
-Pill, Mukta 500 at `text-sm`. Hierarchy (data variant → look): `primary` = red fill, white text; `secondary` = paper tint; `outline` = paper with hairline border. Hover: primary darkens, others shift to `muted`. Focus: `focus-ring` (2px solid `ring`, 2px offset). Never hard-code behaviour; use `ActionButton` with `link`, `contact-dialog`, `directions` or `social` actions. `directions` opens the site's `mapUrl` in a new tab (`rel="noopener noreferrer"`) with a Location icon. `social` (`{ type: "social", platform }`) opens that platform's `site.socials` url the same way, with the platform icon; the build fails if the platform is not in `site.socials`. A social button is never platform-coloured (YouTube is not red here); use `outline`. Data variant `quiet` maps to `ghost` (ink text, no fill, not red): the content-level replacement for a text link.
+Pill, Nunito Sans 500 at `text-sm`. Hierarchy (data variant → look): `primary` = red fill, white text; `secondary` = paper tint; `outline` = paper with hairline border. Hover: primary darkens, others shift to `muted`. Focus: `focus-ring` (2px solid `ring`, 2px offset). Never hard-code behaviour; use `ActionButton` with `link`, `contact-dialog`, `directions` or `social` actions. `directions` opens the site's `mapUrl` in a new tab (`rel="noopener noreferrer"`) with a Location icon. `social` (`{ type: "social", platform }`) opens that platform's `site.socials` url the same way, with the platform icon; the build fails if the platform is not in `site.socials`. A social button is never platform-coloured (YouTube is not red here); use `outline`. Data variant `quiet` maps to `ghost` (ink text, no fill, not red): the content-level replacement for a text link.
 
 - **Sizes and variants:** do not use the `xs` size or the `link` variant from `ui/button.tsx`; they break the type floor and the red-text rule.
 - **Touch targets:** primary actions at least 2.75rem (44px) below `lg` (touch screens); at least 2.25rem on desktop. Mobile hero CTAs are `h-11`. The visible size may be smaller (e.g. 2.25rem) when an invisible hit area brings the target to at least 2.75rem; the navbar CTA and menu toggle do this with the `hit-area` utility.
@@ -194,7 +194,7 @@ Pill, Mukta 500 at `text-sm`. Hierarchy (data variant → look): `primary` = red
 
 ### Contact dialog ("Talk to us")
 
-Desktop (`useIsDesktop`) uses a centred Dialog; mobile uses a bottom Drawer. Same content: title in Young Serif `text-title`, hours as description, then the phone list with Call, WhatsApp and Copy actions, each `h-11` with `text-base`. Close button is `size-11` on `secondary`. Focus returns to the opener. Scrim is warm ink at 30%.
+Desktop (`useIsDesktop`) uses a centred Dialog; mobile uses a bottom Drawer. Same content: title in EB Garamond `text-title`, hours as description, then the phone list with Call, WhatsApp and Copy actions, each `h-11` with `text-base`. Close button is `size-11` on `secondary`. Focus returns to the opener. Scrim is warm ink at 30%.
 
 ### CTA band (dark)
 
@@ -202,7 +202,7 @@ The page's one dark band, the last section, directly above the footer (`cta-band
 
 ### Footer
 
-Quiet tonal block (`bg-footer`), no red. Three groups: contact, visit, and Explore plus Courses columns (two-up at every width). Column titles are muted `text-sm`; links are ink with underline on hover/focus. Tagline in Young Serif. Social icons sit in `size-11` targets. The wordmark is decorative, tone on tone (`footer-mark`), its lower third clipped by the footer edge.
+Quiet tonal block (`bg-footer`), no red. Three groups: contact, visit, and Explore plus Courses columns (two-up at every width). Column titles are muted `text-sm`; links are ink with underline on hover/focus. Tagline in EB Garamond. Social icons sit in `size-11` targets. The wordmark is decorative, tone on tone (`footer-mark`), its lower third clipped by the footer edge.
 
 ### Portrait (split section)
 
@@ -218,19 +218,19 @@ Courses grouped under muted `text-sm` labels (a `<p>`, not a heading) with a hai
 
 ### Reason list
 
-A ruled `<ol>` of 3–8 reasons (`reason-list`). Numerals are CSS counters (Young Serif `font-normal`, `text-muted-foreground`, tabular figures, fixed 2.5rem column, empty alt text so screen readers hear the list, not the number). Each row: `h3` title (`text-lead`, `text-title` from `md`) and one line of muted `text-base`; hairline rules between rows only (`py-5`, `md:py-6`). No icons, cards, hover, links, chevrons, red or motion. Mobile: heading, list, then the figure (`h-56` photo, `rounded-xl`, caption). From `md`: 12-column grid by named areas; heading and figure in columns 1–5 (figure bottom aligned with the last row), list in 6–12. Default paper tone, no divider.
+A ruled `<ol>` of 3–8 reasons (`reason-list`). Numerals are CSS counters (EB Garamond `font-normal`, `text-muted-foreground`, tabular figures, fixed 2.5rem column, empty alt text so screen readers hear the list, not the number). Each row: `h3` title (`text-lead`, `text-title` from `md`) and one line of muted `text-base`; hairline rules between rows only (`py-5`, `md:py-6`). No icons, cards, hover, links, chevrons, red or motion. Mobile: heading, list, then the figure (`h-56` photo, `rounded-xl`, caption). From `md`: 12-column grid by named areas; heading and figure in columns 1–5 (figure bottom aligned with the last row), list in 6–12. Default paper tone, no divider.
 
 ### Results grid
 
 Recent results on home (`results-grid`, from `src/content/results.ts`, resolved to `{ name, photo, headline, meta }`; highlights only, newest year first). Tone is `muted`: why-daksh above and testimonials below are paper, so the results get their own surface and the raised cards lift off it with a hairline. One markup for every width; cards are not links and have no hover or motion.
 
-Card: photo `aspect-4/5`, `rounded-xl`, no effects (initials in Young Serif when there is no photo, decorative `alt=""` because the name sits beside it). Then the score or admission (`headline`: "96.2%", or the school's short name, "Sainik", "RMS", "RIMC", so it stays on one line in a five-across card) in Young Serif `font-normal` with tabular figures, `text-title` on mobile and `text-heading` from `md`; then the student's name as an `h3`; then a muted `text-sm` meta line ("Class 12 · Science · CBSE 2026 · Classes 11–12 tuition" or "Admitted · AISSEE 2026 · RMS/RIMC/Sainik prep"). The meta line breaks only between its parts, never inside one. DOM order is name, score, meta; the score is shown first. The student name is an `h3` in Mukta 500 (`text-base`, `text-lead` from `md`), not Young Serif: with the score set in the serif at heading size, a second serif line would compete with it. This is a deliberate exception to "h3 is Young Serif", like the FAQ questions. Subject marks are not shown on home (`variant: "compact"`).
+Card: photo `aspect-4/5`, `rounded-xl`, no effects (initials in EB Garamond when there is no photo, decorative `alt=""` because the name sits beside it). Then the score or admission (`headline`: "96.2%", or the school's short name, "Sainik", "RMS", "RIMC", so it stays on one line in a five-across card) in EB Garamond `font-normal` with tabular figures, `text-title` on mobile and `text-heading` from `md`; then the student's name as an `h3`; then a muted `text-sm` meta line ("Class 12 · Science · CBSE 2026 · Classes 11–12 tuition" or "Admitted · AISSEE 2026 · RMS/RIMC/Sainik prep"). The meta line breaks only between its parts, never inside one. DOM order is name, score, meta; the score is shown first. The student name is an `h3` in Nunito Sans 500 (`text-base`, `text-lead` from `md`), not EB Garamond: with the score set in the serif at heading size, a second serif line would compete with it. This is a deliberate exception to "h3 is EB Garamond", like the FAQ questions. Subject marks are not shown on home (`variant: "compact"`).
 
 Layout: below `md`, one raised `card` panel of rows (4.5rem photo left, hairline dividers). At `md`, six columns with cards spanning two, so 3 + 2 with the short row centred (structural `nth-` selectors, no per-count markup). At `lg`, five equal cards in one row. From `md` each card is a four-row subgrid (photo, score, name, meta), so a percentage card and an admission card line up even when "Rashtriya Military School" wraps. No red.
 
 ### Testimonial grid
 
-Three testimonials on home (`testimonial-grid`, ids resolved to `{ name, byline, text, photo }`). Not cards: each is a `<figure>` under a hairline rule, three columns from `md`, stacked on mobile. The quote is the visitor's own words, verbatim, in Mukta `text-base` in ink (`<blockquote>`); no quote glyph, no italic, no Young Serif. The `<figcaption>` holds a 3rem circular avatar (`object-cover object-top`, initials on `muted` when there is no photo) beside the name (Mukta 500) and a muted `text-sm` byline (the context, else "Student" or "Parent"). Default paper tone: results above are muted, the videos band below. From `md` the blocks are a two-row subgrid (quote, then attribution), so every name and avatar sits on one line whatever the quote length; the avatar and name are top-aligned so a two-line byline does not shift them. No motion, no red.
+Three testimonials on home (`testimonial-grid`, ids resolved to `{ name, byline, text, photo }`). Not cards: each is a `<figure>` under a hairline rule, three columns from `md`, stacked on mobile. The quote is the visitor's own words, verbatim, in Nunito Sans `text-base` in ink (`<blockquote>`); no quote glyph, no italic, no EB Garamond. The `<figcaption>` holds a 3rem circular avatar (`object-cover object-top`, initials on `muted` when there is no photo) beside the name (Nunito Sans 500) and a muted `text-sm` byline (the context, else "Student" or "Parent"). Default paper tone: results above are muted, the videos band below. From `md` the blocks are a two-row subgrid (quote, then attribution), so every name and avatar sits on one line whatever the quote length; the avatar and name are top-aligned so a two-line byline does not shift them. No motion, no red.
 
 ### Video grid
 
@@ -246,7 +246,7 @@ Questions parents ask before they call (`faq`, items `{ question, answer }`). Te
 
 Layout: below `md` a single column. From `md` a 12-column grid like the reason list: heading block in columns 1–5, sticky under the navbar, questions in 6–12, so nine questions do not become one long narrow centred scroll. Default paper tone (the videos band is above, the dark CTA below). Hairline rules between items and at the top and bottom of the list. All closed by default; several can be open.
 
-Each question is a `<details>` with a full-width `<summary>` (min `2.75rem`, `focus-ring`, default marker removed). The question is an `h3` in Mukta 500 (`text-base`, 1.1875rem from `md`, one step under `text-lead` so nine rows stay calm), not Young Serif: nine serif lines in a row read as display text and compete with the h2, while Mukta medium scans as a list. This is a deliberate exception to "h3 is Young Serif". A Hugeicons chevron (`aria-hidden`, muted) rotates 180° when open (a plus would read as "close"). The answer is muted `text-base`, `max-w-prose`.
+Each question is a `<details>` with a full-width `<summary>` (min `2.75rem`, `focus-ring`, default marker removed). The question is an `h3` in Nunito Sans 500 (`text-base`, 1.1875rem from `md`, one step under `text-lead` so nine rows stay calm), not EB Garamond: nine serif lines in a row read as display text and compete with the h2, while Nunito Sans medium scans as a list. This is a deliberate exception to "h3 is EB Garamond". A Hugeicons chevron (`aria-hidden`, muted) rotates 180° when open (a plus would read as "close"). The answer is muted `text-base`, `max-w-prose`.
 
 Motion: a small client island (`FaqList`, anime.js) wraps the list. A click on a summary (mouse, Enter, Space) is intercepted and the answer's height and opacity animate over 250ms, with `open` set before opening and removed after closing; the chevron turns in sync (CSS, keyed to `[open]:not([data-closing])`). A click mid-animation takes over from the current height. Items the browser opens itself (find-in-page) are left alone. Without JS, and under reduced motion, the native instant toggle applies. No red.
 
@@ -276,7 +276,7 @@ Real photos of the institute and people only. Never AI-generated people. Decorat
 ### Do
 
 - **Do** use the primary token for buttons and `primary-hover` for hover.
-- **Do** keep headings Young Serif `font-normal` and body Mukta 400/500.
+- **Do** keep headings EB Garamond `font-normal` and body Nunito Sans 400/500.
 - **Do** use `text-sm` (0.9375rem) as the smallest size.
 - **Do** keep primary actions at 2.75rem below `lg` (visible size or invisible `hit-area`) and 2.25rem on desktop.
 - **Do** start every page with a hero.

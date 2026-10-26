@@ -51,16 +51,16 @@
   --text-base--line-height: 1.6;
   --text-lead: 1.3125rem;
   --text-lead--line-height: 1.55;
-  --text-title: 1.625rem;
-  --text-title--line-height: 1.25;
-  --text-heading: clamp(1.875rem, 1.5rem + 1.6vw, 2.5rem);
-  --text-heading--line-height: 1.12;
-  --text-display: clamp(2.25rem, 8.5vw, 4.25rem);
-  --text-display--line-height: 1.08;
+  --text-title: 1.95rem;
+  --text-title--line-height: 1.2;
+  --text-heading: clamp(2.25rem, 1.8rem + 1.9vw, 3rem);
+  --text-heading--line-height: 1.08;
+  --text-display: clamp(2.7rem, 10.2vw, 5.1rem);
+  --text-display--line-height: 1.04;
   /* From sm up the hero headline is two fixed lines, so it scales with the
      viewport more slowly: the first line is about 14x the font size wide. */
-  --text-display-wide: clamp(2.25rem, 6.4vw, 4.25rem);
-  --text-display-wide--line-height: 1.08;
+  --text-display-wide: clamp(2.7rem, 7.7vw, 5.1rem);
+  --text-display-wide--line-height: 1.04;
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);

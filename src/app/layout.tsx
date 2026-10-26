@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next"
-import { Mukta, Young_Serif } from "next/font/google"
+import { EB_Garamond, Nunito_Sans } from "next/font/google"
 
 import "./globals.css"
 import { Footer } from "@/components/layout/footer"
@@ -9,15 +9,13 @@ import { getSite } from "@/lib/content"
 import { themeColors } from "@/lib/theme-colors"
 import { cn } from "@/lib/utils"
 
-const mukta = Mukta({
-  weight: ["400", "500"],
+const nunitoSans = Nunito_Sans({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-sans",
 })
 
-const youngSerif = Young_Serif({
-  weight: "400",
+const ebGaramond = EB_Garamond({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-serif",
@@ -45,8 +43,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         "h-full",
         "antialiased",
         "font-sans",
-        mukta.variable,
-        youngSerif.variable,
+        nunitoSans.variable,
+        ebGaramond.variable,
       )}
     >
       <body className="flex min-h-full flex-col">
