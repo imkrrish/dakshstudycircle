@@ -40,7 +40,7 @@ function TestimonialItem({ item }: { item: Item }) {
             )}
           </span>
           <span className="flex min-w-0 flex-col">
-            <span className="font-medium">{item.name}</span>
+            <span className="font-semibold">{item.name}</span>
             <span className="text-sm text-muted-foreground">{item.byline}</span>
           </span>
         </figcaption>

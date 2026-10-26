@@ -64,14 +64,14 @@ function SplitSection({ section }: { section: SectionOf<"split"> }) {
               eyebrow={eyebrow}
               title={heading}
             />
-            <div className="flex max-w-prose flex-col gap-4 text-base leading-relaxed text-foreground/80">
+            <div className="flex max-w-prose flex-col gap-4 text-base text-foreground/80">
               {body.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
             {attribution && (
               <p className="flex max-w-prose flex-col gap-0.5 border-t pt-4 text-base">
-                <span className="font-medium">{name}</span>
+                <span className="font-semibold">{name}</span>
                 {role && <span className="text-muted-foreground">{role}</span>}
               </p>
             )}

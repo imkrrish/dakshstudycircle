@@ -14,7 +14,7 @@ import type { ResolvedCourseGridSection, SectionOf } from "@/lib/content-schema"
 
 type Item = ResolvedCourseGridSection["groups"][number]["items"][number]
 
-const titleClass = "font-heading text-lead font-normal md:text-title"
+const titleClass = "font-heading text-subtitle md:text-title"
 
 function CourseItem({ item }: { item: Extract<Item, { kind: "course" }> }) {
   return (
@@ -60,14 +60,14 @@ function StreamGroupItem({
           <p className="text-sm text-muted-foreground">{item.note}</p>
         )}
       </div>
-      <ul className="flex flex-wrap gap-2">
+      <ul className="flex flex-wrap gap-1.5">
         {item.links.map((link) => (
           <li key={link.href}>
             <Link
               href={link.href}
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
-                "h-11 px-5 focus-ring active:bg-accent",
+                "h-11 px-3.5 focus-ring active:bg-accent",
               )}
             >
               <span className="sr-only">{item.title} </span>
@@ -116,7 +116,7 @@ function CourseGridSection({ section }: { section: SectionOf<"course-grid"> }) {
               <div key={group.label} className="flex flex-col gap-3 md:gap-4">
                 <p
                   id={labelId}
-                  className="flex items-center gap-4 text-sm text-muted-foreground after:h-px after:flex-1 after:bg-border"
+                  className="flex items-center gap-4 text-eyebrow text-muted-foreground after:h-px after:flex-1 after:bg-border"
                 >
                   {group.label}
                 </p>

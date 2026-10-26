@@ -30,9 +30,9 @@ function ReasonListSection({ section }: { section: SectionOf<"reason-list"> }) {
             {items.map((item) => (
               <li
                 key={item.title}
-                className="grid grid-cols-[2.5rem_1fr] py-5 [counter-increment:reason] before:font-heading before:text-lead before:font-normal before:text-muted-foreground before:tabular-nums before:content-[counter(reason)_/_''] first:pt-0 last:pb-0 md:py-6 md:before:text-title"
+                className="grid grid-cols-[2.5rem_1fr] gap-y-1 py-5 [counter-increment:reason] before:font-heading before:text-subtitle before:text-muted-foreground before:tabular-nums before:content-[counter(reason)_/_''] first:pt-0 last:pb-0 md:py-6 md:before:text-title"
               >
-                <h3 className="font-heading text-lead font-normal md:text-title">
+                <h3 className="font-heading text-subtitle md:text-title">
                   {item.title}
                 </h3>
                 <p className="col-start-2 text-base text-muted-foreground">

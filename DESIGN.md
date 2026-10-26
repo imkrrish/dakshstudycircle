@@ -23,34 +23,55 @@ colors:
 typography:
   display:
     fontFamily: "EB Garamond, serif"
-    fontSize: "clamp(2.7rem, 10.2vw, 5.1rem)"
-    fontWeight: 400
+    fontSize: "clamp(2.5rem, 9.4vw, 4.75rem)"
+    fontWeight: 500
     lineHeight: 1.04
+    letterSpacing: "-0.02em"
   display-wide:
     fontFamily: "EB Garamond, serif"
-    fontSize: "clamp(2.7rem, 7.7vw, 5.1rem)"
-    fontWeight: 400
+    fontSize: "clamp(2.5rem, 7.2vw, 4.75rem)"
+    fontWeight: 500
     lineHeight: 1.04
+    letterSpacing: "-0.02em"
   heading:
     fontFamily: "EB Garamond, serif"
-    fontSize: "clamp(2.25rem, 1.8rem + 1.9vw, 3rem)"
-    fontWeight: 400
-    lineHeight: 1.08
+    fontSize: "clamp(2rem, 1.7rem + 1.4vw, 2.75rem)"
+    fontWeight: 500
+    lineHeight: 1.1
+    letterSpacing: "-0.015em"
   title:
     fontFamily: "EB Garamond, serif"
-    fontSize: "1.95rem"
-    fontWeight: 400
+    fontSize: "1.625rem"
+    fontWeight: 500
     lineHeight: 1.2
+    letterSpacing: "-0.01em"
+  subtitle:
+    fontFamily: "EB Garamond, serif"
+    fontSize: "1.375rem"
+    fontWeight: 500
+    lineHeight: 1.25
+    letterSpacing: "-0.005em"
   lead:
     fontFamily: "Nunito Sans, sans-serif"
-    fontSize: "1.3125rem"
+    fontSize: "1.1875rem"
     fontWeight: 400
-    lineHeight: 1.55
-  body:
+    lineHeight: 1.5
+  intro:
     fontFamily: "Nunito Sans, sans-serif"
-    fontSize: "1.0625rem"
+    fontSize: "clamp(1rem, 0.96rem + 0.2vw, 1.125rem)"
     fontWeight: 400
     lineHeight: 1.6
+  body:
+    fontFamily: "Nunito Sans, sans-serif"
+    fontSize: "1rem"
+    fontWeight: 400
+    lineHeight: 1.65
+  eyebrow:
+    fontFamily: "Nunito Sans, sans-serif"
+    fontSize: "0.9375rem"
+    fontWeight: 500
+    lineHeight: 1.4
+    letterSpacing: "0.02em"
   label:
     fontFamily: "Nunito Sans, sans-serif"
     fontSize: "0.9375rem"
@@ -135,25 +156,32 @@ Always use tokens (`bg-primary`, `text-muted-foreground`). No hard-coded colours
 
 ## Typography
 
-**Headings:** EB Garamond, weight 400 (`font-heading font-normal`); it is lighter and narrower than the old face, so heading tokens (display, heading, title) are scaled about 1.2x and 500 is available if a heading looks thin. **Body:** Nunito Sans 400, 500 (buttons, nav links) and 600. Both are variable fonts loaded through `next/font/google` (latin, `display: swap`). The typography will be rebalanced in the next step (typeset); sizes and weights here are a starting point.
+**Headings:** EB Garamond at weight 500 (carried by the size tokens, so `font-heading text-heading` is enough); the face is light with a small x-height, so 500 and slightly negative tracking keep presence without getting loud. Lining figures (`"lnum"`) are set once on `--font-heading`, so class ranges, percentages and counters in serif never turn old-style; add `tabular-nums` where figures align (scores, list counters, phone numbers, hours). **Body:** Nunito Sans 400, with 500 for buttons, nav links and eyebrows and 600 for names and FAQ questions. Nunito's x-height is large, so body is 1rem, not 1.0625rem. Both are variable fonts loaded through `next/font/google` (latin, `display: swap`).
 
-### Scale (Tailwind tokens, ratio ≈1.25)
+### Scale (Tailwind tokens; size, line height, weight, tracking)
 
-| Token               | Size                       | Line height | Use                                                                                                                             |
-| ------------------- | -------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `text-display`      | clamp 2.25–4.25rem (8.5vw) | 1.08        | Hero h1, below `sm`                                                                                                             |
-| `text-display-wide` | clamp 2.25–4.25rem (6.4vw) | 1.08        | Hero h1 from `sm` (two fixed lines)                                                                                             |
-| `text-heading`      | clamp 1.875–2.5rem         | 1.12        | Section h2                                                                                                                      |
-| `text-title`        | 1.625rem                   | 1.25        | Card h3, dialog title                                                                                                           |
-| `text-lead`         | 1.3125rem                  | 1.55        | Hero supporting line from `md`; course titles in mobile course rows and reason-list titles below `md` (the list-row exceptions) |
-| `text-base`         | 1.0625rem                  | 1.6         | Body (default on `<body>`)                                                                                                      |
-| `text-sm`           | 0.9375rem                  | 1.5         | Smallest text: eyebrows, captions, nav, buttons                                                                                 |
+| Token               | Size                         | LH   | Weight | Tracking | Use                                                                                           |
+| ------------------- | ---------------------------- | ---- | ------ | -------- | --------------------------------------------------------------------------------------------- |
+| `text-display`      | clamp 2.5–4.75rem (9.4vw)    | 1.04 | 500    | -0.02em  | Hero h1, below `sm`                                                                           |
+| `text-display-wide` | clamp 2.5–4.75rem (7.2vw)    | 1.04 | 500    | -0.02em  | Hero h1 from `sm` (two fixed lines)                                                           |
+| `text-heading`      | clamp 2–2.75rem              | 1.1  | 500    | -0.015em | Section h2; result score from `md`                                                            |
+| `text-title`        | 1.625rem                     | 1.2  | 500    | -0.01em  | Card h3 from `md`, reason h3 from `md`, dialog title, result score below `md`                 |
+| `text-subtitle`     | 1.375rem                     | 1.25 | 500    | -0.005em | Serif titles in list rows below `md` (course, reason) and video titles                        |
+| `text-lead`         | 1.1875rem                    | 1.5  | 400    | 0        | Hero supporting line from `md`; FAQ question and result name from `md` (Nunito Sans, 600)     |
+| `text-intro`        | clamp 1–1.125rem             | 1.6  | 400    | 0        | Section intro under the h2                                                                    |
+| `text-base`         | 1rem                         | 1.65 | 400    | 0        | Body (default on `<body>`), answers, quotes, reason lines                                     |
+| `text-eyebrow`      | 0.9375rem                    | 1.4  | 500    | 0.02em   | Section and hero eyebrows, course group labels                                                |
+| `text-sm`           | 0.9375rem                    | 1.5  | 400    | 0        | Smallest text: meta, captions, bylines, course notes, proof line, hours                       |
+
+At 1280: h1 76 → h2 44 → title 26 → subtitle 22 → lead 19 → intro 18 → body 16 → small 15. Do not set `font-normal`, `tracking-*` or `leading-*` on a headed role; the token carries them.
 
 ### Named Rules
 
-**The Heading Weight Rule.** Headings are EB Garamond, regular by default; 500 only where a heading looks thin. No bold, no italic, no faux weights. To be reviewed in the typeset step.
+**The Heading Weight Rule.** Headings are EB Garamond 500 through the size tokens. No bold, no italic, no faux weights.
 **The Heading Level Rule.** `h1` only in the hero, `h2` for sections, `h3` for cards. Section headings are h2 in EB Garamond. Footer and utility headings may be h2 styled as small Nunito Sans labels.
-**The Floor Rule.** Minimum text size is 0.9375rem. Do not use `text-xs` or arbitrary smaller sizes.
+**The Floor Rule.** Minimum text size is 0.9375rem. Do not use `text-xs` or arbitrary sizes.
+**The Figures Rule.** Serif numerals are lining (set on `--font-heading`); figures that align or change are also `tabular-nums`.
+**The Wrap Rule.** `h1`–`h3` use `text-wrap: balance`; `p`, `li`, `blockquote`, `figcaption` use `text-wrap: pretty` (both in `globals.css`). Where that cannot save a lone word in a narrow card, join the last words with a no-break space in the copy (`\u00a0`, e.g. course notes "8 or 9", "usually June–August").
 **Line length.** Intro paragraphs cap at `max-w-prose`; hero supporting line at `max-w-xl`.
 
 ## Layout
@@ -214,29 +242,29 @@ Portraits are rounded rectangles (`rounded-xl`), head-and-shoulders, `aspect-4/5
 
 ### Course grid
 
-Courses grouped under muted `text-sm` labels (a `<p>`, not a heading) with a hairline rule running right. Below `md` each group is one raised `card` panel of full-width rows (min `4rem`, hairline dividers, title `text-lead`, note, chevron). From `md` the panel dissolves into cards (`rounded-xl`, 2 columns); from `lg` every group shares one column grid (largest group, up to 4). Each course is a stretched link (`<h3><a>` with `after:inset-0`), so its accessible name is the title only. Hover (pointer devices only) is `muted`, a soft flame glow rising from the card's bottom edge and a 0.25rem arrow nudge; pressed is `accent` with the same glow and nudge, instantly. The glow is a `::before` radial gradient (`flame` 40%, `saffron` 12%, in the bottom half only), kept faint so `muted-foreground` text stays at 5:1 or better over it; it never covers the title. Under reduced motion the glow still appears (a static colour change) but nothing moves. The Classes 11–12 stream card is not a link and has no glow; its chips keep their own states. Groups with fewer than three items (Entrance and skills) use two wider columns from `lg` (`max-w-3xl`) so long titles keep to two lines. Focus is the 2px ring on the whole row or card. A stream group (Classes 11–12) is not a link: its stream chips are `h-11` outline links with a hidden group prefix. No red in the section.
+Courses grouped under muted `text-eyebrow` labels (a `<p>`, not a heading) with a hairline rule running right. Below `md` each group is one raised `card` panel of full-width rows (min `4rem`, hairline dividers, title `text-subtitle`, note, chevron). From `md` the panel dissolves into cards (`rounded-xl`, 2 columns); from `lg` every group shares one column grid (largest group, up to 4). Each course is a stretched link (`<h3><a>` with `after:inset-0`), so its accessible name is the title only. Hover (pointer devices only) is `muted`, a soft flame glow rising from the card's bottom edge and a 0.25rem arrow nudge; pressed is `accent` with the same glow and nudge, instantly. The glow is a `::before` radial gradient (`flame` 40%, `saffron` 12%, in the bottom half only), kept faint so `muted-foreground` text stays at 5:1 or better over it; it never covers the title. Under reduced motion the glow still appears (a static colour change) but nothing moves. The Classes 11–12 stream card is not a link and has no glow; its chips keep their own states. Groups with fewer than three items (Entrance and skills) use two wider columns from `lg` (`max-w-3xl`) so long titles keep to two lines. Focus is the 2px ring on the whole row or card. A stream group (Classes 11–12) is not a link: its stream chips are `h-11` outline links (`px-3.5`, `gap-1.5`, so three fit in at most two rows at 768 and 1280) with a hidden group prefix. No red in the section.
 
 ### Reason list
 
-A ruled `<ol>` of 3–8 reasons (`reason-list`). Numerals are CSS counters (EB Garamond `font-normal`, `text-muted-foreground`, tabular figures, fixed 2.5rem column, empty alt text so screen readers hear the list, not the number). Each row: `h3` title (`text-lead`, `text-title` from `md`) and one line of muted `text-base`; hairline rules between rows only (`py-5`, `md:py-6`). No icons, cards, hover, links, chevrons, red or motion. Mobile: heading, list, then the figure (`h-56` photo, `rounded-xl`, caption). From `md`: 12-column grid by named areas; heading and figure in columns 1–5 (figure bottom aligned with the last row), list in 6–12. Default paper tone, no divider.
+A ruled `<ol>` of 3–8 reasons (`reason-list`). Numerals are CSS counters (EB Garamond, `text-muted-foreground`, tabular figures, fixed 2.5rem column, empty alt text so screen readers hear the list, not the number). Each row: `h3` title (`text-subtitle`, `text-title` from `md`) and one line of muted `text-base`; hairline rules between rows only (`py-5`, `md:py-6`). No icons, cards, hover, links, chevrons, red or motion. Mobile: heading, list, then the figure (`h-56` photo, `rounded-xl`, caption). From `md`: 12-column grid by named areas; heading and figure in columns 1–5 (figure bottom aligned with the last row), list in 6–12. Default paper tone, no divider.
 
 ### Results grid
 
 Recent results on home (`results-grid`, from `src/content/results.ts`, resolved to `{ name, photo, headline, meta }`; highlights only, newest year first). Tone is `muted`: why-daksh above and testimonials below are paper, so the results get their own surface and the raised cards lift off it with a hairline. One markup for every width; cards are not links and have no hover or motion.
 
-Card: photo `aspect-4/5`, `rounded-xl`, no effects (initials in EB Garamond when there is no photo, decorative `alt=""` because the name sits beside it). Then the score or admission (`headline`: "96.2%", or the school's short name, "Sainik", "RMS", "RIMC", so it stays on one line in a five-across card) in EB Garamond `font-normal` with tabular figures, `text-title` on mobile and `text-heading` from `md`; then the student's name as an `h3`; then a muted `text-sm` meta line ("Class 12 · Science · CBSE 2026 · Classes 11–12 tuition" or "Admitted · AISSEE 2026 · RMS/RIMC/Sainik prep"). The meta line breaks only between its parts, never inside one. DOM order is name, score, meta; the score is shown first. The student name is an `h3` in Nunito Sans 500 (`text-base`, `text-lead` from `md`), not EB Garamond: with the score set in the serif at heading size, a second serif line would compete with it. This is a deliberate exception to "h3 is EB Garamond", like the FAQ questions. Subject marks are not shown on home (`variant: "compact"`).
+Card: photo `aspect-4/5`, `rounded-xl`, no effects (initials in EB Garamond when there is no photo, decorative `alt=""` because the name sits beside it). Then the score or admission (`headline`: "96.2%", or the school's short name, "Sainik", "RMS", "RIMC", so it stays on one line in a five-across card) in EB Garamond with lining tabular figures, `text-title` on mobile and `text-heading` from `md`; then the student's name as an `h3`; then a muted `text-sm` meta line ("Class 12 · Science · CBSE 2026 · Classes 11–12 tuition" or "Admitted · AISSEE 2026 · RMS/RIMC/Sainik prep"). The meta line breaks only between its parts, never inside one. DOM order is name, score, meta; the score is shown first. The student name is an `h3` in Nunito Sans 600 (`text-base`, `text-lead` from `md`), not EB Garamond: with the score set in the serif at heading size, a second serif line would compete with it. This is a deliberate exception to "h3 is EB Garamond", like the FAQ questions. Subject marks are not shown on home (`variant: "compact"`).
 
 Layout: below `md`, one raised `card` panel of rows (4.5rem photo left, hairline dividers). At `md`, six columns with cards spanning two, so 3 + 2 with the short row centred (structural `nth-` selectors, no per-count markup). At `lg`, five equal cards in one row. From `md` each card is a four-row subgrid (photo, score, name, meta), so a percentage card and an admission card line up even when "Rashtriya Military School" wraps. No red.
 
 ### Testimonial grid
 
-Three testimonials on home (`testimonial-grid`, ids resolved to `{ name, byline, text, photo }`). Not cards: each is a `<figure>` under a hairline rule, three columns from `md`, stacked on mobile. The quote is the visitor's own words, verbatim, in Nunito Sans `text-base` in ink (`<blockquote>`); no quote glyph, no italic, no EB Garamond. The `<figcaption>` holds a 3rem circular avatar (`object-cover object-top`, initials on `muted` when there is no photo) beside the name (Nunito Sans 500) and a muted `text-sm` byline (the context, else "Student" or "Parent"). Default paper tone: results above are muted, the videos band below. From `md` the blocks are a two-row subgrid (quote, then attribution), so every name and avatar sits on one line whatever the quote length; the avatar and name are top-aligned so a two-line byline does not shift them. No motion, no red.
+Three testimonials on home (`testimonial-grid`, ids resolved to `{ name, byline, text, photo }`). Not cards: each is a `<figure>` under a hairline rule, three columns from `md`, stacked on mobile. The quote is the visitor's own words, verbatim, in Nunito Sans `text-base` in ink (`<blockquote>`); no quote glyph, no italic, no EB Garamond. The `<figcaption>` holds a 3rem circular avatar (`object-cover object-top`, initials on `muted` when there is no photo) beside the name (Nunito Sans 600) and a muted `text-sm` byline (the context, else "Student" or "Parent"). Default paper tone: results above are muted, the videos band below. From `md` the blocks are a two-row subgrid (quote, then attribution), so every name and avatar sits on one line whatever the quote length; the avatar and name are top-aligned so a two-line byline does not shift them. No motion, no red.
 
 ### Video grid
 
 Free YouTube playlists (`video-grid`, videos from `src/content/videos.ts`, resolved to `{ title, href, thumbnail, meta }`; the playlist URL is built only in `content.ts`). Cards link out: no iframe, no YouTube script, and thumbnails go through `next/image` (`i.ytimg.com` in `remotePatterns`), so the browser contacts YouTube only after a click. Each card is a stretched link (`<h3><a target="_blank" rel="noopener noreferrer">`, `after:inset-0`) with accessible name "Class 10 Maths playlist on YouTube (opens in a new tab)". Thumbnails are 16:9 (`maxresdefault`), `rounded-md`/`lg`, decorative (`alt=""`), lazy. Meta line is muted `text-sm` ("Playlist · YouTube"); a Hugeicons `ArrowUpRight01Icon` (aria-hidden) nudges diagonally on hover and press.
 
-Layout: all playlists are equal cards (no lead card). Below `md`, compact rows (6rem thumbnail, title `text-lead`, meta, arrow) in one raised panel, like the course grid; chosen over a horizontal scroll row because a swipe row hides three or four playlists and stacked 16:9 cards run over 1,300px. From `md`, cards wrap in a centred flex row: 3 per row at `md` (3 + 2, the short row centred, so no orphan at the edge) and 5 per row at `lg` (about 13rem wide at 1280, so every title stays on one line). The arrow sits on the meta line, not beside the title. Thumbnails are 16:9, uncropped (`object-cover` in a 16:9 box), so no thumbnail text is cut.
+Layout: all playlists are equal cards (no lead card). Below `md`, compact rows (6rem thumbnail, title `text-subtitle`, meta, arrow) in one raised panel, like the course grid; chosen over a horizontal scroll row because a swipe row hides three or four playlists and stacked 16:9 cards run over 1,300px. From `md`, cards wrap in a centred flex row: 3 per row at `md` (3 + 2, the short row centred, so no orphan at the edge) and 5 per row at `lg` (about 13rem wide at 1280, so every title stays on one line). The arrow sits on the meta line, not beside the title. Thumbnails are 16:9, uncropped (`object-cover` in a 16:9 box), so no thumbnail text is cut.
 
 Thumbnails rest calm: `saturate(0.6) sepia(0.12)` so the bright YouTube art sits in the warm palette. On hover (pointer devices only) and while pressed they return to full colour (`saturate(1) sepia(0)`, 300ms) together with the course grid's flame glow (`card-styles.ts`) and a `muted`/`accent` fill. Under reduced motion the colour change is instant (`transition-none`) and the arrow does not move. Tone is `band`: why-daksh above is paper, so a paper videos section would run on without an edge; the band gives it its own surface and steps tint → ink into the CTA. The action is `outline` (never `secondary` on a band), no red.
 
@@ -246,7 +274,7 @@ Questions parents ask before they call (`faq`, items `{ question, answer }`). Te
 
 Layout: below `md` a single column. From `md` a 12-column grid like the reason list: heading block in columns 1–5, sticky under the navbar, questions in 6–12, so nine questions do not become one long narrow centred scroll. Default paper tone (the videos band is above, the dark CTA below). Hairline rules between items and at the top and bottom of the list. All closed by default; several can be open.
 
-Each question is a `<details>` with a full-width `<summary>` (min `2.75rem`, `focus-ring`, default marker removed). The question is an `h3` in Nunito Sans 500 (`text-base`, 1.1875rem from `md`, one step under `text-lead` so nine rows stay calm), not EB Garamond: nine serif lines in a row read as display text and compete with the h2, while Nunito Sans medium scans as a list. This is a deliberate exception to "h3 is EB Garamond". A Hugeicons chevron (`aria-hidden`, muted) rotates 180° when open (a plus would read as "close"). The answer is muted `text-base`, `max-w-prose`.
+Each question is a `<details>` with a full-width `<summary>` (min `2.75rem`, `focus-ring`, default marker removed). The question is an `h3` in Nunito Sans 600 (`text-base`, `text-lead` from `md`), not EB Garamond: nine serif lines in a row read as display text and compete with the h2, while Nunito Sans semibold scans as a list. This is a deliberate exception to "h3 is EB Garamond". A Hugeicons chevron (`aria-hidden`, muted) rotates 180° when open (a plus would read as "close"). The answer is muted `text-base`, `max-w-prose`.
 
 Motion: a small client island (`FaqList`, anime.js) wraps the list. A click on a summary (mouse, Enter, Space) is intercepted and the answer's height and opacity animate over 250ms, with `open` set before opening and removed after closing; the chevron turns in sync (CSS, keyed to `[open]:not([data-closing])`). A click mid-animation takes over from the current height. Items the browser opens itself (find-in-page) are left alone. Without JS, and under reduced motion, the native instant toggle applies. No red.
 
@@ -276,7 +304,7 @@ Real photos of the institute and people only. Never AI-generated people. Decorat
 ### Do
 
 - **Do** use the primary token for buttons and `primary-hover` for hover.
-- **Do** keep headings EB Garamond `font-normal` and body Nunito Sans 400/500.
+- **Do** keep headings EB Garamond 500 (via the size tokens) and body Nunito Sans 400/500/600.
 - **Do** use `text-sm` (0.9375rem) as the smallest size.
 - **Do** keep primary actions at 2.75rem below `lg` (visible size or invisible `hit-area`) and 2.25rem on desktop.
 - **Do** start every page with a hero.

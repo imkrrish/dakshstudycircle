@@ -70,10 +70,10 @@ function ResultItem({ item }: { item: Item }) {
         )}
       </div>
       <div className="flex min-w-0 flex-col md:contents">
-        <h3 className="order-2 text-base font-medium md:row-start-3 md:px-1 md:pt-1 md:text-lead">
+        <h3 className="order-2 text-base font-semibold md:row-start-3 md:px-1 md:pt-1 md:text-lead">
           {item.name}
         </h3>
-        <p className="order-1 font-heading text-title leading-tight break-words tabular-nums md:row-start-2 md:px-1 md:pt-4 md:text-heading">
+        <p className="order-1 font-heading text-title break-words tabular-nums md:row-start-2 md:px-1 md:pt-4 md:text-heading">
           {item.headline}
         </p>
         <p className="order-3 text-sm text-muted-foreground md:row-start-4 md:px-1 md:pt-1 md:pb-1">

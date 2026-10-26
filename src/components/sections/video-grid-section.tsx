@@ -38,7 +38,7 @@ function VideoItem({ item }: { item: Item }) {
         />
       </div>
       <div className="grid flex-1 grid-cols-[1fr_auto] items-center gap-x-3 gap-y-1 md:px-1 md:pb-1">
-        <h3 className="font-heading text-lead font-normal md:col-span-2">
+        <h3 className="font-heading text-subtitle md:col-span-2">
           <a
             href={item.href}
             target="_blank"

@@ -53,7 +53,7 @@ async function Footer() {
           </div>
         </div>
         <div className="mt-6 flex flex-wrap items-center justify-between gap-x-6 border-t pt-2 md:mt-10 md:pt-4">
-          <p className="font-heading text-base text-foreground md:text-lead">
+          <p className="font-heading text-base font-bold text-foreground md:text-lead">
             {site.tagline}
           </p>
           <FooterSocials

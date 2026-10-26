@@ -56,7 +56,7 @@ async function CtaBandSection({ section }: { section: SectionOf<"cta-band"> }) {
           </div>
         )}
         {hours && (
-          <p className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
+          <p className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm text-muted-foreground tabular-nums">
             <HugeiconsIcon
               icon={Clock01Icon}
               strokeWidth={2}

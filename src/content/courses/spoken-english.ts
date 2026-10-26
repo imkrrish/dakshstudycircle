@@ -10,7 +10,7 @@ export const spokenEnglish: Course = {
   title: "Spoken English",
   summary:
     "A 3-month Spoken English course for students of Classes 1–12, usually held June–August.",
-  cardNote: "A 3-month course for Classes 1–12, usually June–August",
+  cardNote: "A 3-month course for Classes 1–12, usually June–August",
   classes: [
     "Class 1",
     "Class 2",

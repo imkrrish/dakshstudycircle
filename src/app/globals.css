@@ -44,23 +44,46 @@
   --color-flame: var(--flame);
   --color-flame-light: var(--flame-light);
   --color-saffron: var(--saffron);
-  /* Type scale, ratio about 1.25. Minimum text is 0.9375rem. */
-  --text-sm: 0.9375rem;
-  --text-sm--line-height: 1.5;
-  --text-base: 1.0625rem;
-  --text-base--line-height: 1.6;
-  --text-lead: 1.3125rem;
-  --text-lead--line-height: 1.55;
-  --text-title: 1.95rem;
-  --text-title--line-height: 1.2;
-  --text-heading: clamp(2.25rem, 1.8rem + 1.9vw, 3rem);
-  --text-heading--line-height: 1.08;
-  --text-display: clamp(2.7rem, 10.2vw, 5.1rem);
+  /* EB Garamond has old-style figures by default; headings get lining ones. */
+  --font-heading--font-feature-settings: "lnum";
+  /* Type scale. Minimum text is 0.9375rem. EB Garamond tokens (display to
+     subtitle) carry weight 500 and a little negative tracking: the face is
+     light with a small x-height. Nunito Sans tokens (lead to sm) stay 400 and
+     are sized down, because its x-height is large. */
+  --text-display: clamp(2.5rem, 9.4vw, 4.75rem);
   --text-display--line-height: 1.04;
+  --text-display--letter-spacing: -0.02em;
+  --text-display--font-weight: 500;
   /* From sm up the hero headline is two fixed lines, so it scales with the
      viewport more slowly: the first line is about 14x the font size wide. */
-  --text-display-wide: clamp(2.7rem, 7.7vw, 5.1rem);
+  --text-display-wide: clamp(2.5rem, 7.2vw, 4.75rem);
   --text-display-wide--line-height: 1.04;
+  --text-display-wide--letter-spacing: -0.02em;
+  --text-display-wide--font-weight: 500;
+  --text-heading: clamp(2rem, 1.7rem + 1.4vw, 2.75rem);
+  --text-heading--line-height: 1.1;
+  --text-heading--letter-spacing: -0.015em;
+  --text-heading--font-weight: 500;
+  --text-title: 1.625rem;
+  --text-title--line-height: 1.2;
+  --text-title--letter-spacing: -0.01em;
+  --text-title--font-weight: 500;
+  --text-subtitle: 1.375rem;
+  --text-subtitle--line-height: 1.25;
+  --text-subtitle--letter-spacing: -0.005em;
+  --text-subtitle--font-weight: 500;
+  --text-lead: 1.1875rem;
+  --text-lead--line-height: 1.5;
+  --text-intro: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --text-intro--line-height: 1.6;
+  --text-base: 1rem;
+  --text-base--line-height: 1.65;
+  --text-eyebrow: 0.9375rem;
+  --text-eyebrow--line-height: 1.4;
+  --text-eyebrow--letter-spacing: 0.02em;
+  --text-eyebrow--font-weight: 500;
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.5;
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -191,7 +214,19 @@
   }
   h1,
   h2 {
-    @apply font-heading font-normal;
+    @apply font-heading;
+  }
+  /* No one-word last lines: balance short blocks, tidy the end of prose. */
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  p,
+  li,
+  blockquote,
+  figcaption {
+    text-wrap: pretty;
   }
   button:not(:disabled),
   [role="button"]:not(:disabled) {

@@ -35,14 +35,14 @@ function SectionHeading({
       className={cn(sectionHeadingVariants({ align, className }))}
       {...props}
     >
-      {eyebrow && <p className="text-sm text-muted-foreground">{eyebrow}</p>}
-      <h2 id={id} className="font-heading text-heading font-normal">
+      {eyebrow && (
+        <p className="text-eyebrow text-muted-foreground">{eyebrow}</p>
+      )}
+      <h2 id={id} className="font-heading text-heading">
         {title}
       </h2>
       {intro && (
-        <p className="max-w-prose text-base leading-relaxed text-muted-foreground md:text-lg">
-          {intro}
-        </p>
+        <p className="mt-1 max-w-prose text-intro text-muted-foreground">{intro}</p>
       )}
     </div>
   )

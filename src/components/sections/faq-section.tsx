@@ -35,7 +35,7 @@ function FaqSection({ section }: { section: SectionOf<"faq"> }) {
             {items.map((item) => (
               <details key={item.question} className="group">
                 <summary className="flex min-h-11 w-full cursor-pointer list-none items-center justify-between gap-4 rounded-sm py-4 focus-ring marker:content-none [&::-webkit-details-marker]:hidden">
-                  <h3 className="text-base font-medium md:text-[1.1875rem]">
+                  <h3 className="text-base font-semibold md:text-lead">
                     {item.question}
                   </h3>
                   <HugeiconsIcon

@@ -27,18 +27,15 @@ const heroSectionVariants = cva(
   },
 )
 
-const heroHeadingVariants = cva(
-  "font-heading font-normal tracking-tight text-balance",
-  {
-    variants: {
-      size: {
-        large: "text-display sm:text-display-wide",
-        compact: "text-display",
-      },
+const heroHeadingVariants = cva("font-heading text-balance", {
+  variants: {
+    size: {
+      large: "text-display sm:text-display-wide",
+      compact: "text-display",
     },
-    defaultVariants: { size: "large" },
   },
-)
+  defaultVariants: { size: "large" },
+})
 
 function HeroSection({ section }: { section: SectionOf<"hero"> }) {
   const { id, size, eyebrow, heading, subheading, proofLine, actions } = section
@@ -86,7 +83,7 @@ function HeroSection({ section }: { section: SectionOf<"hero"> }) {
   )
 
   const eyebrowRow = eyebrow && (
-    <p className="flex items-center gap-3 text-sm text-muted-foreground">
+    <p className="flex items-center gap-3 text-eyebrow text-muted-foreground">
       <span aria-hidden="true" className="h-px w-8 bg-muted-foreground/40" />
       {eyebrow}
       <span aria-hidden="true" className="h-px w-8 bg-muted-foreground/40" />
