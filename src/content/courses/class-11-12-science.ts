@@ -1,25 +1,32 @@
 import type { Course } from "@/lib/content-schema"
 
 // Open [CONFIRM] items:
-// - Whether Computer Science or English are offered
-// - Modes (group, online, home, offline) for this course
-// - Batch size, timings, duration, fees
+// - Which subjects belong to which stream (split proposed, not confirmed by the owner)
+// - Batch timings, duration, fees
 // - Faculty per subject (facultyIds)
 
 export const class11To12Science: Course = {
   slug: "class-11-12-science",
   title: "Class 11–12 Science",
   summary:
-    "Physics, Chemistry, Maths and Biology for Classes 11 and 12, for students in the science stream.",
-  cardNote: "Physics, Chemistry, Maths and Biology",
+    "Science subjects for CBSE Classes 11–12, taught in small batches with the syllabus finished early.",
+  cardNote: "Physics, Chemistry, Maths, Biology and more",
   classes: ["Class 11", "Class 12"],
-  subjects: ["Physics", "Chemistry", "Maths", "Biology"],
+  subjects: [
+    "Physics",
+    "Chemistry",
+    "Maths",
+    "Biology",
+    "English",
+    "C++ (Computer Science)",
+    "Informatics Practices",
+  ],
   facultyIds: [],
   order: 4,
   seo: {
-    title: "Class 11–12 Science, Delhi Cantt",
+    title: "Science Tuition (11–12), Delhi Cantt",
     description:
-      "Physics, Chemistry, Maths and Biology for Class 11 and 12 at Daksh Study Circle, Sadar Bazaar, Delhi Cantt. Call or WhatsApp to ask about batches.",
+      "Class 11 and 12 science tuition in Sadar Bazaar, Delhi Cantt: Physics, Chemistry, Maths. Small batches, regular tests and a free demo class.",
   },
   sections: [
     {
@@ -29,7 +36,7 @@ export const class11To12Science: Course = {
       eyebrow: "Science stream · Classes 11–12",
       heading: ["Science for Classes 11 and 12"],
       subheading:
-        "Physics, Chemistry, Maths and Biology, taught to the CBSE syllabus in Delhi Cantt.",
+        "Physics, Chemistry, Maths and Biology, plus English, Computer Science (C++) and Informatics Practices, to the CBSE syllabus.",
     },
   ],
 }

@@ -1,25 +1,23 @@
 import type { Course } from "@/lib/content-schema"
 
 // Open [CONFIRM] items:
-// - Exact subject list
-// - Modes (group, online, home, offline) for this course
-// - Batch size, timings, duration, fees
+// - Batch timings, duration, fees
 // - Faculty per subject (facultyIds)
 
 export const classes9To10: Course = {
   slug: "classes-9-10",
   title: "Classes 9–10",
   summary:
-    "CBSE tuition across subjects for Classes 9 and 10, the two years that lead to the Class 10 board exam.",
-  cardNote: "All subjects, leading up to the Class 10 boards",
+    "Tuition in Maths, Science, English, Hindi and Social Studies for Classes 9–10, with steady preparation for the Class 10 boards.",
+  cardNote: "Five subjects, leading up to the Class 10 boards",
   classes: ["Class 9", "Class 10"],
-  subjects: ["All CBSE school subjects"],
+  subjects: ["Maths", "Science", "English", "Hindi", "Social Studies"],
   facultyIds: [],
   order: 3,
   seo: {
-    title: "Classes 9–10 Tuition in Delhi Cantt",
+    title: "Classes 9–10 CBSE Tuition, Delhi Cantt",
     description:
-      "CBSE tuition for Classes 9 and 10 in Delhi Cantt, leading up to the Class 10 board exam. Call or WhatsApp Daksh Study Circle, Sadar Bazaar.",
+      "Class 9 and 10 CBSE tuition in Delhi Cantt: Maths, Science, English, Hindi, Social Studies. Syllabus finished early, then revision for the boards.",
   },
   sections: [
     {
@@ -29,7 +27,7 @@ export const classes9To10: Course = {
       eyebrow: "Classes 9–10 · CBSE",
       heading: ["Getting ready for the Class 10 boards"],
       subheading:
-        "CBSE tuition for Classes 9 and 10 in Delhi Cantt, across subjects.",
+        "Maths, Science, English, Hindi and Social Studies for Classes 9 and 10, in Delhi Cantt.",
     },
   ],
 }

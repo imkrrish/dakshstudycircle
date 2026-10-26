@@ -7,6 +7,7 @@ import { Section } from "@/components/layout/section"
 import { SectionHeading } from "@/components/layout/section-heading"
 import { ActionButton } from "@/components/shared/action-button"
 import { getSite } from "@/lib/content"
+import { formatHours } from "@/lib/hours"
 import type { SectionOf } from "@/lib/content-schema"
 
 const ctaBandVariants = cva("", {
@@ -21,7 +22,9 @@ const ctaBandVariants = cva("", {
 
 async function CtaBandSection({ section }: { section: SectionOf<"cta-band"> }) {
   const { id, variant, heading, body, actions, showHours } = section
-  const hours = showHours ? (await getSite()).contact.hours : undefined
+  const hours = showHours
+    ? formatHours((await getSite()).contact.hours)
+    : undefined
 
   return (
     <Section
@@ -53,14 +56,23 @@ async function CtaBandSection({ section }: { section: SectionOf<"cta-band"> }) {
           </div>
         )}
         {hours && (
-          <p className="flex items-center gap-2 text-sm text-muted-foreground">
+          <p className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
             <HugeiconsIcon
               icon={Clock01Icon}
               strokeWidth={2}
               className="size-4"
               aria-hidden="true"
             />
-            {hours}
+            {hours.map((row, i) => (
+              <span key={row} className="whitespace-nowrap">
+                {i > 0 && (
+                  <span aria-hidden="true" className="mr-2">
+                    ·
+                  </span>
+                )}
+                {row}
+              </span>
+            ))}
           </p>
         )}
       </Container>

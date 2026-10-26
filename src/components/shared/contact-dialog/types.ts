@@ -1,8 +1,8 @@
 import type { Site } from "@/lib/content-schema"
 
-type ContactDialogData = Pick<
-  Site["contact"],
-  "phones" | "hours" | "whatsappMessage"
->
+// `hours` arrives already formatted, one string per row (see formatHours).
+type ContactDialogData = Pick<Site["contact"], "phones" | "whatsappMessage"> & {
+  hours: string[]
+}
 
 export type { ContactDialogData }

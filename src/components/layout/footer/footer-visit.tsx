@@ -2,6 +2,7 @@ import type { ComponentProps } from "react"
 import { cn } from "cn"
 
 import type { Site } from "@/lib/content-schema"
+import { formatHours } from "@/lib/hours"
 import { FooterColumn, footerLinkClass } from "./footer-column"
 
 function FooterVisit({
@@ -29,7 +30,11 @@ function FooterVisit({
           {lines.join(", ")}
         </address>
       </li>
-      <li className="text-sm text-muted-foreground md:text-base">{hours}</li>
+      {formatHours(hours).map((row) => (
+        <li key={row} className="text-sm text-muted-foreground md:text-base">
+          {row}
+        </li>
+      ))}
       {mapUrl && (
         <li>
           <a

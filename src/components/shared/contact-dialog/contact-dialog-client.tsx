@@ -56,6 +56,13 @@ function ContactDialogClient({
     if (!next) closeDialog()
   }
 
+  // One line per row, so any number of rows stacks cleanly.
+  const hoursRows = hours.map((row) => (
+    <span key={row} className="block">
+      {row}
+    </span>
+  ))
+
   const list = (
     <ContactPhoneList phones={phones} whatsappMessage={whatsappMessage} />
   )
@@ -73,7 +80,7 @@ function ContactDialogClient({
             <DialogTitle className="font-heading text-title font-normal">
               {TITLE}
             </DialogTitle>
-            <DialogDescription>{hours}</DialogDescription>
+            <DialogDescription>{hoursRows}</DialogDescription>
           </DialogHeader>
           {list}
           <DialogClose render={closeButton}>
@@ -96,7 +103,7 @@ function ContactDialogClient({
           <DrawerTitle className="font-heading text-title font-normal">
             {TITLE}
           </DrawerTitle>
-          <DrawerDescription>{hours}</DrawerDescription>
+          <DrawerDescription>{hoursRows}</DrawerDescription>
           <DrawerClose render={closeButton}>
             <HugeiconsIcon icon={Cancel01Icon} aria-hidden="true" />
             <span className="sr-only">Close</span>

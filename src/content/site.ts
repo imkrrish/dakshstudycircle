@@ -25,7 +25,12 @@ export const site: Site = {
       },
     ],
     emails: ["urdaksh@gmail.com", "dakshstudycircle@gmail.com"],
-    hours: "Mon–Sat, 10 am – 7 pm",
+    hours: [
+      { from: "mon", to: "sat", opens: "09:00", closes: "20:00" },
+      { from: "sun", opens: "09:00", closes: "18:00" },
+    ],
+    landmark: "Behind the Mother Dairy booth, opposite Sadar Bazaar bus stand",
+    nearestMetro: "Sadar Bazar Cantonment (Magenta Line), about 2 km",
     whatsappMessage:
       "Hello, I'd like to know about classes at Daksh Study Circle.",
     address: {

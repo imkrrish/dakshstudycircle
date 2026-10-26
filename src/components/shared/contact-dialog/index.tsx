@@ -1,4 +1,5 @@
 import { getSite } from "@/lib/content"
+import { formatHours } from "@/lib/hours"
 import { ContactDialogClient } from "./contact-dialog-client"
 
 async function ContactDialog() {
@@ -6,7 +7,7 @@ async function ContactDialog() {
   return (
     <ContactDialogClient
       phones={contact.phones}
-      hours={contact.hours}
+      hours={formatHours(contact.hours)}
       whatsappMessage={contact.whatsappMessage}
     />
   )

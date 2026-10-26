@@ -30,6 +30,7 @@ import {
   type Section,
   type Site,
 } from "@/lib/content-schema"
+import { formatHoursInline } from "@/lib/hours"
 import { site as rawSite } from "@/content/site"
 import { pages as rawPages, type PageSlug } from "@/content/pages"
 import { courses as rawCourses } from "@/content/courses"
@@ -189,9 +190,10 @@ function checkSocialActions(
   }
 }
 
-// Site facts that faq text may use as {address}, {phones} and {hours}.
+// Site facts that faq text may use as {address}, {phones}, {hours}, {landmark}
+// and {metro}. The last two exist only when set in site.contact.
 function contactPlaceholders(site: Site): Record<string, string> {
-  const { address, phones, hours } = site.contact
+  const { address, phones, hours, landmark, nearestMetro } = site.contact
   return {
     // Same one-line format as the footer.
     address: [
@@ -205,7 +207,9 @@ function contactPlaceholders(site: Site): Record<string, string> {
     phones: new Intl.ListFormat("en-IN", { type: "disjunction" }).format(
       phones.map((p) => p.display),
     ),
-    hours,
+    hours: formatHoursInline(hours),
+    ...(landmark ? { landmark } : {}),
+    ...(nearestMetro ? { metro: nearestMetro } : {}),
   }
 }
 
@@ -275,7 +279,8 @@ function loadContent() {
   })
 
   // Dev data must read as real copy: no "mock"/"placeholder" wording on the page.
-  const VISIBLE_TEXT_BAN = /\b(mock|placeholder|lorem)\b/i
+  // "mock tests" is ordinary wording (a real testimonial uses it), so it is allowed.
+  const VISIBLE_TEXT_BAN = /\bmock\b(?!\s+tests?\b)|\b(placeholder|lorem)\b/i
 
   const testimonials: Testimonial[] = []
   const testimonialIds = new Set<string>()

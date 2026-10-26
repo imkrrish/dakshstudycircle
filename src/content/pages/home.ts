@@ -37,7 +37,7 @@ export const home: Page = {
       eyebrow: "Our courses",
       heading: "Tuition for every class, from 1 to 12",
       intro:
-        "Plus entrance preparation for defence schools and a Spoken English course. Choose your child's class to begin.",
+        "Plus defence school entrance preparation, Spoken English and classes for college students. Choose your child's class to begin.",
       groups: [
         {
           label: "School tuition",
@@ -58,10 +58,11 @@ export const home: Page = {
           ],
         },
         {
-          label: "Entrance and skills",
+          label: "Beyond school tuition",
           items: [
             { kind: "course", course: "rms-rimc-sainik" },
             { kind: "course", course: "spoken-english" },
+            { kind: "course", course: "college-classes" },
           ],
         },
       ],
@@ -80,10 +81,10 @@ export const home: Page = {
       eyebrow: "From the director",
       heading: "Meet Anil Sir, director of Daksh",
       body: [
-        "I teach Maths to Classes 8–12 myself. At Daksh Study Circle, we look after everything around your child's learning: the classroom atmosphere, the lectures, the study material and the test series.",
+        "I teach Maths to Classes 9–12 myself. At Daksh Study Circle, we look after everything around your child's learning: the classroom atmosphere, the lectures, the study material and the test series.",
         "We also guide you as parents, because you are part of this too. If you would like to know how we can help your child, please come and meet us at our centre in Sadar Bazaar.",
       ],
-      attribution: "Anil Kumar · Director, teaches Maths for Classes 8–12",
+      attribution: "Anil Kumar · Director, teaches Maths for Classes 9–12",
       // PLACEHOLDER: AI-generated development image, cropped (Gemini watermark
       // removed) from public/anildaksh-potrait-img.jpg. Replace with a real
       // photo before launch. The other anildaksh-* files in public/ are AI
@@ -116,10 +117,9 @@ export const home: Page = {
       heading: "Why families in Delhi Cantt join Daksh",
       intro: "The things parents ask us about most, answered plainly.",
       items: [
-        // [CONFIRM] personal attention for every child
         {
           title: "Attention for every child",
-          body: "Not every child learns at the same pace. We pay attention to each student's needs in class.",
+          body: "Batches are small, about 10 to 20 students, so teachers know each child and can answer every doubt.",
         },
         {
           title: "Here since July 2005",
@@ -129,20 +129,17 @@ export const home: Page = {
           title: "Classes 1 to 12, one place",
           body: "From Class 1 to Class 12, plus defence school entrance prep, your child can stay with us through school.",
         },
-        // [CONFIRM] early syllabus completion
         {
           title: "Syllabus finished early",
-          body: "We aim to complete the syllabus early, so your child has more time to revise before exams.",
+          body: "We finish the syllabus early in every class. Then your child revises it with us for the rest of the year.",
         },
-        // [CONFIRM] online classes for missed classes
         {
-          title: "Online classes when needed",
-          body: "If your child misses a class, online sessions help them keep up.",
+          title: "Offline, online or at home",
+          body: "Study at our centre, join online classes, or choose home tuition. Pick what suits your child.",
         },
-        // [CONFIRM] smartboards in classrooms
         {
-          title: "Smart classrooms",
-          body: "Smartboards help teachers explain difficult topics with diagrams and visuals.",
+          title: "A smart classroom",
+          body: "One classroom has a smartboard for clearer explanations, and we are adding more.",
         },
       ],
       // PLACEHOLDER: AI image (cropped, Gemini watermark removed, from
@@ -182,7 +179,7 @@ export const home: Page = {
       eyebrow: "In their words",
       heading: "What families tell us",
       intro: "Parents and students on learning at Daksh, in their own words.",
-      testimonials: ["vikram-negi", "sunita-rawat", "ishita-jain"],
+      testimonials: ["lt-col-saharan", "col-mukesh", "ishita-jain"],
     },
     {
       id: "videos",
@@ -215,39 +212,36 @@ export const home: Page = {
       intro:
         "If your question is not here, call or WhatsApp us. We will answer it plainly.",
       items: [
-        // [CONFIRM] nearest landmark or metro for directions
         {
           question: "Where is Daksh Study Circle, and how do I reach you?",
-          answer: "We are at {address}. Our office is open {hours}.",
+          answer:
+            "We are at {address}. {landmark}. The nearest metro is {metro}, a short auto ride away.",
         },
         {
           question: "Which classes and subjects do you teach?",
           answer:
-            "We teach CBSE students from Class 1 to 12. Batches are Classes 1–5, 6–8 and 9–10. For Classes 11–12 we have Science, Commerce and Humanities. We also run Spoken English.",
+            "We teach CBSE Classes 1–12. Classes 1–8 study Maths, Science and English. Classes 9–10 also study Hindi and Social Studies. For Classes 11–12, we teach Science, Commerce and Humanities subjects. We also run Spoken English for school students and classes for B.A., B.Com. and B.Sc.",
         },
         {
           question:
             "Do you prepare students for RMS, RIMC and Sainik School entrance?",
           answer:
-            "Yes. We offer entrance preparation for RMS, RIMC and Sainik School. Call or WhatsApp us to ask about the batch for your child's class.",
+            "Yes. These students study in a separate batch. Demo classes are available, and we also prepare your child for the interview.",
         },
         {
           question: "Can my child attend a demo class first?",
           answer:
-            "Yes. Your child can attend a demo class before joining, so you can both see how we teach. Call or WhatsApp us on {phones} to book one.",
+            "Yes, for offline classes at our centre. Your child can attend free until you are satisfied and ready to join.",
         },
-        // [CONFIRM] which modes apply to which classes
         {
           question: "Do you have online classes or home tuition?",
           answer:
-            "Yes. We offer group tuition, online classes, home tuition and classes at our centre. Call us to find out what suits your child's class and subject.",
+            "Yes. Along with classes at the centre, we offer online classes and home tuition. Call us to discuss what suits your child.",
         },
-        // [CONFIRM] batch size per class, and how doubts are handled
         {
           question:
             "How many students are in a batch? Will my child get personal attention?",
-          answer:
-            "Call us or visit the centre, and we will tell you the batch size for your child's class.",
+          answer: "About 10 to 20 students, depending on the class.",
         },
         // [CONFIRM] whether fees can be shared by phone or WhatsApp, and any instalment option
         {
@@ -258,12 +252,12 @@ export const home: Page = {
         {
           question: "How do I enquire or get started?",
           answer:
-            "Call or WhatsApp {phones}. You can also visit us at the centre, {hours}.",
+            "Call or WhatsApp {phones}. You can also visit the centre. Opening hours: {hours}.",
         },
         {
           question: "Who teaches Maths?",
           answer:
-            "Director Anil Kumar teaches Maths for Classes 8 to 12. You can also watch his free Maths lessons on our YouTube channel.",
+            "Director Anil Kumar teaches Maths for Classes 9 to 12. You can also watch his free Maths lessons on our YouTube channel.",
         },
       ],
     },
@@ -272,7 +266,7 @@ export const home: Page = {
       type: "cta-band",
       variant: "dark",
       heading: "Let's find the right class for your child",
-      body: "Call or WhatsApp us, or drop by the centre. We'll help you choose the right course and batch for your child.",
+      body: "Call or WhatsApp us, or drop by the centre. We'll help you choose the right course and batch for your child. Your child can try our offline classes free before you decide.",
       actions: [
         {
           label: "Talk to us",

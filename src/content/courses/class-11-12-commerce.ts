@@ -1,25 +1,31 @@
 import type { Course } from "@/lib/content-schema"
 
 // Open [CONFIRM] items:
-// - Whether Business Studies, Maths, English are offered
-// - Modes (group, online, home, offline) for this course
-// - Batch size, timings, duration, fees
+// - Which subjects belong to which stream (split proposed, not confirmed by the owner)
+// - Batch timings, duration, fees
 // - Faculty per subject (facultyIds)
 
 export const class11To12Commerce: Course = {
   slug: "class-11-12-commerce",
   title: "Class 11–12 Commerce",
   summary:
-    "Class 11 and 12 commerce students can study Accounts and Economics here, to the CBSE syllabus.",
-  cardNote: "Accounts and Economics",
+    "Commerce subjects for CBSE Classes 11–12, taught in small batches with the syllabus finished early.",
+  cardNote: "Accountancy, Business Studies, Economics and more",
   classes: ["Class 11", "Class 12"],
-  subjects: ["Accounts", "Economics"],
+  subjects: [
+    "Accountancy",
+    "Business Studies",
+    "Economics",
+    "Maths",
+    "English",
+    "Informatics Practices",
+  ],
   facultyIds: [],
   order: 5,
   seo: {
-    title: "Class 11–12 Commerce, Delhi Cantt",
+    title: "Commerce Tuition (11–12), Delhi Cantt",
     description:
-      "Accounts and Economics for Class 11 and 12 commerce students in Delhi Cantt. Call or WhatsApp Daksh Study Circle, Sadar Bazaar, about batches.",
+      "Class 11 and 12 commerce tuition in Sadar Bazaar, Delhi Cantt: Accountancy, Business Studies, Economics. Small batches, regular tests and a free demo class.",
   },
   sections: [
     {
@@ -29,7 +35,7 @@ export const class11To12Commerce: Course = {
       eyebrow: "Commerce stream · Classes 11–12",
       heading: ["Commerce for Classes 11 and 12"],
       subheading:
-        "Accounts and Economics for commerce students, with CBSE-syllabus tuition in Delhi Cantt.",
+        "Accountancy, Business Studies and Economics, plus Maths, English and Informatics Practices, to the CBSE syllabus.",
     },
   ],
 }

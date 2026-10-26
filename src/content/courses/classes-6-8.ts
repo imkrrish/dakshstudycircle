@@ -1,24 +1,23 @@
 import type { Course } from "@/lib/content-schema"
 
 // Open [CONFIRM] items:
-// - Exact subject list
-// - Modes (group, online, home, offline) for this course
-// - Batch size, timings, duration, fees
+// - Batch timings, duration, fees
+// - Faculty per subject (facultyIds)
 
 export const classes6To8: Course = {
   slug: "classes-6-8",
   title: "Classes 6–8",
   summary:
-    "CBSE tuition for the middle years, when subjects grow more detailed. A bridge between primary classes and the board years.",
-  cardNote: "All school subjects through the middle years",
+    "Maths, Science and English tuition for CBSE Classes 6–8, to keep your child confident through the middle years.",
+  cardNote: "Maths, Science and English through the middle years",
   classes: ["Class 6", "Class 7", "Class 8"],
-  subjects: ["All CBSE school subjects"],
+  subjects: ["Maths", "Science", "English"],
   facultyIds: [],
   order: 2,
   seo: {
-    title: "Classes 6–8 Tuition in Delhi Cantt",
+    title: "Classes 6–8 CBSE Tuition, Delhi Cantt",
     description:
-      "CBSE tuition for Classes 6 to 8 in Delhi Cantt, as subjects grow more detailed. Call or WhatsApp Daksh Study Circle, Sadar Bazaar, to ask about batches.",
+      "CBSE tuition in Maths, Science and English for Classes 6–8 in Sadar Bazaar, Delhi Cantt. Batches of about 10–20, regular tests and revision.",
   },
   sections: [
     {
@@ -28,7 +27,7 @@ export const classes6To8: Course = {
       eyebrow: "Classes 6–8 · CBSE",
       heading: ["Support through Classes 6 to 8"],
       subheading:
-        "CBSE tuition for the middle years, when subjects grow more detailed and homework needs more guidance.",
+        "CBSE tuition in Maths, Science and English for the middle years, when subjects grow more detailed and homework needs more guidance.",
     },
   ],
 }

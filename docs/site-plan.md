@@ -39,13 +39,13 @@ Stats ★ is not on home for now (real numbers only, none yet).
 ### Courses `/courses`
 
 1. hero (small)
-2. card-grid: all 8 courses
+2. card-grid: all 9 courses
 3. steps ★: how joining works
 4. cta-band
 
-### Course detail `/courses/[slug]` (one template, 8 courses)
+### Course detail `/courses/[slug]` (one template, 9 courses)
 
-Slugs: classes-1-5, classes-6-8, classes-9-10, class-11-12-science, class-11-12-commerce, class-11-12-humanities, rms-rimc-sainik, spoken-english
+Slugs: classes-1-5, classes-6-8, classes-9-10, class-11-12-science, class-11-12-commerce, class-11-12-humanities, rms-rimc-sainik, spoken-english, college-classes
 
 1. hero: course name, classes, subjects
 2. split: what's covered

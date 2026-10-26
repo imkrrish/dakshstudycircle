@@ -6,33 +6,25 @@ import type { Course } from "@/lib/content-schema"
 // before publishing any specifics.
 //
 // Open [CONFIRM] items:
-// - Whether Daksh prepares for the interview/viva
 // - Batch timings
 // - Entry classes actually prepared for
-// - Whether it is a separate batch
-// - Modes, batch size, duration, fees
+// - Batch size, duration, fees
 // - Faculty (facultyIds)
 
 export const rmsRimcSainik: Course = {
   slug: "rms-rimc-sainik",
   title: "RMS, RIMC and Sainik School",
   summary:
-    "Preparation for the RMS, RIMC and Sainik School entrance exams, for admission to Class 6, 8 or 9.",
+    "Entrance preparation for RMS, RIMC and Sainik Schools in a separate batch, with interview preparation.",
   cardNote: "Entrance prep for admission to Class 6, 8 or 9",
   classes: ["Class 5", "Class 7", "Class 8"],
-  subjects: [
-    "Mathematics",
-    "English",
-    "Intelligence and reasoning",
-    "General knowledge",
-    "Science and Social Science (Class 9 entry)",
-  ],
+  subjects: ["Entrance exam preparation", "Interview preparation"],
   facultyIds: [],
   order: 7,
   seo: {
-    title: "RMS RIMC Sainik Prep, Delhi Cantt",
+    title: "RMS, RIMC & Sainik School Coaching",
     description:
-      "Entrance preparation for RMS, RIMC and Sainik School admission in Delhi Cantt. Call or WhatsApp Daksh Study Circle, Sadar Bazaar, to ask about batches.",
+      "RMS, RIMC and Sainik School entrance coaching in Delhi Cantt. Separate batch, demo classes and interview preparation for Class 6, 8 or 9 admission.",
   },
   sections: [
     {
@@ -42,7 +34,7 @@ export const rmsRimcSainik: Course = {
       eyebrow: "Defence school entrance",
       heading: ["Entrance preparation for defence schools"],
       subheading:
-        "Entrance preparation for students aiming for admission to RMS, RIMC and Sainik Schools, at Daksh Study Circle in Delhi Cantt.",
+        "A separate batch, demo classes and interview practice for admission to Class 6, 8 or 9.",
     },
   ],
 }

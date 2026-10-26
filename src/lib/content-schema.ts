@@ -47,6 +47,19 @@ const SeoSchema = z.strictObject({
 
 const FeaturesSchema = z.strictObject({ showFaculty: z.boolean() })
 
+const DaySchema = z.enum(["mon", "tue", "wed", "thu", "fri", "sat", "sun"])
+
+// 24-hour "HH:MM".
+const TimeSchema = z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/)
+
+// One row of opening hours: a single day (`from` only) or a range `from`–`to`.
+const OpeningHoursSchema = z.strictObject({
+  from: DaySchema,
+  to: DaySchema.optional(),
+  opens: TimeSchema,
+  closes: TimeSchema,
+})
+
 // `feature` hides the item when that site feature is off.
 const NavItemSchema = z.strictObject({
   label: z.string().min(1),
@@ -80,8 +93,12 @@ const SiteSchema = z.strictObject({
       }),
     ),
     emails: z.array(z.string()),
-    hours: z.string(),
+    // Rows are rendered by formatHours() in src/lib/hours.ts, everywhere hours appear.
+    hours: z.array(OpeningHoursSchema).min(1),
     whatsappMessage: z.string(),
+    // Directions aids; usable in faq text as {landmark} and {metro}.
+    landmark: z.string().optional(),
+    nearestMetro: z.string().optional(),
     address: z.strictObject({
       line1: z.string(),
       line2: z.string().optional(),
@@ -180,7 +197,7 @@ const FaqSectionSchema = z.strictObject({
   intro: z.string().optional(),
   // "band": a deeper warm surface, full-bleed (same as split).
   tone: z.enum(["default", "band"]).optional(),
-  // {address}, {phones} and {hours} in text are filled from site data by getPage().
+  // {address}, {phones}, {hours}, {landmark} and {metro} in text are filled from site data by getPage().
   items: z
     .array(
       z.strictObject({
@@ -198,7 +215,7 @@ const CtaBandSectionSchema = z.strictObject({
   heading: z.string(),
   body: z.string().optional(),
   actions: z.array(ButtonSchema),
-  // Shows site.contact.hours under the buttons.
+  // Shows the site.contact.hours rows under the buttons.
   showHours: z.boolean().optional(),
 })
 
@@ -397,12 +414,12 @@ const CourseSchema = z.strictObject({
   summary: z.string(),
   // Short line for course cards; falls back to the first subject.
   cardNote: z.string().max(60).optional(),
-  // "Class 1" … "Class 12", or "All ages".
+  // "Class 1" … "Class 12", or "College".
   classes: z
     .array(
       z.union([
         z.string().regex(/^Class (1[0-2]|[1-9])$/),
-        z.literal("All ages"),
+        z.literal("College"),
       ]),
     )
     .min(1),

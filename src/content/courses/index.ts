@@ -7,6 +7,7 @@ import { class11To12Commerce } from "./class-11-12-commerce"
 import { class11To12Humanities } from "./class-11-12-humanities"
 import { rmsRimcSainik } from "./rms-rimc-sainik"
 import { spokenEnglish } from "./spoken-english"
+import { collegeClasses } from "./college-classes"
 
 // One file per course, imported and listed here.
 export const courses: Course[] = [
@@ -18,4 +19,5 @@ export const courses: Course[] = [
   class11To12Humanities,
   rmsRimcSainik,
   spokenEnglish,
+  collegeClasses,
 ]
