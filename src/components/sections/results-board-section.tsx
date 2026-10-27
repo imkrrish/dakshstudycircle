@@ -5,11 +5,13 @@ import { Section } from "@/components/layout/section"
 import { SectionHeading } from "@/components/layout/section-heading"
 import { ActionButton } from "@/components/shared/action-button"
 import { DetailsList } from "@/components/shared/details-list"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import type {
   ResolvedResultsBoardSection,
   SectionOf,
 } from "@/lib/content-schema"
+
+import { ResultsBoardIndicator, ResultsBoardTabs } from "./results-board-tabs"
 
 type Item = ResolvedResultsBoardSection["years"][number]["items"][number]
 
@@ -123,7 +125,10 @@ function ResultsBoardSection({
             rule alone below it, so the frame stays light on a phone. */}
         <div className="mx-auto w-full max-w-3xl bg-card sm:border sm:border-foreground/20 sm:p-1.5">
           <div className="border border-foreground/20 px-3 py-8 sm:px-8 sm:py-10 md:px-14 md:py-12">
-            <Tabs defaultValue={String(years[0].year)} className="w-full gap-0">
+            <ResultsBoardTabs
+              defaultValue={String(years[0].year)}
+              className="w-full gap-0"
+            >
               <p className="text-center font-heading text-subtitle tracking-[0.08em] text-muted-foreground [font-variant-caps:all-small-caps]">
                 {boardTitle}
               </p>
@@ -131,8 +136,9 @@ function ResultsBoardSection({
                 variant="line"
                 activateOnFocus
                 aria-label="Results by year"
-                className="mt-1 h-auto! w-full justify-center gap-0 p-0"
+                className="relative mt-1 h-auto! w-full justify-center gap-0 p-0 has-[[data-slot=results-board-indicator]:not([hidden])]:**:data-[slot=tabs-trigger]:after:hidden"
               >
+                <ResultsBoardIndicator />
                 {years.map(({ year }) => (
                   <TabsTrigger
                     key={year}
@@ -146,7 +152,12 @@ function ResultsBoardSection({
                 ))}
               </TabsList>
               {years.map(({ year, items }) => (
-                <TabsContent key={year} value={String(year)} keepMounted>
+                <TabsContent
+                  key={year}
+                  value={String(year)}
+                  data-year={year}
+                  keepMounted
+                >
                   {/* The year, set large between two rules. Decorative: the
                       tab already names the panel. */}
                   <div
@@ -154,7 +165,10 @@ function ResultsBoardSection({
                     className="mt-4 mb-6 flex items-center gap-4 md:gap-6"
                   >
                     <span className="h-px flex-1 bg-foreground/20" />
-                    <span className="font-heading text-display tabular-nums">
+                    <span
+                      data-board-year
+                      className="font-heading text-display tabular-nums"
+                    >
                       {year}
                     </span>
                     <span className="h-px flex-1 bg-foreground/20" />
@@ -168,7 +182,7 @@ function ResultsBoardSection({
                   </DetailsList>
                 </TabsContent>
               ))}
-            </Tabs>
+            </ResultsBoardTabs>
           </div>
         </div>
         {actions && actions.length > 0 && (

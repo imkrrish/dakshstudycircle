@@ -12,6 +12,7 @@ import {
 import type { SectionOf } from "@/lib/content-schema"
 
 import { TestimonialCard } from "./testimonial-card"
+import { TestimonialCarouselMotion } from "./testimonial-carousel-motion"
 
 const tiltFor = (i: number) => (i % 2 === 0 ? "right" : "left")
 
@@ -56,6 +57,7 @@ function TestimonialGridSection({
             aria-label="Testimonials"
             className="flex flex-col gap-8 md:gap-10"
           >
+            <TestimonialCarouselMotion />
             <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-8">
               {headingBlock}
               <div className="flex shrink-0 items-center justify-between gap-4">

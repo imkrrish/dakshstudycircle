@@ -5,6 +5,7 @@ import { Section } from "@/components/layout/section"
 import { ActionButton } from "@/components/shared/action-button"
 import type { SectionOf } from "@/lib/content-schema"
 
+import { EmblemFlame } from "./emblem-flame"
 import { HeroEntrance } from "./hero-entrance"
 import { HeroWash } from "./hero-wash"
 
@@ -108,17 +109,24 @@ function HeroSection({ section }: { section: SectionOf<"hero"> }) {
             className="hidden md:block"
           />
           <div className="flex flex-col items-center justify-center gap-4">
-            <Image
+            {/* Trimmed to 528x601 of the old 750x750 box; margins keep the old
+                layout. The wrapper carries the size so the flame overlay can
+                be placed by percentage over the image. */}
+            <span
               data-hero-ornament
-              src="/daksh-emblem-trimmed.png"
-              alt=""
-              width={528}
-              height={601}
-              sizes="5rem"
-              loading="eager"
-              // Trimmed to 528x601 of the old 750x750 box; margins keep the old layout.
-              className="mt-[calc(var(--hero-emblem)*0.1267)] mb-[calc(var(--hero-emblem)*0.0747)] h-[calc(var(--hero-emblem)*0.8013)] w-[calc(var(--hero-emblem)*0.704)]"
-            />
+              className="relative mt-[calc(var(--hero-emblem)*0.1267)] mb-[calc(var(--hero-emblem)*0.0747)] block h-[calc(var(--hero-emblem)*0.8013)] w-[calc(var(--hero-emblem)*0.704)]"
+            >
+              <Image
+                src="/daksh-emblem-trimmed.png"
+                alt=""
+                width={528}
+                height={601}
+                sizes="5rem"
+                loading="eager"
+                className="size-full"
+              />
+              <EmblemFlame />
+            </span>
             {eyebrowRow}
           </div>
           <div className="mx-auto mt-5 max-w-5xl">{headline}</div>

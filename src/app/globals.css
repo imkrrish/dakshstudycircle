@@ -458,7 +458,8 @@
 /* CTA glow: a diya lit in a dark room. A soft saffron-to-amber bloom centred
    behind the content, fading to nothing well inside the band, so there is no
    edge anywhere. Saffron and flame only (no yellow: yellow over dark ink turns
-   olive). Faint so light text stays well above AA over it. No blur, no motion. */
+   olive). Faint so light text stays well above AA over it. No blur. Its one
+   motion (opacity 55% to 100% as the band scrolls in) is in CtaGlow. */
 .cta-glow {
   position: absolute;
   inset: 0;
@@ -524,7 +525,7 @@
 }
 
 /* Press and hover family. Buttons (shadcn Button and ActionButton) shrink to
-   0.97 while pressed (carousel arrows to 0.94) and return with the settle
+   0.96 while pressed (carousel arrows to 0.94) and return with the settle
    curve; a trailing icon nudges 0.25rem on hover (pointer devices only). Our
    own rules, because src/components/ui/ is not edited. Unlayered, so they win
    over the button's utility classes. Colour changes keep the button's own
@@ -544,7 +545,7 @@
       [aria-disabled="true"],
       [data-disabled]
     ):active {
-    scale: 0.97;
+    scale: 0.96;
     transition-duration: var(--dur-press);
   }
 

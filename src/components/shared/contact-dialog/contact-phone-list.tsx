@@ -19,7 +19,7 @@ const COPIED_MS = 1500
 type CopyState = { display: string; status: "copied" | "failed" } | null
 
 // Every action is at least 2.75rem tall (touch target).
-const action = "h-11 gap-2 px-4 text-base"
+const action = "h-11 gap-2 px-3 text-base"
 
 function ContactPhoneList({
   phones,
@@ -118,7 +118,10 @@ function ContactPhoneList({
                     aria-hidden="true"
                     className={state === "copied" ? "copy-pop" : undefined}
                   />
-                  {state === "copied" ? "Copied" : "Copy"}
+                  {/* The label never changes: a longer "Copied" pushed the row
+                      past the drawer at 375. The check icon and the live region
+                      below carry the feedback, and the button keeps its width. */}
+                  Copy
                 </Button>
               </div>
               <p

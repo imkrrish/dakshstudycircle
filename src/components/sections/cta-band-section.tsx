@@ -10,6 +10,8 @@ import { getSite } from "@/lib/content"
 import { formatHours } from "@/lib/hours"
 import type { SectionOf } from "@/lib/content-schema"
 
+import { CtaGlow } from "./cta-glow"
+
 const ctaBandVariants = cva("", {
   variants: {
     variant: {
@@ -34,7 +36,7 @@ async function CtaBandSection({ section }: { section: SectionOf<"cta-band"> }) {
       aria-labelledby={`${id}-heading`}
       className={ctaBandVariants({ variant })}
     >
-      {variant === "dark" && <div aria-hidden="true" className="cta-glow" />}
+      {variant === "dark" && <CtaGlow />}
       <Container className="flex flex-col items-center gap-8 text-center">
         <SectionHeading
           id={`${id}-heading`}

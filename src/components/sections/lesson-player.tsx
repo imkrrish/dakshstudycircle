@@ -135,35 +135,38 @@ function LessonPlayer({
                   setPlaying(false)
                 }}
                 className={cn(
-                  "flex min-h-16 flex-1 items-center gap-4 px-4 py-3 focus-ring focus-visible:-outline-offset-2",
+                  "group flex min-h-16 flex-1 items-center px-4 py-3 focus-ring focus-visible:-outline-offset-2",
                   "hover:bg-muted active:bg-accent",
-                  "motion-safe:transition-[scale] motion-safe:duration-(--dur-base) motion-safe:ease-(--ease-settle) motion-safe:active:scale-[0.985] motion-safe:active:duration-(--dur-press)",
                   isSelected &&
                     "bg-[color-mix(in_oklch,var(--flame)_18%,var(--card))] hover:bg-[color-mix(in_oklch,var(--flame)_18%,var(--card))]",
                 )}
               >
-                <span
-                  className={cn(
-                    "relative aspect-video w-18 shrink-0 overflow-clip rounded-md bg-muted",
-                    isSelected &&
-                      "ring-2 ring-ring ring-offset-2 ring-offset-card",
-                  )}
-                >
-                  <Image
-                    src={item.thumbnail.src}
-                    alt={item.thumbnail.alt}
-                    fill
-                    sizes="4.5rem"
-                    className="object-cover"
-                  />
-                </span>
-                <span className="flex min-w-0 flex-col">
-                  <span className="font-heading text-subtitle">
-                    {item.title}
+                {/* The press scales this content, not the row: the row's
+                    background stays flush with the panel border. */}
+                <span className="flex min-w-0 flex-1 items-center gap-4 motion-safe:transition-[scale] motion-safe:duration-(--dur-base) motion-safe:ease-(--ease-settle) motion-safe:group-active:scale-[0.985] motion-safe:group-active:duration-(--dur-press)">
+                  <span
+                    className={cn(
+                      "relative aspect-video w-18 shrink-0 overflow-clip rounded-md bg-muted",
+                      isSelected &&
+                        "ring-2 ring-ring ring-offset-2 ring-offset-card",
+                    )}
+                  >
+                    <Image
+                      src={item.thumbnail.src}
+                      alt={item.thumbnail.alt}
+                      fill
+                      sizes="4.5rem"
+                      className="object-cover"
+                    />
                   </span>
-                  <span className="text-sm text-muted-foreground">
-                    {isSelected ? "Now showing" : item.meta}
-                    <span className="sr-only"> (opens in a new tab)</span>
+                  <span className="flex min-w-0 flex-col">
+                    <span className="font-heading text-subtitle">
+                      {item.title}
+                    </span>
+                    <span className="text-sm text-muted-foreground">
+                      {isSelected ? "Now showing" : item.meta}
+                      <span className="sr-only"> (opens in a new tab)</span>
+                    </span>
                   </span>
                 </span>
               </a>

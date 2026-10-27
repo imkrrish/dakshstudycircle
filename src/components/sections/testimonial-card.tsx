@@ -9,7 +9,9 @@ type Item = ResolvedTestimonialGridSection["items"][number]
 
 // A paper card: the quote verbatim in body text, then who said it, pinned to
 // the bottom so attributions line up across a row. `tilt` sets the resting
-// angle (about 0.5deg); it straightens on hover (hover devices only).
+// angle (about 0.5deg); it straightens on hover (hover devices only), and in a
+// carousel when its slide is snapped or held (marks set by
+// TestimonialCarouselMotion on the slide); a held card also presses to 0.985.
 function TestimonialCard({
   item,
   tilt,
@@ -27,7 +29,7 @@ function TestimonialCard({
     <figure
       data-slot="testimonial-card"
       className={cn(
-        "flex h-full flex-col gap-6 rounded-xl border bg-card p-6 hover:rotate-0 motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out",
+        "flex h-full flex-col gap-6 rounded-xl border bg-card p-6 hover:rotate-0 in-data-held:scale-[0.985] in-data-held:rotate-0 in-data-snapped:rotate-0 motion-safe:transition-[rotate,scale] motion-safe:duration-(--dur-base) motion-safe:ease-(--ease-settle)",
         tilt === "left" && "-rotate-[0.5deg]",
         tilt === "right" && "rotate-[0.5deg]",
         className,
