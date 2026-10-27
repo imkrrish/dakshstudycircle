@@ -4,11 +4,11 @@ import { HugeiconsIcon } from "@hugeicons/react"
 import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
 import { SectionHeading } from "@/components/layout/section-heading"
+import { DetailsList } from "@/components/shared/details-list"
 import type { SectionOf } from "@/lib/content-schema"
-import { FaqList } from "./faq-list"
 
 // Native <details>: every answer stays in the HTML while closed and it works
-// without JavaScript; FaqList only adds the open/close animation. Questions are body-font 500 (not the serif) so nine in a row read as a
+// without JavaScript; DetailsList only adds the open/close animation. Questions are body-font 500 (not the serif) so nine in a row read as a
 // list to scan and do not compete with the section's h2.
 function FaqSection({ section }: { section: SectionOf<"faq"> }) {
   const { id, eyebrow, heading, intro, tone, items } = section
@@ -31,7 +31,7 @@ function FaqSection({ section }: { section: SectionOf<"faq"> }) {
             intro={intro}
             className="md:sticky md:top-[calc(var(--navbar-height)+2rem)] md:col-span-5"
           />
-          <FaqList className="divide-y border-y md:col-span-7">
+          <DetailsList className="divide-y border-y md:col-span-7">
             {items.map((item) => (
               <details key={item.question} className="group">
                 <summary className="flex min-h-11 w-full cursor-pointer list-none items-center justify-between gap-4 rounded-sm py-4 focus-ring marker:content-none [&::-webkit-details-marker]:hidden">
@@ -45,14 +45,14 @@ function FaqSection({ section }: { section: SectionOf<"faq"> }) {
                     className="size-5 shrink-0 text-muted-foreground transition-transform duration-250 ease-out group-[[open]:not([data-closing])]:rotate-180 motion-reduce:transition-none"
                   />
                 </summary>
-                <div data-faq-answer className="overflow-hidden">
+                <div data-details-body className="overflow-hidden">
                   <p className="max-w-prose pb-5 text-base text-muted-foreground">
                     {item.answer}
                   </p>
                 </div>
               </details>
             ))}
-          </FaqList>
+          </DetailsList>
         </div>
       </Container>
     </Section>

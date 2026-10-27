@@ -157,18 +157,17 @@ export const home: Page = {
     },
     {
       id: "results",
-      type: "results-grid",
+      type: "results-board",
       tone: "muted",
       eyebrow: "Results",
       heading: "Recent results from our students",
       intro:
         "A few board results and school admissions from the last three years.",
-      show: "highlights",
-      variant: "compact",
+      perYear: 6,
       actions: [
         {
           label: "See all results",
-          variant: "outline",
+          variant: "quiet",
           action: { type: "link", href: "/results" },
         },
       ],

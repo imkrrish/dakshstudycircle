@@ -3,22 +3,10 @@ import type { Result } from "@/lib/content-schema"
 // MOCK: development data for the results section. Replace with the institute's
 // real results before launch.
 //
-// Photo credits (Unsplash Licence: free use, attribution appreciated).
-// Source URL is https://images.unsplash.com/photo-<id>:
-//   boy-holding-yellow-book.jpg     Muhammad Zaid    1623303366639-0e330d7c3d9f
-//   boy-smiling-checked-shirt.jpg   Nehal Patel      1603185030522-05d4497bb180
-//   boy-school-uniform-tie.jpg      Assad Tanoli     1698992939360-7a413b5419ce
-//   girl-braid-smiling.jpg          Yogendra Singh   1618245472177-2a74ad3b994a
-//   girl-striped-top-doorway.jpg    Soubhagya Ranjan 1665072692785-8dd0c152f7a5
-//   girl-smiling-portrait.jpg       Razib Hossain    1674278882093-3870ef98e826
-//   girl-pink-top-portrait.jpg      Rajesh Rajput    1582887122254-f271875d0594
-//   girl-long-hair-pink-wall.jpg    LJ               1497486443155-158cceb6629a
-//   girl-laughing-bw.jpg            LJ               1497487231007-0a45e7b4b68a
-//   young-woman-green-leaves.jpg    Atul Pandey      1768326205103-0ad658551cea
-// Some photos are reused across results; fine for development.
-function photo(file: string, alt: string): Result["photo"] {
-  return { src: `/mock/people/${file}.jpg`, alt, width: 600, height: 750 }
-}
+// No photos: the free-licence pool (Unsplash) had too few matching teen
+// portraits for a consistent set, so rows show a monogram medallion. A result
+// may still carry `photo` ({ src, alt, width, height }) once real photos exist;
+// the honour board then shows it in the expanded row.
 
 export const results: Result[] = [
   {
@@ -33,7 +21,6 @@ export const results: Result[] = [
       { name: "Maths", marks: 99 },
       { name: "Science", marks: 97 },
     ],
-    photo: photo("girl-smiling-portrait", "Aanya Sharma"),
     highlight: true,
   },
   {
@@ -49,7 +36,6 @@ export const results: Result[] = [
       { name: "Science", marks: 92 },
       { name: "English", marks: 88 },
     ],
-    photo: photo("boy-smiling-checked-shirt", "Rohan Bisht"),
   },
   {
     id: "2026-ishaan-rawat",
@@ -65,7 +51,6 @@ export const results: Result[] = [
       { name: "Chemistry", marks: 92 },
       { name: "Maths", marks: 96 },
     ],
-    photo: photo("boy-holding-yellow-book", "Ishaan Rawat"),
     highlight: true,
   },
   {
@@ -81,7 +66,6 @@ export const results: Result[] = [
       { name: "Accountancy", marks: 94 },
       { name: "Economics", marks: 91 },
     ],
-    photo: photo("girl-braid-smiling", "Kavya Negi"),
   },
   {
     id: "2026-aryan-thakur",
@@ -91,7 +75,6 @@ export const results: Result[] = [
     course: "RMS/RIMC/Sainik prep",
     exam: "AISSEE",
     outcome: { title: "Sainik", note: "School admission · AISSEE" },
-    photo: photo("boy-school-uniform-tie", "Aryan Thakur"),
     highlight: true,
   },
   {
@@ -107,7 +90,6 @@ export const results: Result[] = [
       { name: "Science", marks: 95 },
       { name: "English", marks: 90 },
     ],
-    photo: photo("girl-striped-top-doorway", "Priya Joshi"),
   },
   {
     id: "2025-devansh-kapoor",
@@ -121,7 +103,6 @@ export const results: Result[] = [
       { name: "Maths", marks: 92 },
       { name: "Science", marks: 86 },
     ],
-    photo: photo("boy-holding-yellow-book", "Devansh Kapoor"),
   },
   {
     id: "2025-simran-kaur",
@@ -136,7 +117,6 @@ export const results: Result[] = [
       { name: "Science", marks: 84 },
       { name: "English", marks: 86 },
     ],
-    photo: photo("girl-pink-top-portrait", "Simran Kaur"),
   },
   {
     id: "2025-mohit-pundir",
@@ -152,7 +132,6 @@ export const results: Result[] = [
       { name: "Chemistry", marks: 90 },
       { name: "Maths", marks: 93 },
     ],
-    photo: photo("boy-school-uniform-tie", "Mohit Pundir"),
   },
   {
     id: "2025-nidhi-rana",
@@ -167,7 +146,6 @@ export const results: Result[] = [
       { name: "Political Science", marks: 95 },
       { name: "History", marks: 93 },
     ],
-    photo: photo("girl-long-hair-pink-wall", "Nidhi Rana"),
     highlight: true,
   },
   {
@@ -178,7 +156,6 @@ export const results: Result[] = [
     course: "RMS/RIMC/Sainik prep",
     exam: "RMS CET",
     outcome: { title: "RMS", note: "School admission · RMS CET" },
-    photo: photo("boy-smiling-checked-shirt", "Kabir Chauhan"),
   },
   {
     id: "2024-tanvi-bhatt",
@@ -193,7 +170,6 @@ export const results: Result[] = [
       { name: "Science", marks: 93 },
       { name: "English", marks: 89 },
     ],
-    photo: photo("girl-laughing-bw", "Tanvi Bhatt"),
   },
   {
     id: "2024-harsh-verma",
@@ -207,7 +183,6 @@ export const results: Result[] = [
       { name: "Maths", marks: 85 },
       { name: "Science", marks: 81 },
     ],
-    photo: photo("boy-holding-yellow-book", "Harsh Verma"),
   },
   {
     id: "2024-ritika-panwar",
@@ -223,7 +198,6 @@ export const results: Result[] = [
       { name: "Business Studies", marks: 87 },
       { name: "Economics", marks: 84 },
     ],
-    photo: photo("young-woman-green-leaves", "Ritika Panwar"),
   },
   {
     id: "2024-yash-dhami",
@@ -238,7 +212,6 @@ export const results: Result[] = [
       { name: "Physics", marks: 85 },
       { name: "Maths", marks: 91 },
     ],
-    photo: photo("boy-smiling-checked-shirt", "Yash Dhami"),
   },
   {
     id: "2024-arnav-saini",
@@ -248,7 +221,6 @@ export const results: Result[] = [
     course: "RMS/RIMC/Sainik prep",
     exam: "RIMC",
     outcome: { title: "RIMC", note: "Selected · RIMC Dehradun" },
-    photo: photo("boy-smiling-checked-shirt", "Arnav Saini"),
     highlight: true,
   },
 ]

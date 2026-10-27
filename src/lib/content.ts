@@ -12,6 +12,8 @@ import {
   type Result,
   type ResultsGridSection,
   type ResolvedResultsGridSection,
+  type ResolvedResultsBoardSection,
+  type ResultsBoardSection,
   type TestimonialGridSection,
   type ResolvedTestimonialGridSection,
   type Course,
@@ -157,6 +159,9 @@ function checkResultsGrids(
   errors: string[],
 ) {
   for (const section of sections) {
+    if (section.type === "results-board" && results.length === 0) {
+      errors.push(`${label}: results-board "${section.id}" has no results`)
+    }
     if (section.type !== "results-grid") continue
     if (section.show === "highlights" && !results.some((r) => r.highlight)) {
       errors.push(
@@ -330,6 +335,7 @@ function loadContent() {
       parsed.course,
       parsed.outcome?.title ?? "",
       parsed.outcome?.note ?? "",
+      ...(parsed.subjects ?? []).map((subject) => subject.name),
     ]) {
       if (VISIBLE_TEXT_BAN.test(text)) {
         errors.push(`${label}: visible text contains mock/placeholder wording`)
@@ -535,6 +541,46 @@ function resolveResultsGrid(
   }
 }
 
+// Year tabs newest first. Within a year: highlights, then the higher
+// percentage; entrance results (no percentage) after board results. The sort
+// is stable, so data order breaks ties.
+function resolveResultsBoard(
+  section: ResultsBoardSection,
+): ResolvedResultsBoardSection {
+  const { perYear, ...rest } = section
+  const years = [...new Set(content.results.map((r) => r.year))].sort(
+    (a, b) => b - a,
+  )
+  return {
+    ...rest,
+    years: years.map((year) => ({
+      year,
+      items: content.results
+        .filter((r) => r.year === year)
+        .sort(
+          (a, b) =>
+            Number(b.highlight ?? false) - Number(a.highlight ?? false) ||
+            (b.percentage ?? -1) - (a.percentage ?? -1),
+        )
+        .slice(0, perYear)
+        .map((r) => ({
+          id: r.id,
+          name: r.studentName,
+          meta: r.outcome
+            ? r.outcome.note
+            : [r.class, r.stream, r.exam]
+                .filter((part): part is string => Boolean(part))
+                .join(" · "),
+          course: r.course,
+          score: r.percentage === undefined ? undefined : `${r.percentage}%`,
+          outcome: r.outcome ? { title: r.outcome.title } : undefined,
+          subjects: r.subjects?.length ? r.subjects : undefined,
+          photo: r.photo,
+        })),
+    })),
+  }
+}
+
 // The home carousel never shows more than this many cards.
 const MAX_CAROUSEL_TESTIMONIALS = 12
 
@@ -595,6 +641,8 @@ function resolveSections(sections: Section[]): ResolvedSection[] {
         return resolveVideoGrid(section)
       case "results-grid":
         return resolveResultsGrid(section)
+      case "results-board":
+        return resolveResultsBoard(section)
       case "testimonial-grid":
         return resolveTestimonialGrid(section)
       default:

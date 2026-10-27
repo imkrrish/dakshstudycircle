@@ -10,6 +10,7 @@ import { CtaBandSection } from "./cta-band-section"
 import { FaqSection } from "./faq-section"
 import { HeroSection } from "./hero-section"
 import { ReasonListSection } from "./reason-list-section"
+import { ResultsBoardSection } from "./results-board-section"
 import { ResultsGridSection } from "./results-grid-section"
 import { SplitSection } from "./split-section"
 import { TestimonialGridSection } from "./testimonial-grid-section"
@@ -28,6 +29,7 @@ const sectionComponents = {
   "course-grid": CourseGridSection,
   "video-grid": VideoGridSection,
   "results-grid": ResultsGridSection,
+  "results-board": ResultsBoardSection,
   "testimonial-grid": TestimonialGridSection,
   faq: FaqSection,
   "cta-band": CtaBandSection,

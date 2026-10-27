@@ -366,6 +366,52 @@ const ResolvedResultsGridSectionSchema = z.strictObject({
     .min(1),
 })
 
+const resultsBoardBase = {
+  ...sectionBase,
+  type: z.literal("results-board"),
+  eyebrow: z.string().optional(),
+  heading: z.string().min(1),
+  intro: z.string().optional(),
+  tone: sectionTone.optional(),
+  actions: z.array(ButtonSchema).optional(),
+}
+
+// Authoring shape. The board shows every year present in the results data,
+// newest first, at most `perYear` rows each. getPage() resolves them.
+const ResultsBoardSectionSchema = z.strictObject({
+  ...resultsBoardBase,
+  perYear: z.number().int().min(1).max(12).default(6),
+})
+
+// What the component receives: one tab per year, text already built.
+const ResolvedResultsBoardSectionSchema = z.strictObject({
+  ...resultsBoardBase,
+  years: z
+    .array(
+      z.strictObject({
+        year: z.number().int(),
+        items: z
+          .array(
+            z.strictObject({
+              id: z.string(),
+              name: z.string(),
+              meta: z.string(),
+              course: z.string(),
+              // "96.2%" for board results; entrance results carry an outcome.
+              score: z.string().optional(),
+              outcome: z.strictObject({ title: z.string() }).optional(),
+              subjects: z
+                .array(z.strictObject({ name: z.string(), marks: z.number() }))
+                .optional(),
+              photo: ImageSchema.optional(),
+            }),
+          )
+          .min(1),
+      }),
+    )
+    .min(1),
+})
+
 const testimonialGridBase = {
   ...sectionBase,
   type: z.literal("testimonial-grid"),
@@ -416,6 +462,7 @@ const SectionSchema = z.discriminatedUnion("type", [
   CourseGridSectionSchema,
   VideoGridSectionSchema,
   ResultsGridSectionSchema,
+  ResultsBoardSectionSchema,
   TestimonialGridSectionSchema,
   FaqSectionSchema,
   CtaBandSectionSchema,
@@ -544,6 +591,10 @@ type ResultsGridSection = z.infer<typeof ResultsGridSectionSchema>
 type ResolvedResultsGridSection = z.infer<
   typeof ResolvedResultsGridSectionSchema
 >
+type ResultsBoardSection = z.infer<typeof ResultsBoardSectionSchema>
+type ResolvedResultsBoardSection = z.infer<
+  typeof ResolvedResultsBoardSectionSchema
+>
 type TestimonialGridSection = z.infer<typeof TestimonialGridSectionSchema>
 type ResolvedTestimonialGridSection = z.infer<
   typeof ResolvedTestimonialGridSectionSchema
@@ -553,12 +604,18 @@ type ResolvedSection =
   | Exclude<
       Section,
       {
-        type: "course-grid" | "video-grid" | "results-grid" | "testimonial-grid"
+        type:
+          | "course-grid"
+          | "video-grid"
+          | "results-grid"
+          | "results-board"
+          | "testimonial-grid"
       }
     >
   | ResolvedCourseGridSection
   | ResolvedVideoGridSection
   | ResolvedResultsGridSection
+  | ResolvedResultsBoardSection
   | ResolvedTestimonialGridSection
 type SectionType = ResolvedSection["type"]
 type SectionOf<T extends SectionType> = Extract<ResolvedSection, { type: T }>
@@ -584,6 +641,7 @@ export {
   ResolvedCourseGridSectionSchema,
   ResolvedVideoGridSectionSchema,
   ResolvedResultsGridSectionSchema,
+  ResolvedResultsBoardSectionSchema,
   ResolvedTestimonialGridSectionSchema,
   PageSchema,
   CourseSchema,
@@ -612,6 +670,8 @@ export type {
   ResolvedVideoGridSection,
   ResultsGridSection,
   ResolvedResultsGridSection,
+  ResultsBoardSection,
+  ResolvedResultsBoardSection,
   TestimonialGridSection,
   ResolvedTestimonialGridSection,
   ResolvedSection,

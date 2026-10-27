@@ -28,7 +28,7 @@ Content marked PLACEHOLDER / MOCK until real data arrives.
 2. course-grid: courses overview (from courses collection)
 3. split: director's message (Anil Kumar, from faculty), band tone
 4. reason-list: why Daksh, 6 points (ruled numbered list, photo beside), paper
-5. results-grid (compact): 5 highlights + link to /results, muted tone
+5. results-board: honour board with year tabs, up to 6 rows per year (marks and course in the expanded row) + link to /results, muted tone
 6. testimonial-grid: swipeable carousel of featured testimonials (max 12) with a Google rating badge, paper
 7. video-grid: free Maths playlists as link-out cards to YouTube (no embed), band tone
 8. faq: native details, 9 questions, site-data placeholders

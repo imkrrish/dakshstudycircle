@@ -5,13 +5,14 @@ import { animate, type JSAnimation } from "animejs"
 
 const DURATION = 250
 
-// Enhances the server-rendered <details> list: a click on a summary animates
-// the answer's height and opacity instead of toggling instantly. The `open`
-// attribute is set before opening and removed after closing, so the answer is
+// Enhances a server-rendered list of <details> (FAQ, results board): a click on
+// a summary animates the body's height and opacity instead of toggling
+// instantly. The body is the element marked `data-details-body`. The `open`
+// attribute is set before opening and removed after closing, so the body is
 // always in the DOM and everything still works without JavaScript. While an
 // item closes it carries `data-closing`, so the icon (CSS) turns back at once.
 // Reduced motion keeps the native instant toggle.
-function FaqList({ children, ...props }: ComponentProps<"div">) {
+function DetailsList({ children, ...props }: ComponentProps<"div">) {
   const rootRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -32,24 +33,22 @@ function FaqList({ children, ...props }: ComponentProps<"div">) {
     }
 
     function resetStyles(details: HTMLDetailsElement) {
-      const answer = details.querySelector<HTMLElement>("[data-faq-answer]")
-      answer?.style.removeProperty("height")
-      answer?.style.removeProperty("opacity")
+      const body = details.querySelector<HTMLElement>("[data-details-body]")
+      body?.style.removeProperty("height")
+      body?.style.removeProperty("opacity")
     }
 
     function toggle(details: HTMLDetailsElement) {
-      const answer = details.querySelector<HTMLElement>("[data-faq-answer]")
-      if (!answer) return
+      const body = details.querySelector<HTMLElement>("[data-details-body]")
+      if (!body) return
 
       // A click during an animation takes over from where it stopped.
       running.get(details)?.cancel()
       const opening = !details.open || details.hasAttribute("data-closing")
 
-      const fromHeight = details.open
-        ? answer.getBoundingClientRect().height
-        : 0
+      const fromHeight = details.open ? body.getBoundingClientRect().height : 0
       const fromOpacity = details.open
-        ? Number(getComputedStyle(answer).opacity)
+        ? Number(getComputedStyle(body).opacity)
         : 0
 
       if (opening) {
@@ -60,8 +59,8 @@ function FaqList({ children, ...props }: ComponentProps<"div">) {
       }
 
       // Heights are measured layout pixels, so they stay in px.
-      const animation = animate(answer, {
-        height: [`${fromHeight}px`, `${opening ? answer.scrollHeight : 0}px`],
+      const animation = animate(body, {
+        height: [`${fromHeight}px`, `${opening ? body.scrollHeight : 0}px`],
         opacity: [fromOpacity, opening ? 1 : 0],
         duration: DURATION,
         ease: "out(3)",
@@ -124,10 +123,10 @@ function FaqList({ children, ...props }: ComponentProps<"div">) {
   }, [])
 
   return (
-    <div data-slot="faq-list" ref={rootRef} {...props}>
+    <div data-slot="details-list" ref={rootRef} {...props}>
       {children}
     </div>
   )
 }
 
-export { FaqList }
+export { DetailsList }
