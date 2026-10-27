@@ -566,14 +566,21 @@ function resolveResultsBoard(
         .map((r) => ({
           id: r.id,
           name: r.studentName,
-          meta: r.outcome
-            ? r.outcome.note
-            : [r.class, r.stream, r.exam]
-                .filter((part): part is string => Boolean(part))
-                .join(" · "),
+          meta: (r.outcome ? [r.class, r.exam] : [r.class, r.stream])
+            .filter((part): part is string => Boolean(part))
+            .join(" · "),
           course: r.course,
-          score: r.percentage === undefined ? undefined : `${r.percentage}%`,
-          outcome: r.outcome ? { title: r.outcome.title } : undefined,
+          // One decimal, so "93.0%" lines up with "96.2%" down the board.
+          score:
+            r.percentage === undefined
+              ? undefined
+              : `${r.percentage.toFixed(1)}%`,
+          outcome: r.outcome
+            ? {
+                status: r.outcome.status ?? "Admitted",
+                school: r.outcome.school ?? r.outcome.title,
+              }
+            : undefined,
           subjects: r.subjects?.length ? r.subjects : undefined,
           photo: r.photo,
         })),

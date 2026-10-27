@@ -205,6 +205,24 @@
   }
 }
 
+/* Dotted leader, as on a printed honour board or a contents page: dots run
+   from a name to its figure. Use on a ::after (`after:leader`) of a flex row
+   with `after:flex-1`. Pure CSS, so there are no dot characters to read out. */
+@utility leader {
+  content: "";
+  height: 0.25rem;
+  margin-bottom: 0.2em;
+  color: color-mix(in oklab, var(--muted-foreground) 70%, transparent);
+  background-image: radial-gradient(
+    circle,
+    currentColor 0.065rem,
+    transparent 0.08rem
+  );
+  background-size: 0.4rem 0.25rem;
+  background-repeat: repeat-x;
+  background-position: left bottom;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

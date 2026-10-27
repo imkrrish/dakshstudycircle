@@ -372,6 +372,8 @@ const resultsBoardBase = {
   eyebrow: z.string().optional(),
   heading: z.string().min(1),
   intro: z.string().optional(),
+  // Lettered at the head of the board, above the year switcher.
+  boardTitle: z.string().min(1),
   tone: sectionTone.optional(),
   actions: z.array(ButtonSchema).optional(),
 }
@@ -399,7 +401,9 @@ const ResolvedResultsBoardSectionSchema = z.strictObject({
               course: z.string(),
               // "96.2%" for board results; entrance results carry an outcome.
               score: z.string().optional(),
-              outcome: z.strictObject({ title: z.string() }).optional(),
+              outcome: z
+                .strictObject({ status: z.string(), school: z.string() })
+                .optional(),
               subjects: z
                 .array(z.strictObject({ name: z.string(), marks: z.number() }))
                 .optional(),
@@ -561,8 +565,15 @@ const ResultSchema = z.strictObject({
     .optional(),
   // Entrance results: title is the school, note the status, e.g.
   // { title: "Sainik School", note: "Admitted · AISSEE" }.
+  // The honour board sets it as "{status} · {school}": `school` is the full
+  // name (falls back to `title`), `status` defaults to "Admitted".
   outcome: z
-    .strictObject({ title: z.string().min(1), note: z.string().min(1) })
+    .strictObject({
+      title: z.string().min(1),
+      note: z.string().min(1),
+      school: z.string().min(1).optional(),
+      status: z.enum(["Admitted", "Selected"]).optional(),
+    })
     .optional(),
   // The Daksh course the student took, e.g. "Classes 11–12 tuition".
   course: z.string().min(1),

@@ -4,9 +4,9 @@ import type { Result } from "@/lib/content-schema"
 // real results before launch.
 //
 // No photos: the free-licence pool (Unsplash) had too few matching teen
-// portraits for a consistent set, so rows show a monogram medallion. A result
-// may still carry `photo` ({ src, alt, width, height }) once real photos exist;
-// the honour board then shows it in the expanded row.
+// portraits for a consistent set. A result may still carry `photo`
+// ({ src, alt, width, height }) once real photos exist; the honour board then
+// shows it in the expanded row.
 
 export const results: Result[] = [
   {
@@ -74,7 +74,11 @@ export const results: Result[] = [
     class: "Entrance",
     course: "RMS/RIMC/Sainik prep",
     exam: "AISSEE",
-    outcome: { title: "Sainik", note: "School admission · AISSEE" },
+    outcome: {
+      title: "Sainik",
+      note: "School admission · AISSEE",
+      school: "Sainik School",
+    },
     highlight: true,
   },
   {
@@ -155,7 +159,11 @@ export const results: Result[] = [
     class: "Entrance",
     course: "RMS/RIMC/Sainik prep",
     exam: "RMS CET",
-    outcome: { title: "RMS", note: "School admission · RMS CET" },
+    outcome: {
+      title: "RMS",
+      note: "School admission · RMS CET",
+      school: "RMS",
+    },
   },
   {
     id: "2024-tanvi-bhatt",
@@ -220,7 +228,12 @@ export const results: Result[] = [
     class: "Entrance",
     course: "RMS/RIMC/Sainik prep",
     exam: "RIMC",
-    outcome: { title: "RIMC", note: "Selected · RIMC Dehradun" },
+    outcome: {
+      title: "RIMC",
+      note: "Selected · RIMC Dehradun",
+      school: "RIMC",
+      status: "Selected",
+    },
     highlight: true,
   },
 ]

@@ -163,6 +163,7 @@ export const home: Page = {
       heading: "Recent results from our students",
       intro:
         "A few board results and school admissions from the last three years.",
+      boardTitle: "Honour Board",
       perYear: 6,
       actions: [
         {
