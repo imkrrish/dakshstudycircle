@@ -91,10 +91,19 @@ function CourseGridSection({ section }: { section: SectionOf<"course-grid"> }) {
   return (
     <Section
       data-slot="course-grid-section"
-      className="pt-12 md:pt-16"
+      className="relative pt-12 md:pt-16"
       id={id}
       aria-labelledby={`${id}-heading`}
     >
+      {/* A faint flame-lit rule on the seam with the hero; sits in the section's
+          top padding, so it never overlaps text or moves anything. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute top-0 right-4 left-4 md:right-6 md:left-6"
+      >
+        <div className="section-seam-line" />
+        <div className="section-seam-glow" />
+      </div>
       <Container
         className="flex flex-col gap-10 md:gap-12"
         style={
