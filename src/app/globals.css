@@ -60,6 +60,11 @@
   --text-display-wide--line-height: 1.04;
   --text-display-wide--letter-spacing: -0.02em;
   --text-display-wide--font-weight: 500;
+  /* Inner-page h1 (compact hero): above the h2, well below the home hero. */
+  --text-page-title: clamp(2.25rem, 1.8rem + 2vw, 3.375rem);
+  --text-page-title--line-height: 1.08;
+  --text-page-title--letter-spacing: -0.018em;
+  --text-page-title--font-weight: 500;
   --text-heading: clamp(2rem, 1.7rem + 1.4vw, 2.75rem);
   --text-heading--line-height: 1.1;
   --text-heading--letter-spacing: -0.015em;

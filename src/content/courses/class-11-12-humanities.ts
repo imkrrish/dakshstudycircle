@@ -9,7 +9,7 @@ export const class11To12Humanities: Course = {
   slug: "class-11-12-humanities",
   title: "Class 11–12 Humanities",
   summary:
-    "Humanities subjects for CBSE Classes 11–12, taught in small batches with the syllabus finished early.",
+    "CBSE Humanities for Classes 11–12 in batches of about 10–20, with the syllabus finished early for\u00a0revision.",
   cardNote: "Political Science, Economics and English",
   classes: ["Class 11", "Class 12"],
   subjects: ["Political Science", "Economics", "English"],

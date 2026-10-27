@@ -8,7 +8,7 @@ export const classes9To10: Course = {
   slug: "classes-9-10",
   title: "Classes 9–10",
   summary:
-    "Tuition in Maths, Science, English, Hindi and Social Studies for Classes 9–10, with steady preparation for the Class 10 boards.",
+    "CBSE tuition for Classes 9–10 with regular tests, and Maths taught by our director, Anil\u00a0Kumar.",
   cardNote: "Five subjects, leading up to the Class 10 boards",
   classes: ["Class 9", "Class 10"],
   subjects: ["Maths", "Science", "English", "Hindi", "Social Studies"],

@@ -16,7 +16,7 @@ export const rmsRimcSainik: Course = {
   title: "RMS, RIMC and Sainik School",
   summary:
     "Entrance preparation for RMS, RIMC and Sainik Schools in a separate batch, with interview preparation.",
-  cardNote: "Entrance prep for admission to Class 6, 8 or 9",
+  cardNote: "Entrance prep for admission to Class 6, 8 or 9",
   classes: ["Class 5", "Class 7", "Class 8"],
   subjects: ["Entrance exam preparation", "Interview preparation"],
   facultyIds: [],
@@ -34,7 +34,7 @@ export const rmsRimcSainik: Course = {
       eyebrow: "Defence school entrance",
       heading: ["Entrance preparation for defence schools"],
       subheading:
-        "A separate batch, demo classes and interview practice for admission to Class 6, 8 or 9.",
+        "A separate batch, demo classes and interview practice for admission to Class\u00a06, 8 or\u00a09.",
     },
   ],
 }

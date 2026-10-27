@@ -9,7 +9,7 @@ export const class11To12Science: Course = {
   slug: "class-11-12-science",
   title: "Class 11–12 Science",
   summary:
-    "Science subjects for CBSE Classes 11–12, taught in small batches with the syllabus finished early.",
+    "CBSE Science for Classes 11–12 in batches of about 10–20, with Maths taught by our director, Anil\u00a0Kumar.",
   cardNote: "Physics, Chemistry, Maths, Biology and more",
   classes: ["Class 11", "Class 12"],
   subjects: [

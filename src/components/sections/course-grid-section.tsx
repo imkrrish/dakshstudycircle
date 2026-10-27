@@ -18,13 +18,20 @@ type Item = ResolvedCourseGridSection["groups"][number]["items"][number]
 
 const titleClass = "font-heading text-subtitle md:text-title"
 
-function CourseItem({ item }: { item: Extract<Item, { kind: "course" }> }) {
+function CourseItem({
+  item,
+  full,
+}: {
+  item: Extract<Item, { kind: "course" }>
+  full: boolean
+}) {
   return (
     <li
       className={cn(
         itemClass,
         flameGlowClass,
-        "group/item flex min-h-16 items-center gap-3 px-4 py-3 md:min-h-0 md:items-start md:p-6",
+        "group/item flex min-h-16 gap-3 px-4 py-3 md:min-h-0 md:p-6",
+        full ? "items-start" : "items-center md:items-start",
         "hover:bg-muted active:bg-accent",
         "motion-safe:transition-[scale] motion-safe:duration-(--dur-base) motion-safe:ease-(--ease-settle) motion-safe:active:scale-[0.985] motion-safe:active:duration-(--dur-press)",
       )}
@@ -39,12 +46,18 @@ function CourseItem({ item }: { item: Extract<Item, { kind: "course" }> }) {
           </Link>
         </h3>
         <p className="text-sm text-muted-foreground">{item.note}</p>
+        {full && item.summary && (
+          <p className="mt-2 text-base text-foreground/80">{item.summary}</p>
+        )}
       </div>
       <HugeiconsIcon
         icon={ArrowRight01Icon}
         strokeWidth={2}
         aria-hidden="true"
-        className="pointer-events-none size-5 shrink-0 text-muted-foreground transition-transform duration-200 ease-out group-hover/item:translate-x-1 group-active/item:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover/item:translate-x-0 motion-reduce:group-active/item:translate-x-0 md:mt-1.5"
+        className={cn(
+          "pointer-events-none size-5 shrink-0 text-muted-foreground transition-transform duration-200 ease-out group-hover/item:translate-x-1 group-active/item:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover/item:translate-x-0 motion-reduce:group-active/item:translate-x-0 md:mt-1.5",
+          full && "mt-1.5",
+        )}
       />
     </li>
   )
@@ -84,8 +97,22 @@ function StreamGroupItem({
   )
 }
 
+// lg columns. Compact: every group shares the largest group's grid, and short
+// groups get two wider columns so long titles keep to two lines. Full (cards
+// with summaries): columns follow the group, 2x2 for four, three across for
+// three; an odd last card spans both columns at md so none is left alone.
+function columnsClass(count: number, full: boolean) {
+  if (count < 3) return "lg:max-w-3xl lg:grid-cols-2"
+  if (!full) return "lg:grid-cols-(--course-cols)"
+  if (count === 3) {
+    return "md:*:odd:last:col-span-2 lg:grid-cols-3 lg:*:odd:last:col-span-1"
+  }
+  return "lg:grid-cols-2"
+}
+
 function CourseGridSection({ section }: { section: SectionOf<"course-grid"> }) {
   const { id, eyebrow, heading, intro, groups, actions } = section
+  const full = section.variant === "full"
   // Every group sits on the same lg column grid: the largest group, up to 4.
   const columns = Math.min(
     Math.max(...groups.map((group) => group.items.length)),
@@ -137,15 +164,12 @@ function CourseGridSection({ section }: { section: SectionOf<"course-grid"> }) {
                   aria-labelledby={labelId}
                   className={cn(
                     "divide-y overflow-visible rounded-xl border bg-card md:grid md:grid-cols-2 md:gap-4 md:divide-y-0 md:rounded-none md:border-0 md:bg-transparent",
-                    // Short groups get two wider columns so long titles keep to two lines.
-                    group.items.length < 3
-                      ? "lg:max-w-3xl lg:grid-cols-2"
-                      : "lg:grid-cols-(--course-cols)",
+                    columnsClass(group.items.length, full),
                   )}
                 >
                   {group.items.map((item) =>
                     item.kind === "course" ? (
-                      <CourseItem key={item.href} item={item} />
+                      <CourseItem key={item.href} item={item} full={full} />
                     ) : (
                       <StreamGroupItem key={item.title} item={item} />
                     ),

@@ -9,7 +9,7 @@ export const spokenEnglish: Course = {
   slug: "spoken-english",
   title: "Spoken English",
   summary:
-    "A 3-month Spoken English course for students of Classes 1–12, usually held June–August.",
+    "A Spoken English course for school students, to help them speak English with more\u00a0confidence.",
   cardNote: "A 3-month course for Classes 1–12, usually June–August",
   classes: [
     "Class 1",

@@ -8,7 +8,7 @@ export const collegeClasses: Course = {
   slug: "college-classes",
   title: "College classes",
   summary:
-    "Classes for B.A., B.Com. and B.Sc. students at our Sadar Bazaar centre.",
+    "College tuition for B.A., B.Com. and B.Sc. students at our Sadar Bazaar centre, opposite the bus\u00a0stand.",
   cardNote: "Classes for B.A., B.Com. and B.Sc. students",
   classes: ["College"],
   subjects: [],

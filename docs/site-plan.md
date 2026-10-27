@@ -36,12 +36,14 @@ Content marked PLACEHOLDER / MOCK until real data arrives.
 
 Stats ★ is not on home for now (real numbers only, none yet).
 
-### Courses `/courses`
+### Courses `/courses` (built)
 
-1. hero (small)
-2. card-grid: all 9 courses
-3. steps ★: how joining works
-4. cta-band
+1. hero (compact, with breadcrumbs Home › Courses)
+2. course-grid (`variant: "full"`: summary under each card note, no ribbon): the same groups as home
+3. steps ★: how joining works (not built yet)
+4. cta-band (dark, same content as home)
+
+SEO phase: add BreadcrumbList structured data (JSON-LD) from each compact hero's `breadcrumbs` data.
 
 ### Course detail `/courses/[slug]` (one template, 9 courses)
 

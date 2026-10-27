@@ -9,7 +9,7 @@ export const class11To12Commerce: Course = {
   slug: "class-11-12-commerce",
   title: "Class 11–12 Commerce",
   summary:
-    "Commerce subjects for CBSE Classes 11–12, taught in small batches with the syllabus finished early.",
+    "CBSE Commerce for Classes 11–12 in batches of about 10–20, with regular tests and study\u00a0material.",
   cardNote: "Accountancy, Business Studies, Economics and more",
   classes: ["Class 11", "Class 12"],
   subjects: [

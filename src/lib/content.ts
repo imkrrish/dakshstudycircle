@@ -69,6 +69,24 @@ function checkSections(label: string, sections: Section[], errors: string[]) {
     if (seen.has(id)) errors.push(`${label}: duplicate section id "${id}"`)
     seen.add(id)
   }
+  const hero = sections[0]
+  if (hero?.type === "hero" && hero.breadcrumbs) {
+    const { breadcrumbs } = hero
+    if (hero.size !== "compact") {
+      errors.push(`${label}: breadcrumbs belong on a compact hero`)
+    }
+    breadcrumbs.forEach((crumb, i) => {
+      const last = i === breadcrumbs.length - 1
+      if (last && crumb.href) {
+        errors.push(
+          `${label}: the last breadcrumb is the current page, no href`,
+        )
+      }
+      if (!last && !crumb.href) {
+        errors.push(`${label}: breadcrumb "${crumb.label}" needs an href`)
+      }
+    })
+  }
   const dark = sections.filter(
     (s) => s.type === "cta-band" && s.variant === "dark",
   ).length
@@ -483,6 +501,7 @@ function resolveCourseGrid(
             kind: "course" as const,
             title: course.title,
             note: course.cardNote ?? course.subjects[0] ?? "",
+            ...(section.variant === "full" && { summary: course.summary }),
             href: courseHref(course.slug),
           }
         }

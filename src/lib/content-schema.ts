@@ -146,6 +146,14 @@ const HeroSectionSchema = z.strictObject({
   subheading: z.string().optional(),
   proofLine: z.string().optional(),
   actions: z.array(ButtonSchema).optional(),
+  // Compact hero only: the trail above the eyebrow. Every item but the last
+  // links somewhere; the last is the current page and has no href.
+  breadcrumbs: z
+    .array(
+      z.strictObject({ label: z.string().min(1), href: z.string().optional() }),
+    )
+    .min(2)
+    .optional(),
 })
 
 const SplitSectionSchema = z.strictObject({
@@ -248,6 +256,8 @@ const courseGridBase = {
   heading: z.string().min(1),
   intro: z.string().optional(),
   actions: z.array(ButtonSchema).optional(),
+  // "full" also shows each course's summary under its note.
+  variant: z.enum(["compact", "full"]).optional(),
 }
 
 const CourseGridSectionSchema = z.strictObject({
@@ -279,6 +289,8 @@ const ResolvedCourseGridSectionSchema = z.strictObject({
               kind: z.literal("course"),
               title: z.string(),
               note: z.string(),
+              // Only with variant "full".
+              summary: z.string().optional(),
               href: z.string(),
             }),
             z.strictObject({

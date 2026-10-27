@@ -8,7 +8,7 @@ export const classes1To5: Course = {
   slug: "classes-1-5",
   title: "Classes 1–5",
   summary:
-    "Maths, Science and English tuition for CBSE Classes 1–5, to build a steady base before middle school.",
+    "CBSE tuition for Classes 1–5 in batches of about 10–20, and you can call or visit to talk to the\u00a0teachers.",
   cardNote: "Maths, Science and English, building a strong base",
   classes: ["Class 1", "Class 2", "Class 3", "Class 4", "Class 5"],
   subjects: ["Maths", "Science", "English"],

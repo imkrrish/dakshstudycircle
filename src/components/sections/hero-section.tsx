@@ -1,8 +1,11 @@
 import { cva } from "class-variance-authority"
+import { cn } from "cn"
 import Image from "next/image"
 
+import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
 import { ActionButton } from "@/components/shared/action-button"
+import { HeroBreadcrumbs } from "@/components/shared/hero-breadcrumbs"
 import type { SectionOf } from "@/lib/content-schema"
 
 import { EmblemFlame } from "./emblem-flame"
@@ -21,7 +24,8 @@ const heroSectionVariants = cva(
         // nothing of the next section peeks in.
         large:
           "pt-[calc(var(--navbar-height)+var(--hero-pad))] pb-12 md:flex md:min-h-svh md:flex-col md:justify-center md:pb-(--navbar-height)",
-        compact: "pt-[calc(var(--navbar-height)+3rem)] pb-12 md:pb-16",
+        compact:
+          "pt-[calc(var(--navbar-height)+2rem)] md:pt-[calc(var(--navbar-height)+3rem)] pb-10 md:pb-14",
       },
     },
     defaultVariants: { size: "large" },
@@ -32,14 +36,23 @@ const heroHeadingVariants = cva("font-heading text-balance", {
   variants: {
     size: {
       large: "text-display sm:text-display-wide",
-      compact: "text-display",
+      compact: "text-page-title",
     },
   },
   defaultVariants: { size: "large" },
 })
 
 function HeroSection({ section }: { section: SectionOf<"hero"> }) {
-  const { id, size, eyebrow, heading, subheading, proofLine, actions } = section
+  const {
+    id,
+    size,
+    eyebrow,
+    heading,
+    subheading,
+    proofLine,
+    actions,
+    breadcrumbs,
+  } = section
   const large = size === "large"
 
   const headline = (
@@ -98,7 +111,7 @@ function HeroSection({ section }: { section: SectionOf<"hero"> }) {
       aria-labelledby={`${id}-heading`}
       className={heroSectionVariants({ size })}
     >
-      <HeroWash size={size} className={large ? "md:hidden" : undefined} />
+      {large && <HeroWash size={size} className="md:hidden" />}
       {large ? (
         <HeroEntrance className="relative mx-auto flex w-full max-w-6xl flex-col px-4 text-center md:px-6">
           {/* md and up the content is centred in the screen, so the wash is
@@ -139,13 +152,27 @@ function HeroSection({ section }: { section: SectionOf<"hero"> }) {
           </div>
         </HeroEntrance>
       ) : (
-        <div className="mx-auto flex w-full max-w-6xl flex-col items-center px-4 text-center md:px-6">
-          {eyebrowRow && <div className="mb-5">{eyebrowRow}</div>}
-          <div className="mx-auto max-w-5xl">{headline}</div>
-          {intro && <div className="mt-5">{intro}</div>}
+        <Container className="flex flex-col items-start">
+          {breadcrumbs && <HeroBreadcrumbs items={breadcrumbs} />}
+          {eyebrow && (
+            <p
+              className={cn(
+                "text-eyebrow text-muted-foreground",
+                breadcrumbs ? "mt-6" : "",
+              )}
+            >
+              {eyebrow}
+            </p>
+          )}
+          <div className="mt-3 max-w-4xl">{headline}</div>
+          {subheading && (
+            <p className="mt-5 max-w-prose text-intro text-muted-foreground">
+              {subheading}
+            </p>
+          )}
           {buttons && <div className="mt-8 w-full sm:w-auto">{buttons}</div>}
           {proof && <div className="mt-6">{proof}</div>}
-        </div>
+        </Container>
       )}
     </Section>
   )
