@@ -104,7 +104,7 @@ function LessonPlayer({
             href={selected.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="hit-area inline-flex items-center gap-1 text-sm font-medium underline decoration-border underline-offset-4 focus-ring hover:decoration-foreground"
+            className="hit-area inline-flex items-center gap-1 link-draw text-sm font-medium underline decoration-border underline-offset-4 focus-ring [--link-draw-y:calc(100%-0.1875rem)]"
           >
             Open on YouTube
             <HugeiconsIcon
@@ -137,6 +137,7 @@ function LessonPlayer({
                 className={cn(
                   "flex min-h-16 flex-1 items-center gap-4 px-4 py-3 focus-ring focus-visible:-outline-offset-2",
                   "hover:bg-muted active:bg-accent",
+                  "motion-safe:transition-[scale] motion-safe:duration-(--dur-base) motion-safe:ease-(--ease-settle) motion-safe:active:scale-[0.985] motion-safe:active:duration-(--dur-press)",
                   isSelected &&
                     "bg-[color-mix(in_oklch,var(--flame)_18%,var(--card))] hover:bg-[color-mix(in_oklch,var(--flame)_18%,var(--card))]",
                 )}

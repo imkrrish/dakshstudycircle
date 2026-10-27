@@ -28,7 +28,7 @@ import { useIsDesktop } from "./use-is-desktop"
 const TITLE = "Call or WhatsApp us"
 
 // Warm ink instead of the ui default bg-black/30.
-const OVERLAY = "bg-foreground/30"
+const OVERLAY = "contact-scrim bg-foreground/30"
 
 const closeButton = (
   <Button

@@ -96,6 +96,18 @@
 :root {
   --navbar-height: 4rem; /* sticky header box; same in both navbar states */
   --radius: 0.625rem;
+  /* Motion vocabulary. Easings: settle for arrivals and returns, out for plain
+     fades, linear only for scroll-synced motion. Durations: press (feedback),
+     base (state change), slow (overlays). Exits run at about 60% of the
+     entrance. Animate transform and opacity only. */
+  --ease-settle: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: ease-out;
+  --ease-scroll: linear;
+  --dur-press: 120ms;
+  --dur-base: 250ms;
+  --dur-slow: 450ms;
+  --dur-base-exit: 150ms;
+  --dur-slow-exit: 270ms;
   /* Warm paper and brown-black ink. Card/popover are a lighter paper (not pure
      white) so they lift off the page with the hairline border and stay warm. */
   --background: oklch(0.985 0.008 85);
@@ -202,6 +214,54 @@
     translate: -50% -50%;
     width: max(100% + 2px, 2.75rem);
     height: max(100% + 2px, 2.75rem);
+  }
+}
+
+/* Link underline draw: a 1px line grows left to right on hover (pointer
+   devices) and on focus-visible, settling over --dur-base. `link-draw` is for a
+   link's own text; `link-draw-label` is for a span inside a button or badge
+   and reacts to that control. Reduced motion: the line appears instantly.
+   --link-draw-y moves the line when the box is taller than its text. */
+@utility link-draw {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  background-position: 0 var(--link-draw-y, 100%);
+  box-decoration-break: clone;
+  &:focus-visible {
+    background-size: 100% 1px;
+  }
+  @media (hover: hover) {
+    &:hover {
+      background-size: 100% 1px;
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    transition: background-size var(--dur-base) var(--ease-settle);
+  }
+}
+
+@utility link-draw-label {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  background-position: 0 var(--link-draw-y, calc(100% - 0.125rem));
+  box-decoration-break: clone;
+  :is(
+      [data-slot="action-button"],
+      [data-slot="google-rating-badge"]
+    ):focus-visible
+    & {
+    background-size: 100% 1px;
+  }
+  @media (hover: hover) {
+    :is([data-slot="action-button"], [data-slot="google-rating-badge"]):hover
+      & {
+      background-size: 100% 1px;
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    transition: background-size var(--dur-base) var(--ease-settle);
   }
 }
 
@@ -438,7 +498,6 @@
   }
 }
 
-
 /* Course ribbon and path: the first title starts on the container edge (the
    same gutter as the section's content), so the static state and the state
    before scrolling are identical. The left fade covers exactly that gutter, so
@@ -461,5 +520,116 @@
 @media (min-width: 48rem) {
   .course-ribbon {
     --ribbon-start: max(1.5rem, calc((100% - 72rem) / 2 + 1.5rem));
+  }
+}
+
+/* Press and hover family. Buttons (shadcn Button and ActionButton) shrink to
+   0.97 while pressed (carousel arrows to 0.94) and return with the settle
+   curve; a trailing icon nudges 0.25rem on hover (pointer devices only). Our
+   own rules, because src/components/ui/ is not edited. Unlayered, so they win
+   over the button's utility classes. Colour changes keep the button's own
+   transition. Reduced motion: none of this moves. */
+@media (prefers-reduced-motion: no-preference) {
+  :is(
+    [data-slot="button"],
+    [data-slot="action-button"],
+    [data-slot="carousel-previous"],
+    [data-slot="carousel-next"]
+  ) {
+    transition-timing-function: var(--ease-settle);
+  }
+
+  :is([data-slot="button"], [data-slot="action-button"]):not(
+      :disabled,
+      [aria-disabled="true"],
+      [data-disabled]
+    ):active {
+    scale: 0.97;
+    transition-duration: var(--dur-press);
+  }
+
+  :is([data-slot="carousel-previous"], [data-slot="carousel-next"]):not(
+      :disabled,
+      [aria-disabled="true"],
+      [data-disabled]
+    ):active {
+    scale: 0.94;
+    transition-duration: var(--dur-press);
+  }
+
+  :is([data-slot="button"], [data-slot="action-button"])
+    > svg[data-icon="inline-end"] {
+    transition: translate var(--dur-base) var(--ease-settle);
+  }
+
+  @media (hover: hover) {
+    :is([data-slot="button"], [data-slot="action-button"]):hover
+      > svg[data-icon="inline-end"] {
+      translate: 0.25rem 0;
+    }
+  }
+}
+
+/* Contact dialog and drawer. Desktop: the popup arrives from scale 0.96 plus
+   fade over --dur-slow with the settle curve and leaves in about 60% of that
+   (tw-animate-css reads --tw-duration, --tw-ease and the scale variables).
+   Mobile: the drawer keeps its native slide, on the same curve, and its exit
+   is 60% of the entrance while keeping the swipe-velocity scaling. The scrim
+   (.contact-scrim, on both overlays) fades over 200ms. */
+[data-slot="contact-dialog"]:not([data-swipe-axis]) {
+  --tw-enter-scale: 0.96;
+  --tw-exit-scale: 0.96;
+  --tw-duration: var(--dur-slow);
+  --tw-ease: var(--ease-settle);
+}
+
+[data-slot="contact-dialog"]:not([data-swipe-axis])[data-closed] {
+  --tw-duration: var(--dur-slow-exit);
+}
+
+[data-slot="contact-dialog"][data-swipe-axis] {
+  transition-timing-function: var(--ease-settle);
+}
+
+[data-slot="contact-dialog"][data-swipe-axis][data-ending-style]:not(
+    [data-swiping]
+  ) {
+  transition-duration: calc(var(--drawer-swipe-strength, 1) * 270ms);
+}
+
+.contact-scrim:not([data-swiping]) {
+  --tw-duration: 200ms;
+  --tw-ease: var(--ease-out);
+  transition-duration: 200ms;
+  transition-timing-function: var(--ease-out);
+}
+
+.contact-scrim[data-closed],
+.contact-scrim[data-ending-style]:not([data-swiping]) {
+  --tw-duration: var(--dur-base-exit);
+  transition-duration: var(--dur-base-exit);
+}
+
+/* Reduced motion: the dialog still fades but does not scale. */
+@media (prefers-reduced-motion: reduce) {
+  [data-slot="contact-dialog"]:not([data-swipe-axis]) {
+    --tw-enter-scale: 1;
+    --tw-exit-scale: 1;
+  }
+}
+
+/* Copy confirmation: the check pops in (120ms) when the number is copied. */
+@keyframes copy-pop {
+  from {
+    scale: 0.6;
+  }
+  to {
+    scale: 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .copy-pop {
+    animation: copy-pop var(--dur-press) var(--ease-settle) both;
   }
 }

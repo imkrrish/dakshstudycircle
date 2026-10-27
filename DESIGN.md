@@ -319,6 +319,23 @@ Motion: a small client island (`DetailsList`, anime.js, shared with the results 
 
 ## Motion
 
+**Motion vocabulary** (CSS custom properties on `:root` in `globals.css`; use these, not ad hoc values).
+
+| Token                                 | Value                           | Use                                                      |
+| ------------------------------------- | ------------------------------- | -------------------------------------------------------- |
+| `--ease-settle`                       | `cubic-bezier(0.16, 1, 0.3, 1)` | arrivals, returns, press release, underline draw, dialog |
+| `--ease-out`                          | `ease-out`                      | plain fades (scrim)                                      |
+| `--ease-scroll`                       | `linear`                        | scroll-synced motion only (ribbon, path)                 |
+| `--dur-press`                         | 120ms                           | press feedback, check pop                                |
+| `--dur-base`                          | 250ms                           | state changes, underline draw, nudges                    |
+| `--dur-slow`                          | 450ms                           | overlays (dialog, drawer)                                |
+| `--dur-base-exit` / `--dur-slow-exit` | 150ms / 270ms                   | exits, about 60% of the entrance                         |
+
+Animate `transform` and `opacity` only (scale, translate, fade); colour changes are the one exception and stay quick. Reduced motion: no scale, nudge or pop; colour changes and underlines appear instantly; the dialog still fades.
+
+- **Press and hover family** (`globals.css`, keyed on `data-slot`, because `src/components/ui/` is not edited): `button` and `action-button` scale to 0.97 while pressed (120ms) and return with settle; carousel arrows 0.94. A trailing button icon (`data-icon="inline-end"`) nudges 0.25rem on hover (pointer devices only). Course cards and rows and playlist rows scale to 0.985 while pressed (classes on the item). Hero buttons get press and hover only, never an entrance.
+- **Link underline draw:** `link-draw` (a link's own text) and `link-draw-label` (a span inside a quiet button or the Google badge, reacting to the control): a 1px line grows left to right on hover and `focus-visible` over `--dur-base`, settle. Used by quiet buttons (`ActionButton` wraps their label), footer links, "Open on YouTube" (over its resting hairline underline) and the Google badge.
+- **Contact dialog and drawer:** desktop popup arrives from scale 0.96 plus fade (450ms, settle) and leaves in 270ms; the scrim fades in 200ms and out in 150ms (`.contact-scrim` on both overlays). The mobile drawer keeps its native slide on the same curve; its exit is 270ms scaled by swipe strength. **Copy:** the icon swaps to a check with a 120ms pop and the label reads "Copied" for 1.5s; the `aria-live` announcement stays.
 - CSS for simple transitions (≤300ms, `ease-out`); anime.js for sequences (the nav highlight, the hero ornament fade-up).
 - Content is always visible without JavaScript. Hidden-until-revealed states exist only under `@media (scripting: enabled)` with a CSS fallback timer.
 - **Never animate the hero headline, supporting line or buttons** (LCP). Only the emblem may enter.

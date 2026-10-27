@@ -2,7 +2,7 @@ import type { ComponentProps } from "react"
 import { cn } from "cn"
 
 const footerLinkClass =
-  "inline-flex min-h-9 items-center rounded-sm text-foreground md:min-h-0 md:inline underline-offset-4 focus-ring hover:underline focus-visible:underline"
+  "inline-flex min-h-9 items-center rounded-sm text-foreground md:min-h-0 md:inline focus-ring link-draw [--link-draw-y:calc(50%+0.5lh-0.125rem)] md:[--link-draw-y:100%]"
 
 function FooterColumn({
   title,

@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button"
 import { whatsappHref } from "@/lib/utils"
 import type { ContactDialogData } from "./types"
 
-const COPIED_MS = 2000
+const COPIED_MS = 1500
 
 type CopyState = { display: string; status: "copied" | "failed" } | null
 
@@ -113,8 +113,10 @@ function ContactPhoneList({
                   onClick={() => copyNumber(phone.display)}
                 >
                   <HugeiconsIcon
+                    key={state === "copied" ? "copied" : "copy"}
                     icon={state === "copied" ? Tick02Icon : Copy01Icon}
                     aria-hidden="true"
+                    className={state === "copied" ? "copy-pop" : undefined}
                   />
                   {state === "copied" ? "Copied" : "Copy"}
                 </Button>

@@ -24,8 +24,9 @@ function CourseItem({ item }: { item: Extract<Item, { kind: "course" }> }) {
       className={cn(
         itemClass,
         flameGlowClass,
-        "group/item flex min-h-16 items-center gap-3 px-4 py-3 transition-none md:min-h-0 md:items-start md:p-6",
+        "group/item flex min-h-16 items-center gap-3 px-4 py-3 md:min-h-0 md:items-start md:p-6",
         "hover:bg-muted active:bg-accent",
+        "motion-safe:transition-[scale] motion-safe:duration-(--dur-base) motion-safe:ease-(--ease-settle) motion-safe:active:scale-[0.985] motion-safe:active:duration-(--dur-press)",
       )}
     >
       <div className="relative flex flex-1 flex-col gap-1">
@@ -67,6 +68,7 @@ function StreamGroupItem({
           <li key={link.href}>
             <Link
               href={link.href}
+              data-slot="button"
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
                 "h-11 px-3.5 focus-ring active:bg-accent",

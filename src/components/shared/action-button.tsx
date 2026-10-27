@@ -23,6 +23,15 @@ const socialIcons = {
   youtube: YoutubeIcon,
 } satisfies Record<SocialPlatform, IconSvgElement>
 
+// A quiet button is a text link: its label gets the underline draw.
+function Label({ button }: { button: Button }) {
+  return button.variant === "quiet" ? (
+    <span className="link-draw-label">{button.label}</span>
+  ) : (
+    button.label
+  )
+}
+
 const variantMap = {
   primary: "default",
   secondary: "secondary",
@@ -68,7 +77,7 @@ function ExternalButton({
         data-icon="inline-start"
         aria-hidden="true"
       />
-      {button.label}
+      <Label button={button} />
       <span className="sr-only"> (opens in a new tab)</span>
     </a>
   )
@@ -133,7 +142,7 @@ function ActionButton({
       if (isInternal) {
         return (
           <Link href={href} {...linkProps}>
-            {button.label}
+            <Label button={button} />
           </Link>
         )
       }
@@ -143,7 +152,7 @@ function ActionButton({
           {...(isWeb && { target: "_blank", rel: "noopener noreferrer" })}
           {...linkProps}
         >
-          {button.label}
+          <Label button={button} />
           {isWeb && <span className="sr-only"> (opens in a new tab)</span>}
         </a>
       )
@@ -158,7 +167,7 @@ function ActionButton({
           className={cn("focus-ring", className)}
           {...dataAttributes}
         >
-          {button.label}
+          <Label button={button} />
         </DialogTriggerButton>
       )
     case "directions":

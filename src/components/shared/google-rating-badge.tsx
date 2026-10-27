@@ -37,7 +37,9 @@ function GoogleRatingBadge({
       <span aria-hidden="true" className="text-muted-foreground">
         ·
       </span>
-      <span>{new Intl.NumberFormat("en-IN").format(count)} Google reviews</span>
+      <span className="link-draw-label">
+        {new Intl.NumberFormat("en-IN").format(count)} Google reviews
+      </span>
       <span className="sr-only">, see them on Google (opens in a new tab)</span>
     </a>
   )
