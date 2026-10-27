@@ -160,18 +160,18 @@ Always use tokens (`bg-primary`, `text-muted-foreground`). No hard-coded colours
 
 ### Scale (Tailwind tokens; size, line height, weight, tracking)
 
-| Token               | Size                         | LH   | Weight | Tracking | Use                                                                                           |
-| ------------------- | ---------------------------- | ---- | ------ | -------- | --------------------------------------------------------------------------------------------- |
-| `text-display`      | clamp 2.5–4.75rem (9.4vw)    | 1.04 | 500    | -0.02em  | Hero h1, below `sm`; honour-board year numeral                                                |
-| `text-display-wide` | clamp 2.5–4.75rem (7.2vw)    | 1.04 | 500    | -0.02em  | Hero h1 from `sm` (two fixed lines)                                                           |
-| `text-heading`      | clamp 2–2.75rem              | 1.1  | 500    | -0.015em | Section h2; result card score from `md`                                                            |
-| `text-title`        | 1.625rem                     | 1.2  | 500    | -0.01em  | Card h3 from `md`, reason h3 from `md`, dialog title, result score below `md`                 |
-| `text-subtitle`     | 1.375rem                     | 1.25 | 500    | -0.005em | Serif titles in list rows below `md` (course, reason), player and playlist titles, honour-board names and year index                       |
-| `text-lead`         | 1.1875rem                    | 1.5  | 400    | 0        | Hero supporting line from `md`; FAQ question and result name from `md` (Nunito Sans, 600)     |
-| `text-intro`        | clamp 1–1.125rem             | 1.6  | 400    | 0        | Section intro under the h2                                                                    |
-| `text-base`         | 1rem                         | 1.65 | 400    | 0        | Body (default on `<body>`), answers, quotes, reason lines                                     |
-| `text-eyebrow`      | 0.9375rem                    | 1.4  | 500    | 0.02em   | Section and hero eyebrows, course group labels                                                |
-| `text-sm`           | 0.9375rem                    | 1.5  | 400    | 0        | Smallest text: meta, captions, bylines, course notes, proof line, hours                       |
+| Token               | Size                      | LH   | Weight | Tracking | Use                                                                                                                  |
+| ------------------- | ------------------------- | ---- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------- |
+| `text-display`      | clamp 2.5–4.75rem (9.4vw) | 1.04 | 500    | -0.02em  | Hero h1, below `sm`; honour-board year numeral                                                                       |
+| `text-display-wide` | clamp 2.5–4.75rem (7.2vw) | 1.04 | 500    | -0.02em  | Hero h1 from `sm` (two fixed lines)                                                                                  |
+| `text-heading`      | clamp 2–2.75rem           | 1.1  | 500    | -0.015em | Section h2; result card score from `md`                                                                              |
+| `text-title`        | 1.625rem                  | 1.2  | 500    | -0.01em  | Card h3 from `md`, reason h3 from `md`, dialog title, result score below `md`                                        |
+| `text-subtitle`     | 1.375rem                  | 1.25 | 500    | -0.005em | Serif titles in list rows below `md` (course, reason), player and playlist titles, honour-board names and year index |
+| `text-lead`         | 1.1875rem                 | 1.5  | 400    | 0        | Hero supporting line from `md`; FAQ question and result name from `md` (Nunito Sans, 600)                            |
+| `text-intro`        | clamp 1–1.125rem          | 1.6  | 400    | 0        | Section intro under the h2                                                                                           |
+| `text-base`         | 1rem                      | 1.65 | 400    | 0        | Body (default on `<body>`), answers, quotes, reason lines                                                            |
+| `text-eyebrow`      | 0.9375rem                 | 1.4  | 500    | 0.02em   | Section and hero eyebrows, course group labels                                                                       |
+| `text-sm`           | 0.9375rem                 | 1.5  | 400    | 0        | Smallest text: meta, captions, bylines, course notes, proof line, hours                                              |
 
 At 1280: h1 76 → h2 44 → title 26 → subtitle 22 → lead 19 → intro 18 → body 16 → small 15. Do not set `font-normal`, `tracking-*` or `leading-*` on a headed role; the token carries them.
 
@@ -196,7 +196,9 @@ At 1280: h1 76 → h2 44 → title 26 → subtitle 22 → lead 19 → intro 18 �
 
 Flat. Depth comes from paper tone (raised card on paper) and hairline borders, not shadows. The only shadow is `shadow-sm` on the scrolled navbar pill. Dialog and drawer sit on a warm ink scrim (`bg-foreground/30`), never black. The hero wash is layered radial gradients (yellow core, amber, orange edges) fading into paper with a mask. No `filter: blur`.
 
-**The Calm Decoration Rule.** Decoration never sits behind text and is never louder than the heading. The hero wash is the only background effect, and it fades out before the content below the hero. Portraits carry no glow, shadow or mask.
+**The Calm Decoration Rule.** Decoration never sits behind text and is never louder than the heading. The hero wash is the only background effect on a page, and it fades out before the content below the hero.
+
+**The Flame Glow Rule.** The flame glow is used only behind the hero emblem: it is the diya's light. Never use it as a separator, a section edge or a background elsewhere (the dark CTA band's own glow is a diya lit in a dark room, a separate case). The hero flows into the next section through space and the course ribbon (see Motion), never through light or a line. Portraits carry no glow, shadow or mask.
 
 ## Shapes
 
@@ -242,7 +244,7 @@ Portraits are rounded rectangles (`rounded-xl`), head-and-shoulders, `aspect-4/5
 
 ### Course grid
 
-Courses grouped under muted `text-eyebrow` labels (a `<p>`, not a heading) with a hairline rule running right. Below `md` each group is one raised `card` panel of full-width rows (min `4rem`, hairline dividers, title `text-subtitle`, note, chevron). From `md` the panel dissolves into cards (`rounded-xl`, 2 columns); from `lg` every group shares one column grid (largest group, up to 4). Each course is a stretched link (`<h3><a>` with `after:inset-0`), so its accessible name is the title only. Hover (pointer devices only) is `muted`, a soft flame glow rising from the card's bottom edge and a 0.25rem arrow nudge; pressed is `accent` with the same glow and nudge, instantly. The glow is a `::before` radial gradient (`flame` 40%, `saffron` 12%, in the bottom half only), kept faint so `muted-foreground` text stays at 5:1 or better over it; it never covers the title. Under reduced motion the glow still appears (a static colour change) but nothing moves. The Classes 11–12 stream card is not a link and has no glow; its chips keep their own states. Groups with fewer than three items (Entrance and skills) use two wider columns from `lg` (`max-w-3xl`) so long titles keep to two lines. Focus is the 2px ring on the whole row or card. A stream group (Classes 11–12) is not a link: its stream chips are `h-11` outline links (`px-3.5`, `gap-1.5`, so three fit in at most two rows at 768 and 1280) with a hidden group prefix. No red in the section.
+Courses grouped under muted `text-eyebrow` labels (a `<p>`, not a heading; no rule beside them, the page already has plenty of lines). Below `md` each group is one raised `card` panel of full-width rows (min `4rem`, hairline dividers, title `text-subtitle`, note, chevron). From `md` the panel dissolves into cards (`rounded-xl`, 2 columns); from `lg` every group shares one column grid (largest group, up to 4). Each course is a stretched link (`<h3><a>` with `after:inset-0`), so its accessible name is the title only. Hover (pointer devices only) is `muted`, a soft flame glow rising from the card's bottom edge and a 0.25rem arrow nudge; pressed is `accent` with the same glow and nudge, instantly. The glow is a `::before` radial gradient (`flame` 40%, `saffron` 12%, in the bottom half only), kept faint so `muted-foreground` text stays at 5:1 or better over it; it never covers the title. Under reduced motion the glow still appears (a static colour change) but nothing moves. The Classes 11–12 stream card is not a link and has no glow; its chips keep their own states. Groups with fewer than three items (Entrance and skills) use two wider columns from `lg` (`max-w-3xl`) so long titles keep to two lines. Focus is the 2px ring on the whole row or card. A stream group (Classes 11–12) is not a link: its stream chips are `h-11` outline links (`px-3.5`, `gap-1.5`, so three fit in at most two rows at 768 and 1280) with a hidden group prefix. No red in the section.
 
 ### Reason list
 
@@ -257,6 +259,7 @@ Home results (`results-board`, from `src/content/results.ts`). A printed honour 
 **Lockup.** `boardTitle` ("Honour Board", page data) in EB Garamond `text-subtitle`, all small caps, `tracking-[0.08em]`, muted. Below it the year index: shadcn `Tabs` (Base UI), `variant="line"`, years in EB Garamond `text-subtitle`, tabular, `h-11`, centred, separated by small muted dots (a `::before` shape, not a character, so the tab names stay clean). Active year is ink with a 1px ink underline under the numeral only; inactive is muted. No pill, no full-width bar, no red. Arrow keys move between tabs (`activateOnFocus`). Every panel is `keepMounted` (inactive ones `hidden`, in the HTML), so all years are crawlable. The size sits on an inner span because `cn` treats a `text-subtitle!` and a colour class as one conflict. In each panel the year is set again, large (`text-display`, tabular), between two `foreground/20` rules, `aria-hidden` (the tab already names the panel).
 
 **Row.** A native `<details>`; hairline rules between rows and at both ends. The `summary` (min `2.75rem`, `py-3.5`, `focus-ring`) has two lines. Line one: the student's name, a dotted leader, the score, a plus. Line two: one muted `text-sm` meta line ("Class 12 · Science", entrance "Entrance · AISSEE"). The course taken is not in the summary any more.
+
 - Name: `h3` in EB Garamond `text-subtitle`. This reverses the Nunito Sans 600 name rule for this section only (a lettered board sets names in the serif); the FAQ and results grid keep theirs.
 - Score: EB Garamond `text-title`, lining + tabular figures, one decimal ("93.0%", so figures line up), `whitespace-nowrap`, right-aligned in a `min-w-18` column.
 - Admission: EB Garamond small caps (`font-variant-caps: small-caps`), `text-lead` from `sm`, `text-sm` below, never wraps: "Admitted · Sainik School" ("Selected · RIMC" for a selection). `status` defaults to "Admitted"; the school is `outcome.school`, falling back to `outcome.title`.
@@ -319,7 +322,8 @@ Motion: a small client island (`DetailsList`, anime.js, shared with the results 
 - CSS for simple transitions (≤300ms, `ease-out`); anime.js for sequences (the nav highlight, the hero ornament fade-up).
 - Content is always visible without JavaScript. Hidden-until-revealed states exist only under `@media (scripting: enabled)` with a CSS fallback timer.
 - **Never animate the hero headline, supporting line or buttons** (LCP). Only the emblem may enter.
-- `prefers-reduced-motion` means static: wash settle and ornament entrance are off, the nav highlight jumps, navbar transitions are disabled.
+- **Course ribbon** (`course-ribbon`, the `ribbon` flag on the home course grid): the course titles in section order, EB Garamond 500 (`text-subtitle`, `text-title` from `md`, always smaller than the h2), `text-muted-foreground`, separated by small CSS-drawn dots, full-bleed with both ends masked to paper. It sits across the hero boundary: below `md` in the gap between the proof line and the eyebrow (at least 2.5rem below the proof line, 2rem above the eyebrow, no added height); from `md` at the top of the courses section, below the first screen (the hero still fills it alone). `aria-hidden`, not focusable, no hover state. Its position is tied to scroll progress only (anime.js `onScroll` with `sync`, `translateX` only, right to left, at most one viewport width of travel, linear, so it stops the moment scrolling stops); there is no autoplay. Without JavaScript, before hydration and under reduced motion it is static with the first title on the container edge, the same place it starts from, so nothing shifts. The section stays a Server Component; `CourseRibbon` is the only client island.
+- `prefers-reduced-motion` means static: wash settle and ornament entrance are off, the nav highlight jumps, navbar transitions are disabled, the course ribbon stays at rest.
 
 ## Imagery
 

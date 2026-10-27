@@ -34,6 +34,7 @@ export const home: Page = {
     {
       id: "courses",
       type: "course-grid",
+      ribbon: true,
       eyebrow: "Our courses",
       heading: "Tuition for every class, from 1 to 12",
       intro:

@@ -10,6 +10,7 @@ import { SectionHeading } from "@/components/layout/section-heading"
 import { ActionButton } from "@/components/shared/action-button"
 import { buttonVariants } from "@/components/ui/button"
 import { flameGlowClass, itemClass } from "./card-styles"
+import { CourseRibbon } from "./course-ribbon"
 import type { ResolvedCourseGridSection, SectionOf } from "@/lib/content-schema"
 
 type Item = ResolvedCourseGridSection["groups"][number]["items"][number]
@@ -95,15 +96,7 @@ function CourseGridSection({ section }: { section: SectionOf<"course-grid"> }) {
       id={id}
       aria-labelledby={`${id}-heading`}
     >
-      {/* A faint flame-lit rule on the seam with the hero; sits in the section's
-          top padding, so it never overlaps text or moves anything. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute top-0 right-4 left-4 md:right-6 md:left-6"
-      >
-        <div className="section-seam-line" />
-        <div className="section-seam-glow" />
-      </div>
+      {section.ribbon && <CourseRibbon titles={section.ribbon} />}
       <Container
         className="flex flex-col gap-10 md:gap-12"
         style={
@@ -125,7 +118,7 @@ function CourseGridSection({ section }: { section: SectionOf<"course-grid"> }) {
               <div key={group.label} className="flex flex-col gap-3 md:gap-4">
                 <p
                   id={labelId}
-                  className="flex items-center gap-4 text-eyebrow text-muted-foreground after:h-px after:flex-1 after:bg-border"
+                  className="text-eyebrow text-muted-foreground"
                 >
                   {group.label}
                 </p>

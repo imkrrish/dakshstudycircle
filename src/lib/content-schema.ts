@@ -252,6 +252,8 @@ const courseGridBase = {
 
 const CourseGridSectionSchema = z.strictObject({
   ...courseGridBase,
+  // Show the course ribbon above the section (titles come from `groups`).
+  ribbon: z.boolean().optional(),
   groups: z
     .array(
       z.strictObject({
@@ -265,6 +267,8 @@ const CourseGridSectionSchema = z.strictObject({
 // What the component receives: plain data, hrefs already built.
 const ResolvedCourseGridSectionSchema = z.strictObject({
   ...courseGridBase,
+  // Course titles in section order, when the ribbon is on.
+  ribbon: z.array(z.string().min(1)).optional(),
   groups: z
     .array(
       z.strictObject({

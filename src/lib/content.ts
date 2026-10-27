@@ -471,8 +471,9 @@ function findCourse(slug: string) {
 function resolveCourseGrid(
   section: CourseGridSection,
 ): ResolvedCourseGridSection {
-  return {
-    ...section,
+  const { ribbon, ...rest } = section
+  const resolved: ResolvedCourseGridSection = {
+    ...rest,
     groups: section.groups.map((group) => ({
       label: group.label,
       items: group.items.map((item) => {
@@ -500,6 +501,13 @@ function resolveCourseGrid(
       }),
     })),
   }
+  // The ribbon reads the same titles the cards show, in the same order.
+  if (ribbon) {
+    resolved.ribbon = resolved.groups.flatMap((group) =>
+      group.items.map((item) => item.title),
+    )
+  }
+  return resolved
 }
 
 // The only place YouTube playlist URLs are built.

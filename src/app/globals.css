@@ -438,53 +438,26 @@
   }
 }
 
-/* Seam between the hero and the section below it: a hairline that warms toward
-   the centre, with a faint glow beneath, like the flame's last light on the
-   page. Decoration only, in the section's top padding. Static by default; where
-   scroll-driven animation exists and motion is allowed, the line draws out from
-   the centre as it enters view. */
-.section-seam-line {
-  position: absolute;
-  inset: 0 0 auto;
-  height: 1px;
-  background: linear-gradient(
+
+/* Course ribbon: edges fade to paper, and the first title starts on the
+   container edge (the same gutter as the section's content), so the static
+   state and the state before scrolling are identical. */
+.course-ribbon {
+  mask-image: linear-gradient(
     to right,
     transparent,
-    var(--border) 16%,
-    color-mix(in oklch, var(--flame) 70%, var(--border)) 50%,
-    var(--border) 84%,
+    black 3rem,
+    black calc(100% - 3rem),
     transparent
   );
 }
 
-.section-seam-glow {
-  position: absolute;
-  inset: 1px 0 auto;
-  height: 2.5rem;
-  background: radial-gradient(
-    ellipse 50% 100% at 50% 0,
-    color-mix(in oklch, var(--flame) 15%, transparent),
-    transparent 75%
-  );
+.course-ribbon-track {
+  padding-inline-start: max(1rem, calc((100% - 72rem) / 2 + 1.5rem));
 }
 
-@keyframes seam-draw {
-  from {
-    transform: scaleX(0.2);
-    opacity: 0;
-  }
-  to {
-    transform: none;
-    opacity: 1;
-  }
-}
-
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .section-seam-line {
-      animation: seam-draw linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 70%;
-    }
+@media (min-width: 48rem) {
+  .course-ribbon-track {
+    padding-inline-start: max(1.5rem, calc((100% - 72rem) / 2 + 1.5rem));
   }
 }
