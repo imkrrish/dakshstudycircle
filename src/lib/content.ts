@@ -21,6 +21,7 @@ import {
   type NavItem,
   type CourseGridSection,
   type FaqSection,
+  type HeroSection,
   type Video,
   type VideoPlayerSection,
   type ResolvedVideoPlayerSection,
@@ -32,7 +33,7 @@ import {
   type Section,
   type Site,
 } from "@/lib/content-schema"
-import { formatHoursInline } from "@/lib/hours"
+import { formatHoursInline, formatHoursShort } from "@/lib/hours"
 import { site as rawSite } from "@/content/site"
 import { pages as rawPages, type PageSlug } from "@/content/pages"
 import { courses as rawCourses } from "@/content/courses"
@@ -86,6 +87,19 @@ function checkSections(label: string, sections: Section[], errors: string[]) {
         errors.push(`${label}: breadcrumb "${crumb.label}" needs an href`)
       }
     })
+  }
+  if (hero?.type === "hero" && hero.size !== "compact") {
+    if (hero.media) errors.push(`${label}: media belongs on a compact hero`)
+    if (hero.facts) errors.push(`${label}: facts belong on a compact hero`)
+  }
+  for (const section of sections) {
+    if (section.type === "course-grid" && section.hideHeading) {
+      if (section.eyebrow || section.intro) {
+        errors.push(
+          `${label}: course-grid "${section.id}" hides its heading, so it cannot have an eyebrow or intro`,
+        )
+      }
+    }
   }
   const dark = sections.filter(
     (s) => s.type === "cta-band" && s.variant === "dark",
@@ -240,16 +254,38 @@ function contactPlaceholders(site: Site): Record<string, string> {
   }
 }
 
+// Centre-wide facts that hero fact values may use: {hours}, {batchSize}, {modes}, {freeDemo}.
+function heroPlaceholders(site: Site): Record<string, string> {
+  return {
+    hours: formatHoursShort(site.contact.hours),
+    batchSize: site.facts.batchSize,
+    modes: site.facts.modes,
+    freeDemo: site.facts.freeDemo,
+  }
+}
+
 const PLACEHOLDER_PATTERN = /\{(\w+)\}/g
 
-// An unknown {name} in faq text would ship as literal braces, so it fails the build.
+// An unknown {name} in faq text or hero facts would ship as literal braces, so it fails the build.
 function checkPlaceholders(
   label: string,
   sections: Section[],
   known: Set<string>,
+  knownHero: Set<string>,
   errors: string[],
 ) {
   for (const section of sections) {
+    if (section.type === "hero") {
+      section.facts?.items.forEach((item, i) => {
+        for (const [, name] of item.value.matchAll(PLACEHOLDER_PATTERN)) {
+          if (knownHero.has(name)) continue
+          errors.push(
+            `${label}: hero "${section.id}" fact ${i + 1}: unknown placeholder {${name}}. Known: ${[...knownHero].map((k) => `{${k}}`).join(", ")}`,
+          )
+        }
+      })
+      continue
+    }
     if (section.type !== "faq") continue
     section.items.forEach((item, i) => {
       for (const text of [item.question, item.answer]) {
@@ -393,8 +429,17 @@ function loadContent() {
   const placeholderNames = new Set(
     site ? Object.keys(contactPlaceholders(site)) : [],
   )
+  const heroPlaceholderNames = new Set(
+    site ? Object.keys(heroPlaceholders(site)) : [],
+  )
   for (const [key, page] of pages) {
-    checkPlaceholders(`pages/${key}`, page.sections, placeholderNames, errors)
+    checkPlaceholders(
+      `pages/${key}`,
+      page.sections,
+      placeholderNames,
+      heroPlaceholderNames,
+      errors,
+    )
     checkCourseGrids(`pages/${key}`, page.sections, courseSlugs, errors)
     checkVideoPlayers(`pages/${key}`, page.sections, videoIds, errors)
     checkTestimonialGrids(`pages/${key}`, page.sections, testimonials, errors)
@@ -406,6 +451,7 @@ function loadContent() {
       `courses/${course.slug}`,
       course.sections,
       placeholderNames,
+      heroPlaceholderNames,
       errors,
     )
     checkCourseGrids(
@@ -684,10 +730,39 @@ function resolveFaq(section: FaqSection): FaqSection {
   }
 }
 
+// Fills the hero's fact placeholders. Without a photo the media is dropped
+// unless shot cards are on, so production never shows "photo to come".
+function resolveHero(section: HeroSection): HeroSection {
+  const { site } = content
+  const values = heroPlaceholders(site)
+  const { media, facts, ...rest } = section
+  const showMedia =
+    media && (media.image || site.features.showShotCards) ? media : undefined
+  return {
+    ...rest,
+    ...(showMedia ? { media: showMedia } : {}),
+    ...(facts
+      ? {
+          facts: {
+            items: facts.items.map(({ label, value }) => ({
+              label,
+              value: value.replace(
+                PLACEHOLDER_PATTERN,
+                (_, name: string) => values[name],
+              ),
+            })),
+          },
+        }
+      : {}),
+  }
+}
+
 // Fills section references to collections so components only receive plain data.
 function resolveSections(sections: Section[]): ResolvedSection[] {
   return sections.map((section) => {
     switch (section.type) {
+      case "hero":
+        return resolveHero(section)
       case "faq":
         return resolveFaq(section)
       case "course-grid":

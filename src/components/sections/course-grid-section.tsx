@@ -111,7 +111,8 @@ function columnsClass(count: number, full: boolean) {
 }
 
 function CourseGridSection({ section }: { section: SectionOf<"course-grid"> }) {
-  const { id, eyebrow, heading, intro, groups, actions } = section
+  const { id, eyebrow, heading, intro, hideHeading, groups, actions } =
+    section
   const full = section.variant === "full"
   // Every group sits on the same lg column grid: the largest group, up to 4.
   const columns = Math.min(
@@ -151,6 +152,7 @@ function CourseGridSection({ section }: { section: SectionOf<"course-grid"> }) {
           eyebrow={eyebrow}
           title={heading}
           intro={intro}
+          srOnly={hideHeading}
         />
         <div className="flex flex-col gap-8 md:gap-10">
           {groups.map((group, index) => {

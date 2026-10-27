@@ -32,6 +32,9 @@ export const class11To12Commerce: Course = {
       id: "hero",
       type: "hero",
       size: "compact",
+      media: {
+        shot: "Class 11–12 commerce batch, an accounts table on the board · landscape 3:2 · from the back corner at chest height, students seen from behind · daylight with the lights on, clean board",
+      },
       eyebrow: "Commerce stream · Classes 11–12",
       heading: ["Commerce for Classes 11 and 12"],
       subheading:

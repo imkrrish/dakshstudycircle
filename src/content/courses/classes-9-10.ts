@@ -24,6 +24,9 @@ export const classes9To10: Course = {
       id: "hero",
       type: "hero",
       size: "compact",
+      media: {
+        shot: "Anil Sir teaching Maths at the board to a Class 9–10 batch · landscape 3:2 · from the back corner at chest height, students seen from behind · daylight with the lights on, clean board",
+      },
       eyebrow: "Classes 9–10 · CBSE",
       heading: ["Getting ready for the Class 10 boards"],
       subheading:

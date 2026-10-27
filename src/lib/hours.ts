@@ -28,9 +28,23 @@ function formatHours(hours: OpeningHours[]): string[] {
   })
 }
 
+// "9", "9:30": no am/pm, for tight rows. "Mon–Sat 9–8 · Sun 9–6".
+function formatHoursShort(hours: OpeningHours[]): string {
+  const clock = (time: string) => {
+    const [h, m] = time.split(":").map(Number)
+    return `${h % 12 === 0 ? 12 : h % 12}${m ? `:${String(m).padStart(2, "0")}` : ""}`
+  }
+  return hours
+    .map(({ from, to, opens, closes }) => {
+      const days = to ? `${DAY_LABELS[from]}–${DAY_LABELS[to]}` : DAY_LABELS[from]
+      return `${days} ${clock(opens)}–${clock(closes)}`
+    })
+    .join(" · ")
+}
+
 // All rows on one line, for running text such as faq answers.
 function formatHoursInline(hours: OpeningHours[]): string {
   return formatHours(hours).join("; ")
 }
 
-export { formatHours, formatHoursInline }
+export { formatHours, formatHoursInline, formatHoursShort }

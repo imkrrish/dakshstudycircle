@@ -25,6 +25,7 @@ function Section({
   return (
     <section
       data-slot="section"
+      data-tone={tone}
       id={id}
       className={cn(sectionVariants({ tone, className }))}
       {...props}

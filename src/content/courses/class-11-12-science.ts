@@ -33,6 +33,9 @@ export const class11To12Science: Course = {
       id: "hero",
       type: "hero",
       size: "compact",
+      media: {
+        shot: "Class 11–12 science batch, a worked problem on the board · landscape 3:2 · from the back corner at chest height, students seen from behind · daylight with the lights on, clean board",
+      },
       eyebrow: "Science stream · Classes 11–12",
       heading: ["Science for Classes 11 and 12"],
       subheading:

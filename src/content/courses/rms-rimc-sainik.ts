@@ -31,6 +31,9 @@ export const rmsRimcSainik: Course = {
       id: "hero",
       type: "hero",
       size: "compact",
+      media: {
+        shot: "A small batch practising entrance test papers at their desks · landscape 3:2 · over the shoulders from behind, at chest height · daylight with the lights on",
+      },
       eyebrow: "Defence school entrance",
       heading: ["Entrance preparation for defence schools"],
       subheading:

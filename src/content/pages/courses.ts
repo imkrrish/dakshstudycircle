@@ -13,19 +13,33 @@ export const courses: Page = {
       type: "hero",
       size: "compact",
       breadcrumbs: [{ label: "Home", href: "/" }, { label: "Courses" }],
-      eyebrow: "Courses in Delhi Cantt",
       heading: ["One centre,", "from Class 1 to college"],
       subheading:
-        "CBSE tuition for Classes 1–12, RMS, RIMC and Sainik School entrance preparation, Spoken English and college classes. Every batch is about 10–20 students.",
+        "CBSE tuition for Classes 1–12, RMS, RIMC and Sainik School entrance preparation, Spoken English and college classes. Not sure which one fits? We'll help you choose.",
+      media: {
+        image: {
+          src: "/images/classroom-test-day.avif",
+          alt: "Students from several classes writing a test at their desks in a Daksh Study Circle classroom",
+          width: 1280,
+          height: 958,
+        },
+        shot: "Classroom mid-lesson, teacher at the board · landscape 3:2 · from the back corner at chest height, students seen from behind · daylight with the lights on",
+      },
+      facts: {
+        items: [
+          { label: "Batch size", value: "{batchSize}" },
+          { label: "Modes", value: "{modes}" },
+          { label: "Free demo", value: "{freeDemo}" },
+          { label: "Hours", value: "{hours}" },
+        ],
+      },
     },
     {
       id: "courses",
       type: "course-grid",
       variant: "full",
-      eyebrow: "Choose a course",
       heading: "Every course we teach",
-      intro:
-        "Open a course to see its subjects and how classes run. Not sure which one fits? We'll help you choose.",
+      hideHeading: true,
       groups: [
         {
           label: "School tuition",

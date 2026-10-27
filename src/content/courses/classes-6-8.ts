@@ -24,6 +24,9 @@ export const classes6To8: Course = {
       id: "hero",
       type: "hero",
       size: "compact",
+      media: {
+        shot: "Middle-school batch writing in notebooks, teacher walking between the desks · landscape 3:2 · from the back corner at chest height · daylight with the lights on",
+      },
       eyebrow: "Classes 6–8 · CBSE",
       heading: ["Support through Classes 6 to 8"],
       subheading:

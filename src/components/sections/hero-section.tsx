@@ -1,62 +1,32 @@
-import { cva } from "class-variance-authority"
-import { cn } from "cn"
 import Image from "next/image"
 
-import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
 import { ActionButton } from "@/components/shared/action-button"
-import { HeroBreadcrumbs } from "@/components/shared/hero-breadcrumbs"
 import type { SectionOf } from "@/lib/content-schema"
 
 import { EmblemFlame } from "./emblem-flame"
+import { HeroCompact } from "./hero-compact"
 import { HeroEntrance } from "./hero-entrance"
 import { HeroWash } from "./hero-wash"
 
 // The hero starts at the top of the page, behind the transparent navbar, so
 // it adds the navbar height to its own top padding. --hero-pad and
 // --hero-emblem also place the flame wash (see .hero-wash) behind the emblem.
-const heroSectionVariants = cva(
-  "relative isolate overflow-clip [--hero-emblem:4.5rem] [--hero-pad:1.5rem] md:[--hero-emblem:5rem] md:[--hero-pad:2.5rem]",
-  {
-    variants: {
-      size: {
-        // From md the large hero fills the first screen and centres its content, so
-        // nothing of the next section peeks in.
-        large:
-          "pt-[calc(var(--navbar-height)+var(--hero-pad))] pb-12 md:flex md:min-h-svh md:flex-col md:justify-center md:pb-(--navbar-height)",
-        compact:
-          "pt-[calc(var(--navbar-height)+2rem)] md:pt-[calc(var(--navbar-height)+3rem)] pb-10 md:pb-14",
-      },
-    },
-    defaultVariants: { size: "large" },
-  },
-)
-
-const heroHeadingVariants = cva("font-heading text-balance", {
-  variants: {
-    size: {
-      large: "text-display sm:text-display-wide",
-      compact: "text-page-title",
-    },
-  },
-  defaultVariants: { size: "large" },
-})
+// From md the hero fills the first screen and centres its content, so nothing
+// of the next section peeks in.
+const heroSectionClass =
+  "relative isolate overflow-clip [--hero-emblem:4.5rem] [--hero-pad:1.5rem] pt-[calc(var(--navbar-height)+var(--hero-pad))] pb-12 md:[--hero-emblem:5rem] md:[--hero-pad:2.5rem] md:flex md:min-h-svh md:flex-col md:justify-center md:pb-(--navbar-height)"
 
 function HeroSection({ section }: { section: SectionOf<"hero"> }) {
-  const {
-    id,
-    size,
-    eyebrow,
-    heading,
-    subheading,
-    proofLine,
-    actions,
-    breadcrumbs,
-  } = section
-  const large = size === "large"
+  if (section.size === "compact") return <HeroCompact section={section} />
+  return <LargeHero section={section} />
+}
+
+function LargeHero({ section }: { section: SectionOf<"hero"> }) {
+  const { id, eyebrow, heading, subheading, proofLine, actions } = section
 
   const headline = (
-    <h1 id={`${id}-heading`} className={heroHeadingVariants({ size })}>
+    <h1 id={`${id}-heading`} className="font-heading text-display text-balance sm:text-display-wide">
       {heading.map((line, i) => (
         <span key={line} className="block">
           {line}
@@ -109,15 +79,15 @@ function HeroSection({ section }: { section: SectionOf<"hero"> }) {
       data-slot="hero-section"
       id={id}
       aria-labelledby={`${id}-heading`}
-      className={heroSectionVariants({ size })}
+      className={heroSectionClass}
     >
-      {large && <HeroWash size={size} className="md:hidden" />}
-      {large ? (
+      <HeroWash size="large" className="md:hidden" />
+      {(
         <HeroEntrance className="relative mx-auto flex w-full max-w-6xl flex-col px-4 text-center md:px-6">
           {/* md and up the content is centred in the screen, so the wash is
               anchored to it: same geometry as when it sat at the page top. */}
           <HeroWash
-            size={size}
+            size="large"
             data-anchor="content"
             className="hidden md:block"
           />
@@ -151,31 +121,9 @@ function HeroSection({ section }: { section: SectionOf<"hero"> }) {
             {proof}
           </div>
         </HeroEntrance>
-      ) : (
-        <Container className="flex flex-col items-start">
-          {breadcrumbs && <HeroBreadcrumbs items={breadcrumbs} />}
-          {eyebrow && (
-            <p
-              className={cn(
-                "text-eyebrow text-muted-foreground",
-                breadcrumbs ? "mt-6" : "",
-              )}
-            >
-              {eyebrow}
-            </p>
-          )}
-          <div className="mt-3 max-w-4xl">{headline}</div>
-          {subheading && (
-            <p className="mt-5 max-w-prose text-intro text-muted-foreground">
-              {subheading}
-            </p>
-          )}
-          {buttons && <div className="mt-8 w-full sm:w-auto">{buttons}</div>}
-          {proof && <div className="mt-6">{proof}</div>}
-        </Container>
       )}
     </Section>
   )
 }
 
-export { HeroSection, heroSectionVariants }
+export { HeroSection }

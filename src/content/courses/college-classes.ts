@@ -24,6 +24,9 @@ export const collegeClasses: Course = {
       id: "hero",
       type: "hero",
       size: "compact",
+      media: {
+        shot: "College students studying at a table with books and notes · landscape 3:2 · from behind at chest height · daylight with the lights on",
+      },
       eyebrow: "B.A., B.Com., B.Sc.",
       heading: ["Support for your college studies"],
       subheading:

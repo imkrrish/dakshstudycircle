@@ -48,20 +48,21 @@ Open: whether nearby institutes also offer RMS/RIMC/Sainik prep. If few do, #2 l
 - English only.
 - No backend yet. A contact form (email or admin panel) and a CMS come later.
 - Content is data-driven (`src/content/`); components hold nothing institute-specific.
-- Open data conflict: `site.ts` has `foundedYear: 2000`, but the owner states founding in July 2005. Resolve before using any "since" claim.
 
 ## Brand Commitments
 
 Name: Daksh Study Circle. Tagline in site data: "Your quest for knowledge ends here."
-Confirmed: founded July 2005, CBSE Classes 1–12, RMS/RIMC/Sainik entrance prep, Spoken English.
+Confirmed: founded July 2005 (site data `foundedYear: 2005`, shown as "since 2005"), CBSE Classes 1–12, RMS/RIMC/Sainik entrance prep, Spoken English.
 Confirmed by the owner (and already on the page):
 
 - Director Anil Kumar teaches Maths for Classes 9–12.
-- Batch size is about 10–20 students, depending on the class.
+- Batch size is about 10–20 students, true for every class (site data `facts.batchSize`).
 - The syllabus is finished early in every class, then revised for the rest of the year.
-- Free demo for offline classes at the centre, until the child is satisfied and ready to join.
+- Free demo for offline classes only (not online or home tuition), at the centre, until the child is satisfied and ready to join (`facts.freeDemo`).
 - One smart classroom (smartboard), with more being added.
-- Offline classes at the centre, online classes and home tuition.
+- Three modes: offline classes at the centre, online classes and home tuition (`facts.modes`).
+- Regular tests and study material, and a test series, are part of the tuition (written in the course data and the director's message).
+- Landmark: behind the Mother Dairy booth, opposite Sadar Bazaar bus stand; nearest metro Sadar Bazar Cantonment (Magenta Line), about 2 km (`contact.landmark`, `contact.nearestMetro`).
 - Hours: Mon–Sat 9 am – 8 pm, Sun 9 am – 6 pm.
 
 Nothing in this list is waiting on confirmation.

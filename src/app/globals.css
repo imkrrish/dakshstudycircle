@@ -429,6 +429,13 @@
   }
 }
 
+/* A compact hero owns the space below it (its own pb), so the plain section
+   after it starts with no top padding. Toned sections keep theirs: their edge
+   is visible. Unlayered so it beats the section's padding utilities. */
+[data-slot="hero-section"][data-size="compact"] + section[data-tone="default"] {
+  padding-top: 0;
+}
+
 /* One red button per viewport: while the page's hero CTA is on screen the
    navbar's CTA is outline; NavCtaTone sets data-solid once the hero CTA
    scrolls out of view, and it turns primary. Unlayered so it beats the button's

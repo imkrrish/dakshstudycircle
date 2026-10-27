@@ -5,6 +5,11 @@ export const site: Site = {
   shortName: "Daksh",
   tagline: "Your quest for knowledge ends here.",
   foundedYear: 2005,
+  facts: {
+    batchSize: "About 10–20 students",
+    modes: "Offline, online, home tuition",
+    freeDemo: "Offline classes",
+  },
   url: "https://www.dakshstudycircle.in",
   seo: {
     titleTemplate: "%s | Daksh Study Circle",
@@ -81,5 +86,9 @@ export const site: Site = {
     variant: "primary",
     action: { type: "contact-dialog" },
   },
-  features: { showFaculty: true },
+  features: {
+    showFaculty: true,
+    // Off in production until real photos replace the shot cards.
+    showShotCards: process.env.NODE_ENV === "development",
+  },
 }

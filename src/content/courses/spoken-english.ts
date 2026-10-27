@@ -38,6 +38,9 @@ export const spokenEnglish: Course = {
       id: "hero",
       type: "hero",
       size: "compact",
+      media: {
+        shot: "A Spoken English batch practising conversation in pairs · landscape 3:2 · from the side at chest height, students seen from behind · daylight with the lights on",
+      },
       eyebrow: "Spoken English, Classes 1–12",
       heading: ["Speak English with more confidence"],
       subheading:

@@ -20,6 +20,7 @@ function SectionHeading({
   intro,
   id,
   align = "left",
+  srOnly = false,
   className,
   ...props
 }: Omit<ComponentProps<"div">, "title" | "id"> &
@@ -28,7 +29,16 @@ function SectionHeading({
     title: string
     intro?: string
     id?: string
+    // Only the h2, for screen readers (the page already says it above).
+    srOnly?: boolean
   }) {
+  if (srOnly) {
+    return (
+      <h2 id={id} className="sr-only">
+        {title}
+      </h2>
+    )
+  }
   return (
     <div
       data-slot="section-heading"

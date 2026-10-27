@@ -45,7 +45,12 @@ const SeoSchema = z.strictObject({
 
 // ---------- Site ----------
 
-const FeaturesSchema = z.strictObject({ showFaculty: z.boolean() })
+const FeaturesSchema = z.strictObject({
+  showFaculty: z.boolean(),
+  // A hero with no photo shows a "photo to come" card with its shot brief.
+  // On in development, off in production: without it the hero drops the media.
+  showShotCards: z.boolean(),
+})
 
 const DaySchema = z.enum(["mon", "tue", "wed", "thu", "fri", "sat", "sun"])
 
@@ -77,6 +82,12 @@ const SiteSchema = z.strictObject({
   shortName: z.string().min(1),
   tagline: z.string(),
   foundedYear: z.number().int(),
+  // True for the whole centre; usable in hero facts as {batchSize}, {modes}, {freeDemo}.
+  facts: z.strictObject({
+    batchSize: z.string().min(1),
+    modes: z.string().min(1),
+    freeDemo: z.string().min(1),
+  }),
   url: z.string().min(1),
   seo: z.strictObject({
     titleTemplate: z.string().min(1),
@@ -153,6 +164,24 @@ const HeroSectionSchema = z.strictObject({
       z.strictObject({ label: z.string().min(1), href: z.string().optional() }),
     )
     .min(2)
+    .optional(),
+  // Compact hero only. `shot` is the brief for the photo this slot needs; the
+  // hero shows `image` when there is one, otherwise a shot card (see
+  // features.showShotCards).
+  media: z
+    .strictObject({ image: ImageSchema.optional(), shot: z.string().min(1) })
+    .optional(),
+  // Compact hero only: 2-4 label/value rows. Values may use {hours},
+  // {batchSize}, {modes} and {freeDemo}, filled by getPage().
+  facts: z
+    .strictObject({
+      items: z
+        .array(
+          z.strictObject({ label: z.string().min(1), value: z.string().min(1) }),
+        )
+        .min(2)
+        .max(4),
+    })
     .optional(),
 })
 
@@ -255,6 +284,9 @@ const courseGridBase = {
   eyebrow: z.string().optional(),
   heading: z.string().min(1),
   intro: z.string().optional(),
+  // The h2 stays for screen readers but is not shown (a hero right above says
+  // it already). Then eyebrow and intro must be left out.
+  hideHeading: z.boolean().optional(),
   actions: z.array(ButtonSchema).optional(),
   // "full" also shows each course's summary under its note.
   variant: z.enum(["compact", "full"]).optional(),
@@ -617,6 +649,7 @@ type Section = z.infer<typeof SectionSchema>
 type CourseGridSection = z.infer<typeof CourseGridSectionSchema>
 type ResolvedCourseGridSection = z.infer<typeof ResolvedCourseGridSectionSchema>
 type FaqSection = z.infer<typeof FaqSectionSchema>
+type HeroSection = z.infer<typeof HeroSectionSchema>
 type VideoPlayerSection = z.infer<typeof VideoPlayerSectionSchema>
 type ResolvedVideoPlayerSection = z.infer<
   typeof ResolvedVideoPlayerSectionSchema
@@ -700,6 +733,7 @@ export type {
   CourseGridSection,
   ResolvedCourseGridSection,
   FaqSection,
+  HeroSection,
   VideoPlayerSection,
   ResolvedVideoPlayerSection,
   ResultsGridSection,

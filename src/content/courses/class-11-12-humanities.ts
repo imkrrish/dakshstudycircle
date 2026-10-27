@@ -25,6 +25,9 @@ export const class11To12Humanities: Course = {
       id: "hero",
       type: "hero",
       size: "compact",
+      media: {
+        shot: "Class 11–12 humanities batch in discussion with the teacher · landscape 3:2 · from the side at chest height, students seen from behind · daylight with the lights on",
+      },
       eyebrow: "Humanities stream · Classes 11–12",
       heading: ["Humanities for Classes 11 and 12"],
       subheading:
