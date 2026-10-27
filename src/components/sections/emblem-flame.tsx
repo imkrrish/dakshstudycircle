@@ -94,8 +94,8 @@ function EmblemFlame() {
         <Image
           src="/daksh-emblem-flame.png"
           alt=""
-          width={215}
-          height={290}
+          width={50}
+          height={67}
           unoptimized
           loading="eager"
           className="size-full origin-bottom"

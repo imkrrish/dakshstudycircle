@@ -5,7 +5,7 @@ export const site: Site = {
   shortName: "Daksh",
   tagline: "Your quest for knowledge ends here.",
   foundedYear: 2005,
-  url: "https://example.com",
+  url: "https://www.dakshstudycircle.in",
   seo: {
     titleTemplate: "%s | Daksh Study Circle",
     description:

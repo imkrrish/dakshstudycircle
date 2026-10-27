@@ -111,6 +111,24 @@ async function SocialButton({
   )
 }
 
+async function ContactDialogButton({
+  button,
+  ...props
+}: Omit<ComponentProps<typeof DialogTriggerButton>, "dialog"> & {
+  button: Button
+}) {
+  const [firstPhone] = (await getSite()).contact.phones
+  return (
+    <DialogTriggerButton
+      dialog="contact"
+      fallbackHref={firstPhone && `tel:${firstPhone.e164}`}
+      {...props}
+    >
+      <Label button={button} />
+    </DialogTriggerButton>
+  )
+}
+
 function ActionButton({
   button,
   className,
@@ -159,16 +177,14 @@ function ActionButton({
     }
     case "contact-dialog":
       return (
-        <DialogTriggerButton
+        <ContactDialogButton
           data-slot="action-button"
-          dialog="contact"
+          button={button}
           variant={variant}
           size={size}
           className={cn("focus-ring", className)}
           {...dataAttributes}
-        >
-          <Label button={button} />
-        </DialogTriggerButton>
+        />
       )
     case "directions":
       return (

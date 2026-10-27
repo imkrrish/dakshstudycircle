@@ -26,12 +26,12 @@ function ResultRow({ item }: { item: Item }) {
     <li>
       <details className="group">
         <summary className="flex min-h-11 w-full cursor-pointer list-none flex-col gap-0.5 py-3.5 focus-ring marker:content-none [&::-webkit-details-marker]:hidden">
-          <span className="flex items-baseline gap-1.5 sm:gap-3">
+          <span className="flex flex-wrap items-baseline gap-x-1.5 sm:flex-nowrap sm:gap-x-3">
             <span className="flex min-w-0 flex-1 items-baseline gap-2 after:leader after:min-w-2 after:flex-1 sm:after:min-w-4">
               <h3 className="font-heading text-subtitle">{item.name}</h3>
             </span>
             {item.outcome ? (
-              <span className="font-heading text-sm tracking-tight whitespace-nowrap [font-variant-caps:small-caps] sm:text-lead sm:tracking-normal">
+              <span className="order-last basis-full font-heading text-sm tracking-tight [font-variant-caps:small-caps] sm:order-none sm:basis-auto sm:text-lead sm:tracking-normal sm:whitespace-nowrap">
                 {item.outcome.status} · {item.outcome.school}
               </span>
             ) : (
@@ -138,7 +138,6 @@ function ResultsBoardSection({
                 aria-label="Results by year"
                 className="relative mt-1 h-auto! w-full justify-center gap-0 p-0 has-[[data-slot=results-board-indicator]:not([hidden])]:**:data-[slot=tabs-trigger]:after:hidden"
               >
-                <ResultsBoardIndicator />
                 {years.map(({ year }) => (
                   <TabsTrigger
                     key={year}
@@ -150,12 +149,16 @@ function ResultsBoardSection({
                     <span className="text-subtitle">{year}</span>
                   </TabsTrigger>
                 ))}
+                {/* After the triggers, so the first year is :first-child and
+                    gets no separator dot before it. */}
+                <ResultsBoardIndicator />
               </TabsList>
               {years.map(({ year, items }) => (
                 <TabsContent
                   key={year}
                   value={String(year)}
                   data-year={year}
+                  className="focus-ring"
                   keepMounted
                 >
                   {/* The year, set large between two rules. Decorative: the

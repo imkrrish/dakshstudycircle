@@ -1,26 +1,15 @@
 "use client"
 
-import { useEffect, useRef, useState, type MouseEvent } from "react"
+import { useEffect, useRef, useState } from "react"
 import { ArrowUpRight01Icon, PlayIcon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { cn } from "cn"
 import Image from "next/image"
 
 import type { ResolvedVideoPlayerSection } from "@/lib/content-schema"
+import { isPlainClick } from "@/lib/utils"
 
 type Item = ResolvedVideoPlayerSection["items"][number]
-
-// A click on a link that the browser should handle itself (new tab, new
-// window, download) is left alone.
-function isPlainClick(event: MouseEvent) {
-  return (
-    event.button === 0 &&
-    !event.metaKey &&
-    !event.ctrlKey &&
-    !event.shiftKey &&
-    !event.altKey
-  )
-}
 
 // The one client island of the video-player section. Every playlist is a real
 // link to YouTube, so it works without JavaScript and crawlers see it. With

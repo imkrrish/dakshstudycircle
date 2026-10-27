@@ -66,7 +66,7 @@ function ContactPhoneList({
                     {phone.label}
                   </span>
                 )}
-                <span className="text-xl font-medium tabular-nums">
+                <span className="font-heading text-subtitle [font-variant-numeric:lining-nums_tabular-nums]">
                   {phone.display}
                 </span>
               </div>

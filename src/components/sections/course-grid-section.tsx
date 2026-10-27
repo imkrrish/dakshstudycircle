@@ -29,7 +29,7 @@ function CourseItem({ item }: { item: Extract<Item, { kind: "course" }> }) {
         "motion-safe:transition-[scale] motion-safe:duration-(--dur-base) motion-safe:ease-(--ease-settle) motion-safe:active:scale-[0.985] motion-safe:active:duration-(--dur-press)",
       )}
     >
-      <div className="relative flex flex-1 flex-col gap-1">
+      <div className="flex flex-1 flex-col gap-1">
         <h3 className={titleClass}>
           <Link
             href={item.href}
@@ -44,7 +44,7 @@ function CourseItem({ item }: { item: Extract<Item, { kind: "course" }> }) {
         icon={ArrowRight01Icon}
         strokeWidth={2}
         aria-hidden="true"
-        className="relative size-5 shrink-0 text-muted-foreground transition-transform duration-200 ease-out group-hover/item:translate-x-1 group-active/item:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover/item:translate-x-0 motion-reduce:group-active/item:translate-x-0 md:mt-1.5"
+        className="pointer-events-none size-5 shrink-0 text-muted-foreground transition-transform duration-200 ease-out group-hover/item:translate-x-1 group-active/item:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover/item:translate-x-0 motion-reduce:group-active/item:translate-x-0 md:mt-1.5"
       />
     </li>
   )

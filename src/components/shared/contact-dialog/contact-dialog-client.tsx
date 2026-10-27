@@ -27,6 +27,15 @@ import { useIsDesktop } from "./use-is-desktop"
 
 const TITLE = "Call or WhatsApp us"
 
+// Title: EB Garamond title token. Hours: muted supporting line, tabular so the
+// times line up. The ui titles set their own size and leading, so both are
+// restated here.
+// `text-title` loses to the ui titles' `text-base` in cn, so the token's size
+// goes through an explicit length.
+const titleClass =
+  "font-heading text-[length:var(--text-title)] leading-(--text-title--line-height) font-medium tracking-(--text-title--letter-spacing)"
+const hoursClass = "mt-1 text-sm text-muted-foreground tabular-nums"
+
 // Warm ink instead of the ui default bg-black/30.
 const OVERLAY = "contact-scrim bg-foreground/30"
 
@@ -76,11 +85,11 @@ function ContactDialogClient({
           overlayClassName={OVERLAY}
           showCloseButton={false}
         >
-          <DialogHeader className="pr-14">
-            <DialogTitle className="font-heading text-title font-normal">
-              {TITLE}
-            </DialogTitle>
-            <DialogDescription>{hoursRows}</DialogDescription>
+          <DialogHeader className="gap-0 pr-14">
+            <DialogTitle className={titleClass}>{TITLE}</DialogTitle>
+            <DialogDescription className={hoursClass}>
+              {hoursRows}
+            </DialogDescription>
           </DialogHeader>
           {list}
           <DialogClose render={closeButton}>
@@ -99,11 +108,11 @@ function ContactDialogClient({
         finalFocus={finalFocus}
         overlayClassName={OVERLAY}
       >
-        <DrawerHeader className="relative pr-16 group-data-[swipe-axis=y]/drawer-popup:text-left">
-          <DrawerTitle className="font-heading text-title font-normal">
-            {TITLE}
-          </DrawerTitle>
-          <DrawerDescription>{hoursRows}</DrawerDescription>
+        <DrawerHeader className="relative gap-0 pr-16 group-data-[swipe-axis=y]/drawer-popup:text-left">
+          <DrawerTitle className={titleClass}>{TITLE}</DrawerTitle>
+          <DrawerDescription className={hoursClass}>
+            {hoursRows}
+          </DrawerDescription>
           <DrawerClose render={closeButton}>
             <HugeiconsIcon icon={Cancel01Icon} aria-hidden="true" />
             <span className="sr-only">Close</span>

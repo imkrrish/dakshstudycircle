@@ -28,7 +28,7 @@ Working hypothesis, to confirm (not a settled claim):
 1. **Longevity in one locality.** Teaching in Delhi Cantt since July 2005; 20+ years of local reputation and word of mouth. A new competitor cannot copy this.
 2. **Defence-school entrance prep** (RMS, RIMC, Sainik) alongside regular CBSE tuition.
 3. **One place from Class 1 to 12**, plus Spoken English; a family can stay for years.
-4. **Director-led and personal.** Director Anil Kumar, small groups, personal attention, early syllabus completion so there is time to revise, online classes when needed so no topic is missed.
+4. **Director-led and personal.** Director Anil Kumar teaches Maths himself; batches of about 10–20; the syllabus is finished early so there is time to revise; offline, online and home tuition.
 
 Open: whether nearby institutes also offer RMS/RIMC/Sainik prep. If few do, #2 leads; if many do, #1 and #4 lead. Never claim "best" or "top" without evidence.
 
@@ -53,10 +53,18 @@ Open: whether nearby institutes also offer RMS/RIMC/Sainik prep. If few do, #2 l
 ## Brand Commitments
 
 Name: Daksh Study Circle. Tagline in site data: "Your quest for knowledge ends here."
-Confirmed: founded July 2005, CBSE Classes 1–12, RMS/RIMC/Sainik entrance prep, Spoken English,
-Director Anil Kumar teaches Maths (Classes 8–12).
-To confirm before use: personal attention / batch size, early syllabus completion, online
-classes when needed. Never state "small groups" unless confirmed.
+Confirmed: founded July 2005, CBSE Classes 1–12, RMS/RIMC/Sainik entrance prep, Spoken English.
+Confirmed by the owner (and already on the page):
+
+- Director Anil Kumar teaches Maths for Classes 9–12.
+- Batch size is about 10–20 students, depending on the class.
+- The syllabus is finished early in every class, then revised for the rest of the year.
+- Free demo for offline classes at the centre, until the child is satisfied and ready to join.
+- One smart classroom (smartboard), with more being added.
+- Offline classes at the centre, online classes and home tuition.
+- Hours: Mon–Sat 9 am – 8 pm, Sun 9 am – 6 pm.
+
+Nothing in this list is waiting on confirmation.
 
 ## Evidence on Hand
 

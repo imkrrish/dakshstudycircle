@@ -576,7 +576,10 @@
    (tw-animate-css reads --tw-duration, --tw-ease and the scale variables).
    Mobile: the drawer keeps its native slide, on the same curve, and its exit
    is 60% of the entrance while keeping the swipe-velocity scaling. The scrim
-   (.contact-scrim, on both overlays) fades over 200ms. */
+   (.contact-scrim, on both overlays) fades in over 200ms and out over the same
+   time as the popup, so the close is one movement. Exit animations hold their
+   end frame (fill-mode forwards): without it the scrim snapped back to full
+   opacity when its own animation ended, while the popup was still fading. */
 [data-slot="contact-dialog"]:not([data-swipe-axis]) {
   --tw-enter-scale: 0.96;
   --tw-exit-scale: 0.96;
@@ -586,6 +589,7 @@
 
 [data-slot="contact-dialog"]:not([data-swipe-axis])[data-closed] {
   --tw-duration: var(--dur-slow-exit);
+  --tw-animation-fill-mode: forwards;
 }
 
 [data-slot="contact-dialog"][data-swipe-axis] {
@@ -605,10 +609,13 @@
   transition-timing-function: var(--ease-out);
 }
 
-.contact-scrim[data-closed],
+.contact-scrim[data-closed] {
+  --tw-duration: var(--dur-slow-exit);
+  --tw-animation-fill-mode: forwards;
+}
+
 .contact-scrim[data-ending-style]:not([data-swiping]) {
-  --tw-duration: var(--dur-base-exit);
-  transition-duration: var(--dur-base-exit);
+  transition-duration: calc(var(--drawer-swipe-strength, 1) * 270ms);
 }
 
 /* Reduced motion: the dialog still fades but does not scale. */
