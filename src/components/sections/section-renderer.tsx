@@ -14,7 +14,7 @@ import { ResultsBoardSection } from "./results-board-section"
 import { ResultsGridSection } from "./results-grid-section"
 import { SplitSection } from "./split-section"
 import { TestimonialGridSection } from "./testimonial-grid-section"
-import { VideoGridSection } from "./video-grid-section"
+import { VideoPlayerSection } from "./video-player-section"
 
 type SectionComponents = {
   [T in SectionType]: (props: { section: SectionOf<T> }) => ReactNode
@@ -27,7 +27,7 @@ const sectionComponents = {
   "card-grid": CardGridSection,
   "reason-list": ReasonListSection,
   "course-grid": CourseGridSection,
-  "video-grid": VideoGridSection,
+  "video-player": VideoPlayerSection,
   "results-grid": ResultsGridSection,
   "results-board": ResultsBoardSection,
   "testimonial-grid": TestimonialGridSection,

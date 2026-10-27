@@ -30,7 +30,7 @@ Content marked PLACEHOLDER / MOCK until real data arrives.
 4. reason-list: why Daksh, 6 points (ruled numbered list, photo beside), paper
 5. results-board: honour board with year tabs, up to 6 rows per year (marks and course in the expanded row) + link to /results, muted tone
 6. testimonial-grid: swipeable carousel of featured testimonials (max 12) with a Google rating badge, paper
-7. video-grid: free Maths playlists as link-out cards to YouTube (no embed), band tone
+7. video-player: lesson player (click-to-play facade, nocookie embed on click, default Class 10 Maths) beside a list of the 5 free Maths playlists; rows link to YouTube without JS; band tone
 8. faq: native details, 9 questions, site-data placeholders
 9. cta-band (dark)
 
@@ -51,7 +51,7 @@ Slugs: classes-1-5, classes-6-8, classes-9-10, class-11-12-science, class-11-12-
 2. split: what's covered
 3. card-grid: subjects / batch details
 4. faculty-grid ★ (compact): who teaches this
-5. video-grid: link-out playlist cards, only if related playlists exist
+5. video-player: lesson player with a playlist list, only if related playlists exist
 6. faq: course-specific
 7. cta-band
    Each course needs genuinely unique copy (no find-and-replace pages).

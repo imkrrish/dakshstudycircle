@@ -184,12 +184,13 @@ export const home: Page = {
     },
     {
       id: "videos",
-      type: "video-grid",
+      type: "video-player",
       tone: "band",
       eyebrow: "Free video lessons",
       heading: "Free Maths lessons with Anil Sir",
       intro:
         "Maths lessons for Classes 9 to 12, plus Basic Maths, free to watch at home.",
+      defaultVideo: "class-10-maths",
       videos: [
         "basic-maths",
         "class-9-maths",

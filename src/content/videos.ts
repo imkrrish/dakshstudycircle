@@ -2,7 +2,7 @@ import type { Video } from "@/lib/content-schema"
 
 // The institute's free Maths playlists (public, channel "Anil sir").
 // Thumbnails are each playlist's first video, 16:9. They are decorative
-// (alt ""): the card title already names the playlist.
+// (alt ""): the playlist title next to them already names it.
 function thumbnail(videoId: string): Video["thumbnail"] {
   return {
     src: `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,

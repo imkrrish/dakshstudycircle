@@ -22,8 +22,8 @@ import {
   type CourseGridSection,
   type FaqSection,
   type Video,
-  type VideoGridSection,
-  type ResolvedVideoGridSection,
+  type VideoPlayerSection,
+  type ResolvedVideoPlayerSection,
   type Page,
   type ResolvedCourse,
   type ResolvedCourseGridSection,
@@ -106,16 +106,17 @@ function checkCourseGrids(
   }
 }
 
-// Every video-grid id must exist, and appear once per section.
-function checkVideoGrids(
+// Every video-player id must exist, and appear once per section; the default
+// video must be one of them.
+function checkVideoPlayers(
   label: string,
   sections: Section[],
   videoIds: Set<string>,
   errors: string[],
 ) {
   for (const section of sections) {
-    if (section.type !== "video-grid") continue
-    const where = `${label}: video-grid "${section.id}"`
+    if (section.type !== "video-player") continue
+    const where = `${label}: video-player "${section.id}"`
     const seen = new Set<string>()
     for (const id of section.videos) {
       if (!videoIds.has(id)) {
@@ -125,6 +126,11 @@ function checkVideoGrids(
       }
       if (seen.has(id)) errors.push(`${where}: video "${id}" appears twice`)
       seen.add(id)
+    }
+    if (!seen.has(section.defaultVideo)) {
+      errors.push(
+        `${where}: defaultVideo "${section.defaultVideo}" is not in its videos`,
+      )
     }
   }
 }
@@ -372,7 +378,7 @@ function loadContent() {
   for (const [key, page] of pages) {
     checkPlaceholders(`pages/${key}`, page.sections, placeholderNames, errors)
     checkCourseGrids(`pages/${key}`, page.sections, courseSlugs, errors)
-    checkVideoGrids(`pages/${key}`, page.sections, videoIds, errors)
+    checkVideoPlayers(`pages/${key}`, page.sections, videoIds, errors)
     checkTestimonialGrids(`pages/${key}`, page.sections, testimonials, errors)
     checkResultsGrids(`pages/${key}`, page.sections, results, errors)
     checkSocialActions(`pages/${key}`, page.sections, socialPlatforms, errors)
@@ -390,7 +396,12 @@ function loadContent() {
       courseSlugs,
       errors,
     )
-    checkVideoGrids(`courses/${course.slug}`, course.sections, videoIds, errors)
+    checkVideoPlayers(
+      `courses/${course.slug}`,
+      course.sections,
+      videoIds,
+      errors,
+    )
     checkTestimonialGrids(
       `courses/${course.slug}`,
       course.sections,
@@ -496,7 +507,15 @@ function playlistHref(playlistId: string) {
   return `https://www.youtube.com/playlist?list=${playlistId}`
 }
 
-function resolveVideoGrid(section: VideoGridSection): ResolvedVideoGridSection {
+// Built here only; used by the player after a click. nocookie host, autoplay
+// because the visitor has just pressed play.
+function playlistEmbedSrc(playlistId: string) {
+  return `https://www.youtube-nocookie.com/embed/videoseries?list=${playlistId}&autoplay=1`
+}
+
+function resolveVideoPlayer(
+  section: VideoPlayerSection,
+): ResolvedVideoPlayerSection {
   const { videos: ids, ...rest } = section
   return {
     ...rest,
@@ -504,10 +523,12 @@ function resolveVideoGrid(section: VideoGridSection): ResolvedVideoGridSection {
       const video = content.videos.find((v) => v.id === id)
       if (!video) throw new Error(`[content] unknown video "${id}"`)
       return {
+        id: video.id,
         title: video.title,
         href: playlistHref(video.youtubePlaylistId),
+        embedSrc: playlistEmbedSrc(video.youtubePlaylistId),
         thumbnail: video.thumbnail,
-        meta: "Playlist · YouTube",
+        meta: "Playlist",
       }
     }),
   }
@@ -644,8 +665,8 @@ function resolveSections(sections: Section[]): ResolvedSection[] {
         return resolveFaq(section)
       case "course-grid":
         return resolveCourseGrid(section)
-      case "video-grid":
-        return resolveVideoGrid(section)
+      case "video-player":
+        return resolveVideoPlayer(section)
       case "results-grid":
         return resolveResultsGrid(section)
       case "results-board":

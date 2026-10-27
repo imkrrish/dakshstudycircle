@@ -296,9 +296,9 @@ const ResolvedCourseGridSectionSchema = z.strictObject({
     .min(1),
 })
 
-const videoGridBase = {
+const videoPlayerBase = {
   ...sectionBase,
-  type: z.literal("video-grid"),
+  type: z.literal("video-player"),
   eyebrow: z.string().optional(),
   heading: z.string().min(1),
   intro: z.string().optional(),
@@ -307,20 +307,25 @@ const videoGridBase = {
   actions: z.array(ButtonSchema).optional(),
 }
 
-// Authoring shape: videos are referenced by id. getPage() resolves them.
-const VideoGridSectionSchema = z.strictObject({
-  ...videoGridBase,
+// Authoring shape: videos are referenced by id; defaultVideo is the one shown
+// first and must be among them. getPage() resolves them.
+const VideoPlayerSectionSchema = z.strictObject({
+  ...videoPlayerBase,
   videos: z.array(z.string().min(1)).min(1),
+  defaultVideo: z.string().min(1),
 })
 
-// What the component receives: plain data, hrefs already built.
-const ResolvedVideoGridSectionSchema = z.strictObject({
-  ...videoGridBase,
+// What the component receives: plain data, URLs already built.
+const ResolvedVideoPlayerSectionSchema = z.strictObject({
+  ...videoPlayerBase,
+  defaultVideo: z.string().min(1),
   items: z
     .array(
       z.strictObject({
+        id: z.string(),
         title: z.string(),
         href: z.string(),
+        embedSrc: z.string(),
         thumbnail: ImageSchema,
         meta: z.string(),
       }),
@@ -464,7 +469,7 @@ const SectionSchema = z.discriminatedUnion("type", [
   CardGridSectionSchema,
   ReasonListSectionSchema,
   CourseGridSectionSchema,
-  VideoGridSectionSchema,
+  VideoPlayerSectionSchema,
   ResultsGridSectionSchema,
   ResultsBoardSectionSchema,
   TestimonialGridSectionSchema,
@@ -502,7 +507,7 @@ const CourseSchema = z.strictObject({
   sections: z.array(SectionSchema),
 })
 
-// A free YouTube playlist. Cards link out to it; nothing is embedded.
+// A free YouTube playlist. Rows link out to it; the player embeds it only after a click.
 const VideoSchema = z.strictObject({
   id: z.string().min(1),
   title: z.string().min(1),
@@ -596,8 +601,10 @@ type Section = z.infer<typeof SectionSchema>
 type CourseGridSection = z.infer<typeof CourseGridSectionSchema>
 type ResolvedCourseGridSection = z.infer<typeof ResolvedCourseGridSectionSchema>
 type FaqSection = z.infer<typeof FaqSectionSchema>
-type VideoGridSection = z.infer<typeof VideoGridSectionSchema>
-type ResolvedVideoGridSection = z.infer<typeof ResolvedVideoGridSectionSchema>
+type VideoPlayerSection = z.infer<typeof VideoPlayerSectionSchema>
+type ResolvedVideoPlayerSection = z.infer<
+  typeof ResolvedVideoPlayerSectionSchema
+>
 type ResultsGridSection = z.infer<typeof ResultsGridSectionSchema>
 type ResolvedResultsGridSection = z.infer<
   typeof ResolvedResultsGridSectionSchema
@@ -617,14 +624,14 @@ type ResolvedSection =
       {
         type:
           | "course-grid"
-          | "video-grid"
+          | "video-player"
           | "results-grid"
           | "results-board"
           | "testimonial-grid"
       }
     >
   | ResolvedCourseGridSection
-  | ResolvedVideoGridSection
+  | ResolvedVideoPlayerSection
   | ResolvedResultsGridSection
   | ResolvedResultsBoardSection
   | ResolvedTestimonialGridSection
@@ -650,7 +657,7 @@ export {
   SiteSchema,
   SectionSchema,
   ResolvedCourseGridSectionSchema,
-  ResolvedVideoGridSectionSchema,
+  ResolvedVideoPlayerSectionSchema,
   ResolvedResultsGridSectionSchema,
   ResolvedResultsBoardSectionSchema,
   ResolvedTestimonialGridSectionSchema,
@@ -677,8 +684,8 @@ export type {
   CourseGridSection,
   ResolvedCourseGridSection,
   FaqSection,
-  VideoGridSection,
-  ResolvedVideoGridSection,
+  VideoPlayerSection,
+  ResolvedVideoPlayerSection,
   ResultsGridSection,
   ResolvedResultsGridSection,
   ResultsBoardSection,
