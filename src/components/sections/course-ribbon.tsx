@@ -73,16 +73,16 @@ function CourseRibbon({ titles }: { titles: string[] }) {
       ref={rootRef}
       aria-hidden="true"
       data-slot="course-ribbon"
-      className="course-ribbon pointer-events-none absolute inset-x-0 -top-2 h-6 overflow-x-clip select-none md:top-0 md:h-7"
+      className="course-ribbon pointer-events-none absolute inset-x-0 -top-0.5 h-6 overflow-x-clip select-none md:hidden"
     >
       <div
         ref={trackRef}
-        className="course-ribbon-track flex h-full w-max items-center whitespace-nowrap font-heading text-subtitle text-muted-foreground will-change-transform md:text-title"
+        className="course-ribbon-track flex h-full w-max items-center font-heading text-subtitle whitespace-nowrap text-muted-foreground will-change-transform"
       >
         {titles.map((title) => (
           <span
             key={title}
-            className="flex items-center after:mx-5 after:size-1 after:rounded-full after:bg-muted-foreground/60 after:content-[''] last:after:hidden md:after:mx-6"
+            className="flex items-center after:mx-5 after:size-1 after:rounded-full after:bg-muted-foreground/60 after:content-[''] last:after:hidden"
           >
             {title}
           </span>

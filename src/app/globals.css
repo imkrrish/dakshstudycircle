@@ -439,25 +439,27 @@
 }
 
 
-/* Course ribbon: edges fade to paper, and the first title starts on the
-   container edge (the same gutter as the section's content), so the static
-   state and the state before scrolling are identical. */
+/* Course ribbon and path: the first title starts on the container edge (the
+   same gutter as the section's content), so the static state and the state
+   before scrolling are identical. The left fade covers exactly that gutter, so
+   the first title is fully opaque at rest; the right edge fades over 3rem. */
 .course-ribbon {
+  --ribbon-start: max(1rem, calc((100% - 72rem) / 2 + 1.5rem));
   mask-image: linear-gradient(
     to right,
     transparent,
-    black 3rem,
+    black var(--ribbon-start),
     black calc(100% - 3rem),
     transparent
   );
 }
 
 .course-ribbon-track {
-  padding-inline-start: max(1rem, calc((100% - 72rem) / 2 + 1.5rem));
+  padding-inline-start: var(--ribbon-start);
 }
 
 @media (min-width: 48rem) {
-  .course-ribbon-track {
-    padding-inline-start: max(1.5rem, calc((100% - 72rem) / 2 + 1.5rem));
+  .course-ribbon {
+    --ribbon-start: max(1.5rem, calc((100% - 72rem) / 2 + 1.5rem));
   }
 }

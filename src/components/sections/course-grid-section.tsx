@@ -10,6 +10,7 @@ import { SectionHeading } from "@/components/layout/section-heading"
 import { ActionButton } from "@/components/shared/action-button"
 import { buttonVariants } from "@/components/ui/button"
 import { flameGlowClass, itemClass } from "./card-styles"
+import { CoursePath } from "./course-path"
 import { CourseRibbon } from "./course-ribbon"
 import type { ResolvedCourseGridSection, SectionOf } from "@/lib/content-schema"
 
@@ -92,11 +93,22 @@ function CourseGridSection({ section }: { section: SectionOf<"course-grid"> }) {
   return (
     <Section
       data-slot="course-grid-section"
-      className="relative pt-12 md:pt-16"
+      // With the ribbon: below md it sits 44px under the proof line and 56px
+      // above the eyebrow; from md the path (6rem tall) sits at the section top
+      // and the eyebrow is 100px below its lowest glyph.
+      className={cn(
+        "relative",
+        section.ribbon ? "pt-20 md:pt-48" : "pt-12 md:pt-16",
+      )}
       id={id}
       aria-labelledby={`${id}-heading`}
     >
-      {section.ribbon && <CourseRibbon titles={section.ribbon} />}
+      {section.ribbon && (
+        <>
+          <CourseRibbon titles={section.ribbon} />
+          <CoursePath titles={section.ribbon} />
+        </>
+      )}
       <Container
         className="flex flex-col gap-10 md:gap-12"
         style={
@@ -116,10 +128,7 @@ function CourseGridSection({ section }: { section: SectionOf<"course-grid"> }) {
             const labelId = `${id}-group-${index}`
             return (
               <div key={group.label} className="flex flex-col gap-3 md:gap-4">
-                <p
-                  id={labelId}
-                  className="text-eyebrow text-muted-foreground"
-                >
+                <p id={labelId} className="text-eyebrow text-muted-foreground">
                   {group.label}
                 </p>
                 <ul
