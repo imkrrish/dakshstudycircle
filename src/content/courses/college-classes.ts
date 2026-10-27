@@ -1,4 +1,5 @@
 import type { Course } from "@/lib/content-schema"
+import { courseCta } from "./shared"
 
 // Open [CONFIRM] items:
 // - Subjects, mode (offline/online), batch size, timings, fees
@@ -32,5 +33,6 @@ export const collegeClasses: Course = {
       subheading:
         "Classes for college students at our centre in Sadar Bazaar, Delhi Cantt.",
     },
+    courseCta,
   ],
 }

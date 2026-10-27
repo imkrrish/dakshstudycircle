@@ -50,6 +50,8 @@ const FeaturesSchema = z.strictObject({
   // A hero with no photo shows a "photo to come" card with its shot brief.
   // On in development, off in production: without it the hero drops the media.
   showShotCards: z.boolean(),
+  // Fees blocks (and FAQ items marked `feature: "showFees"`) are dropped when off.
+  showFees: z.boolean(),
 })
 
 const DaySchema = z.enum(["mon", "tue", "wed", "thu", "fri", "sat", "sun"])
@@ -250,6 +252,8 @@ const FaqSectionSchema = z.strictObject({
       z.strictObject({
         question: z.string().min(1),
         answer: z.string().min(1),
+        // Dropped from the page when that site feature is off.
+        feature: FeaturesSchema.keyof().optional(),
       }),
     )
     .min(1),
@@ -379,6 +383,60 @@ const ResolvedVideoPlayerSectionSchema = z.strictObject({
       }),
     )
     .min(1),
+})
+
+// Course pages only: one row per subject in the course record, with the
+// teachers derived from the faculty collection. Nothing else to author.
+const subjectsBase = {
+  ...sectionBase,
+  type: z.literal("subjects"),
+  eyebrow: z.string().optional(),
+  heading: z.string().min(1),
+  intro: z.string().optional(),
+}
+
+const SubjectsSectionSchema = z.strictObject(subjectsBase)
+
+// What the component receives: a teacher is shown as "name, role".
+const ResolvedSubjectsSectionSchema = z.strictObject({
+  ...subjectsBase,
+  items: z
+    .array(
+      z.strictObject({
+        name: z.string().min(1),
+        teachers: z.array(
+          z.strictObject({ name: z.string().min(1), role: z.string() }),
+        ),
+      }),
+    )
+    .min(1),
+})
+
+// Course pages only: shows the course's `fees` record (see CourseSchema).
+const feesBase = {
+  ...sectionBase,
+  type: z.literal("fees"),
+  eyebrow: z.string().optional(),
+  heading: z.string().min(1),
+  intro: z.string().optional(),
+}
+
+const FeesSectionSchema = z.strictObject(feesBase)
+
+// What the component receives: amounts already formatted, e.g. "₹18,000".
+const ResolvedFeesSectionSchema = z.strictObject({
+  ...feesBase,
+  rows: z
+    .array(
+      z.strictObject({
+        label: z.string().min(1),
+        amount: z.string().min(1),
+        // "per subject · per year"
+        basis: z.string().min(1),
+      }),
+    )
+    .min(1),
+  note: z.string().optional(),
 })
 
 const sectionTone = z.enum(["default", "muted", "band"])
@@ -523,6 +581,8 @@ const SectionSchema = z.discriminatedUnion("type", [
   TestimonialGridSectionSchema,
   FaqSectionSchema,
   CtaBandSectionSchema,
+  SubjectsSectionSchema,
+  FeesSectionSchema,
 ])
 
 // ---------- Pages & collections ----------
@@ -531,6 +591,33 @@ const PageSchema = z.strictObject({
   slug: z.string().min(1),
   seo: SeoSchema,
   sections: z.array(SectionSchema),
+})
+
+// A fee in rupees: one amount, or a range (e.g. 25,000 to 30,000).
+const AmountSchema = z.union([
+  z.number().int().positive(),
+  z
+    .strictObject({
+      from: z.number().int().positive(),
+      to: z.number().int().positive(),
+    })
+    .refine((range) => range.from < range.to, "from must be below to"),
+])
+
+// What a fee covers. `period` is required on purpose: a fee never renders
+// without saying how often it is paid ("course" = one fee for the whole course).
+const FeesSchema = z.strictObject({
+  rows: z
+    .array(
+      z.strictObject({
+        label: z.string().min(1),
+        amount: AmountSchema,
+        per: z.enum(["subject", "course"]),
+        period: z.enum(["month", "quarter", "year", "session", "course"]),
+      }),
+    )
+    .min(1),
+  note: z.string().optional(),
 })
 
 const CourseSchema = z.strictObject({
@@ -550,6 +637,8 @@ const CourseSchema = z.strictObject({
     .min(1),
   subjects: z.array(z.string()),
   facultyIds: z.array(z.string()),
+  // Shown by the page's `fees` section, and only when site.features.showFees is on.
+  fees: FeesSchema.optional(),
   order: z.number(),
   seo: SeoSchema,
   sections: z.array(SectionSchema),
@@ -568,16 +657,34 @@ const VideoSchema = z.strictObject({
   subject: z.string().min(1),
 })
 
+// `sample: true` marks an example record: it shows in development and the
+// resolver removes it in production (see content.ts). Collection items that can
+// be examples carry it.
+const sampleField = { sample: z.boolean().optional() }
+
 const FacultySchema = z.strictObject({
   id: z.string().min(1),
+  // Full name as the teacher wants it printed.
   name: z.string(),
+  // Job title, e.g. "Director", "Senior Physics teacher".
   role: z.string(),
+  // Subjects as named in the course data (e.g. "Maths", "Science"). A subject row
+  // shows this teacher when the subject matches and a class overlaps.
   subjects: z.array(z.string()),
+  // "Class 9" … "Class 12" the teacher takes.
   classes: z.array(z.string()),
+  // Degrees and certificates, one line, e.g. "M.Sc. Physics, B.Ed.".
+  qualification: z.string().optional(),
+  // Teaching experience, one line, e.g. "12 years of teaching".
+  experience: z.string().optional(),
+  // Two or three sentences in the teacher's own style; facts only.
   bio: z.string().optional(),
   photo: ImageSchema.optional(),
+  // The brief for the photo this record needs, until `photo` exists.
+  photoShot: z.string().optional(),
   isDirector: z.boolean(),
   order: z.number(),
+  ...sampleField,
 })
 
 const TestimonialSchema = z.strictObject({
@@ -634,6 +741,7 @@ const ResultSchema = z.strictObject({
   photo: ImageSchema.optional(),
   // Shown on the home page.
   highlight: z.boolean().optional(),
+  ...sampleField,
 })
 
 type Image = z.infer<typeof ImageSchema>
@@ -666,6 +774,11 @@ type TestimonialGridSection = z.infer<typeof TestimonialGridSectionSchema>
 type ResolvedTestimonialGridSection = z.infer<
   typeof ResolvedTestimonialGridSectionSchema
 >
+type SubjectsSection = z.infer<typeof SubjectsSectionSchema>
+type ResolvedSubjectsSection = z.infer<typeof ResolvedSubjectsSectionSchema>
+type FeesSection = z.infer<typeof FeesSectionSchema>
+type ResolvedFeesSection = z.infer<typeof ResolvedFeesSectionSchema>
+type Fees = z.infer<typeof FeesSchema>
 // Sections as components receive them (references resolved).
 type ResolvedSection =
   | Exclude<
@@ -677,6 +790,8 @@ type ResolvedSection =
           | "results-grid"
           | "results-board"
           | "testimonial-grid"
+          | "subjects"
+          | "fees"
       }
     >
   | ResolvedCourseGridSection
@@ -684,6 +799,8 @@ type ResolvedSection =
   | ResolvedResultsGridSection
   | ResolvedResultsBoardSection
   | ResolvedTestimonialGridSection
+  | ResolvedSubjectsSection
+  | ResolvedFeesSection
 type SectionType = ResolvedSection["type"]
 type SectionOf<T extends SectionType> = Extract<ResolvedSection, { type: T }>
 type Page = z.infer<typeof PageSchema>
@@ -710,6 +827,8 @@ export {
   ResolvedResultsGridSectionSchema,
   ResolvedResultsBoardSectionSchema,
   ResolvedTestimonialGridSectionSchema,
+  ResolvedSubjectsSectionSchema,
+  ResolvedFeesSectionSchema,
   PageSchema,
   CourseSchema,
   VideoSchema,
@@ -742,6 +861,11 @@ export type {
   ResolvedResultsBoardSection,
   TestimonialGridSection,
   ResolvedTestimonialGridSection,
+  SubjectsSection,
+  ResolvedSubjectsSection,
+  FeesSection,
+  ResolvedFeesSection,
+  Fees,
   ResolvedSection,
   ResolvedPage,
   ResolvedCourse,

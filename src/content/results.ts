@@ -1,7 +1,8 @@
 import type { Result } from "@/lib/content-schema"
 
-// MOCK: development data for the results section. Replace with the institute's
-// real results before launch.
+// MOCK: development data for the results section, every item marked
+// `sample: true`, so production builds drop it. Replace with the institute's
+// real results before launch (see docs/content-requests.md).
 //
 // No photos: the free-licence pool (Unsplash) had too few matching teen
 // portraits for a consistent set. A result may still carry `photo`
@@ -11,6 +12,7 @@ import type { Result } from "@/lib/content-schema"
 export const results: Result[] = [
   {
     id: "2026-aanya-sharma",
+    sample: true,
     studentName: "Aanya Sharma",
     year: 2026,
     class: "Class 10",
@@ -25,6 +27,7 @@ export const results: Result[] = [
   },
   {
     id: "2026-rohan-bisht",
+    sample: true,
     studentName: "Rohan Bisht",
     year: 2026,
     class: "Class 10",
@@ -39,6 +42,7 @@ export const results: Result[] = [
   },
   {
     id: "2026-ishaan-rawat",
+    sample: true,
     studentName: "Ishaan Rawat",
     year: 2026,
     class: "Class 12",
@@ -55,6 +59,7 @@ export const results: Result[] = [
   },
   {
     id: "2026-kavya-negi",
+    sample: true,
     studentName: "Kavya Negi",
     year: 2026,
     class: "Class 12",
@@ -69,6 +74,7 @@ export const results: Result[] = [
   },
   {
     id: "2026-aryan-thakur",
+    sample: true,
     studentName: "Aryan Thakur",
     year: 2026,
     class: "Entrance",
@@ -83,6 +89,7 @@ export const results: Result[] = [
   },
   {
     id: "2025-priya-joshi",
+    sample: true,
     studentName: "Priya Joshi",
     year: 2025,
     class: "Class 10",
@@ -97,6 +104,7 @@ export const results: Result[] = [
   },
   {
     id: "2025-devansh-kapoor",
+    sample: true,
     studentName: "Devansh Kapoor",
     year: 2025,
     class: "Class 10",
@@ -110,6 +118,7 @@ export const results: Result[] = [
   },
   {
     id: "2025-simran-kaur",
+    sample: true,
     studentName: "Simran Kaur",
     year: 2025,
     class: "Class 10",
@@ -124,6 +133,7 @@ export const results: Result[] = [
   },
   {
     id: "2025-mohit-pundir",
+    sample: true,
     studentName: "Mohit Pundir",
     year: 2025,
     class: "Class 12",
@@ -139,6 +149,7 @@ export const results: Result[] = [
   },
   {
     id: "2025-nidhi-rana",
+    sample: true,
     studentName: "Nidhi Rana",
     year: 2025,
     class: "Class 12",
@@ -154,6 +165,7 @@ export const results: Result[] = [
   },
   {
     id: "2025-kabir-chauhan",
+    sample: true,
     studentName: "Kabir Chauhan",
     year: 2025,
     class: "Entrance",
@@ -167,6 +179,7 @@ export const results: Result[] = [
   },
   {
     id: "2024-tanvi-bhatt",
+    sample: true,
     studentName: "Tanvi Bhatt",
     year: 2024,
     class: "Class 10",
@@ -181,6 +194,7 @@ export const results: Result[] = [
   },
   {
     id: "2024-harsh-verma",
+    sample: true,
     studentName: "Harsh Verma",
     year: 2024,
     class: "Class 10",
@@ -194,6 +208,7 @@ export const results: Result[] = [
   },
   {
     id: "2024-ritika-panwar",
+    sample: true,
     studentName: "Ritika Panwar",
     year: 2024,
     class: "Class 12",
@@ -209,6 +224,7 @@ export const results: Result[] = [
   },
   {
     id: "2024-yash-dhami",
+    sample: true,
     studentName: "Yash Dhami",
     year: 2024,
     class: "Class 12",
@@ -223,6 +239,7 @@ export const results: Result[] = [
   },
   {
     id: "2024-arnav-saini",
+    sample: true,
     studentName: "Arnav Saini",
     year: 2024,
     class: "Entrance",

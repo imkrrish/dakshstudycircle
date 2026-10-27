@@ -95,3 +95,8 @@ Slugs: classes-1-5, classes-6-8, classes-9-10, class-11-12-science, class-11-12-
 ### Privacy `/privacy`, 404
 
 Simple text pages / branded not-found with links home.
+
+## Later
+
+- SEO phase: unknown course slugs (e.g. `/courses/nope`) return HTTP 200 with `noindex` and the 404 content, because of Cache Components (`dynamicParams` is not allowed). Find a way to send a real 404.
+- Pre-launch accessibility pass: header and footer links are under 44px at 375 (Talk to us 36px, menu button 36px, logo, footer links, back link, "Open on YouTube").

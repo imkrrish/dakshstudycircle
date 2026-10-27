@@ -67,6 +67,22 @@ Confirmed by the owner (and already on the page):
 
 Nothing in this list is waiting on confirmation.
 
+## Fees (pamphlet)
+
+From the owner's recent pamphlet scans (true as of Oct 2026). Confirmed: Class 9 and 10 fees are per subject,
+per session, up to the final exams (shown on `/courses/classes-9-10`; `site.features.showFees` hides every fee at
+once). The period of the other fees is not confirmed, so they are not on the site: `course.fees` needs a `period`.
+No registration fee, instalments or online/home-tuition price differences are stated: do not mention any.
+
+- Classes 1–8: Rs 25,000 to Rs 30,000 (Maths, Science, English). A range.
+- Class 9 and Class 10: Rs 18,000 per subject (Maths, Science, English, Hindi, Social Studies).
+- Class 11 and Class 12: Rs 25,000 per subject (Maths, Physics, Chemistry, Biology, Accounts, Economics,
+  Political Science, Business Studies, English, C++, IP).
+- RIMC / RMS / Sainik School: Rs 80,000.
+- Spoken English: Rs 9,000 for a 3-month course.
+- College-level classes also offered: B.A., B.Com., B.Sc. (no fee given).
+- Pamphlet line usable as copy: "Revise it whole year with us."
+
 ## Evidence on Hand
 
 - Real: address, phones, emails, socials, offered courses, director name (Anil Kumar).

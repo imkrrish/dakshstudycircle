@@ -1,4 +1,5 @@
 import type { Course } from "@/lib/content-schema"
+import { courseCta } from "./shared"
 
 // Open [CONFIRM] items:
 // - Batch timings, duration, fees
@@ -32,5 +33,6 @@ export const classes6To8: Course = {
       subheading:
         "CBSE tuition in Maths, Science and English for the middle years, when subjects grow more detailed and homework needs more guidance.",
     },
+    courseCta,
   ],
 }

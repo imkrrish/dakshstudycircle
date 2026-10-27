@@ -1,4 +1,5 @@
 import type { Course } from "@/lib/content-schema"
+import { courseCta } from "./shared"
 
 // Open [CONFIRM] items:
 // - Batch timings, duration, fees
@@ -32,5 +33,6 @@ export const classes1To5: Course = {
       subheading:
         "CBSE tuition in Maths, Science and English for young learners, in Delhi Cantt.",
     },
+    courseCta,
   ],
 }

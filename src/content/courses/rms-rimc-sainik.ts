@@ -1,4 +1,5 @@
 import type { Course } from "@/lib/content-schema"
+import { courseCta } from "./shared"
 
 // DEVELOPMENT DATA from research, not final copy. RMS CET admits to Classes 6 and 9; RIMC admits
 // to Class 8 (written test + viva-voce, boys and girls); AISSEE (Sainik Schools, NTA) admits to
@@ -39,5 +40,6 @@ export const rmsRimcSainik: Course = {
       subheading:
         "A separate batch, demo classes and interview practice for admission to Class\u00a06, 8 or\u00a09.",
     },
+    courseCta,
   ],
 }

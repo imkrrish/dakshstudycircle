@@ -1,4 +1,5 @@
 import type { Course } from "@/lib/content-schema"
+import { courseCta } from "./shared"
 
 // Open [CONFIRM] items:
 // - Which subjects belong to which stream (split proposed, not confirmed by the owner)
@@ -40,5 +41,6 @@ export const class11To12Commerce: Course = {
       subheading:
         "Accountancy, Business Studies and Economics, plus Maths, English and Informatics Practices, to the CBSE syllabus.",
     },
+    courseCta,
   ],
 }

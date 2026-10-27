@@ -1,4 +1,5 @@
 import type { Course } from "@/lib/content-schema"
+import { courseCta } from "./shared"
 
 // Open [CONFIRM] items:
 // - Which subjects belong to which stream (split proposed, not confirmed by the owner)
@@ -33,5 +34,6 @@ export const class11To12Humanities: Course = {
       subheading:
         "Political Science, Economics and English for humanities students, to the CBSE syllabus.",
     },
+    courseCta,
   ],
 }

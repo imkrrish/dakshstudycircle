@@ -25,6 +25,10 @@ import {
   type Video,
   type VideoPlayerSection,
   type ResolvedVideoPlayerSection,
+  type SubjectsSection,
+  type ResolvedSubjectsSection,
+  type FeesSection,
+  type ResolvedFeesSection,
   type Page,
   type ResolvedCourse,
   type ResolvedCourseGridSection,
@@ -167,6 +171,40 @@ function checkVideoPlayers(
   }
 }
 
+// Course-only sections: a page has no course record to read. A fees section
+// needs the course's fees; each video must belong to one of the course's classes.
+function checkCourseSections(
+  label: string,
+  course: Course,
+  videos: Video[],
+  errors: string[],
+) {
+  for (const section of course.sections) {
+    if (section.type === "fees" && !course.fees) {
+      errors.push(`${label}: fees "${section.id}" but the course has no fees`)
+    }
+    if (section.type !== "video-player") continue
+    for (const id of section.videos) {
+      const video = videos.find((v) => v.id === id)
+      if (video?.class && !(course.classes as string[]).includes(video.class)) {
+        errors.push(
+          `${label}: video-player "${section.id}": "${id}" is for ${video.class}, which this course does not teach`,
+        )
+      }
+    }
+  }
+}
+
+function checkPageSections(label: string, sections: Section[], errors: string[]) {
+  for (const section of sections) {
+    if (section.type === "subjects" || section.type === "fees") {
+      errors.push(
+        `${label}: "${section.id}" (${section.type}) belongs on a course page`,
+      )
+    }
+  }
+}
+
 // A testimonial-grid that selects nothing would render an empty section.
 function checkTestimonialGrids(
   label: string,
@@ -255,14 +293,36 @@ function contactPlaceholders(site: Site): Record<string, string> {
 }
 
 // Centre-wide facts that hero fact values may use: {hours}, {batchSize}, {modes}, {freeDemo}.
-function heroPlaceholders(site: Site): Record<string, string> {
+function heroPlaceholders(site: Site, course?: Course): Record<string, string> {
   return {
     hours: formatHoursShort(site.contact.hours),
     batchSize: site.facts.batchSize,
     modes: site.facts.modes,
     freeDemo: site.facts.freeDemo,
+    ...(course
+      ? {
+          classes: classRange(course.classes),
+          subjectCount: String(course.subjects.length),
+        }
+      : {}),
   }
 }
+
+// "Class 9", "Class 10" → "9–10"; a gap or "College" keeps the list ("9 and 11").
+function classRange(classes: string[]): string {
+  const numbers = classes.map((c) => Number(c.replace("Class ", "")))
+  if (numbers.some(Number.isNaN)) return classes.join(", ")
+  const contiguous = numbers.every((n, i) => i === 0 || n === numbers[i - 1] + 1)
+  if (contiguous && numbers.length > 1) {
+    return `${numbers[0]}–${numbers[numbers.length - 1]}`
+  }
+  return new Intl.ListFormat("en-IN", { type: "conjunction" }).format(
+    numbers.map(String),
+  )
+}
+
+// A course page's hero facts may also use {classes} and {subjectCount}.
+const COURSE_HERO_PLACEHOLDERS = ["classes", "subjectCount"]
 
 const PLACEHOLDER_PATTERN = /\{(\w+)\}/g
 
@@ -287,6 +347,15 @@ function checkPlaceholders(
       continue
     }
     if (section.type !== "faq") continue
+    const unknownIn = (text: string, where: string) => {
+      for (const [, name] of text.matchAll(PLACEHOLDER_PATTERN)) {
+        if (known.has(name)) continue
+        errors.push(
+          `${label}: faq "${section.id}" ${where}: unknown placeholder {${name}}. Known: ${[...known].map((k) => `{${k}}`).join(", ")}`,
+        )
+      }
+    }
+    if (section.intro) unknownIn(section.intro, "intro")
     section.items.forEach((item, i) => {
       for (const text of [item.question, item.answer]) {
         for (const [, name] of text.matchAll(PLACEHOLDER_PATTERN)) {
@@ -440,20 +509,26 @@ function loadContent() {
       heroPlaceholderNames,
       errors,
     )
+    checkPageSections(`pages/${key}`, page.sections, errors)
     checkCourseGrids(`pages/${key}`, page.sections, courseSlugs, errors)
     checkVideoPlayers(`pages/${key}`, page.sections, videoIds, errors)
     checkTestimonialGrids(`pages/${key}`, page.sections, testimonials, errors)
     checkResultsGrids(`pages/${key}`, page.sections, results, errors)
     checkSocialActions(`pages/${key}`, page.sections, socialPlatforms, errors)
   }
+  const courseHeroPlaceholderNames = new Set([
+    ...heroPlaceholderNames,
+    ...COURSE_HERO_PLACEHOLDERS,
+  ])
   for (const course of courses) {
     checkPlaceholders(
       `courses/${course.slug}`,
       course.sections,
       placeholderNames,
-      heroPlaceholderNames,
+      courseHeroPlaceholderNames,
       errors,
     )
+    checkCourseSections(`courses/${course.slug}`, course, videos, errors)
     checkCourseGrids(
       `courses/${course.slug}`,
       course.sections,
@@ -492,15 +567,21 @@ function loadContent() {
     )
   }
 
+  // Sample items (`sample: true`) are examples: kept in development, removed
+  // everywhere else. next.config.ts prints a warning for any left in the data.
+  const showSamples = process.env.NODE_ENV === "development"
+  const real = <T extends { sample?: boolean }>(items: T[]) =>
+    showSamples ? items : items.filter((item) => !item.sample)
+
   return {
     site,
     pages,
     videos,
     testimonials,
     // Year descending; Array.sort is stable, so data order breaks ties.
-    results: results.sort((a, b) => b.year - a.year),
+    results: real(results).sort((a, b) => b.year - a.year),
     courses: courses.sort((a, b) => a.order - b.order),
-    faculty: faculty.sort((a, b) => a.order - b.order),
+    faculty: real(faculty).sort((a, b) => a.order - b.order),
   }
 }
 
@@ -721,25 +802,40 @@ function resolveFaq(section: FaqSection): FaqSection {
   // Names were validated at load, so every match has a value.
   const fill = (text: string) =>
     text.replace(PLACEHOLDER_PATTERN, (_, name: string) => values[name])
+  const { features } = content.site
   return {
     ...section,
-    items: section.items.map(({ question, answer }) => ({
-      question: fill(question),
-      answer: fill(answer),
-    })),
+    ...(section.intro ? { intro: fill(section.intro) } : {}),
+    items: section.items
+      .filter((item) => !item.feature || features[item.feature])
+      .map(({ question, answer }) => ({
+        question: fill(question),
+        answer: fill(answer),
+      })),
   }
 }
 
 // Fills the hero's fact placeholders. Without a photo the media is dropped
-// unless shot cards are on, so production never shows "photo to come".
-function resolveHero(section: HeroSection): HeroSection {
+// unless shot cards are on, so production never shows "photo to come". A course
+// hero without its own trail gets Home › Courses › the course.
+function resolveHero(section: HeroSection, course?: Course): HeroSection {
   const { site } = content
-  const values = heroPlaceholders(site)
+  const values = heroPlaceholders(site, course)
   const { media, facts, ...rest } = section
   const showMedia =
     media && (media.image || site.features.showShotCards) ? media : undefined
+  const breadcrumbs =
+    section.breadcrumbs ??
+    (course && section.size === "compact"
+      ? [
+          { label: "Home", href: "/" },
+          { label: "Courses", href: "/courses" },
+          { label: course.title },
+        ]
+      : undefined)
   return {
     ...rest,
+    ...(breadcrumbs ? { breadcrumbs } : {}),
     ...(showMedia ? { media: showMedia } : {}),
     ...(facts
       ? {
@@ -757,28 +853,121 @@ function resolveHero(section: HeroSection): HeroSection {
   }
 }
 
-// Fills section references to collections so components only receive plain data.
-function resolveSections(sections: Section[]): ResolvedSection[] {
-  return sections.map((section) => {
+// Teachers of a subject in a course: the course's faculty who teach that
+// subject to at least one of its classes. Derived, never stored.
+function resolveSubjects(
+  section: SubjectsSection,
+  course: Course,
+): ResolvedSubjectsSection {
+  return {
+    ...section,
+    items: course.subjects.map((name) => ({
+      name,
+      teachers: content.faculty
+        .filter(
+          (f) =>
+            course.facultyIds.includes(f.id) &&
+            f.subjects.includes(name) &&
+            f.classes.some((c) => (course.classes as string[]).includes(c)),
+        )
+        .map((f) => ({ name: f.name, role: f.role })),
+    })),
+  }
+}
+
+const rupees = new Intl.NumberFormat("en-IN")
+
+// How often the fee is paid, as it reads after "per subject, ".
+const FEE_PERIODS = {
+  month: "per month",
+  quarter: "per quarter",
+  year: "per year",
+  session: "for the session up to the final exams",
+  course: "for the whole course",
+} as const
+
+// Null when fees are switched off, so no amount reaches the page.
+function resolveFees(
+  section: FeesSection,
+  course: Course,
+): ResolvedFeesSection | null {
+  if (!content.site.features.showFees || !course.fees) return null
+  const { rows, note } = course.fees
+  return {
+    ...section,
+    rows: rows.map(({ label, amount, per, period }) => ({
+      label,
+      amount:
+        typeof amount === "number"
+          ? `₹${rupees.format(amount)}`
+          : `₹${rupees.format(amount.from)}–₹${rupees.format(amount.to)}`,
+      basis: [per === "subject" ? "per subject" : null, FEE_PERIODS[period]]
+        .filter(Boolean)
+        .join(", "),
+    })),
+    ...(note ? { note } : {}),
+  }
+}
+
+// Fills section references to collections so components only receive plain
+// data. `course` is the course whose page this is; sections that read the
+// course record need it (the build already rejects them on other pages).
+function resolveSections(
+  sections: Section[],
+  course?: Course,
+): ResolvedSection[] {
+  return sections.flatMap((section): ResolvedSection[] => {
+    switch (section.type) {
+      case "subjects":
+        return [resolveSubjects(section, requireCourse(section.id, course))]
+      case "fees": {
+        const fees = resolveFees(section, requireCourse(section.id, course))
+        return fees ? [fees] : []
+      }
+      // A section with nothing left to show (e.g. only sample results, in
+      // production) is dropped rather than rendered empty.
+      case "results-grid": {
+        const resolved = resolveResultsGrid(section)
+        return resolved.items.length > 0 ? [resolved] : []
+      }
+      case "results-board": {
+        const resolved = resolveResultsBoard(section)
+        return resolved.years.length > 0 ? [resolved] : []
+      }
+      default:
+        return [resolveOne(section, course)]
+    }
+  })
+}
+
+function requireCourse(id: string, course?: Course): Course {
+  if (!course) throw new Error(`[content] section "${id}" needs a course`)
+  return course
+}
+
+function resolveOne(
+  section: Exclude<
+    Section,
+    { type: "subjects" | "fees" | "results-grid" | "results-board" }
+  >,
+  course?: Course,
+): ResolvedSection {
+  {
     switch (section.type) {
       case "hero":
-        return resolveHero(section)
+        return resolveHero(section, course)
       case "faq":
         return resolveFaq(section)
       case "course-grid":
         return resolveCourseGrid(section)
       case "video-player":
         return resolveVideoPlayer(section)
-      case "results-grid":
-        return resolveResultsGrid(section)
-      case "results-board":
-        return resolveResultsBoard(section)
       case "testimonial-grid":
         return resolveTestimonialGrid(section)
       default:
         return section
     }
-  })
+  }
 }
 
 // ---------- API (async so a CMS fetch can replace the body later) ----------
@@ -814,7 +1003,7 @@ async function getCourse(slug: string): Promise<ResolvedCourse> {
       `[content] unknown course "${slug}". Known: ${content.courses.map((c) => c.slug).join(", ") || "(none)"}`,
     )
   }
-  return { ...course, sections: resolveSections(course.sections) }
+  return { ...course, sections: resolveSections(course.sections, course) }
 }
 
 async function getFaculty(): Promise<Faculty[]> {

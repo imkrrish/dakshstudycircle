@@ -1,4 +1,5 @@
 import type { Course } from "@/lib/content-schema"
+import { courseCta } from "./shared"
 
 // Open [CONFIRM] items:
 // - Whether personality development is part of the course (not in the owner's facts)
@@ -46,5 +47,6 @@ export const spokenEnglish: Course = {
       subheading:
         "A 3-month course for school students, usually held June to August each year.",
     },
+    courseCta,
   ],
 }

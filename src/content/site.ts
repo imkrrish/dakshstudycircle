@@ -90,5 +90,7 @@ export const site: Site = {
     showFaculty: true,
     // Off in production until real photos replace the shot cards.
     showShotCards: process.env.NODE_ENV === "development",
+    // Fee figures and periods are confirmed; switch off to hide every fee at once.
+    showFees: true,
   },
 }

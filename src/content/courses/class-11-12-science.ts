@@ -1,4 +1,5 @@
 import type { Course } from "@/lib/content-schema"
+import { courseCta } from "./shared"
 
 // Open [CONFIRM] items:
 // - Which subjects belong to which stream (split proposed, not confirmed by the owner)
@@ -41,5 +42,6 @@ export const class11To12Science: Course = {
       subheading:
         "Physics, Chemistry, Maths and Biology, plus English, Computer Science (C++) and Informatics Practices, to the CBSE syllabus.",
     },
+    courseCta,
   ],
 }
