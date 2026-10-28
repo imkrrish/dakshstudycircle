@@ -44,4 +44,130 @@ export const faculty: Faculty[] = [
     // Order on the faculty page: the director first, then 2, 3, …
     order: 2,
   },
+  // SAMPLE records below: invented placeholders so every subject row shows a
+  // teacher in development. They are removed in production. Replace each with
+  // the real teacher (docs/content-requests.md).
+  {
+    id: "sample-maths-junior",
+    sample: true,
+    // NEEDED: the teacher's full name as they want it printed.
+    name: "SAMPLE Full Name Maths Junior",
+    // NEEDED: job title, as the institute uses it.
+    role: "Maths teacher (SAMPLE)",
+    // NEEDED: confirm the subjects, named as in the course data.
+    subjects: ["Maths"],
+    // NEEDED: which classes they take.
+    classes: [
+      "Class 1",
+      "Class 2",
+      "Class 3",
+      "Class 4",
+      "Class 5",
+      "Class 6",
+      "Class 7",
+      "Class 8",
+    ],
+    // NEEDED: degrees and certificates, one line.
+    qualification: "SAMPLE B.Sc. Mathematics, B.Ed.",
+    // NEEDED: how long they have taught.
+    experience: "SAMPLE 8 years of teaching",
+    // NEEDED: two or three true sentences about how they teach; no ranks or "best".
+    bio: "SAMPLE: Teaches Maths to Classes 1 to 8. Replace with a real bio from the institute.",
+    // NEEDED: a real photo once taken; this brief shows in development only.
+    photoShot:
+      "SAMPLE: Maths teacher at the board with a junior batch · portrait 4:5 · head and shoulders, daylight, plain background",
+    isDirector: false,
+    order: 3,
+  },
+  {
+    id: "sample-science-junior",
+    sample: true,
+    // NEEDED: the teacher's full name as they want it printed.
+    name: "SAMPLE Full Name Science Junior",
+    // NEEDED: job title, as the institute uses it.
+    role: "Science teacher (SAMPLE)",
+    // NEEDED: confirm the subjects, named as in the course data.
+    subjects: ["Science"],
+    // NEEDED: which classes they take.
+    classes: [
+      "Class 1",
+      "Class 2",
+      "Class 3",
+      "Class 4",
+      "Class 5",
+      "Class 6",
+      "Class 7",
+      "Class 8",
+    ],
+    // NEEDED: degrees and certificates, one line.
+    qualification: "SAMPLE B.Sc. Chemistry, B.Ed.",
+    // NEEDED: how long they have taught.
+    experience: "SAMPLE 7 years of teaching",
+    // NEEDED: two or three true sentences about how they teach; no ranks or "best".
+    bio: "SAMPLE: Teaches Science to Classes 1 to 8. Replace with a real bio from the institute.",
+    // NEEDED: a real photo once taken; this brief shows in development only.
+    photoShot:
+      "SAMPLE: Science teacher holding a classroom model · portrait 4:5 · head and shoulders, daylight, plain background",
+    isDirector: false,
+    order: 4,
+  },
+  {
+    id: "sample-english-teacher",
+    sample: true,
+    // NEEDED: the teacher's full name as they want it printed.
+    name: "SAMPLE Full Name English",
+    // NEEDED: job title, as the institute uses it.
+    role: "English teacher (SAMPLE)",
+    // NEEDED: confirm the subjects, named as in the course data.
+    subjects: ["English", "Spoken English"],
+    // NEEDED: which classes they take.
+    classes: [
+      "Class 1",
+      "Class 2",
+      "Class 3",
+      "Class 4",
+      "Class 5",
+      "Class 6",
+      "Class 7",
+      "Class 8",
+      "Class 9",
+      "Class 10",
+      "Class 11",
+      "Class 12",
+    ],
+    // NEEDED: degrees and certificates, one line.
+    qualification: "SAMPLE M.A. English, B.Ed.",
+    // NEEDED: how long they have taught.
+    experience: "SAMPLE 9 years of teaching",
+    // NEEDED: two or three true sentences about how they teach; no ranks or "best".
+    bio: "SAMPLE: Teaches English and Spoken English. Replace with a real bio from the institute.",
+    // NEEDED: a real photo once taken; this brief shows in development only.
+    photoShot:
+      "SAMPLE: English teacher with a book in hand · portrait 4:5 · head and shoulders, daylight, plain background",
+    isDirector: false,
+    order: 5,
+  },
+  {
+    id: "sample-college-teacher",
+    sample: true,
+    // NEEDED: the teacher's full name as they want it printed.
+    name: "SAMPLE Full Name College",
+    // NEEDED: job title, as the institute uses it.
+    role: "College classes teacher (SAMPLE)",
+    // NEEDED: confirm the subjects, named as in the course data.
+    subjects: ["B.A.", "B.Com."],
+    // NEEDED: which classes they take.
+    classes: ["College"],
+    // NEEDED: degrees and certificates, one line.
+    qualification: "SAMPLE M.A., M.Com.",
+    // NEEDED: how long they have taught.
+    experience: "SAMPLE 6 years of teaching",
+    // NEEDED: two or three true sentences about how they teach; no ranks or "best".
+    bio: "SAMPLE: Teaches college students of open and distance degrees. Replace with a real bio from the institute.",
+    // NEEDED: a real photo once taken; this brief shows in development only.
+    photoShot:
+      "SAMPLE: College classes teacher at a table with books · portrait 4:5 · head and shoulders, daylight, plain background",
+    isDirector: false,
+    order: 6,
+  },
 ]

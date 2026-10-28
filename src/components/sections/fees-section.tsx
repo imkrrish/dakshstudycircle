@@ -36,6 +36,11 @@ function FeesSection({ section }: { section: SectionOf<"fees"> }) {
                   <p className="mt-1 text-sm text-muted-foreground">
                     {row.basis}
                   </p>
+                  {row.note && (
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {row.note}
+                    </p>
+                  )}
                 </div>
               ))}
             </dl>

@@ -98,5 +98,5 @@ Simple text pages / branded not-found with links home.
 
 ## Later
 
-- SEO phase: unknown course slugs (e.g. `/courses/nope`) return HTTP 200 with `noindex` and the 404 content, because of Cache Components (`dynamicParams` is not allowed). Find a way to send a real 404.
+- SEO phase: unknown course slugs (e.g. `/courses/nope`) return HTTP 200 with `noindex` and the 404 content, because of Cache Components (`dynamicParams` is not allowed). Find a way to send a real 404. Observed inconsistency: `/courses/nope` returned 200 once and 404 later, so the behaviour is not stable; re-test on a production build (`pnpm build && pnpm start`) before relying on either.
 - Pre-launch accessibility pass: header and footer links are under 44px at 375 (Talk to us 36px, menu button 36px, logo, footer links, back link, "Open on YouTube").

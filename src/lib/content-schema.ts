@@ -433,10 +433,31 @@ const ResolvedFeesSectionSchema = z.strictObject({
         amount: z.string().min(1),
         // "per subject · per year"
         basis: z.string().min(1),
+        note: z.string().optional(),
       }),
     )
     .min(1),
   note: z.string().optional(),
+})
+
+// A short list of outside links (official sites, circulars). External links
+// open in a new tab with rel="noopener noreferrer" and are marked as external.
+const LinkListSectionSchema = z.strictObject({
+  ...sectionBase,
+  type: z.literal("link-list"),
+  eyebrow: z.string().optional(),
+  heading: z.string().min(1),
+  intro: z.string().optional(),
+  items: z
+    .array(
+      z.strictObject({
+        label: z.string().min(1),
+        href: z.string().min(1),
+        // One line: what the visitor finds there.
+        purpose: z.string().min(1),
+      }),
+    )
+    .min(1),
 })
 
 const sectionTone = z.enum(["default", "muted", "band"])
@@ -583,6 +604,7 @@ const SectionSchema = z.discriminatedUnion("type", [
   CtaBandSectionSchema,
   SubjectsSectionSchema,
   FeesSectionSchema,
+  LinkListSectionSchema,
 ])
 
 // ---------- Pages & collections ----------
@@ -614,6 +636,8 @@ const FeesSchema = z.strictObject({
         amount: AmountSchema,
         per: z.enum(["subject", "course"]),
         period: z.enum(["month", "quarter", "year", "session", "course"]),
+        // Shown under the row, e.g. what the amount depends on.
+        note: z.string().optional(),
       }),
     )
     .min(1),
@@ -626,15 +650,15 @@ const CourseSchema = z.strictObject({
   summary: z.string(),
   // Short line for course cards; falls back to the first subject.
   cardNote: z.string().max(60).optional(),
-  // "Class 1" … "Class 12", or "College".
+  // "Class 1" … "Class 12", or "College". Empty for a course by age, not class
+  // (Spoken English).
   classes: z
     .array(
       z.union([
         z.string().regex(/^Class (1[0-2]|[1-9])$/),
         z.literal("College"),
       ]),
-    )
-    .min(1),
+    ),
   subjects: z.array(z.string()),
   facultyIds: z.array(z.string()),
   // Shown by the page's `fees` section, and only when site.features.showFees is on.

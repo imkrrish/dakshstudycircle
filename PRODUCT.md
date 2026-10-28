@@ -65,16 +65,25 @@ Confirmed by the owner (and already on the page):
 - Landmark: behind the Mother Dairy booth, opposite Sadar Bazaar bus stand; nearest metro Sadar Bazar Cantonment (Magenta Line), about 2 km (`contact.landmark`, `contact.nearestMetro`).
 - Hours: Mon–Sat 9 am – 8 pm, Sun 9 am – 6 pm.
 
-Nothing in this list is waiting on confirmation.
+- Classes 1–8 teach Maths, Science and English only on the site (Hindi / Social Studies not confirmed; the
+  pamphlet cover says "I–VIII all subjects"). No videos for these classes.
+- Spoken English: Rs 9,000 for a 3-month course, ages under 20, 5 classes a week. Not confirmed: level, start
+  months, timing, certificate. "Classes 1–12" and "June–August" are no longer used.
+- College classes are for students of open and distance degrees such as DU SOL. Shown degrees: B.A. and B.Com.
+  DU SOL has no general B.Sc. (only B.Sc. (Hons) Computer Science). No fee shown. Never promise admission help.
+- Anil Kumar teaches Maths for Classes 9–12 only.
+
+Nothing in the list above is waiting on confirmation.
 
 ## Fees (pamphlet)
 
 From the owner's recent pamphlet scans (true as of Oct 2026). Confirmed: Class 9 and 10 fees are per subject,
 per session, up to the final exams (shown on `/courses/classes-9-10`; `site.features.showFees` hides every fee at
-once). The period of the other fees is not confirmed, so they are not on the site: `course.fees` needs a `period`.
+once). Classes 1–8 (per session) and Spoken English (3-month course) are now confirmed too; Classes 11–12 and entrance fees stay off the site until their pages are built. `course.fees` needs a `period`.
 No registration fee, instalments or online/home-tuition price differences are stated: do not mention any.
 
-- Classes 1–8: Rs 25,000 to Rs 30,000 (Maths, Science, English). A range.
+- Classes 1–8: Rs 25,000 to Rs 30,000 per session (up to the final exams), for Maths, Science and English together.
+  Confirmed by the owner: the amount depends on the class and on when in the session the student joins.
 - Class 9 and Class 10: Rs 18,000 per subject (Maths, Science, English, Hindi, Social Studies).
 - Class 11 and Class 12: Rs 25,000 per subject (Maths, Physics, Chemistry, Biology, Accounts, Economics,
   Political Science, Business Studies, English, C++, IP).

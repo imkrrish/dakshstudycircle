@@ -868,7 +868,8 @@ function resolveSubjects(
           (f) =>
             course.facultyIds.includes(f.id) &&
             f.subjects.includes(name) &&
-            f.classes.some((c) => (course.classes as string[]).includes(c)),
+            (course.classes.length === 0 ||
+              f.classes.some((c) => (course.classes as string[]).includes(c))),
         )
         .map((f) => ({ name: f.name, role: f.role })),
     })),
@@ -895,15 +896,22 @@ function resolveFees(
   const { rows, note } = course.fees
   return {
     ...section,
-    rows: rows.map(({ label, amount, per, period }) => ({
+    rows: rows.map(({ label, amount, per, period, note: rowNote }) => ({
       label,
       amount:
         typeof amount === "number"
           ? `₹${rupees.format(amount)}`
           : `₹${rupees.format(amount.from)}–₹${rupees.format(amount.to)}`,
-      basis: [per === "subject" ? "per subject" : null, FEE_PERIODS[period]]
+      basis: [
+        per === "subject" ? "per subject" : null,
+        // "up to the final exams" is only confirmed for per-subject fees.
+        period === "session" && per === "course"
+          ? "for the session"
+          : FEE_PERIODS[period],
+      ]
         .filter(Boolean)
         .join(", "),
+      ...(rowNote ? { note: rowNote } : {}),
     })),
     ...(note ? { note } : {}),
   }

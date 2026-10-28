@@ -10,6 +10,7 @@ import { CtaBandSection } from "./cta-band-section"
 import { FaqSection } from "./faq-section"
 import { FeesSection } from "./fees-section"
 import { HeroSection } from "./hero-section"
+import { LinkListSection } from "./link-list-section"
 import { ReasonListSection } from "./reason-list-section"
 import { ResultsBoardSection } from "./results-board-section"
 import { ResultsGridSection } from "./results-grid-section"
@@ -37,6 +38,7 @@ const sectionComponents = {
   "cta-band": CtaBandSection,
   subjects: SubjectsSection,
   fees: FeesSection,
+  "link-list": LinkListSection,
 } satisfies SectionComponents
 
 function SectionRenderer({ sections }: { sections: ResolvedSection[] }) {
