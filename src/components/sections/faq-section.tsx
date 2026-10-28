@@ -46,7 +46,7 @@ function FaqSection({ section }: { section: SectionOf<"faq"> }) {
                   />
                 </summary>
                 <div data-details-body className="overflow-hidden">
-                  <p className="max-w-prose pb-5 text-base text-muted-foreground">
+                  <p className="max-w-prose pb-5 text-base text-foreground/80">
                     {item.answer}
                   </p>
                 </div>

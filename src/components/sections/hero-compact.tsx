@@ -40,15 +40,27 @@ function HeroCompact({ section }: { section: SectionOf<"hero"> }) {
 
   const factsCard = facts && <HeroFacts facts={facts.items} />
 
+  // Photo-split: a real photo and no facts tile. Text left, a larger photo
+  // right from lg; the photo needs no tile laid over it.
+  const split = Boolean(media?.image && !facts)
+
   return (
     <Section
       data-slot="hero-section"
       data-size="compact"
       id={id}
       aria-labelledby={`${id}-heading`}
-      className="relative isolate overflow-clip pt-[calc(var(--navbar-height)+1.5rem)] pb-8 md:pt-[calc(var(--navbar-height)+3rem)] md:pb-10"
+      className={cn(
+        "relative isolate overflow-clip pt-[calc(var(--navbar-height)+1.5rem)] md:pt-[calc(var(--navbar-height)+3rem)]",
+        split ? "pb-10 md:pb-14" : "pb-8 md:pb-10",
+      )}
     >
-      <Container className="lg:grid lg:grid-cols-12 lg:gap-x-8">
+      <Container
+        className={cn(
+          "lg:grid lg:grid-cols-12 lg:gap-x-8",
+          split && "lg:items-center lg:gap-x-12",
+        )}
+      >
         {(breadcrumbs || back) && (
           <div className="lg:col-span-12">
             {breadcrumbs && (
@@ -71,7 +83,12 @@ function HeroCompact({ section }: { section: SectionOf<"hero"> }) {
           </div>
         )}
 
-        <div className="mt-4 flex flex-col items-start lg:col-span-7 lg:mt-5">
+        <div
+          className={cn(
+            "mt-4 flex flex-col items-start lg:mt-5",
+            split ? "lg:col-span-6 lg:mt-0" : "lg:col-span-7",
+          )}
+        >
           {eyebrow && (
             <p className="mb-3 text-eyebrow text-muted-foreground">{eyebrow}</p>
           )}
@@ -87,7 +104,14 @@ function HeroCompact({ section }: { section: SectionOf<"hero"> }) {
             ))}
           </h1>
           {subheading && (
-            <p className="mt-4 max-w-md text-intro text-muted-foreground md:mt-5">
+            <p
+              className={cn(
+                "mt-4 text-intro md:mt-5",
+                split
+                  ? "max-w-lg text-foreground/80 md:text-lead"
+                  : "max-w-md text-muted-foreground",
+              )}
+            >
               {subheading}
             </p>
           )}
@@ -112,9 +136,19 @@ function HeroCompact({ section }: { section: SectionOf<"hero"> }) {
         </div>
 
         {media ? (
-          <div className="relative mt-5 lg:col-span-5 lg:col-start-8 lg:mt-5 xl:col-span-4 xl:col-start-9">
+          <div
+            className={cn(
+              "relative mt-6",
+              split
+                ? "lg:col-span-6 lg:mt-0"
+                : "mt-5 lg:col-span-5 lg:col-start-8 lg:mt-5 xl:col-span-4 xl:col-start-9",
+            )}
+          >
             {media.image ? (
-              <HeroPhoto image={media.image} />
+              <HeroPhoto
+                image={media.image}
+                layout={split ? "split" : "strip"}
+              />
             ) : (
               <ShotCard
                 brief={media.shot}

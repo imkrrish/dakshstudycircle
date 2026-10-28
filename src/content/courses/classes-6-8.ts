@@ -48,14 +48,6 @@ export const classes6To8: Course = {
       heading: ["Good habits for the middle school years"],
       subheading:
         "Maths, Science and English for Classes 6 to 8, with regular tests and steady revision, in Delhi Cantt.",
-      facts: {
-        items: [
-          { label: "Classes", value: "{classes}" },
-          { label: "Subjects", value: "{subjectCount}" },
-          { label: "Batch size", value: "{batchSize}" },
-          { label: "Free demo", value: "{freeDemo}" },
-        ],
-      },
     },
     {
       id: "subjects",

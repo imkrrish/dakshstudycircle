@@ -48,14 +48,6 @@ export const classes1To5: Course = {
       heading: ["A steady base for young learners"],
       subheading:
         "Maths, Science and English for Classes 1 to 5, taught in small batches in Delhi Cantt.",
-      facts: {
-        items: [
-          { label: "Classes", value: "{classes}" },
-          { label: "Subjects", value: "{subjectCount}" },
-          { label: "Batch size", value: "{batchSize}" },
-          { label: "Free demo", value: "{freeDemo}" },
-        ],
-      },
     },
     {
       id: "subjects",

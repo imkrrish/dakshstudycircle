@@ -55,14 +55,6 @@ export const class11To12Science: Course = {
       heading: ["Learn Science by solving problems, one step at a time"],
       subheading:
         "Physics, Chemistry, Mathematics and Biology for CBSE Classes 11 and 12. Maths is taught by our director, Anil Kumar.",
-      facts: {
-        items: [
-          { label: "Classes", value: "{classes}" },
-          { label: "Subjects", value: "{subjectCount}" },
-          { label: "Batch size", value: "{batchSize}" },
-          { label: "Fee", value: "Rs 25,000 per subject" },
-        ],
-      },
     },
     {
       id: "subjects",

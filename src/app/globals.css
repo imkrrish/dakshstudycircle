@@ -429,6 +429,13 @@
   }
 }
 
+/* Vertical padding of every section. A page can tighten it by setting both
+   variables on a wrapper (the course pages do). */
+:root {
+  --section-y: 5rem;
+  --section-y-md: 7rem;
+}
+
 /* A compact hero owns the space below it (its own pb), so the plain section
    after it starts with no top padding. Toned sections keep theirs: their edge
    is visible. Unlayered so it beats the section's padding utilities. */

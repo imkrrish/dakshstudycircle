@@ -27,6 +27,7 @@ import {
   type ResolvedVideoPlayerSection,
   type SubjectsSection,
   type ResolvedSubjectsSection,
+  type TeachingPlanSection,
   type FeesSection,
   type ResolvedFeesSection,
   type Page,
@@ -35,6 +36,7 @@ import {
   type ResolvedPage,
   type ResolvedSection,
   type Section,
+  type SectionType,
   type Site,
 } from "@/lib/content-schema"
 import { formatHoursInline, formatHoursShort } from "@/lib/hours"
@@ -183,6 +185,31 @@ function checkCourseSections(
     if (section.type === "fees" && !course.fees) {
       errors.push(`${label}: fees "${section.id}" but the course has no fees`)
     }
+    if (section.type === "subjects") {
+      const summarised = new Set<string>()
+      for (const { subject } of section.summaries ?? []) {
+        if (!course.subjects.includes(subject)) {
+          errors.push(
+            `${label}: subjects "${section.id}": summary for "${subject}", which is not in the course's subjects`,
+          )
+        }
+        if (summarised.has(subject)) {
+          errors.push(
+            `${label}: subjects "${section.id}": two summaries for "${subject}"`,
+          )
+        }
+        summarised.add(subject)
+      }
+      for (const group of section.groups ?? []) {
+        for (const name of group.subjects) {
+          if (!course.subjects.includes(name)) {
+            errors.push(
+              `${label}: subjects "${section.id}": "${name}" is not in the course's subjects`,
+            )
+          }
+        }
+      }
+    }
     if (section.type !== "video-player") continue
     for (const id of section.videos) {
       const video = videos.find((v) => v.id === id)
@@ -197,7 +224,11 @@ function checkCourseSections(
 
 function checkPageSections(label: string, sections: Section[], errors: string[]) {
   for (const section of sections) {
-    if (section.type === "subjects" || section.type === "fees") {
+    if (
+      section.type === "subjects" ||
+      section.type === "fees" ||
+      section.type === "teaching-plan"
+    ) {
       errors.push(
         `${label}: "${section.id}" (${section.type}) belongs on a course page`,
       )
@@ -233,9 +264,16 @@ function checkResultsGrids(
   sections: Section[],
   results: Result[],
   errors: string[],
+  onCoursePage = false,
 ) {
   for (const section of sections) {
-    if (section.type === "results-board" && results.length === 0) {
+    // On a course page the board filters by course and drops itself when
+    // nothing matches, so an empty collection is not an error there.
+    if (
+      section.type === "results-board" &&
+      !onCoursePage &&
+      results.length === 0
+    ) {
       errors.push(`${label}: results-board "${section.id}" has no results`)
     }
     if (section.type !== "results-grid") continue
@@ -292,37 +330,15 @@ function contactPlaceholders(site: Site): Record<string, string> {
   }
 }
 
-// Centre-wide facts that hero fact values may use: {hours}, {batchSize}, {modes}, {freeDemo}.
-function heroPlaceholders(site: Site, course?: Course): Record<string, string> {
+// Centre-wide facts that hero fact values and teaching-plan details may use: {hours}, {batchSize}, {modes}, {freeDemo}.
+function heroPlaceholders(site: Site): Record<string, string> {
   return {
     hours: formatHoursShort(site.contact.hours),
     batchSize: site.facts.batchSize,
     modes: site.facts.modes,
     freeDemo: site.facts.freeDemo,
-    ...(course
-      ? {
-          classes: classRange(course.classes),
-          subjectCount: String(course.subjects.length),
-        }
-      : {}),
   }
 }
-
-// "Class 9", "Class 10" → "9–10"; a gap or "College" keeps the list ("9 and 11").
-function classRange(classes: string[]): string {
-  const numbers = classes.map((c) => Number(c.replace("Class ", "")))
-  if (numbers.some(Number.isNaN)) return classes.join(", ")
-  const contiguous = numbers.every((n, i) => i === 0 || n === numbers[i - 1] + 1)
-  if (contiguous && numbers.length > 1) {
-    return `${numbers[0]}–${numbers[numbers.length - 1]}`
-  }
-  return new Intl.ListFormat("en-IN", { type: "conjunction" }).format(
-    numbers.map(String),
-  )
-}
-
-// A course page's hero facts may also use {classes} and {subjectCount}.
-const COURSE_HERO_PLACEHOLDERS = ["classes", "subjectCount"]
 
 const PLACEHOLDER_PATTERN = /\{(\w+)\}/g
 
@@ -341,6 +357,17 @@ function checkPlaceholders(
           if (knownHero.has(name)) continue
           errors.push(
             `${label}: hero "${section.id}" fact ${i + 1}: unknown placeholder {${name}}. Known: ${[...knownHero].map((k) => `{${k}}`).join(", ")}`,
+          )
+        }
+      })
+      continue
+    }
+    if (section.type === "teaching-plan") {
+      section.details.forEach((item, i) => {
+        for (const [, name] of item.value.matchAll(PLACEHOLDER_PATTERN)) {
+          if (knownHero.has(name)) continue
+          errors.push(
+            `${label}: teaching-plan "${section.id}" detail ${i + 1}: unknown placeholder {${name}}. Known: ${[...knownHero].map((k) => `{${k}}`).join(", ")}`,
           )
         }
       })
@@ -448,6 +475,9 @@ function loadContent() {
       errors.push(`results: duplicate id "${parsed.id}"`)
     }
     resultIds.add(parsed.id)
+    if (!rawCourses.some((c) => c.slug === parsed.course)) {
+      errors.push(`${label}: unknown course "${parsed.course}"`)
+    }
     if ((parsed.percentage === undefined) === (parsed.outcome === undefined)) {
       errors.push(`${label}: needs either a percentage or an outcome, not both`)
     }
@@ -461,7 +491,6 @@ function loadContent() {
     }
     for (const text of [
       parsed.studentName,
-      parsed.course,
       parsed.outcome?.title ?? "",
       parsed.outcome?.note ?? "",
       ...(parsed.subjects ?? []).map((subject) => subject.name),
@@ -516,16 +545,12 @@ function loadContent() {
     checkResultsGrids(`pages/${key}`, page.sections, results, errors)
     checkSocialActions(`pages/${key}`, page.sections, socialPlatforms, errors)
   }
-  const courseHeroPlaceholderNames = new Set([
-    ...heroPlaceholderNames,
-    ...COURSE_HERO_PLACEHOLDERS,
-  ])
   for (const course of courses) {
     checkPlaceholders(
       `courses/${course.slug}`,
       course.sections,
       placeholderNames,
-      courseHeroPlaceholderNames,
+      heroPlaceholderNames,
       errors,
     )
     checkCourseSections(`courses/${course.slug}`, course, videos, errors)
@@ -552,6 +577,7 @@ function loadContent() {
       course.sections,
       results,
       errors,
+      true,
     )
     checkSocialActions(
       `courses/${course.slug}`,
@@ -697,8 +723,13 @@ function resolveResultsGrid(
     ...rest,
     items: chosen.map((r) => {
       const meta = r.outcome
-        ? [`${r.outcome.note} ${r.year}`, r.course]
-        : [r.class, r.stream, `${r.exam} ${r.year}`, r.course].filter(
+        ? [`${r.outcome.note} ${r.year}`, findCourse(r.course).title]
+        : [
+            r.class,
+            r.stream,
+            `${r.exam} ${r.year}`,
+            findCourse(r.course).title,
+          ].filter(
             (part): part is string => Boolean(part),
           )
       return {
@@ -721,16 +752,20 @@ function resolveResultsGrid(
 // is stable, so data order breaks ties.
 function resolveResultsBoard(
   section: ResultsBoardSection,
+  course?: Course,
 ): ResolvedResultsBoardSection {
-  const { perYear, ...rest } = section
-  const years = [...new Set(content.results.map((r) => r.year))].sort(
-    (a, b) => b - a,
-  )
+  const { perYear, years: yearCount, ...rest } = section
+  const results = course
+    ? content.results.filter((r) => r.course === course.slug)
+    : content.results
+  const years = [...new Set(results.map((r) => r.year))]
+    .sort((a, b) => b - a)
+    .slice(0, yearCount)
   return {
     ...rest,
     years: years.map((year) => ({
       year,
-      items: content.results
+      items: results
         .filter((r) => r.year === year)
         .sort(
           (a, b) =>
@@ -744,7 +779,7 @@ function resolveResultsBoard(
           meta: (r.outcome ? [r.class, r.exam] : [r.class, r.stream])
             .filter((part): part is string => Boolean(part))
             .join(" · "),
-          course: r.course,
+          course: findCourse(r.course).title,
           // One decimal, so "93.0%" lines up with "96.2%" down the board.
           score:
             r.percentage === undefined
@@ -820,7 +855,7 @@ function resolveFaq(section: FaqSection): FaqSection {
 // hero without its own trail gets Home › Courses › the course.
 function resolveHero(section: HeroSection, course?: Course): HeroSection {
   const { site } = content
-  const values = heroPlaceholders(site, course)
+  const values = heroPlaceholders(site)
   const { media, facts, ...rest } = section
   const showMedia =
     media && (media.image || site.features.showShotCards) ? media : undefined
@@ -853,25 +888,42 @@ function resolveHero(section: HeroSection, course?: Course): HeroSection {
   }
 }
 
-// Teachers of a subject in a course: the course's faculty who teach that
-// subject to at least one of its classes. Derived, never stored.
+// One row per subject, with its summary when the section has one.
 function resolveSubjects(
   section: SubjectsSection,
   course: Course,
 ): ResolvedSubjectsSection {
+  const { groups, summaries, ...rest } = section
+  const rows = (names: string[]) =>
+    names.map((name) => {
+      const summary = summaries?.find((s) => s.subject === name)?.text
+      return { name, ...(summary ? { summary } : {}) }
+    })
+  if (groups) {
+    return {
+      ...rest,
+      items: [],
+      groups: groups.map(({ label, note, subjects }) => ({
+        label,
+        ...(note ? { note } : {}),
+        items: rows(subjects),
+      })),
+    }
+  }
+  return { ...rest, items: rows(course.subjects) }
+}
+
+// Fills {batchSize}, {modes} and {freeDemo} in the detail values.
+function resolveTeachingPlan(section: TeachingPlanSection): TeachingPlanSection {
+  const values = heroPlaceholders(content.site)
   return {
     ...section,
-    items: course.subjects.map((name) => ({
-      name,
-      teachers: content.faculty
-        .filter(
-          (f) =>
-            course.facultyIds.includes(f.id) &&
-            f.subjects.includes(name) &&
-            (course.classes.length === 0 ||
-              f.classes.some((c) => (course.classes as string[]).includes(c))),
-        )
-        .map((f) => ({ name: f.name, role: f.role })),
+    details: section.details.map(({ label, value }) => ({
+      label,
+      value: value.replace(
+        PLACEHOLDER_PATTERN,
+        (_, name: string) => values[name],
+      ),
     })),
   }
 }
@@ -938,8 +990,10 @@ function resolveSections(
         const resolved = resolveResultsGrid(section)
         return resolved.items.length > 0 ? [resolved] : []
       }
+      case "teaching-plan":
+        return [resolveTeachingPlan(section)]
       case "results-board": {
-        const resolved = resolveResultsBoard(section)
+        const resolved = resolveResultsBoard(section, course)
         return resolved.years.length > 0 ? [resolved] : []
       }
       default:
@@ -956,7 +1010,14 @@ function requireCourse(id: string, course?: Course): Course {
 function resolveOne(
   section: Exclude<
     Section,
-    { type: "subjects" | "fees" | "results-grid" | "results-board" }
+    {
+      type:
+        | "subjects"
+        | "fees"
+        | "teaching-plan"
+        | "results-grid"
+        | "results-board"
+    }
   >,
   course?: Course,
 ): ResolvedSection {
@@ -1004,6 +1065,22 @@ async function getCourses(): Promise<Course[]> {
   return content.courses
 }
 
+// What a course page renders, in this order. Section types left out (fees,
+// link-list, video-player) stay in the course data but are not shown; a
+// `reason-list` and a `teaching-plan` share the "how we teach" slot.
+const COURSE_TEMPLATE: SectionType[][] = [
+  ["hero"],
+  ["subjects"],
+  ["teaching-plan", "reason-list"],
+  ["results-board"],
+  ["faq"],
+  ["cta-band"],
+]
+
+function courseSlot(type: SectionType): number {
+  return COURSE_TEMPLATE.findIndex((types) => types.includes(type))
+}
+
 async function getCourse(slug: string): Promise<ResolvedCourse> {
   const course = content.courses.find((c) => c.slug === slug)
   if (!course) {
@@ -1011,7 +1088,11 @@ async function getCourse(slug: string): Promise<ResolvedCourse> {
       `[content] unknown course "${slug}". Known: ${content.courses.map((c) => c.slug).join(", ") || "(none)"}`,
     )
   }
-  return { ...course, sections: resolveSections(course.sections, course) }
+  const shown = course.sections
+    .filter((section) => courseSlot(section.type) !== -1)
+    // Stable sort: the course file's order breaks ties.
+    .sort((a, b) => courseSlot(a.type) - courseSlot(b.type))
+  return { ...course, sections: resolveSections(shown, course) }
 }
 
 async function getFaculty(): Promise<Faculty[]> {

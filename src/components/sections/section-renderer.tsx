@@ -16,6 +16,7 @@ import { ResultsBoardSection } from "./results-board-section"
 import { ResultsGridSection } from "./results-grid-section"
 import { SplitSection } from "./split-section"
 import { SubjectsSection } from "./subjects-section"
+import { TeachingPlanSection } from "./teaching-plan-section"
 import { TestimonialGridSection } from "./testimonial-grid-section"
 import { VideoPlayerSection } from "./video-player-section"
 
@@ -37,6 +38,7 @@ const sectionComponents = {
   faq: FaqSection,
   "cta-band": CtaBandSection,
   subjects: SubjectsSection,
+  "teaching-plan": TeachingPlanSection,
   fees: FeesSection,
   "link-list": LinkListSection,
 } satisfies SectionComponents

@@ -31,7 +31,13 @@ async function CourseSections({
 }) {
   const { slug } = await params
   const course = await findCourse(slug)
-  return <SectionRenderer sections={course.sections} />
+  // Tighter section rhythm than the rest of the site; `contents` keeps the
+  // sections direct children of <main> for its layout rules.
+  return (
+    <div className="contents [--section-y-md:4rem] [--section-y:3rem]">
+      <SectionRenderer sections={course.sections} />
+    </div>
+  )
 }
 
 // Partial Prefetching: params are awaited inside Suspense. Every course is

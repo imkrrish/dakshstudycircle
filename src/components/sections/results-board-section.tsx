@@ -95,6 +95,38 @@ function ResultRow({ item }: { item: Item }) {
   )
 }
 
+// One year of the board: the numeral set large between two rules (decorative,
+// the tab already names the panel), then the rows.
+function YearRows({ year, items }: { year: number; items: Item[] }) {
+  return (
+    <>
+      <div
+        aria-hidden="true"
+        className="mt-4 mb-6 flex items-center gap-4 md:gap-6"
+      >
+        <span className="h-px flex-1 bg-foreground/20" />
+        <span
+          data-board-year
+          className="font-heading text-display tabular-nums"
+        >
+          {year}
+        </span>
+        <span className="h-px flex-1 bg-foreground/20" />
+      </div>
+      <DetailsList>
+        <ul className="divide-y border-y">
+          {items.map((item) => (
+            <ResultRow key={item.id} item={item} />
+          ))}
+        </ul>
+      </DetailsList>
+    </>
+  )
+}
+
+const boardTitleClass =
+  "text-center font-heading text-subtitle tracking-[0.08em] text-muted-foreground [font-variant-caps:all-small-caps]"
+
 // The section stays a Server Component. Tabs is a client island, but every
 // panel is kept mounted (hidden when inactive), so all years' rows and marks
 // are in the server HTML.
@@ -125,67 +157,52 @@ function ResultsBoardSection({
             rule alone below it, so the frame stays light on a phone. */}
         <div className="mx-auto w-full max-w-3xl bg-card sm:border sm:border-foreground/20 sm:p-1.5">
           <div className="border border-foreground/20 px-3 py-8 sm:px-8 sm:py-10 md:px-14 md:py-12">
-            <ResultsBoardTabs
-              defaultValue={String(years[0].year)}
-              className="w-full gap-0"
-            >
-              <p className="text-center font-heading text-subtitle tracking-[0.08em] text-muted-foreground [font-variant-caps:all-small-caps]">
-                {boardTitle}
-              </p>
-              <TabsList
-                variant="line"
-                activateOnFocus
-                aria-label="Results by year"
-                className="relative mt-1 h-auto! w-full justify-center gap-0 p-0 has-[[data-slot=results-board-indicator]:not([hidden])]:**:data-[slot=tabs-trigger]:after:hidden"
+            {years.length === 1 ? (
+              // One year (a course page): no year index to switch, so no tabs.
+              <div>
+                <p className={boardTitleClass}>{boardTitle}</p>
+                <YearRows year={years[0].year} items={years[0].items} />
+              </div>
+            ) : (
+              <ResultsBoardTabs
+                defaultValue={String(years[0].year)}
+                className="w-full gap-0"
               >
-                {years.map(({ year }) => (
-                  <TabsTrigger
+                <p className={boardTitleClass}>{boardTitle}</p>
+                <TabsList
+                  variant="line"
+                  activateOnFocus
+                  aria-label="Results by year"
+                  className="relative mt-1 h-auto! w-full justify-center gap-0 p-0 has-[[data-slot=results-board-indicator]:not([hidden])]:**:data-[slot=tabs-trigger]:after:hidden"
+                >
+                  {years.map(({ year }) => (
+                    <TabsTrigger
+                      key={year}
+                      value={String(year)}
+                      className="h-11! flex-none! rounded-none! px-4! font-heading! text-muted-foreground! tabular-nums not-first:before:absolute not-first:before:top-1/2 not-first:before:left-0 not-first:before:size-1 not-first:before:-translate-x-1/2 not-first:before:-translate-y-1/2 not-first:before:rounded-full not-first:before:bg-muted-foreground/60 group-data-horizontal/tabs:after:inset-x-4! group-data-horizontal/tabs:after:bottom-2! group-data-horizontal/tabs:after:h-px! focus-visible:ring-0! focus-visible:outline-2! focus-visible:outline-offset-2! data-active:text-foreground!"
+                    >
+                      {/* The size sits on a span: `cn` treats text-subtitle! and
+                        the colour class as one conflict and drops one. */}
+                      <span className="text-subtitle">{year}</span>
+                    </TabsTrigger>
+                  ))}
+                  {/* After the triggers, so the first year is :first-child and
+                    gets no separator dot before it. */}
+                  <ResultsBoardIndicator />
+                </TabsList>
+                {years.map(({ year, items }) => (
+                  <TabsContent
                     key={year}
                     value={String(year)}
-                    className="h-11! flex-none! rounded-none! px-4! font-heading! text-muted-foreground! tabular-nums not-first:before:absolute not-first:before:top-1/2 not-first:before:left-0 not-first:before:size-1 not-first:before:-translate-x-1/2 not-first:before:-translate-y-1/2 not-first:before:rounded-full not-first:before:bg-muted-foreground/60 group-data-horizontal/tabs:after:inset-x-4! group-data-horizontal/tabs:after:bottom-2! group-data-horizontal/tabs:after:h-px! focus-visible:ring-0! focus-visible:outline-2! focus-visible:outline-offset-2! data-active:text-foreground!"
+                    data-year={year}
+                    className="focus-ring"
+                    keepMounted
                   >
-                    {/* The size sits on a span: `cn` treats text-subtitle! and
-                        the colour class as one conflict and drops one. */}
-                    <span className="text-subtitle">{year}</span>
-                  </TabsTrigger>
+                    <YearRows year={year} items={items} />
+                  </TabsContent>
                 ))}
-                {/* After the triggers, so the first year is :first-child and
-                    gets no separator dot before it. */}
-                <ResultsBoardIndicator />
-              </TabsList>
-              {years.map(({ year, items }) => (
-                <TabsContent
-                  key={year}
-                  value={String(year)}
-                  data-year={year}
-                  className="focus-ring"
-                  keepMounted
-                >
-                  {/* The year, set large between two rules. Decorative: the
-                      tab already names the panel. */}
-                  <div
-                    aria-hidden="true"
-                    className="mt-4 mb-6 flex items-center gap-4 md:gap-6"
-                  >
-                    <span className="h-px flex-1 bg-foreground/20" />
-                    <span
-                      data-board-year
-                      className="font-heading text-display tabular-nums"
-                    >
-                      {year}
-                    </span>
-                    <span className="h-px flex-1 bg-foreground/20" />
-                  </div>
-                  <DetailsList>
-                    <ul className="divide-y border-y">
-                      {items.map((item) => (
-                        <ResultRow key={item.id} item={item} />
-                      ))}
-                    </ul>
-                  </DetailsList>
-                </TabsContent>
-              ))}
-            </ResultsBoardTabs>
+              </ResultsBoardTabs>
+            )}
           </div>
         </div>
         {actions && actions.length > 0 && (

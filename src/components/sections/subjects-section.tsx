@@ -3,9 +3,53 @@ import { Section } from "@/components/layout/section"
 import { SectionHeading } from "@/components/layout/section-heading"
 import type { SectionOf } from "@/lib/content-schema"
 
-// One row per subject; a teacher line appears only where a teacher is known.
+type Item = SectionOf<"subjects">["items"][number]
+
+// Column spans on a 6-column grid from md, as literal class names so Tailwind
+// finds them. Rows of three cards (span 2); any remainder becomes rows of two
+// wider cards (span 3), first: 5 subjects are 3 + 3, then 2 + 2 + 2.
+const SPAN = {
+  2: "md:col-span-2",
+  3: "md:col-span-3",
+  6: "md:col-span-6",
+} as const
+
+function spanFor(index: number, count: number): keyof typeof SPAN {
+  if (count === 1) return 6
+  const wide = ((3 - (count % 3)) * 2) % 6
+  return index < Math.min(wide, count) ? 3 : 2
+}
+
+// One paper card per subject; the summary line appears when the data has one.
+function SubjectCard({ item, span }: { item: Item; span: keyof typeof SPAN }) {
+  return (
+    <li className={`rounded-xl border bg-card p-5 md:p-6 ${SPAN[span]}`}>
+      <h3 className="font-heading text-title">{item.name}</h3>
+      {item.summary && (
+        <p className="mt-2 max-w-prose text-base text-foreground/80">
+          {item.summary}
+        </p>
+      )}
+    </li>
+  )
+}
+
+function SubjectGrid({ items }: { items: Item[] }) {
+  return (
+    <ul className="grid gap-3 md:grid-cols-6 md:gap-4">
+      {items.map((item, i) => (
+        <SubjectCard
+          key={item.name}
+          item={item}
+          span={spanFor(i, items.length)}
+        />
+      ))}
+    </ul>
+  )
+}
+
 function SubjectsSection({ section }: { section: SectionOf<"subjects"> }) {
-  const { id, eyebrow, heading, intro, items } = section
+  const { id, eyebrow, heading, intro, items, groups } = section
 
   return (
     <Section
@@ -13,34 +57,30 @@ function SubjectsSection({ section }: { section: SectionOf<"subjects"> }) {
       id={id}
       aria-labelledby={`${id}-heading`}
     >
-      <Container>
-        <div className="grid gap-10 md:grid-cols-12 md:items-start md:gap-x-12 lg:gap-x-16">
-          <SectionHeading
-            id={`${id}-heading`}
-            eyebrow={eyebrow}
-            title={heading}
-            intro={intro}
-            className="md:col-span-5"
-          />
-          <ul className="divide-y rounded-xl border bg-card px-4 md:col-span-7 md:px-6">
-            {items.map((item) => (
-              <li
-                key={item.name}
-                className="flex min-h-16 flex-col justify-center gap-0.5 py-4"
-              >
-                <h3 className="font-heading text-subtitle">{item.name}</h3>
-                {item.teachers.length > 0 && (
-                  <p className="text-sm text-muted-foreground">
-                    Taught by{" "}
-                    {item.teachers
-                      .map((t) => (t.role ? `${t.name}, ${t.role}` : t.name))
-                      .join("; ")}
-                  </p>
-                )}
-              </li>
+      <Container className="flex flex-col gap-8 md:gap-10">
+        <SectionHeading
+          id={`${id}-heading`}
+          eyebrow={eyebrow}
+          title={heading}
+          intro={intro}
+        />
+        {groups ? (
+          <div className="flex flex-col gap-8">
+            {groups.map((group) => (
+              <div key={group.label} className="flex flex-col gap-3">
+                <div>
+                  <p className="font-heading text-subtitle">{group.label}</p>
+                  {group.note && (
+                    <p className="text-base text-foreground/80">{group.note}</p>
+                  )}
+                </div>
+                {group.items.length > 0 && <SubjectGrid items={group.items} />}
+              </div>
             ))}
-          </ul>
-        </div>
+          </div>
+        ) : (
+          <SubjectGrid items={items} />
+        )}
       </Container>
     </Section>
   )

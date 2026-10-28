@@ -2,7 +2,7 @@ import type { ComponentProps } from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "cn"
 
-const sectionVariants = cva("scroll-mt-(--navbar-height) py-20 md:py-28", {
+const sectionVariants = cva("scroll-mt-(--navbar-height) py-(--section-y) md:py-(--section-y-md)", {
   variants: {
     tone: {
       default: "",

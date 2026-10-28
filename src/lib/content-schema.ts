@@ -385,8 +385,7 @@ const ResolvedVideoPlayerSectionSchema = z.strictObject({
     .min(1),
 })
 
-// Course pages only: one row per subject in the course record, with the
-// teachers derived from the faculty collection. Nothing else to author.
+// Course pages only: one card per subject in the course record.
 const subjectsBase = {
   ...sectionBase,
   type: z.literal("subjects"),
@@ -395,21 +394,68 @@ const subjectsBase = {
   intro: z.string().optional(),
 }
 
-const SubjectsSectionSchema = z.strictObject(subjectsBase)
+// Optional grouping (e.g. one group per exam). Each subject must be in the
+// course's `subjects`. A group may have no subjects and only a `note`.
+const subjectGroupSchema = z.strictObject({
+  label: z.string().min(1),
+  note: z.string().optional(),
+  subjects: z.array(z.string().min(1)),
+})
 
-// What the component receives: a teacher is shown as "name, role".
+const SubjectsSectionSchema = z.strictObject({
+  ...subjectsBase,
+  groups: z.array(subjectGroupSchema).min(1).optional(),
+  // One short line per subject on what it covers. Each subject must be in the
+  // course's `subjects`, once.
+  summaries: z
+    .array(
+      z.strictObject({ subject: z.string().min(1), text: z.string().min(1) }),
+    )
+    .optional(),
+})
+
+const resolvedSubjectItem = z.strictObject({
+  name: z.string().min(1),
+  summary: z.string().optional(),
+})
+
+// What the component receives. With `groups`, `items` is empty and each group
+// carries its own rows.
 const ResolvedSubjectsSectionSchema = z.strictObject({
   ...subjectsBase,
-  items: z
+  items: z.array(resolvedSubjectItem),
+  groups: z
     .array(
       z.strictObject({
-        name: z.string().min(1),
-        teachers: z.array(
-          z.strictObject({ name: z.string().min(1), role: z.string() }),
-        ),
+        label: z.string().min(1),
+        note: z.string().optional(),
+        items: z.array(resolvedSubjectItem),
       }),
     )
-    .min(1),
+    .optional(),
+})
+
+// Course pages only: how the course runs. `steps` are the plan through the
+// year; `details` are label / value rows (values may use {batchSize}, {modes}
+// and {freeDemo}, filled by getCourse()).
+const TeachingPlanSectionSchema = z.strictObject({
+  ...sectionBase,
+  type: z.literal("teaching-plan"),
+  eyebrow: z.string().optional(),
+  heading: z.string().min(1),
+  intro: z.string().optional(),
+  steps: z
+    .array(
+      z.strictObject({ title: z.string().min(1), body: z.string().min(1) }),
+    )
+    .min(2)
+    .max(4),
+  details: z
+    .array(
+      z.strictObject({ label: z.string().min(1), value: z.string().min(1) }),
+    )
+    .min(2)
+    .max(6),
 })
 
 // Course pages only: shows the course's `fees` record (see CourseSchema).
@@ -515,6 +561,9 @@ const resultsBoardBase = {
 const ResultsBoardSectionSchema = z.strictObject({
   ...resultsBoardBase,
   perYear: z.number().int().min(1).max(12).default(6),
+  // Only the newest N years (default: all). On a course page the board also
+  // keeps only that course's results.
+  years: z.number().int().min(1).optional(),
 })
 
 // What the component receives: one tab per year, text already built.
@@ -603,6 +652,7 @@ const SectionSchema = z.discriminatedUnion("type", [
   FaqSectionSchema,
   CtaBandSectionSchema,
   SubjectsSectionSchema,
+  TeachingPlanSectionSchema,
   FeesSectionSchema,
   LinkListSectionSchema,
 ])
@@ -759,7 +809,8 @@ const ResultSchema = z.strictObject({
       status: z.enum(["Admitted", "Selected"]).optional(),
     })
     .optional(),
-  // The Daksh course the student took, e.g. "Classes 11–12 tuition".
+  // Slug of the Daksh course the student took (checked against the courses);
+  // the page prints the course's title.
   course: z.string().min(1),
   // Without a photo the card shows the student's initials.
   photo: ImageSchema.optional(),
@@ -800,6 +851,7 @@ type ResolvedTestimonialGridSection = z.infer<
 >
 type SubjectsSection = z.infer<typeof SubjectsSectionSchema>
 type ResolvedSubjectsSection = z.infer<typeof ResolvedSubjectsSectionSchema>
+type TeachingPlanSection = z.infer<typeof TeachingPlanSectionSchema>
 type FeesSection = z.infer<typeof FeesSectionSchema>
 type ResolvedFeesSection = z.infer<typeof ResolvedFeesSectionSchema>
 type Fees = z.infer<typeof FeesSchema>
@@ -877,6 +929,7 @@ export type {
   ResolvedCourseGridSection,
   FaqSection,
   HeroSection,
+  TeachingPlanSection,
   VideoPlayerSection,
   ResolvedVideoPlayerSection,
   ResultsGridSection,

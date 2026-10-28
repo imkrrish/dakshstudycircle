@@ -43,14 +43,6 @@ export const spokenEnglish: Course = {
       heading: ["Speak English with more confidence"],
       subheading:
         "A 3-month course in Delhi Cantt for students under 20, with five classes every week.",
-      facts: {
-        items: [
-          { label: "Course", value: "3 months" },
-          { label: "Classes", value: "5 a week" },
-          { label: "Age", value: "Under 20" },
-          { label: "Fee", value: "Rs 9,000" },
-        ],
-      },
     },
     {
       id: "subjects",

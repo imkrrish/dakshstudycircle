@@ -170,7 +170,7 @@ Always use tokens (`bg-primary`, `text-muted-foreground`). No hard-coded colours
 | ------------------- | ------------------------- | ---- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------- |
 | `text-display`      | clamp 2.5–4.75rem (9.4vw) | 1.04 | 500    | -0.02em  | Hero h1, below `sm`; honour-board year numeral                                                                       |
 | `text-display-wide` | clamp 2.5–4.75rem (7.2vw) | 1.04 | 500    | -0.02em  | Hero h1 from `sm` (two fixed lines)                                                                                  |
-| `text-page-title`   | clamp 2.25–3.375rem       | 1.08 | 500    | -0.018em | Compact hero h1 on inner pages (36px at 375, 44 at 768, 54 at 1280); always above the h2, never near the home h1    |
+| `text-page-title`   | clamp 2.25–3.375rem       | 1.08 | 500    | -0.018em | Compact hero h1 on inner pages (36px at 375, 44 at 768, 54 at 1280); always above the h2, never near the home h1     |
 | `text-heading`      | clamp 2–2.75rem           | 1.1  | 500    | -0.015em | Section h2; result card score from `md`                                                                              |
 | `text-title`        | 1.625rem                  | 1.2  | 500    | -0.01em  | Card h3 from `md`, reason h3 from `md`, dialog title, result score below `md`                                        |
 | `text-subtitle`     | 1.375rem                  | 1.25 | 500    | -0.005em | Serif titles in list rows below `md` (course, reason), player and playlist titles, honour-board names and year index |
@@ -262,6 +262,15 @@ Courses grouped under muted `text-eyebrow` labels (a `<p>`, not a heading; no ru
 ### Reason list
 
 A ruled `<ol>` of 3–8 reasons (`reason-list`). Numerals are CSS counters (EB Garamond, `text-muted-foreground`, tabular figures, fixed 2.5rem column, empty alt text so screen readers hear the list, not the number). Each row: `h3` title (`text-subtitle`, `text-title` from `md`) and one line of muted `text-base`; hairline rules between rows only (`py-5`, `md:py-6`). No icons, cards, hover, links, chevrons, red or motion. Mobile: heading, list, then the figure (`h-56` photo, `rounded-xl`, caption). From `md`: 12-column grid by named areas; heading and figure in columns 1–5 (figure bottom aligned with the last row), list in 6–12. Default paper tone, no divider.
+
+### Course page
+
+Order: hero, subjects, how we teach, results, FAQ, dark CTA (`COURSE_TEMPLATE` in `content.ts`; fees, link-list and video-player stay in the data but are not rendered). The page wrapper tightens `--section-y` to 3rem (4rem from `md`); the rest of the site keeps 5rem / 7rem. Body text on these sections is `text-base text-foreground/80`, not muted grey.
+
+- **Hero, photo-split** (a real photo and no `facts`): text in columns 1–6, photo in 7–12 at its own 4:3 (`HeroPhoto layout="split"`), no caption, no tile. Below `lg` text then photo. One-line audience sentence, no button.
+- **Subjects:** one paper card per subject (name in `text-title`, one summary line), six-column grid from `md`: five subjects are 3 + 3 over 2 + 2 + 2. No icons, initials, chevrons or teachers.
+- **Teaching plan** (`teaching-plan`, band): numbered steps side by side from `md`, then a printed notice of label, dotted leader, value rows (two columns from `lg`; below `sm` label stacks over value).
+- **Results:** the honour board filtered to the course and the newest year; one year means no tabs. Absent when no real results exist (sample records are stripped in production).
 
 ### Results honour board
 

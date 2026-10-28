@@ -42,14 +42,6 @@ export const class11To12Humanities: Course = {
       heading: ["Read with understanding. Write with clarity."],
       subheading:
         "Political Science, Economics and English for CBSE Classes 11 and 12, taught in small batches.",
-      facts: {
-        items: [
-          { label: "Subjects", value: "{subjectCount}" },
-          { label: "Batch size", value: "{batchSize}" },
-          { label: "Free demo", value: "{freeDemo}" },
-          { label: "Fee", value: "Rs 25,000 per subject" },
-        ],
-      },
     },
     {
       id: "subjects",

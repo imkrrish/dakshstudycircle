@@ -33,12 +33,6 @@ export const collegeClasses: Course = {
       heading: ["Support for open and distance degrees"],
       subheading:
         "For students of degrees such as DU SOL (School of Open Learning, University of Delhi). B.A. and B.Com.",
-      facts: {
-        items: [
-          { label: "Degrees", value: "B.A., B.Com." },
-          { label: "Suited to", value: "Open and distance students" },
-        ],
-      },
     },
     {
       id: "subjects",

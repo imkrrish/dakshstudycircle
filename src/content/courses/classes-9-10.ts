@@ -3,8 +3,8 @@ import { courseCta } from "./shared"
 
 // Open [CONFIRM] items:
 // - Batch timings, duration
-// - Pathak Sir is a SAMPLE faculty record (shown in development only): needs his
-//   real details before launch (docs/content-requests.md).
+// Course pages render only the types in COURSE_TEMPLATE (src/lib/content.ts):
+// the videos, fees and official-links sections below are kept but not shown.
 
 export const classes9To10: Course = {
   slug: "classes-9-10",
@@ -26,7 +26,7 @@ export const classes9To10: Course = {
   seo: {
     title: "Classes 9–10 CBSE Tuition, Delhi Cantt",
     description:
-      "Class 9 and 10 CBSE tuition in Delhi Cantt: Maths, Science, English, Hindi, Social Studies. Syllabus finished early, then revision for the boards.",
+      "CBSE Classes 9 and 10 coaching in Delhi Cantt. Maths, Science, English, Hindi and Social Studies, batches of about 10 to 20 and a free offline demo.",
   },
   sections: [
     {
@@ -34,47 +34,80 @@ export const classes9To10: Course = {
       type: "hero",
       size: "compact",
       media: {
+        image: {
+          src: "/images/classroom-test-day.avif",
+          alt: "Students writing a test at their desks in a Daksh Study Circle classroom",
+          width: 1280,
+          height: 958,
+        },
         shot: "Anil Sir teaching Maths at the board to a Class 9–10 batch · landscape 3:2 · from the back corner at chest height, students seen from behind · daylight with the lights on, clean board",
       },
       eyebrow: "Classes 9–10 · CBSE",
       heading: ["Getting ready for the Class 10 boards"],
       subheading:
-        "Maths, Science, English, Hindi and Social Studies for Classes 9 and 10, in Delhi Cantt.",
-      facts: {
-        items: [
-          { label: "Classes", value: "{classes}" },
-          { label: "Subjects", value: "{subjectCount}" },
-          { label: "Batch size", value: "{batchSize}" },
-          { label: "Free demo", value: "{freeDemo}" },
-        ],
-      },
+        "For students in CBSE Classes 9 and 10. The syllabus is finished early, so your child has the whole year to revise and practise.",
     },
     {
       id: "subjects",
       type: "subjects",
-      eyebrow: "Subjects",
-      heading: "Five subjects for Classes 9 and 10",
+      heading: "What your child will study",
+      summaries: [
+        {
+          subject: "Maths",
+          text: "Number systems, algebra, geometry, trigonometry and statistics.",
+        },
+        {
+          subject: "Science",
+          text: "Physics, chemistry and biology topics from the CBSE syllabus.",
+        },
+        {
+          subject: "English",
+          text: "Reading, writing, grammar and literature.",
+        },
+        {
+          subject: "Hindi",
+          text: "Reading, writing, grammar and literature.",
+        },
+        {
+          subject: "Social Studies",
+          text: "History, geography, political science and economics.",
+        },
+      ],
     },
     {
       id: "how-we-teach",
-      type: "reason-list",
-      tone: "band",
-      eyebrow: "How we teach",
-      heading: "A plan that runs the whole year",
-      items: [
+      type: "teaching-plan",
+      heading: "How we prepare your child for the boards",
+      intro: "Class 10 is a big year. We plan for it from Class 9, one step at a time.",
+      steps: [
         {
           title: "Syllabus finished early",
-          body: "We complete the syllabus early. Revision runs through the whole year, not just before the exams.",
+          body: "We complete the syllabus ahead of time, so there is room to revise.",
+        },
+        {
+          title: "Revision all year",
+          body: "Revision runs through the whole year, not only before exams.",
         },
         {
           title: "Regular tests",
-          body: "Regular tests are part of the tuition, so your child sees what is clear and what needs more work.",
-        },
-        {
-          title: "Study material",
-          body: "Study material is part of the tuition, so your child has material to work from.",
+          body: "Tests happen regularly. They show your child what is clear and what needs more work.",
         },
       ],
+      details: [
+        { label: "Batch size", value: "{batchSize}" },
+        { label: "How you study", value: "{modes}" },
+        { label: "Free demo", value: "{freeDemo}, until your child is satisfied" },
+        { label: "Study material", value: "Included in the tuition" },
+      ],
+    },
+    {
+      id: "results",
+      type: "results-board",
+      heading: "Recent board results",
+      intro: "Results from our Class 10 students.",
+      boardTitle: "Honour Board",
+      perYear: 8,
+      years: 1,
     },
     {
       id: "videos",
@@ -102,28 +135,22 @@ export const classes9To10: Course = {
     {
       id: "faq",
       type: "faq",
-      eyebrow: "Questions",
-      heading: "Questions about Classes 9–10",
-      intro:
-        "Short answers for parents and students. If yours is not here, call or WhatsApp us on {phones}.",
+      heading: "Common questions from parents",
+      intro: "Cannot find your answer? Call or WhatsApp us on {phones}.",
       items: [
         {
           question: "Can my child attend a demo class?",
           answer:
-            "Yes. Offline demo classes are held at the centre, {address}. They are free until your child is satisfied and ready to join.",
-        },
-        {
-          question: "Who teaches Maths?",
-          answer: "Director Anil Kumar teaches Maths for Classes 9 to 12.",
+            "Yes. The demo is free for offline classes. Your child can attend at our centre, {address}, until they are satisfied and ready to join.",
         },
         {
           question: "Are there regular tests and study material?",
           answer:
-            "Yes. Regular tests and study material are part of the tuition.",
+            "Yes. Tests are held regularly, and study material is part of the tuition.",
         },
         {
           question: "How many students are in a batch?",
-          answer: "Batches are about 10 to 20 students.",
+          answer: "Batches have about 10 to 20 students.",
         },
         {
           question: "Are online classes or home tuition available?",
@@ -133,7 +160,7 @@ export const classes9To10: Course = {
         {
           question: "What are the fees?",
           answer:
-            "Fees depend on the class and course. Please call or WhatsApp us on {phones} and we will tell you.",
+            "Fees depend on the class and course. Please call or WhatsApp us on {phones}, and we will share the details.",
         },
       ],
     },

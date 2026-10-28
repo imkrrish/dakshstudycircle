@@ -53,14 +53,6 @@ export const class11To12Commerce: Course = {
       heading: ["Get comfortable with accounts, business and numbers"],
       subheading:
         "Accountancy, Business Studies and Economics for CBSE Classes 11 and 12. Maths is taught by our director, Anil Kumar.",
-      facts: {
-        items: [
-          { label: "Classes", value: "{classes}" },
-          { label: "Subjects", value: "{subjectCount}" },
-          { label: "Free demo", value: "{freeDemo}" },
-          { label: "Fee", value: "Rs 25,000 per subject" },
-        ],
-      },
     },
     {
       id: "subjects",
