@@ -5,7 +5,7 @@ export const faculty: Faculty[] = [
     id: "anil-kumar",
     name: "Anil Kumar",
     role: "Director",
-    subjects: ["Maths"],
+    subjects: ["Maths", "Mathematics"],
     classes: ["Class 9", "Class 10", "Class 11", "Class 12"],
     isDirector: true,
     order: 1,
@@ -27,7 +27,7 @@ export const faculty: Faculty[] = [
     // Classes 9–10 is what puts him on the Science row; Physics is for 11–12.
     subjects: ["Science", "Physics"],
     // NEEDED: which classes he teaches (unknown; 9–10 assumed for this example).
-    classes: ["Class 9", "Class 10"],
+    classes: ["Class 9", "Class 10", "Class 11", "Class 12"],
     // NEEDED: degrees and certificates, one line.
     qualification: "SAMPLE M.Sc. Physics, B.Ed.",
     // NEEDED: how long he has taught, in his words or the director's.
@@ -169,5 +169,97 @@ export const faculty: Faculty[] = [
       "SAMPLE: College classes teacher at a table with books · portrait 4:5 · head and shoulders, daylight, plain background",
     isDirector: false,
     order: 6,
+  },
+  {
+    id: "sample-chem-bio-teacher",
+    sample: true,
+    // NEEDED: the teacher's full name as they want it printed.
+    name: "SAMPLE Full Name Chemistry Biology",
+    // NEEDED: job title, as the institute uses it.
+    role: "Chemistry and Biology teacher (SAMPLE)",
+    // NEEDED: confirm the subjects, named as in the course data.
+    subjects: ["Chemistry", "Biology"],
+    // NEEDED: which classes they take.
+    classes: ["Class 11", "Class 12"],
+    // NEEDED: degrees and certificates, one line.
+    qualification: "SAMPLE M.Sc. Chemistry, B.Ed.",
+    // NEEDED: how long they have taught.
+    experience: "SAMPLE 9 years of teaching",
+    // NEEDED: two or three true sentences about how they teach; no ranks or "best".
+    bio: "SAMPLE: Teaches Chemistry and Biology to Classes 11 and 12. Replace with a real bio from the institute.",
+    // NEEDED: a real photo once taken; this brief shows in development only.
+    photoShot:
+      "SAMPLE: Chemistry teacher with a model on the desk · portrait 4:5 · head and shoulders, daylight, plain background",
+    isDirector: false,
+    order: 7,
+  },
+  {
+    id: "sample-computer-teacher",
+    sample: true,
+    // NEEDED: the teacher's full name as they want it printed.
+    name: "SAMPLE Full Name Computer",
+    // NEEDED: job title, as the institute uses it.
+    role: "Computer teacher (SAMPLE)",
+    // NEEDED: confirm the subjects, named as in the course data.
+    subjects: ["Computer Science", "Informatics Practices"],
+    // NEEDED: which classes they take.
+    classes: ["Class 11", "Class 12"],
+    // NEEDED: degrees and certificates, one line.
+    qualification: "SAMPLE M.C.A., B.Ed.",
+    // NEEDED: how long they have taught.
+    experience: "SAMPLE 6 years of teaching",
+    // NEEDED: two or three true sentences about how they teach; no ranks or "best".
+    bio: "SAMPLE: Teaches Computer Science and Informatics Practices to Classes 11 and 12. Replace with a real bio from the institute.",
+    // NEEDED: a real photo once taken; this brief shows in development only.
+    photoShot:
+      "SAMPLE: Computer teacher at a desk with a laptop · portrait 4:5 · head and shoulders, daylight, plain background",
+    isDirector: false,
+    order: 8,
+  },
+  {
+    id: "sample-commerce-teacher",
+    sample: true,
+    // NEEDED: the teacher's full name as they want it printed.
+    name: "SAMPLE Full Name Commerce",
+    // NEEDED: job title, as the institute uses it.
+    role: "Commerce teacher (SAMPLE)",
+    // NEEDED: confirm the subjects, named as in the course data.
+    subjects: ["Accountancy", "Business Studies", "Economics"],
+    // NEEDED: which classes they take.
+    classes: ["Class 11", "Class 12"],
+    // NEEDED: degrees and certificates, one line.
+    qualification: "SAMPLE M.Com., B.Ed.",
+    // NEEDED: how long they have taught.
+    experience: "SAMPLE 10 years of teaching",
+    // NEEDED: two or three true sentences about how they teach; no ranks or "best".
+    bio: "SAMPLE: Teaches Accountancy, Business Studies and Economics to Classes 11 and 12. Replace with a real bio from the institute.",
+    // NEEDED: a real photo once taken; this brief shows in development only.
+    photoShot:
+      "SAMPLE: Commerce teacher at the board with an accounts table · portrait 4:5 · head and shoulders, daylight, plain background",
+    isDirector: false,
+    order: 9,
+  },
+  {
+    id: "sample-humanities-teacher",
+    sample: true,
+    // NEEDED: the teacher's full name as they want it printed.
+    name: "SAMPLE Full Name Humanities",
+    // NEEDED: job title, as the institute uses it.
+    role: "Humanities teacher (SAMPLE)",
+    // NEEDED: confirm the subjects, named as in the course data.
+    subjects: ["Political Science", "Economics"],
+    // NEEDED: which classes they take.
+    classes: ["Class 11", "Class 12"],
+    // NEEDED: degrees and certificates, one line.
+    qualification: "SAMPLE M.A. Political Science, B.Ed.",
+    // NEEDED: how long they have taught.
+    experience: "SAMPLE 8 years of teaching",
+    // NEEDED: two or three true sentences about how they teach; no ranks or "best".
+    bio: "SAMPLE: Teaches Political Science and Economics to Classes 11 and 12. Replace with a real bio from the institute.",
+    // NEEDED: a real photo once taken; this brief shows in development only.
+    photoShot:
+      "SAMPLE: Humanities teacher with a book in hand · portrait 4:5 · head and shoulders, daylight, plain background",
+    isDirector: false,
+    order: 10,
   },
 ]

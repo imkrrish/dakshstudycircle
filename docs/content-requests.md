@@ -54,3 +54,10 @@ College classes
 6. Which degrees exactly? The site shows B.A. and B.Com. DU SOL has no general B.Sc. (only B.Sc. (Hons) Computer Science): do you teach B.Sc.?
 7. Which universities: DU SOL only, or also IGNOU or others?
 8. Subjects, batch days and timings, and the fee.
+
+## Open questions: Classes 11–12
+
+1. Which subjects belong to Science, Commerce and Humanities? The site uses the usual CBSE groupings: Science (Physics, Chemistry, Mathematics, Biology, English, Computer Science, Informatics Practices), Commerce (Accountancy, Business Studies, Economics, Mathematics, English, Informatics Practices), Humanities (Political Science, Economics, English). Please correct them.
+2. Computer Science: is it taught in C++ or Python? (CBSE's current syllabus is Python-based; the pamphlet says "C++".) The site says only "Computer Science" until you answer.
+3. Is Informatics Practices taught for Science and Commerce, or only one? Is Computer Science also offered to Commerce students?
+4. Which teachers take Physics, Chemistry, Biology, Computer Science, Accountancy, Business Studies, Economics, Political Science and English for Classes 11–12? (Sample records show in development only.)

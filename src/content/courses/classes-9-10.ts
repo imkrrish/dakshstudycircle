@@ -137,6 +137,21 @@ export const classes9To10: Course = {
         },
       ],
     },
+    {
+      id: "official-links",
+      type: "link-list",
+      eyebrow: "Official links",
+      heading: "Official CBSE material",
+      intro:
+        "Use these CBSE pages to check the syllabus and practise with sample papers.",
+      items: [
+        {
+          label: "CBSE curriculum 2026-27",
+          href: "https://cbseacademic.nic.in/curriculum_2027.html",
+          purpose: "Syllabus and sample papers, straight from CBSE.",
+        },
+      ],
+    },
     courseCta,
   ],
 }

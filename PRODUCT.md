@@ -73,13 +73,19 @@ Confirmed by the owner (and already on the page):
   DU SOL has no general B.Sc. (only B.Sc. (Hons) Computer Science). No fee shown. Never promise admission help.
 - Anil Kumar teaches Maths for Classes 9–12 only.
 
+- Classes 11–12: Rs 25,000 per subject, per session up to the final exams (shown on the three 11–12 pages).
+  Subjects use official CBSE names (Mathematics, Accountancy, Computer Science with no language, Informatics
+  Practices). Maths on the Science and Commerce pages is taught by Anil Kumar. The split of subjects by stream
+  on the site follows the usual CBSE groupings and is NOT confirmed by the institute. CBSE has no official
+  streams, only subject combinations chosen by the school; only one of IP, Computer Science and IT can be taken.
+
 Nothing in the list above is waiting on confirmation.
 
 ## Fees (pamphlet)
 
 From the owner's recent pamphlet scans (true as of Oct 2026). Confirmed: Class 9 and 10 fees are per subject,
 per session, up to the final exams (shown on `/courses/classes-9-10`; `site.features.showFees` hides every fee at
-once). Classes 1–8 (per session) and Spoken English (3-month course) are now confirmed too; Classes 11–12 and entrance fees stay off the site until their pages are built. `course.fees` needs a `period`.
+once). Classes 1–8 (per session) and Spoken English (3-month course) are now confirmed too; Classes 11–12 (per subject, per session) are confirmed too; the entrance fee stays off the site until its page is built. `course.fees` needs a `period`.
 No registration fee, instalments or online/home-tuition price differences are stated: do not mention any.
 
 - Classes 1–8: Rs 25,000 to Rs 30,000 per session (up to the final exams), for Maths, Science and English together.
