@@ -44,8 +44,7 @@ export const classes9To10: Course = {
       },
       eyebrow: "Classes 9–10 · CBSE",
       heading: ["Getting ready for the Class 10 boards"],
-      subheading:
-        "For students in CBSE Classes 9 and 10. The syllabus is finished early, so your child has the whole year to revise and practise.",
+      subheading: "Coaching CBSE students in Delhi Cantt since 2005.",
     },
     {
       id: "subjects",

@@ -64,14 +64,17 @@ function HeroCompact({ section }: { section: SectionOf<"hero"> }) {
         )}
       >
         {(breadcrumbs || back) && (
-          <div className="lg:col-span-12">
+          <div className={cn("lg:col-span-12", split && "lg:mb-8")}>
             {breadcrumbs && (
-              <HeroBreadcrumbs items={breadcrumbs} className="hidden md:block" />
+              <HeroBreadcrumbs
+                items={breadcrumbs}
+                className="hidden md:block"
+              />
             )}
             {back?.href && (
               <Link
                 href={back.href}
-                className="hit-area link-draw focus-ring inline-flex items-center gap-1 text-sm text-muted-foreground md:hidden"
+                className="hit-area inline-flex items-center gap-1 link-draw text-sm text-muted-foreground focus-ring md:hidden"
               >
                 <HugeiconsIcon
                   icon={ArrowLeft01Icon}
@@ -163,7 +166,7 @@ function HeroCompact({ section }: { section: SectionOf<"hero"> }) {
             {facts && (
               <HeroFacts
                 facts={facts.items}
-                className="relative -mt-8 mr-3 ml-3 md:mr-0 md:ml-6 md:max-w-sm lg:absolute lg:bottom-0 lg:left-0 lg:m-0 lg:mt-0 lg:w-72 lg:max-w-none lg:translate-y-8 lg:-translate-x-14"
+                className="relative -mt-8 mr-3 ml-3 md:mr-0 md:ml-6 md:max-w-sm lg:absolute lg:bottom-0 lg:left-0 lg:m-0 lg:mt-0 lg:w-72 lg:max-w-none lg:-translate-x-14 lg:translate-y-8"
               />
             )}
           </div>
