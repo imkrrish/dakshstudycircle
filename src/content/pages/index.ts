@@ -1,4 +1,4 @@
-import type { Page } from "@/lib/content-schema"
+import type { Page } from "@/lib/content"
 import { courses } from "./courses"
 import { home } from "./home"
 

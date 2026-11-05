@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation"
 import { animate, createScope, utils, type Scope } from "animejs"
 import { cn } from "cn"
 
-import type { NavItem } from "@/lib/content-schema"
+import type { NavItem } from "@/lib/content"
 import { isActiveLink } from "./is-active-link"
 
 // Desktop links. One highlight pill slides between hovered links (anime.js);

@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import type { Seo, Site } from "@/lib/content-schema"
+import type { Seo, Site } from "@/lib/content"
 
 // `path` is relative; it resolves against metadataBase set in the root layout.
 function buildMetadata(seo: Seo, site: Site, path: string): Metadata {

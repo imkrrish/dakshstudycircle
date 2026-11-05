@@ -2,7 +2,7 @@ import Image from "next/image"
 
 import { Section } from "@/components/layout/section"
 import { ActionButton } from "@/components/shared/action-button"
-import type { SectionOf } from "@/lib/content-schema"
+import type { SectionOf } from "@/lib/content"
 
 import { EmblemFlame } from "./emblem-flame"
 import { HeroCompact } from "./hero-compact"

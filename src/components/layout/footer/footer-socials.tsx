@@ -8,7 +8,7 @@ import {
 } from "@hugeicons/core-free-icons"
 import { cn } from "cn"
 
-import type { Site, SocialPlatform } from "@/lib/content-schema"
+import type { Site, SocialPlatform } from "@/lib/content"
 
 const platforms = {
   facebook: { name: "Facebook", icon: Facebook01Icon },

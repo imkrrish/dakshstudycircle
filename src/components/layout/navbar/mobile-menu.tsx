@@ -16,7 +16,7 @@ import { animate, createScope, stagger } from "animejs"
 import { cn } from "cn"
 
 import { Button } from "@/components/ui/button"
-import type { NavItem } from "@/lib/content-schema"
+import type { NavItem } from "@/lib/content"
 import { useDialogStore } from "@/lib/stores/dialog-store"
 import { isActiveLink } from "./is-active-link"
 

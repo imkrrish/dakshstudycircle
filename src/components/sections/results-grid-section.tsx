@@ -8,7 +8,7 @@ import { ActionButton } from "@/components/shared/action-button"
 import type {
   ResolvedResultsGridSection,
   SectionOf,
-} from "@/lib/content-schema"
+} from "@/lib/content"
 import { initials } from "@/lib/utils"
 import { itemClass } from "./card-styles"
 

@@ -9,7 +9,7 @@ import { TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import type {
   ResolvedResultsBoardSection,
   SectionOf,
-} from "@/lib/content-schema"
+} from "@/lib/content"
 
 import { ResultsBoardIndicator, ResultsBoardTabs } from "./results-board-tabs"
 

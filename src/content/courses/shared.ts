@@ -1,4 +1,4 @@
-import type { Section } from "@/lib/content-schema"
+import type { Section } from "@/lib/content"
 
 // The closing band every course page ends with (same words as /courses).
 export const courseCta: Extract<Section, { type: "cta-band" }> = {

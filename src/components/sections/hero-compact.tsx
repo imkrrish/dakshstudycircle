@@ -8,7 +8,7 @@ import { Section } from "@/components/layout/section"
 import { ActionButton } from "@/components/shared/action-button"
 import { HeroBreadcrumbs } from "@/components/shared/hero-breadcrumbs"
 import { ShotCard } from "@/components/shared/shot-card"
-import type { SectionOf } from "@/lib/content-schema"
+import type { SectionOf } from "@/lib/content"
 
 import { HeroFacts } from "./hero-facts"
 import { HeroPhoto } from "./hero-photo"

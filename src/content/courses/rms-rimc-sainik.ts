@@ -1,4 +1,4 @@
-import type { Course } from "@/lib/content-schema"
+import type { Course } from "@/lib/content"
 import { courseCta } from "./shared"
 
 // Entrance facts (ages, selection steps) come from the owner and the research in

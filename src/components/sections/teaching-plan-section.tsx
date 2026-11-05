@@ -1,7 +1,7 @@
 import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
 import { SectionHeading } from "@/components/layout/section-heading"
-import type { SectionOf } from "@/lib/content-schema"
+import type { SectionOf } from "@/lib/content"
 
 // How a course runs. The steps sit side by side from md (numbered with a CSS
 // counter, so the numeral is not read out); below them a printed notice of

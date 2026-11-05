@@ -1,4 +1,4 @@
-import type { Site } from "@/lib/content-schema"
+import type { Site } from "@/lib/content"
 
 export const site: Site = {
   name: "Daksh Study Circle",

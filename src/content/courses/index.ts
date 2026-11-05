@@ -1,4 +1,4 @@
-import type { Course } from "@/lib/content-schema"
+import type { Course } from "@/lib/content"
 import { classes1To5 } from "./classes-1-5"
 import { classes6To8 } from "./classes-6-8"
 import { classes9To10 } from "./classes-9-10"

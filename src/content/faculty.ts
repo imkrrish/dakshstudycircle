@@ -1,4 +1,4 @@
-import type { Faculty } from "@/lib/content-schema"
+import type { Faculty } from "@/lib/content"
 
 export const faculty: Faculty[] = [
   {

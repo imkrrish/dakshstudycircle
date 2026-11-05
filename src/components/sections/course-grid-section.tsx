@@ -12,7 +12,7 @@ import { buttonVariants } from "@/components/ui/button"
 import { flameGlowClass, itemClass } from "./card-styles"
 import { CoursePath } from "./course-path"
 import { CourseRibbon } from "./course-ribbon"
-import type { ResolvedCourseGridSection, SectionOf } from "@/lib/content-schema"
+import type { ResolvedCourseGridSection, SectionOf } from "@/lib/content"
 
 type Item = ResolvedCourseGridSection["groups"][number]["items"][number]
 

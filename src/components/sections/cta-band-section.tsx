@@ -8,7 +8,7 @@ import { SectionHeading } from "@/components/layout/section-heading"
 import { ActionButton } from "@/components/shared/action-button"
 import { getSite } from "@/lib/content"
 import { formatHours } from "@/lib/hours"
-import type { SectionOf } from "@/lib/content-schema"
+import type { SectionOf } from "@/lib/content"
 
 import { CtaGlow } from "./cta-glow"
 

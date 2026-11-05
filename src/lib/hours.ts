@@ -1,4 +1,4 @@
-import type { Site } from "@/lib/content-schema"
+import type { Site } from "@/lib/content"
 
 type OpeningHours = Site["contact"]["hours"][number]
 

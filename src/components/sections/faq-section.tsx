@@ -5,7 +5,7 @@ import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
 import { SectionHeading } from "@/components/layout/section-heading"
 import { DetailsList } from "@/components/shared/details-list"
-import type { SectionOf } from "@/lib/content-schema"
+import type { SectionOf } from "@/lib/content"
 
 // Native <details>: every answer stays in the HTML while closed and it works
 // without JavaScript; DetailsList only adds the open/close animation. Questions are body-font 500 (not the serif) so nine in a row read as a

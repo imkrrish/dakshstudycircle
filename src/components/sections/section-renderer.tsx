@@ -3,7 +3,7 @@ import type {
   ResolvedSection,
   SectionOf,
   SectionType,
-} from "@/lib/content-schema"
+} from "@/lib/content"
 import { CardGridSection } from "./card-grid-section"
 import { CourseGridSection } from "./course-grid-section"
 import { CtaBandSection } from "./cta-band-section"

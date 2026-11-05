@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "cn"
 import Image from "next/image"
 
-import type { Image as ImageData } from "@/lib/content-schema"
+import type { Image as ImageData } from "@/lib/content"
 
 // A printed photo: a thin paper mat with a hairline edge around the picture.
 // The frame has a fixed ratio (2:1 strip, 5:2 from md, 3:2 from lg), so nothing shifts as it

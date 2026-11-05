@@ -1,4 +1,4 @@
-import type { Course } from "@/lib/content-schema"
+import type { Course } from "@/lib/content"
 import { courseCta } from "./shared"
 
 // Open [CONFIRM] items:

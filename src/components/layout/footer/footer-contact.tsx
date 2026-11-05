@@ -1,7 +1,7 @@
 import type { ComponentProps } from "react"
 import { cn } from "cn"
 
-import type { Site } from "@/lib/content-schema"
+import type { Site } from "@/lib/content"
 import { whatsappHref } from "@/lib/utils"
 import { FooterColumn, footerLinkClass } from "./footer-column"
 

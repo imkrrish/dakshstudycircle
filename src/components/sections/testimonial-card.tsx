@@ -2,7 +2,7 @@ import type { ComponentProps } from "react"
 import Image from "next/image"
 import { cn } from "cn"
 
-import type { ResolvedTestimonialGridSection } from "@/lib/content-schema"
+import type { ResolvedTestimonialGridSection } from "@/lib/content"
 import { initials } from "@/lib/utils"
 
 type Item = ResolvedTestimonialGridSection["items"][number]

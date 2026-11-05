@@ -4,7 +4,7 @@ import { HugeiconsIcon } from "@hugeicons/react"
 import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
 import { SectionHeading } from "@/components/layout/section-heading"
-import type { SectionOf } from "@/lib/content-schema"
+import type { SectionOf } from "@/lib/content"
 
 const isExternal = (href: string) => /^https?:\/\//.test(href)
 

@@ -5,7 +5,7 @@ import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
 import { SectionHeading } from "@/components/layout/section-heading"
 import { ActionButton } from "@/components/shared/action-button"
-import type { SectionOf } from "@/lib/content-schema"
+import type { SectionOf } from "@/lib/content"
 
 const splitMediaVariants = cva("", {
   variants: {

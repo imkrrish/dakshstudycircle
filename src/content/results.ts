@@ -1,4 +1,4 @@
-import type { Result } from "@/lib/content-schema"
+import type { Result } from "@/lib/content"
 
 // Development data for the results section, every item marked `sample: true`,
 // so production builds drop it. Replace with the institute's real results

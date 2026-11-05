@@ -9,7 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
-import type { SectionOf } from "@/lib/content-schema"
+import type { SectionOf } from "@/lib/content"
 
 import { TestimonialCard } from "./testimonial-card"
 import { TestimonialCarouselMotion } from "./testimonial-carousel-motion"

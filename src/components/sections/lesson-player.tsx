@@ -6,7 +6,7 @@ import { HugeiconsIcon } from "@hugeicons/react"
 import { cn } from "cn"
 import Image from "next/image"
 
-import type { ResolvedVideoPlayerSection } from "@/lib/content-schema"
+import type { ResolvedVideoPlayerSection } from "@/lib/content"
 import { isPlainClick } from "@/lib/utils"
 
 type Item = ResolvedVideoPlayerSection["items"][number]

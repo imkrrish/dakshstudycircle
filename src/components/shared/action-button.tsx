@@ -14,7 +14,7 @@ import Link from "next/link"
 import { DialogTriggerButton } from "@/components/shared/dialog-trigger-button"
 import { Button as UiButton, buttonVariants } from "@/components/ui/button"
 import { getSite } from "@/lib/content"
-import type { Button, SocialPlatform } from "@/lib/content-schema"
+import type { Button, SocialPlatform } from "@/lib/content"
 
 const socialIcons = {
   facebook: Facebook01Icon,

@@ -1,4 +1,4 @@
-import type { Video } from "@/lib/content-schema"
+import type { Video } from "@/lib/content"
 
 // The institute's free Maths playlists (public, channel "Anil sir").
 // Thumbnails are each playlist's first video, 16:9. They are decorative

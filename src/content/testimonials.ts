@@ -1,4 +1,4 @@
-import type { Testimonial } from "@/lib/content-schema"
+import type { Testimonial } from "@/lib/content"
 
 // Real testimonials from the pamphlet and the old site. Photos are optional;
 // without one the card shows the person's initials.

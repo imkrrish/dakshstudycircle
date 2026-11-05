@@ -1,7 +1,7 @@
 import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
 import { SectionHeading } from "@/components/layout/section-heading"
-import type { SectionOf } from "@/lib/content-schema"
+import type { SectionOf } from "@/lib/content"
 
 // Fee rows as a printed notice: label, dotted leader, amount, basis beneath.
 function FeesSection({ section }: { section: SectionOf<"fees"> }) {
