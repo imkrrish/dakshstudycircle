@@ -40,13 +40,9 @@ export const CourseSchema = z.strictObject({
   cardNote: z.string().max(60).optional(),
   // "Class 1" … "Class 12", or "College". Empty for a course by age, not class
   // (Spoken English).
-  classes: z
-    .array(
-      z.union([
-        z.string().regex(/^Class (1[0-2]|[1-9])$/),
-        z.literal("College"),
-      ]),
-    ),
+  classes: z.array(
+    z.union([z.string().regex(/^Class (1[0-2]|[1-9])$/), z.literal("College")]),
+  ),
   subjects: z.array(z.string()),
   facultyIds: z.array(z.string()),
   // Shown by the page's `fees` section, and only when site.features.showFees is on.
@@ -61,7 +57,6 @@ export type Course = z.infer<typeof CourseSchema>
 export type ResolvedCourse = Omit<Course, "sections"> & {
   sections: ResolvedSection[]
 }
-
 
 // ---------- Validation ----------
 
@@ -92,14 +87,19 @@ export function checkCourseSections(
         }
         summarised.add(subject)
       }
-      for (const group of section.groups ?? []) {
-        for (const name of group.subjects) {
-          if (!course.subjects.includes(name)) {
-            errors.push(
-              `${label}: subjects "${section.id}": "${name}" is not in the course's subjects`,
-            )
-          }
+      if (section.entries && section.summaries) {
+        errors.push(
+          `${label}: subjects "${section.id}": use entries or summaries, not both`,
+        )
+      }
+      const titles = new Set<string>()
+      for (const { title } of section.entries ?? []) {
+        if (titles.has(title)) {
+          errors.push(
+            `${label}: subjects "${section.id}": two entries titled "${title}"`,
+          )
         }
+        titles.add(title)
       }
     }
     if (section.type !== "video-player") continue

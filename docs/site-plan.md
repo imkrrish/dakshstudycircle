@@ -1,7 +1,7 @@
 # Site plan
 
 Section order = render order. Type in brackets. ★ = type not built yet.
-Content marked PLACEHOLDER / MOCK until real data arrives.
+Until real data arrives, results and testimonials are realistic sample records (`sample: true`, dropped from production); no visible SAMPLE/MOCK/PLACEHOLDER text.
 
 ## Navigation
 

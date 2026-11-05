@@ -101,7 +101,7 @@ No registration fee, instalments or online/home-tuition price differences are st
 ## Evidence on Hand
 
 - Real: address, phones, emails, socials, offered courses, director name (Anil Kumar).
-- **None yet:** results, ranks, student numbers, testimonials. These are MOCK placeholders marked `MOCK` until real data arrives. Do not fabricate results, ranks, student numbers or years of experience.
+- **None yet:** results, ranks, student numbers, testimonials. Until real data arrives they are realistic invented records marked `sample: true` (dropped from production), with no visible SAMPLE/MOCK/PLACEHOLDER text. Do not fabricate results, ranks, student numbers or years of experience.
 
 ## Voice
 
@@ -110,7 +110,7 @@ case, no ALL CAPS, no "!!!", no generic coaching phrases ("360 degree", "benchma
 
 ## Product Principles
 
-1. **Trust before polish.** Every claim must be true and checkable; unproven claims are omitted or marked PLACEHOLDER/MOCK.
+1. **Trust before polish.** Every claim must be true and checkable; unproven claims are omitted; sample records carry `sample: true` and never reach production.
 2. **One tap to a human.** Calling or WhatsApping the institute is always within reach on mobile.
 3. **Speak to the parent's worry.** Personal attention, syllabus coverage and location answer the questions parents actually ask.
 4. **Light and fast.** Performance on cheap phones and mobile data is a feature.

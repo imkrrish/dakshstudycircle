@@ -381,7 +381,7 @@ Real photos of the institute and people only. Never AI-generated people. Decorat
 - One focus style everywhere (`focus-ring`). Skip link is first in the tab order. `main` is focusable (`#main`).
 - Full keyboard use; the navbar CTA is always in the tab order.
 - Decorative images and icons use `alt=""` / `aria-hidden`.
-- Content rules: no unverified claims ("best", "top", results) per `PRODUCT.md`. Mock data is marked `MOCK`, missing facts `PLACEHOLDER`.
+- Content rules: no unverified claims ("best", "top", results) per `PRODUCT.md`. Sample data is realistic and marked `sample: true` (dropped from production); missing facts are left out. No visible SAMPLE/MOCK/PLACEHOLDER text.
 
 ## Do's and Don'ts
 

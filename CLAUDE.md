@@ -78,10 +78,11 @@ MVP, frontend only. No backend, database, or auth yet.
 ## Content
 
 - Site copy comes from the `content-writer` agent. Never read `reference/` directly.
-- Results and testimonials are MOCK data until launch: obviously fake, marked `MOCK`.
+- Results and testimonials are sample data until launch: realistic invented records marked
+  `sample: true` (dropped from production). No visible SAMPLE, MOCK or PLACEHOLDER text anywhere.
 - Approved copy goes into the page data files in `src/content/pages/`, never hard-coded in components.
-- Never invent facts (numbers, names, results, dates). Missing content uses obvious
-  placeholder text marked `PLACEHOLDER`.
+- Never invent facts (numbers, names, results, dates) outside `sample: true` records. Missing
+  facts are left out and flagged in a source comment ([CONFIRM]), never shown as placeholder text.
 
 ## Before saying a task is done
 

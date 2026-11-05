@@ -12,23 +12,22 @@ export const subjectsBase = {
   intro: z.string().optional(),
 }
 
-// Optional grouping (e.g. one group per exam). Each subject must be in the
-// course's `subjects`. A group may have no subjects and only a `note`.
-export const subjectGroupSchema = z.strictObject({
-  label: z.string().min(1),
-  note: z.string().optional(),
-  subjects: z.array(z.string().min(1)),
-})
-
 export const SubjectsSectionSchema = z.strictObject({
   ...subjectsBase,
-  groups: z.array(subjectGroupSchema).min(1).optional(),
   // One short line per subject on what it covers. Each subject must be in the
   // course's `subjects`, once.
   summaries: z
     .array(
       z.strictObject({ subject: z.string().min(1), text: z.string().min(1) }),
     )
+    .optional(),
+  // Cards that are not single subjects (e.g. one per exam entry), in place of
+  // the course's subjects. Not used together with `summaries`.
+  entries: z
+    .array(
+      z.strictObject({ title: z.string().min(1), text: z.string().min(1) }),
+    )
+    .min(1)
     .optional(),
 })
 
@@ -37,48 +36,37 @@ export const resolvedSubjectItem = z.strictObject({
   summary: z.string().optional(),
 })
 
-// What the component receives. With `groups`, `items` is empty and each group
-// carries its own rows.
+// What the component receives: one card per item.
 export const ResolvedSubjectsSectionSchema = z.strictObject({
   ...subjectsBase,
   items: z.array(resolvedSubjectItem),
-  groups: z
-    .array(
-      z.strictObject({
-        label: z.string().min(1),
-        note: z.string().optional(),
-        items: z.array(resolvedSubjectItem),
-      }),
-    )
-    .optional(),
 })
 
 export type SubjectsSection = z.infer<typeof SubjectsSectionSchema>
-export type ResolvedSubjectsSection = z.infer<typeof ResolvedSubjectsSectionSchema>
+export type ResolvedSubjectsSection = z.infer<
+  typeof ResolvedSubjectsSectionSchema
+>
 
 // ---------- Resolving ----------
 
-// One row per subject, with its summary when the section has one.
+// One card per entry when the section has entries; otherwise one per course
+// subject, with its summary when the section has one.
 export function resolveSubjects(
   section: SubjectsSection,
   course: CourseLike,
 ): ResolvedSubjectsSection {
-  const { groups, summaries, ...rest } = section
-  const rows = (names: string[]) =>
-    names.map((name) => {
-      const summary = summaries?.find((s) => s.subject === name)?.text
-      return { name, ...(summary ? { summary } : {}) }
-    })
-  if (groups) {
+  const { entries, summaries, ...rest } = section
+  if (entries) {
     return {
       ...rest,
-      items: [],
-      groups: groups.map(({ label, note, subjects }) => ({
-        label,
-        ...(note ? { note } : {}),
-        items: rows(subjects),
-      })),
+      items: entries.map(({ title, text }) => ({ name: title, summary: text })),
     }
   }
-  return { ...rest, items: rows(course.subjects) }
+  return {
+    ...rest,
+    items: course.subjects.map((name) => {
+      const summary = summaries?.find((s) => s.subject === name)?.text
+      return { name, ...(summary ? { summary } : {}) }
+    }),
+  }
 }

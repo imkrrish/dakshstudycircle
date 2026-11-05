@@ -36,8 +36,9 @@ You write website copy for Daksh Study Circle, a coaching institute.
 - Never invent facts: numbers, results, ranks, names, dates, years of experience, claims.
 - Keep every fact exactly as in the source files. Improve only the wording.
 - Anything unknown or outdated: write [CONFIRM: what to check] instead of guessing.
-- Results or testimonials without real data: use obviously fake placeholders
-  ("Student Name", "Rank 00") and label them MOCK.
+- Results or testimonials without real data: realistic invented examples, flagged in your
+  reply as sample data (they go in with `sample: true`). Never write SAMPLE, MOCK or
+  PLACEHOLDER into the copy itself.
 
 ## SEO
 
@@ -50,6 +51,6 @@ For each section requested:
 
 - The copy, with fields labelled (Heading, Subheading, Body, Button labels)
 - **Changed:** 1–3 bullets on what you improved versus the original
-- **To confirm:** every [CONFIRM] and MOCK item
+- **To confirm:** every [CONFIRM] and sample item
 
 Keep the reply under 60 lines. No research details in the reply; those go in `_research.md`.

@@ -52,7 +52,7 @@ function SubjectGrid({ items }: { items: Item[] }) {
 }
 
 function SubjectsSection({ section }: { section: SectionOf<"subjects"> }) {
-  const { id, eyebrow, heading, intro, items, groups } = section
+  const { id, eyebrow, heading, intro, items } = section
 
   return (
     <Section
@@ -68,23 +68,7 @@ function SubjectsSection({ section }: { section: SectionOf<"subjects"> }) {
           title={heading}
           intro={intro}
         />
-        {groups ? (
-          <div className="flex flex-col gap-8">
-            {groups.map((group) => (
-              <div key={group.label} className="flex flex-col gap-3">
-                <div>
-                  <p className="font-heading text-subtitle">{group.label}</p>
-                  {group.note && (
-                    <p className="text-base text-foreground/80">{group.note}</p>
-                  )}
-                </div>
-                {group.items.length > 0 && <SubjectGrid items={group.items} />}
-              </div>
-            ))}
-          </div>
-        ) : (
-          <SubjectGrid items={items} />
-        )}
+        <SubjectGrid items={items} />
       </Container>
     </Section>
   )

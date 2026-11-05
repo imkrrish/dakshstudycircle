@@ -73,75 +73,66 @@ export const rmsRimcSainik: Course = {
         },
         shot: "Teacher at the board explaining a Maths question to a small group at desks · landscape 3:2 · from the back corner at student eye level, teacher and board in frame · soft natural window light",
       },
-      eyebrow: "Defence school entrance",
-      heading: ["Entrance preparation for defence schools"],
+      eyebrow: "RMS · RIMC · Sainik School entrance",
+      heading: ["Preparing your child for defence school entrance exams"],
       subheading:
-        "We prepare your child for the written exam for admission to Class 6, 8 and 9. We teach only the subjects the exam asks for, in a small batch.",
+        "Coaching in Delhi Cantt since 2005, for Class 6, 8 and 9 entry.",
     },
     {
       id: "subjects",
       type: "subjects",
-      eyebrow: "Subjects",
-      heading: "What your child will study",
-      intro:
-        "Each school has its own exam. We teach the subjects of the exam your child is aiming for, and nothing extra.",
-      groups: [
+      heading: "What your child will study for each exam",
+      // One card per exam entry. Exact ages stay out until the institute
+      // confirms the current limits (docs/content-requests.md).
+      entries: [
         {
-          label: "RMS, Class 6 entry",
-          note: "Questions are at Class 5 level.",
-          subjects: [
-            "Intelligence",
-            "General Knowledge",
-            "Mathematics",
-            "English",
-          ],
+          title: "RMS · Class 6 entry",
+          text: "For children in or past Class 5. Intelligence, General Knowledge, Maths and English, at Class 5 level.",
         },
         {
-          label: "RMS, Class 9 entry",
-          note: "Questions are at Class 8 level.",
-          subjects: [
-            "English",
-            "Hindi",
-            "Social Science",
-            "Mathematics",
-            "Science",
-          ],
+          title: "RMS · Class 9 entry",
+          text: "For children in or past Class 8. English, Hindi, Social Science, Maths and Science, at Class 8 level.",
         },
         {
-          label: "RIMC, Class 8 entry",
-          note: "A viva follows the written test.",
-          subjects: ["Mathematics", "General Knowledge", "English"],
+          title: "RIMC · Class 8 entry",
+          text: "For children in or past Class 7. Maths, General Knowledge and English, then a viva.",
         },
         {
-          label: "Sainik Schools (AISSEE)",
-          note: "The subjects follow the latest official NTA notification. Please check it before you plan.",
-          subjects: [],
+          title: "Sainik Schools · Class 6 and 9 entry",
+          text: "We prepare your child for the AISSEE. Please check the latest NTA notice for eligibility, subjects and pattern.",
         },
       ],
     },
     {
       id: "how-we-teach",
-      type: "reason-list",
-      eyebrow: "How we teach",
-      heading: "How we prepare your child",
-      items: [
+      type: "teaching-plan",
+      heading: "Ready well before the entrance exam",
+      steps: [
         {
-          title: "Syllabus finished early",
-          body: "We complete the syllabus early, so your child is not rushing near the exam.",
+          icon: "book",
+          lead: "Every exam topic taught,",
+          title: "finished early",
         },
         {
-          title: "Revision all year",
-          body: "Revision runs through the whole year, not only in the last few weeks.",
+          icon: "note-edit",
+          lead: "Revision and regular tests",
+          title: "all year round",
         },
         {
-          title: "Regular tests",
-          body: "Tests are held regularly, so you and your child can see how the preparation is going.",
-        },
-        {
-          title: "Study material",
-          body: "Study material is part of the tuition, so your child has material to work from.",
+          icon: "school",
+          lead: "On entrance exam day, your child",
+          title: "walks in prepared",
+          destination: true,
         },
       ],
+    },
+    {
+      id: "results",
+      type: "results-board",
+      heading: "Entrance exam results",
+      boardTitle: "Honour Board",
+      perYear: 8,
+      years: 1,
     },
     {
       id: "fees",
@@ -152,40 +143,39 @@ export const rmsRimcSainik: Course = {
     {
       id: "faq",
       type: "faq",
-      eyebrow: "Questions",
-      heading: "Questions about entrance preparation",
+      heading: "Questions parents ask",
       intro:
-        "Short answers for parents. Rules and dates change every year, so please confirm them on the official websites. Call or WhatsApp us on {phones} for anything else.",
+        "Short answers to what parents ask most. Rules change every year, so please check the latest official notice.",
       items: [
         {
-          question: "Which exams does this course cover?",
+          question: "How does RMS admission work?",
           answer:
-            "RMS (Class 6 and 9), RIMC (Class 8) and Sainik Schools (Class 6 and 9).",
+            "There are 5 RMS schools, for boys and girls. For Class 6, your child should be in or have passed Class 5; for Class 9, Class 8. Selection is a written OMR test, then a merit list and interview, then a medical. Forms usually open in September–October and the exam is usually in December. Please check the age limits in the latest notice.",
         },
         {
-          question: "What are the RMS eligibility and selection steps?",
+          question: "How does RIMC admission work?",
           answer:
-            "There are 5 residential CBSE schools: Chail, Ajmer, Belgaum, Bengaluru and Dholpur. For Class 6, your child should be 10 to 12 years old on 31 March and have passed or be studying in Class 5. For Class 9, the age is 13 to 15 on 31 March, with Class 8 passed or ongoing. Boys and girls can both apply, but seats for girls are limited. Selection is a written test (OMR, multiple choice), then a merit list and interview, then a medical. Forms usually come around September to October and the exam around December. Please check the official notification each year.",
-        },
-        {
-          question: "What are the RIMC eligibility and selection steps?",
-          answer:
-            "RIMC is in Dehradun and admits to Class 8, for boys and girls. Your child should be studying in or have passed Class 7, and be 11½ to under 13 years old on the term start date. The exam is held twice a year, in June and December: Maths, General Knowledge and English, then a viva, then a medical. The form is submitted to the state government, not to RIMC.",
+            "RIMC, Dehradun, admits boys and girls to Class 8. Your child should be in or have passed Class 7. The exam is held in June and December: Maths, General Knowledge and English, then a viva and a medical. You send the form to your state government.",
         },
         {
           question: "How do Sainik School admissions work?",
           answer:
-            "Entry to Class 6 and 9 is through the AISSEE exam run by NTA. For eligibility, dates and pattern, please check the latest official NTA notification.",
+            "Entry to Class 6 and 9 is through the AISSEE, run by NTA. For eligibility, pattern and dates, please check the latest official notification.",
         },
         {
-          question: "Can you promise selection?",
+          question: "How are classes run?",
           answer:
-            "No. Selection depends only on the official exam and process. We prepare your child for the written test, and we make no promise about marks or selection.",
+            "Batches of about 10 to 20. We teach only the subjects in the entrance exam, with study material. Classes run at our centre in Delhi Cantt, online, or as home tuition.",
         },
         {
-          question: "How can my child attend, and is there a demo?",
+          question: "Can my child attend a demo class?",
           answer:
-            "You can choose offline classes at the centre, online classes or home tuition. A free demo is available for offline classes only, at {address}.",
+            "Yes. For offline classes, your child can attend free demo classes until you are satisfied. Then you decide.",
+        },
+        {
+          question: "What are the fees?",
+          answer:
+            "Fees depend on the class and course. Please call or WhatsApp us on {phones}, and we will share the details.",
         },
       ],
     },

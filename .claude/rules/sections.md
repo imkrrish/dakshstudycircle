@@ -18,7 +18,8 @@ paths:
 - Schemas are strict: unknown keys fail the build.
 - Buttons are data with an `action` (`link` | `contact-dialog`, more later). Render them only
   through the shared action button component; never hard-code button behaviour in a section.
-- Mark placeholder text `PLACEHOLDER` and mock results `MOCK`.
+- Sample records are realistic and marked `sample: true` (dropped from production). No visible
+  SAMPLE/MOCK/PLACEHOLDER text; `load.ts` fails the build on mock/placeholder wording.
 - Validation runs when `src/lib/content.ts` loads and fails the build on: schema errors, duplicate
   section ids, more than one dark `cta-band` per page/course, duplicate slugs/ids, unknown facultyIds.
 - Sections that show collection data (courses, faculty) store a reference; `getPage()`/`getCourse()`
