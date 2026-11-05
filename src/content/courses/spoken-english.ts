@@ -1,17 +1,20 @@
 import type { Course } from "@/lib/content"
 import { courseCta } from "./shared"
 
-// Open [CONFIRM] items:
-// - Level, start months, daily timing, certificate (docs/content-requests.md)
+// Open [CONFIRM] items (docs/content-requests.md):
+// - Level, start months, daily timing, certificate
+// - Whether batch size (about 10–20) and study material apply to this course
 // - The teacher is a SAMPLE record (shown in development only)
 // - `classes` is empty on purpose: the course is by age (under 20), not class.
+// Course pages render only the types in COURSE_TEMPLATE (src/lib/content/page.ts):
+// the fees section below is kept but not shown.
 
 export const spokenEnglish: Course = {
   slug: "spoken-english",
   title: "Spoken English",
   summary:
     "A 3-month Spoken English course for students under 20, with five classes a week.",
-  cardNote: "3 months · 5 classes a week · Rs 9,000",
+  cardNote: "3 months · 5 classes a week",
   classes: [],
   subjects: ["Spoken English"],
   facultyIds: ["sample-english-teacher"],
@@ -27,9 +30,9 @@ export const spokenEnglish: Course = {
   },
   order: 8,
   seo: {
-    title: "Spoken English Course, Delhi Cantt",
+    title: "Spoken English Classes, Delhi Cantt",
     description:
-      "A 3-month Spoken English course in Delhi Cantt for students under 20. Five classes a week. Fee Rs 9,000. Call us to know more.",
+      "A 3-month Spoken English course in Delhi Cantt for students under 20. Five classes a week and free offline demo classes.",
   },
   sections: [
     {
@@ -45,27 +48,27 @@ export const spokenEnglish: Course = {
         },
         shot: "Spoken English · landscape 3:2 · from the side at desk height, two students talking with the teacher nearby · warm daylight, no clutter",
       },
-      eyebrow: "Spoken English",
-      heading: ["Speak English with more confidence"],
-      subheading:
-        "A 3-month course in Delhi Cantt for students under 20, with five classes every week.",
+      eyebrow: "Spoken English · Delhi Cantt",
+      heading: ["Practise speaking English, five days a week"],
+      subheading: "A 3-month course for students under 20.",
     },
     {
       id: "subjects",
       type: "subjects",
-      eyebrow: "Subjects",
-      heading: "Spoken English for students under 20",
-      intro: "A 3-month course, with five classes a week.",
-    },
-    {
-      id: "how-we-teach",
-      type: "reason-list",
-      eyebrow: "The course",
-      heading: "The course at a glance",
-      items: [
-        { title: "3 months", body: "A course of three months." },
-        { title: "5 classes a week", body: "Classes run five days a week." },
-        { title: "Under 20", body: "For students below 20 years of age." },
+      heading: "How the course works",
+      entries: [
+        {
+          title: "For students under 20",
+          text: "The course is open to students below 20 years of age.",
+        },
+        {
+          title: "Three months",
+          text: "The course runs for three months.",
+        },
+        {
+          title: "Five classes a week",
+          text: "Classes are held five days every week.",
+        },
       ],
     },
     {
@@ -77,26 +80,28 @@ export const spokenEnglish: Course = {
     {
       id: "faq",
       type: "faq",
-      eyebrow: "Questions",
-      heading: "Questions about Spoken English",
-      intro:
-        "Short answers for parents and students. If yours is not here, call or WhatsApp us on {phones}.",
+      heading: "Questions parents ask",
+      intro: "Short answers to what parents ask most.",
       items: [
-        { question: "How long is the course?", answer: "Three months." },
-        { question: "How many classes are there in a week?", answer: "Five." },
         { question: "Who can join?", answer: "Students under 20." },
         {
-          question: "What is the fee?",
-          answer: "Rs 9,000 for the 3-month course.",
+          question: "How long is the course?",
+          answer: "Three months, with five classes every week.",
         },
         {
-          question: "What about batch timings and mode?",
-          answer: "Please call us on {phones}. We are open {hours}.",
-        },
-        {
-          question: "How do I join?",
+          question: "Can my child attend a demo class?",
           answer:
-            "Call or WhatsApp us on {phones}, or visit the centre at {address}.",
+            "Yes. For offline classes, your child can attend free demo classes until you are satisfied. Then you decide.",
+        },
+        {
+          question: "How many students are in a batch?",
+          answer:
+            "About 10 to 20 students, so every child gets attention in class.",
+        },
+        {
+          question: "What are the fees?",
+          answer:
+            "Fees depend on the class and course. Please call or WhatsApp us on {phones}, and we will share the details.",
         },
       ],
     },

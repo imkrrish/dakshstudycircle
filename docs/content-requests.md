@@ -47,8 +47,9 @@ Classes 1–8
 2. The exact fee for each class (1 to 8), and a simple example of how a mid-session joining changes it. The site now says Rs 25,000–30,000 per session, depending on the class and the joining time.
 
 Spoken English 3. Level (beginner, intermediate, both)? Is "under 20" a firm age limit? 4. Which months does a batch start and end, and at what time of day? 5. Is a certificate given? Is grammar or personality development part of it?
+   Also: the owner's facts file says "Classes 1–12 only, usually June–August", but the site says under 20. Which is right? Can college students join? Are batches about 10–20, and is study material given?
 
-College classes 6. Which degrees exactly? The site shows B.A. and B.Com. DU SOL has no general B.Sc. (only B.Sc. (Hons) Computer Science): do you teach B.Sc.? 7. Which universities: DU SOL only, or also IGNOU or others? 8. Subjects, batch days and timings, and the fee.
+College classes 6. Which degrees exactly? The site shows B.A. and B.Com. DU SOL has no general B.Sc. (only B.Sc. (Hons) Computer Science): do you teach B.Sc.? 7. Which universities: DU SOL only, or also IGNOU or others? 8. Subjects, batch days and timings, and the fee. Also: batch size and study material for college classes, and does the free demo apply to them?
 
 ## Open questions: RMS, RIMC and Sainik School
 

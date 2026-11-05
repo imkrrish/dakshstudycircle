@@ -155,7 +155,7 @@ export const rmsRimcSainik: Course = {
         {
           question: "How does RIMC admission work?",
           answer:
-            "RIMC, Dehradun, admits boys and girls to Class 8. Your child should be in or have passed Class 7. The exam is held in June and December: Maths, General Knowledge and English, then a viva and a medical. You send the form to your state government.",
+            "RIMC, Dehradun, admits boys and girls to Class 8. Your child should be in or have passed Class 7, and from the December 2026 exam, be 12½ to 14 years old on the term start date. The exam is held in June and December: Maths, General Knowledge and English, then a viva and a medical. Applications are made online through NTA.",
         },
         {
           question: "How do Sainik School admissions work?",

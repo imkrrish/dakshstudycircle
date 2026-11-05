@@ -1,25 +1,27 @@
 import type { Course } from "@/lib/content"
 import { courseCta } from "./shared"
 
-// Open [CONFIRM] items:
+// Open [CONFIRM] items (docs/content-requests.md):
 // - B.Sc.? (DU SOL has only B.Sc. (Hons) Computer Science), IGNOU or other universities
-// - Subjects, mode, timings, fee (docs/content-requests.md)
+// - Subjects, mode, timings, fee; batch size and study material for this course
 // - The teacher is a SAMPLE record (shown in development only)
+// Course pages render only the types in COURSE_TEMPLATE (src/lib/content/page.ts):
+// the official-links section below is kept but not shown.
 
 export const collegeClasses: Course = {
   slug: "college-classes",
   title: "College classes",
   summary:
-    "Classes for B.A. and B.Com students of open and distance degrees such as DU SOL.",
-  cardNote: "B.A. and B.Com · DU SOL and similar",
+    "Classes for B.A. and B.Com. students of open and distance degrees such as DU SOL.",
+  cardNote: "B.A. and B.Com. · DU SOL and similar",
   classes: ["College"],
   subjects: ["B.A.", "B.Com."],
   facultyIds: ["sample-college-teacher"],
   order: 9,
   seo: {
-    title: "DU SOL B.A. & B.Com Classes, Delhi Cantt",
+    title: "DU SOL B.A. & B.Com. Classes, Delhi Cantt",
     description:
-      "Classes for B.A. and B.Com students of open and distance degrees such as DU SOL, in Delhi Cantt. Call us for details.",
+      "B.A. and B.Com. classes in Delhi Cantt for students of open and distance degrees such as DU SOL. Free offline demo classes.",
   },
   sections: [
     {
@@ -35,17 +37,23 @@ export const collegeClasses: Course = {
         },
         shot: "College study · landscape 3:2 · over the shoulder of a student with textbooks at a desk · daylight from a window",
       },
-      eyebrow: "College classes",
-      heading: ["Support for open and distance degrees"],
+      eyebrow: "College classes · DU SOL",
+      heading: ["Classes for your B.A. or B.Com."],
       subheading:
-        "For students of degrees such as DU SOL (School of Open Learning, University of Delhi). B.A. and B.Com.",
+        "For open and distance learning students, in Delhi Cantt since 2005.",
     },
     {
       id: "subjects",
       type: "subjects",
-      eyebrow: "Subjects",
-      heading: "Degrees we support",
-      intro: "Open and distance degrees such as DU SOL.",
+      heading: "Who these classes are for",
+      entries: [
+        {
+          title: "Open and distance learners",
+          text: "For students in degree programmes such as DU SOL.",
+        },
+        { title: "B.A.", text: "Classes for B.A. students." },
+        { title: "B.Com.", text: "Classes for B.Com. students." },
+      ],
     },
     {
       id: "official-links",
@@ -71,30 +79,33 @@ export const collegeClasses: Course = {
     {
       id: "faq",
       type: "faq",
-      eyebrow: "Questions",
-      heading: "Questions about college classes",
-      intro:
-        "Short answers for parents and students. If yours is not here, call or WhatsApp us on {phones}.",
+      heading: "Questions students ask",
+      intro: "Short answers to what students ask most.",
       items: [
         {
           question: "Who are these classes for?",
-          answer: "Students of open and distance degrees such as DU SOL.",
-        },
-        { question: "Which degrees?", answer: "B.A. and B.Com." },
-        {
-          question: "Do you help with admission?",
           answer:
-            "No. For forms and dates, please see the official DU SOL websites.",
+            "Students in open or distance degree programmes, such as DU SOL.",
         },
         {
-          question: "Which subjects are covered?",
-          answer: "Please call us on {phones}.",
+          question: "Which degrees do you teach?",
+          answer: "B.A. and B.Com.",
         },
         {
-          question: "What are the timings and mode?",
-          answer: "Please call us on {phones}. We are open {hours}.",
+          question: "Which subjects do you cover?",
+          answer:
+            "Please call or WhatsApp us on {phones} to check your subjects.",
         },
-        { question: "What is the fee?", answer: "Please call us on {phones}." },
+        {
+          question: "Can I attend a demo class?",
+          answer:
+            "Yes. For offline classes, you can attend free demo classes until you are satisfied. Then you decide.",
+        },
+        {
+          question: "What are the fees?",
+          answer:
+            "Fees depend on the class and course. Please call or WhatsApp us on {phones}, and we will share the details.",
+        },
       ],
     },
     courseCta,
