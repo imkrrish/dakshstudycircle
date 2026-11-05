@@ -77,27 +77,24 @@ export const classes9To10: Course = {
     {
       id: "how-we-teach",
       type: "teaching-plan",
-      heading: "How we prepare your child for the boards",
-      intro: "Class 10 is a big year. We plan for it from Class 9, one step at a time.",
+      heading: "Ready well before the boards",
       steps: [
         {
-          title: "Syllabus finished early",
-          body: "We complete the syllabus ahead of time, so there is room to revise.",
+          icon: "book",
+          lead: "Every chapter taught,",
+          title: "finished early",
         },
         {
-          title: "Revision all year",
-          body: "Revision runs through the whole year, not only before exams.",
+          icon: "note-edit",
+          lead: "Revision and regular tests",
+          title: "all year round",
         },
         {
-          title: "Regular tests",
-          body: "Tests happen regularly. They show your child what is clear and what needs more work.",
+          icon: "school",
+          lead: "On board exam day, your child",
+          title: "walks in prepared",
+          destination: true,
         },
-      ],
-      details: [
-        { label: "Batch size", value: "{batchSize}" },
-        { label: "How you study", value: "{modes}" },
-        { label: "Free demo", value: "{freeDemo}, until your child is satisfied" },
-        { label: "Study material", value: "Included in the tuition" },
       ],
     },
     {

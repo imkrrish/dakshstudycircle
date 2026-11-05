@@ -4,6 +4,8 @@ import {
   Call02Icon,
   Location01Icon,
   Mail01Icon,
+  NoteEditIcon,
+  School01Icon,
   UserGroupIcon,
 } from "@hugeicons/core-free-icons"
 
@@ -14,6 +16,8 @@ export const iconRegistry = {
   phone: Call02Icon,
   location: Location01Icon,
   mail: Mail01Icon,
+  "note-edit": NoteEditIcon,
+  school: School01Icon,
   users: UserGroupIcon,
 } as const
 
