@@ -53,7 +53,6 @@ export const class11To12Humanities: Course = {
     {
       id: "how-we-teach",
       type: "reason-list",
-      tone: "band",
       eyebrow: "How we teach",
       heading: "How we teach Humanities",
       items: [

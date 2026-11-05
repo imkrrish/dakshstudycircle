@@ -31,6 +31,7 @@ async function CtaBandSection({ section }: { section: SectionOf<"cta-band"> }) {
   return (
     <Section
       data-slot="cta-band-section"
+      tone={section.tone}
       data-surface={variant === "dark" ? "ink" : undefined}
       id={id}
       aria-labelledby={`${id}-heading`}

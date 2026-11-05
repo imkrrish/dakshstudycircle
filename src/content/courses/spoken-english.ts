@@ -54,7 +54,6 @@ export const spokenEnglish: Course = {
     {
       id: "how-we-teach",
       type: "reason-list",
-      tone: "band",
       eyebrow: "The course",
       heading: "The course at a glance",
       items: [

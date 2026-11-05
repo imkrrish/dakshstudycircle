@@ -12,7 +12,6 @@ export const SplitSectionSchema = z.strictObject({
   image: ImageSchema,
   imagePosition: z.enum(["left", "right"]),
   // "band": a deeper warm surface, full-bleed, to separate this section from its neighbours.
-  tone: z.enum(["default", "band"]).optional(),
   actions: z.array(ButtonSchema).optional(),
 })
 

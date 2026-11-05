@@ -4,20 +4,23 @@ import { cn } from "cn"
 
 const sectionVariants = cva("scroll-mt-(--navbar-height) py-(--section-y) md:py-(--section-y-md)", {
   variants: {
+    // A section's background; page data picks it, `assignTones()` resolves
+    // clashes so neighbours never match. "ink" is styled by its own section.
     tone: {
-      default: "",
+      paper: "",
       muted: "bg-muted",
       band: "bg-secondary",
+      ink: "",
     },
   },
   defaultVariants: {
-    tone: "default",
+    tone: "paper",
   },
 })
 
 function Section({
   id,
-  tone = "default",
+  tone = "paper",
   className,
   ...props
 }: ComponentProps<"section"> &

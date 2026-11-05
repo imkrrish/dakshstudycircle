@@ -8,7 +8,12 @@ function FeesSection({ section }: { section: SectionOf<"fees"> }) {
   const { id, eyebrow, heading, intro, rows, note } = section
 
   return (
-    <Section data-slot="fees-section" id={id} aria-labelledby={`${id}-heading`}>
+    <Section
+      data-slot="fees-section"
+      tone={section.tone}
+      id={id}
+      aria-labelledby={`${id}-heading`}
+    >
       <Container>
         <div className="grid gap-10 md:grid-cols-12 md:items-start md:gap-x-12 lg:gap-x-16">
           <SectionHeading

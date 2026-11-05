@@ -34,8 +34,8 @@ export const SectionSchema = z.discriminatedUnion("type", [
 ])
 
 export type Section = z.infer<typeof SectionSchema>
-// Sections as components receive them (references resolved).
-export type ResolvedSection =
+// A section with its references resolved, before tones are assigned.
+export type UntonedSection =
   | Exclude<
       Section,
       {
@@ -56,6 +56,14 @@ export type ResolvedSection =
   | ResolvedTestimonialGridSection
   | ResolvedSubjectsSection
   | ResolvedFeesSection
+
+// The background a section renders with (see tones.ts). "ink" is the dark CTA.
+export type ResolvedTone = "paper" | "muted" | "band" | "ink"
+
+type WithTone<T> = T extends unknown ? Omit<T, "tone"> & { tone: ResolvedTone } : never
+
+// Sections as components receive them: references resolved, tone assigned.
+export type ResolvedSection = WithTone<UntonedSection>
 
 export type SectionType = ResolvedSection["type"]
 export type SectionOf<T extends SectionType> = Extract<ResolvedSection, { type: T }>

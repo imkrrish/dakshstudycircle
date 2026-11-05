@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { ButtonSchema, ImageSchema, sectionBase, sectionTone, type LoadedContent } from "../shared"
+import { ButtonSchema, ImageSchema, sectionBase, type LoadedContent } from "../shared"
 import { findCourse } from "./course-grid"
 
 export const resultsGridBase = {
@@ -8,8 +8,6 @@ export const resultsGridBase = {
   eyebrow: z.string().optional(),
   heading: z.string().min(1),
   intro: z.string().optional(),
-  // "muted": the alternate paper tone, full-bleed.
-  tone: sectionTone.optional(),
   // "compact": photo, score or outcome, name, meta. "full" adds subject marks.
   variant: z.enum(["compact", "full"]),
   actions: z.array(ButtonSchema).optional(),

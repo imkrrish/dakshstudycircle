@@ -436,11 +436,13 @@
   --section-y-md: 7rem;
 }
 
-/* A compact hero owns the space below it (its own pb), so the plain section
-   after it starts with no top padding. Toned sections keep theirs: their edge
-   is visible. Unlayered so it beats the section's padding utilities. */
-[data-slot="hero-section"][data-size="compact"] + section[data-tone="default"] {
-  padding-top: 0;
+/* Course cards are their own cards from md. On a muted section the hover tint
+   (bg-muted) would equal the section and the card would vanish, so the card
+   keeps its surface and the flame glow alone marks hover. */
+@media (hover: hover) and (min-width: 48rem) {
+  [data-slot="course-grid-section"][data-tone="muted"] li:hover:not(:active) {
+    background-color: var(--card);
+  }
 }
 
 /* One red button per viewport: while the page's hero CTA is on screen the

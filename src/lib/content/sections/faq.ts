@@ -10,7 +10,6 @@ export const FaqSectionSchema = z.strictObject({
   heading: z.string().min(1),
   intro: z.string().optional(),
   // "band": a deeper warm surface, full-bleed (same as split).
-  tone: z.enum(["default", "band"]).optional(),
   // {address}, {phones}, {hours}, {landmark} and {metro} in text are filled from site data by getPage().
   items: z
     .array(

@@ -38,9 +38,12 @@ export const LinkSchema = z.strictObject({
   href: z.string().min(1),
 })
 
-export const sectionBase = { id: z.string().min(1) }
+// A section's background. In data it is a preference: `assignTones()`
+// (tones.ts) resolves clashes so neighbouring sections never share one.
+// "ink" (the dark CTA band) is never chosen in data.
+export const sectionTone = z.enum(["paper", "muted", "band"])
 
-export const sectionTone = z.enum(["default", "muted", "band"])
+export const sectionBase = { id: z.string().min(1), tone: sectionTone.optional() }
 
 // `sample: true` marks an example record: it shows in development and the
 // resolver removes it in production (see content.ts). Collection items that can

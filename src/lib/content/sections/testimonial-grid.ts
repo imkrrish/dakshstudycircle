@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { ImageSchema, sectionBase, sectionTone, type LoadedContent } from "../shared"
+import { ImageSchema, sectionBase, type LoadedContent } from "../shared"
 
 export const testimonialGridBase = {
   ...sectionBase,
@@ -7,7 +7,6 @@ export const testimonialGridBase = {
   eyebrow: z.string().optional(),
   heading: z.string().min(1),
   intro: z.string().optional(),
-  tone: sectionTone.optional(),
   // "carousel": a swipeable row with arrows. "grid": all cards, no scrolling.
   layout: z.enum(["grid", "carousel"]),
 }

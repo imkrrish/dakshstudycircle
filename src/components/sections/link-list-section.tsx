@@ -16,6 +16,7 @@ function LinkListSection({ section }: { section: SectionOf<"link-list"> }) {
   return (
     <Section
       data-slot="link-list-section"
+      tone={section.tone}
       id={id}
       aria-labelledby={`${id}-heading`}
     >

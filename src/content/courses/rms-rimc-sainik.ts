@@ -116,7 +116,6 @@ export const rmsRimcSainik: Course = {
     {
       id: "how-we-teach",
       type: "reason-list",
-      tone: "band",
       eyebrow: "How we teach",
       heading: "How we prepare your child",
       items: [

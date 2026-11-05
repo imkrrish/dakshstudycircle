@@ -4,6 +4,7 @@ import {
   SectionSchema,
   type ResolvedSection,
   type Section,
+  type UntonedSection,
   type SectionType,
 } from "./sections"
 import type { Course } from "./collections/courses"
@@ -17,6 +18,7 @@ import { resolveFees } from "./sections/fees"
 import { resolveResultsGrid } from "./sections/results-grid"
 import { resolveResultsBoard } from "./sections/results-board"
 import { resolveTeachingPlan } from "./sections/teaching-plan"
+import { assignTones } from "./tones"
 
 // ---------- Page ----------
 
@@ -57,7 +59,7 @@ export function resolveSections(
   content: LoadedContent,
   course?: Course,
 ): ResolvedSection[] {
-  return sections.flatMap((section): ResolvedSection[] => {
+  const resolved = sections.flatMap((section): UntonedSection[] => {
     switch (section.type) {
       case "subjects":
         return [resolveSubjects(section, requireCourse(section.id, course))]
@@ -81,6 +83,8 @@ export function resolveSections(
         return [resolveOne(section, content, course)]
     }
   })
+  // Last: tones depend on which sections survived the drops above.
+  return assignTones(resolved)
 }
 
 function requireCourse(id: string, course?: Course): Course {
@@ -102,7 +106,7 @@ function resolveOne(
   >,
   content: LoadedContent,
   course?: Course,
-): ResolvedSection {
+): UntonedSection {
   {
     switch (section.type) {
       case "hero":
@@ -155,6 +159,13 @@ export function checkSections(label: string, sections: Section[], errors: string
   if (hero?.type === "hero" && hero.size !== "compact") {
     if (hero.media) errors.push(`${label}: media belongs on a compact hero`)
     if (hero.facts) errors.push(`${label}: facts belong on a compact hero`)
+  }
+  for (const section of sections) {
+    if ((section.type === "hero" || section.type === "cta-band") && section.tone) {
+      errors.push(
+        `${label}: "${section.id}" (${section.type}) has a fixed tone, remove "tone"`,
+      )
+    }
   }
   const dark = sections.filter(
     (s) => s.type === "cta-band" && s.variant === "dark",

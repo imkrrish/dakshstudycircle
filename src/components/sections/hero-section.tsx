@@ -77,6 +77,7 @@ function LargeHero({ section }: { section: SectionOf<"hero"> }) {
   return (
     <Section
       data-slot="hero-section"
+      tone={section.tone}
       id={id}
       aria-labelledby={`${id}-heading`}
       className={heroSectionClass}

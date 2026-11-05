@@ -17,7 +17,8 @@ import { HeroPhoto } from "./hero-photo"
 // right from lg, with a small facts card laid over the photo's bottom-left
 // corner. Below lg it is one column: text, a photo strip, the facts card on the
 // strip's bottom edge. Without media the facts card stands alone on the right.
-// It owns the space below it (the next section starts with no top padding).
+// The next section always has a different tone (see assignTones), so it keeps
+// its normal top padding.
 function HeroCompact({ section }: { section: SectionOf<"hero"> }) {
   const {
     id,
@@ -48,6 +49,7 @@ function HeroCompact({ section }: { section: SectionOf<"hero"> }) {
     <Section
       data-slot="hero-section"
       data-size="compact"
+      tone={section.tone}
       id={id}
       aria-labelledby={`${id}-heading`}
       className={cn(

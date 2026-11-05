@@ -60,7 +60,6 @@ export const classes6To8: Course = {
     {
       id: "how-we-teach",
       type: "reason-list",
-      tone: "band",
       eyebrow: "How we teach",
       heading: "Preparing for Class 9, one year at a time",
       items: [

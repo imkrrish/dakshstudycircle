@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { ButtonSchema, ImageSchema, sectionBase, sectionTone, type LoadedContent } from "../shared"
+import { ButtonSchema, ImageSchema, sectionBase, type LoadedContent } from "../shared"
 import { findCourse } from "./course-grid"
 
 type CourseLike = { slug: string; [k: string]: unknown }
@@ -12,7 +12,6 @@ export const resultsBoardBase = {
   intro: z.string().optional(),
   // Lettered at the head of the board, above the year switcher.
   boardTitle: z.string().min(1),
-  tone: sectionTone.optional(),
   actions: z.array(ButtonSchema).optional(),
 }
 

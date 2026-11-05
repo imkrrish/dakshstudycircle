@@ -8,7 +8,6 @@ export const ReasonListSectionSchema = z.strictObject({
   heading: z.string().min(1),
   intro: z.string().optional(),
   // "band": a deeper warm surface, full-bleed (same as split).
-  tone: z.enum(["default", "band"]).optional(),
   items: z
     .array(
       z.strictObject({ title: z.string().min(1), body: z.string().min(1) }),

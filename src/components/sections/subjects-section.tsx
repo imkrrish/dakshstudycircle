@@ -54,6 +54,7 @@ function SubjectsSection({ section }: { section: SectionOf<"subjects"> }) {
   return (
     <Section
       data-slot="subjects-section"
+      tone={section.tone}
       id={id}
       aria-labelledby={`${id}-heading`}
     >

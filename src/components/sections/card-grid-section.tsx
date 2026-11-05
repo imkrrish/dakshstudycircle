@@ -7,6 +7,7 @@ function CardGridSection({ section }: { section: SectionOf<"card-grid"> }) {
   return (
     <Section
       data-slot="card-grid-section"
+      tone={section.tone}
       id={section.id}
       aria-labelledby={`${section.id}-heading`}
     >

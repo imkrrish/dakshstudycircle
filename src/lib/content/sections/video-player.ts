@@ -8,7 +8,6 @@ export const videoPlayerBase = {
   heading: z.string().min(1),
   intro: z.string().optional(),
   // "band": a deeper warm surface, full-bleed (same as split).
-  tone: z.enum(["default", "band"]).optional(),
   actions: z.array(ButtonSchema).optional(),
 }
 

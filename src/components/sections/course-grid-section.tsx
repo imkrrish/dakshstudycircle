@@ -123,12 +123,13 @@ function CourseGridSection({ section }: { section: SectionOf<"course-grid"> }) {
   return (
     <Section
       data-slot="course-grid-section"
+      tone={section.tone}
       // With the ribbon: below md it sits 44px under the proof line and 56px
       // above the eyebrow; from md the path (6rem tall) sits at the section top
       // and the eyebrow is 100px below its lowest glyph.
       className={cn(
         "relative",
-        section.ribbon ? "pt-20 md:pt-48" : "pt-12 md:pt-16",
+        section.ribbon && "pt-20 md:pt-48",
       )}
       id={id}
       aria-labelledby={`${id}-heading`}

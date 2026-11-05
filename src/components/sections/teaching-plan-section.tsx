@@ -18,7 +18,7 @@ function TeachingPlanSection({
     <Section
       data-slot="teaching-plan-section"
       id={id}
-      tone="band"
+      tone={section.tone}
       aria-labelledby={`${id}-heading`}
     >
       <Container className="flex flex-col gap-8 md:gap-12">
