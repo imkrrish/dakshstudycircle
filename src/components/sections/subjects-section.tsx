@@ -20,10 +20,13 @@ function spanFor(index: number, count: number): keyof typeof SPAN {
   return index < Math.min(wide, count) ? 3 : 2
 }
 
-// One paper card per subject; the summary line appears when the data has one.
+// Below md the subjects share one paper sheet (no per-subject card, no rules,
+// space between them); from md each is its own paper card in the grid, and the
+// grid rows stretch so cards in a row are the same height. The summary line
+// appears when the data has one.
 function SubjectCard({ item, span }: { item: Item; span: keyof typeof SPAN }) {
   return (
-    <li className={`rounded-xl border bg-card p-5 md:p-6 ${SPAN[span]}`}>
+    <li className={`md:rounded-xl md:border md:bg-card md:p-6 ${SPAN[span]}`}>
       <h3 className="font-heading text-title">{item.name}</h3>
       {item.summary && (
         <p className="mt-2 max-w-prose text-base text-foreground/80">
@@ -36,7 +39,7 @@ function SubjectCard({ item, span }: { item: Item; span: keyof typeof SPAN }) {
 
 function SubjectGrid({ items }: { items: Item[] }) {
   return (
-    <ul className="grid gap-3 md:grid-cols-6 md:gap-4">
+    <ul className="flex flex-col gap-6 rounded-xl border bg-card p-6 shadow-sm md:grid md:grid-cols-6 md:items-stretch md:gap-4 md:rounded-none md:border-0 md:bg-transparent md:p-0 md:shadow-none">
       {items.map((item, i) => (
         <SubjectCard
           key={item.name}

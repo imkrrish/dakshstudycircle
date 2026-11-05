@@ -61,11 +61,11 @@ export const classes9To10: Course = {
         },
         {
           subject: "English",
-          text: "Reading, writing, grammar and literature.",
+          text: "Reading comprehension, writing skills, grammar and the literature chapters.",
         },
         {
           subject: "Hindi",
-          text: "Reading, writing, grammar and literature.",
+          text: "Hindi grammar, letter and essay writing, and the prose and poetry chapters.",
         },
         {
           subject: "Social Studies",
