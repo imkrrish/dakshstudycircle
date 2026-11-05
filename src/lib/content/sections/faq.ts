@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { sectionBase, content } from "../shared"
+import { sectionBase, type LoadedContent } from "../shared"
 import { FeaturesSchema } from "../site"
 import { contactPlaceholders, PLACEHOLDER_PATTERN } from "../placeholders"
 
@@ -28,7 +28,10 @@ export type FaqSection = z.infer<typeof FaqSectionSchema>
 
 // ---------- Resolving ----------
 
-export function resolveFaq(section: FaqSection): FaqSection {
+export function resolveFaq(
+  section: FaqSection,
+  content: LoadedContent,
+): FaqSection {
   const values = contactPlaceholders(content.site)
   // Names were validated at load, so every match has a value.
   const fill = (text: string) =>

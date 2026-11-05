@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { ButtonSchema, ImageSchema, sectionBase, content } from "../shared"
+import { ButtonSchema, ImageSchema, sectionBase, type LoadedContent } from "../shared"
 
 export const videoPlayerBase = {
   ...sectionBase,
@@ -58,6 +58,7 @@ function playlistEmbedSrc(playlistId: string) {
 
 export function resolveVideoPlayer(
   section: VideoPlayerSection,
+  content: LoadedContent,
 ): ResolvedVideoPlayerSection {
   const { videos: ids, ...rest } = section
   return {

@@ -89,7 +89,7 @@ export const real = <T extends { sample?: boolean }>(items: T[]) =>
   showSamples ? items : items.filter((item) => !item.sample)
 
 // ---------- Content holder ----------
-export interface ContentData {
+export interface LoadedContent {
   site: {
     name: string
     shortName: string
@@ -188,14 +188,3 @@ export interface ContentData {
   }>
   pages: Map<string, { slug: string; seo: Seo; sections: Array<{ type: string; id: string; [key: string]: unknown }> }>
 }
-
-// Holds reference to loaded content to avoid circular dependencies with load.ts
-let _content: ContentData | null = null
-export function setContent(loaded: ContentData) {
-  _content = loaded
-}
-export const content: ContentData = new Proxy({} as ContentData, {
-  get(_, prop: keyof ContentData) {
-    return _content?.[prop]
-  },
-})

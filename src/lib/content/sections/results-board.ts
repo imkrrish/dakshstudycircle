@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { ButtonSchema, ImageSchema, sectionBase, sectionTone, content } from "../shared"
+import { ButtonSchema, ImageSchema, sectionBase, sectionTone, type LoadedContent } from "../shared"
 import { findCourse } from "./course-grid"
 
 type CourseLike = { slug: string; [k: string]: unknown }
@@ -69,6 +69,7 @@ export type ResolvedResultsBoardSection = z.infer<
 // is stable, so data order breaks ties.
 export function resolveResultsBoard(
   section: ResultsBoardSection,
+  content: LoadedContent,
   course?: CourseLike,
 ): ResolvedResultsBoardSection {
   const { perYear, years: yearCount, ...rest } = section
@@ -96,7 +97,7 @@ export function resolveResultsBoard(
           meta: (r.outcome ? [r.class, r.exam] : [r.class, r.stream])
             .filter((part): part is string => Boolean(part))
             .join(" · "),
-          course: findCourse(r.course).title,
+          course: findCourse(r.course, content.courses).title,
           // One decimal, so "93.0%" lines up with "96.2%" down the board.
           score:
             r.percentage === undefined
@@ -112,5 +113,27 @@ export function resolveResultsBoard(
           photo: r.photo,
         })),
     })),
+  }
+}
+
+// ---------- Validation ----------
+
+export function checkResultsBoards(
+  label: string,
+  sections: Array<{ type: string; id: string; [key: string]: unknown }>,
+  results: Array<unknown>,
+  errors: string[],
+  onCoursePage = false,
+) {
+  for (const section of sections) {
+    // On a course page the board filters by course and drops itself when
+    // nothing matches, so an empty collection is not an error there.
+    if (
+      section.type === "results-board" &&
+      !onCoursePage &&
+      results.length === 0
+    ) {
+      errors.push(`${label}: results-board "${section.id}" has no results`)
+    }
   }
 }

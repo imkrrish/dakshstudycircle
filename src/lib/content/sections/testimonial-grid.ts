@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { ImageSchema, sectionBase, sectionTone, content } from "../shared"
+import { ImageSchema, sectionBase, sectionTone, type LoadedContent } from "../shared"
 
 export const testimonialGridBase = {
   ...sectionBase,
@@ -55,6 +55,7 @@ const MAX_CAROUSEL_TESTIMONIALS = 12
 
 export function resolveTestimonialGrid(
   section: TestimonialGridSection,
+  content: LoadedContent,
 ): ResolvedTestimonialGridSection {
   const { show, ...rest } = section
   const chosen = content.testimonials

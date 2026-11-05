@@ -62,7 +62,6 @@ export type ResolvedCourse = Omit<Course, "sections"> & {
   sections: ResolvedSection[]
 }
 
-export { courseHref, findCourse } from "../sections/course-grid"
 
 // ---------- Validation ----------
 

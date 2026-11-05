@@ -1,5 +1,5 @@
 import "server-only"
-import { parseOrCollect, real, setContent } from "./shared"
+import { parseOrCollect, real } from "./shared"
 import { SiteSchema } from "./site"
 import { PageSchema, checkSections, checkPageSections, type Page } from "./page"
 import {
@@ -26,6 +26,7 @@ import {
 } from "./sections/video-player"
 import { checkTestimonialGrids } from "./sections/testimonial-grid"
 import { checkResultsGrids } from "./sections/results-grid"
+import { checkResultsBoards } from "./sections/results-board"
 import { site as rawSite } from "@/content/site"
 import { pages as rawPages } from "@/content/pages"
 import { courses as rawCourses } from "@/content/courses"
@@ -183,6 +184,7 @@ function loadContent() {
     checkVideoPlayers(`pages/${key}`, page.sections, videoIds, errors)
     checkTestimonialGrids(`pages/${key}`, page.sections, testimonials, errors)
     checkResultsGrids(`pages/${key}`, page.sections, results, errors)
+    checkResultsBoards(`pages/${key}`, page.sections, results, errors)
     checkSocialActions(`pages/${key}`, page.sections, socialPlatforms, errors)
   }
   for (const course of courses) {
@@ -217,6 +219,12 @@ function loadContent() {
       course.sections,
       results,
       errors,
+    )
+    checkResultsBoards(
+      `courses/${course.slug}`,
+      course.sections,
+      results,
+      errors,
       true,
     )
     checkSocialActions(
@@ -246,4 +254,3 @@ function loadContent() {
 }
 
 export const content = loadContent()
-setContent(content)

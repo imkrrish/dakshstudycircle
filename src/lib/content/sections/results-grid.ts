@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { ButtonSchema, ImageSchema, sectionBase, sectionTone, content } from "../shared"
+import { ButtonSchema, ImageSchema, sectionBase, sectionTone, type LoadedContent } from "../shared"
 import { findCourse } from "./course-grid"
 
 export const resultsGridBase = {
@@ -47,6 +47,7 @@ export type ResolvedResultsGridSection = z.infer<
 
 export function resolveResultsGrid(
   section: ResultsGridSection,
+  content: LoadedContent,
 ): ResolvedResultsGridSection {
   const { show, ...rest } = section
   const chosen = content.results.filter((r) => show === "all" || r.highlight)
@@ -54,12 +55,12 @@ export function resolveResultsGrid(
     ...rest,
     items: chosen.map((r) => {
       const meta = r.outcome
-        ? [`${r.outcome.note} ${r.year}`, findCourse(r.course).title]
+        ? [`${r.outcome.note} ${r.year}`, findCourse(r.course, content.courses).title]
         : [
             r.class,
             r.stream,
             `${r.exam} ${r.year}`,
-            findCourse(r.course).title,
+            findCourse(r.course, content.courses).title,
           ].filter(
             (part): part is string => Boolean(part),
           )
@@ -86,18 +87,8 @@ export function checkResultsGrids(
   sections: Array<{ type: string; id: string; show?: string; [key: string]: unknown }>,
   results: Array<{ highlight?: boolean; [key: string]: unknown }>,
   errors: string[],
-  onCoursePage = false,
 ) {
   for (const section of sections) {
-    // On a course page the board filters by course and drops itself when
-    // nothing matches, so an empty collection is not an error there.
-    if (
-      section.type === "results-board" &&
-      !onCoursePage &&
-      results.length === 0
-    ) {
-      errors.push(`${label}: results-board "${section.id}" has no results`)
-    }
     if (section.type !== "results-grid") continue
     if (section.show === "highlights" && !results.some((r) => r.highlight)) {
       errors.push(

@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { ButtonSchema, sectionBase, content } from "../shared"
+import { ButtonSchema, sectionBase, type LoadedContent } from "../shared"
 
 // Authoring shape: items refer to courses by slug. getPage() resolves them.
 export const CourseGridItemSchema = z.discriminatedUnion("kind", [
@@ -104,14 +104,18 @@ function streamLabels(titles: string[]): string[] {
   return words.map((w) => w.slice(shared).join(" "))
 }
 
-export function findCourse(slug: string) {
-  const course = content.courses.find((c) => c.slug === slug)
+export function findCourse(
+  slug: string,
+  courses: LoadedContent["courses"],
+) {
+  const course = courses.find((c) => c.slug === slug)
   if (!course) throw new Error(`[content] unknown course "${slug}"`)
   return course
 }
 
 export function resolveCourseGrid(
   section: CourseGridSection,
+  content: LoadedContent,
 ): ResolvedCourseGridSection {
   const { ribbon, ...rest } = section
   const resolved: ResolvedCourseGridSection = {
@@ -120,7 +124,7 @@ export function resolveCourseGrid(
       label: group.label,
       items: group.items.map((item) => {
         if (item.kind === "course") {
-          const course = findCourse(item.course)
+          const course = findCourse(item.course, content.courses)
           return {
             kind: "course" as const,
             title: course.title,
@@ -129,7 +133,9 @@ export function resolveCourseGrid(
             href: courseHref(course.slug),
           }
         }
-        const courses = item.courses.map(findCourse)
+        const courses = item.courses.map((slug) =>
+          findCourse(slug, content.courses),
+        )
         const labels = streamLabels(courses.map((c) => c.title))
         return {
           kind: "stream-group" as const,
@@ -158,12 +164,24 @@ export function resolveCourseGrid(
 // Every course-grid slug must exist, and appear once per section.
 export function checkCourseGrids(
   label: string,
-  sections: Array<{ type: string; id: string; [key: string]: unknown }>,
+  sections: Array<{
+    type: string
+    id: string
+    hideHeading?: boolean
+    eyebrow?: string
+    intro?: string
+    [key: string]: unknown
+  }>,
   courseSlugs: Set<string>,
   errors: string[],
 ) {
   for (const section of sections) {
     if (section.type !== "course-grid") continue
+    if (section.hideHeading && (section.eyebrow || section.intro)) {
+      errors.push(
+        `${label}: course-grid "${section.id}" hides its heading, so it cannot have an eyebrow or intro`,
+      )
+    }
     const groups = section.groups as Array<{ items: Array<{ kind: string; course?: string; courses?: string[] }> }> | undefined
     if (!groups) continue
     const where = `${label}: course-grid "${section.id}"`

@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { sectionBase, content } from "../shared"
+import { sectionBase, type LoadedContent } from "../shared"
 import { heroPlaceholders, PLACEHOLDER_PATTERN } from "../placeholders"
 
 // Course pages only: how the course runs. `steps` are the plan through the
@@ -30,7 +30,10 @@ export type TeachingPlanSection = z.infer<typeof TeachingPlanSectionSchema>
 // ---------- Resolving ----------
 
 // Fills {batchSize}, {modes} and {freeDemo} in the detail values.
-export function resolveTeachingPlan(section: TeachingPlanSection): TeachingPlanSection {
+export function resolveTeachingPlan(
+  section: TeachingPlanSection,
+  content: LoadedContent,
+): TeachingPlanSection {
   const values = heroPlaceholders(content.site)
   return {
     ...section,

@@ -15,7 +15,7 @@ Code is grouped by feature rather than layer: each feature file holds its schema
 
 ## Add a section type
 1. Add `sections/<type>.ts` containing its schema, validation rules, and resolving function.
-2. Add one line to `sections/index.ts` for the discriminated union and re-export.
+2. Add one line to `sections/index.ts` for the discriminated union.
 3. Register its component and renderer entry in `src/components/sections/section-renderer.tsx`.
 
 ## Add a collection

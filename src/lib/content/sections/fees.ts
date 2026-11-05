@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { sectionBase, content } from "../shared"
+import { sectionBase, type LoadedContent } from "../shared"
 
 type CourseLike = {
   fees?: {
@@ -62,6 +62,7 @@ const FEE_PERIODS = {
 // Null when fees are switched off, so no amount reaches the page.
 export function resolveFees(
   section: FeesSection,
+  content: LoadedContent,
   course: CourseLike,
 ): ResolvedFeesSection | null {
   if (!content.site.features.showFees || !course.fees) return null

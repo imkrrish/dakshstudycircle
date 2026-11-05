@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { ButtonSchema, ImageSchema, sectionBase, content } from "../shared"
+import { ButtonSchema, ImageSchema, sectionBase, type LoadedContent } from "../shared"
 import { heroPlaceholders, PLACEHOLDER_PATTERN } from "../placeholders"
 
 type CourseLike = { title: string; [k: string]: unknown }
@@ -47,7 +47,11 @@ export type HeroSection = z.infer<typeof HeroSectionSchema>
 // Fills the hero's fact placeholders. Without a photo the media is dropped
 // unless shot cards are on, so production never shows "photo to come". A course
 // hero without its own trail gets Home › Courses › the course.
-export function resolveHero(section: HeroSection, course?: CourseLike): HeroSection {
+export function resolveHero(
+  section: HeroSection,
+  content: LoadedContent,
+  course?: CourseLike,
+): HeroSection {
   const { site } = content
   const values = heroPlaceholders(site)
   const { media, facts, ...rest } = section

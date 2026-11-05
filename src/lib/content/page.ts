@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { SeoSchema } from "./shared"
+import { SeoSchema, type LoadedContent } from "./shared"
 import {
   SectionSchema,
   type ResolvedSection,
@@ -17,10 +17,6 @@ import { resolveFees } from "./sections/fees"
 import { resolveResultsGrid } from "./sections/results-grid"
 import { resolveResultsBoard } from "./sections/results-board"
 import { resolveTeachingPlan } from "./sections/teaching-plan"
-
-// ---------- SEO ----------
-
-export { SeoSchema, type Seo } from "./shared"
 
 // ---------- Page ----------
 
@@ -58,6 +54,7 @@ export function courseSlot(type: SectionType): number {
 // course record need it (the build already rejects them on other pages).
 export function resolveSections(
   sections: Section[],
+  content: LoadedContent,
   course?: Course,
 ): ResolvedSection[] {
   return sections.flatMap((section): ResolvedSection[] => {
@@ -65,23 +62,23 @@ export function resolveSections(
       case "subjects":
         return [resolveSubjects(section, requireCourse(section.id, course))]
       case "fees": {
-        const fees = resolveFees(section, requireCourse(section.id, course))
+        const fees = resolveFees(section, content, requireCourse(section.id, course))
         return fees ? [fees] : []
       }
       // A section with nothing left to show (e.g. only sample results, in
       // production) is dropped rather than rendered empty.
       case "results-grid": {
-        const resolved = resolveResultsGrid(section)
+        const resolved = resolveResultsGrid(section, content)
         return resolved.items.length > 0 ? [resolved] : []
       }
       case "teaching-plan":
-        return [resolveTeachingPlan(section)]
+        return [resolveTeachingPlan(section, content)]
       case "results-board": {
-        const resolved = resolveResultsBoard(section, course)
+        const resolved = resolveResultsBoard(section, content, course)
         return resolved.years.length > 0 ? [resolved] : []
       }
       default:
-        return [resolveOne(section, course)]
+        return [resolveOne(section, content, course)]
     }
   })
 }
@@ -103,20 +100,21 @@ function resolveOne(
         | "results-board"
     }
   >,
+  content: LoadedContent,
   course?: Course,
 ): ResolvedSection {
   {
     switch (section.type) {
       case "hero":
-        return resolveHero(section, course)
+        return resolveHero(section, content, course)
       case "faq":
-        return resolveFaq(section)
+        return resolveFaq(section, content)
       case "course-grid":
-        return resolveCourseGrid(section)
+        return resolveCourseGrid(section, content)
       case "video-player":
-        return resolveVideoPlayer(section)
+        return resolveVideoPlayer(section, content)
       case "testimonial-grid":
-        return resolveTestimonialGrid(section)
+        return resolveTestimonialGrid(section, content)
       default:
         return section
     }
@@ -157,15 +155,6 @@ export function checkSections(label: string, sections: Section[], errors: string
   if (hero?.type === "hero" && hero.size !== "compact") {
     if (hero.media) errors.push(`${label}: media belongs on a compact hero`)
     if (hero.facts) errors.push(`${label}: facts belong on a compact hero`)
-  }
-  for (const section of sections) {
-    if (section.type === "course-grid" && section.hideHeading) {
-      if (section.eyebrow || section.intro) {
-        errors.push(
-          `${label}: course-grid "${section.id}" hides its heading, so it cannot have an eyebrow or intro`,
-        )
-      }
-    }
   }
   const dark = sections.filter(
     (s) => s.type === "cta-band" && s.variant === "dark",
