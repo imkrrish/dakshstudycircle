@@ -131,27 +131,27 @@ export const classes9To10: Course = {
     {
       id: "faq",
       type: "faq",
-      heading: "Common questions from parents",
-      intro: "Cannot find your answer? Call or WhatsApp us on {phones}.",
+      heading: "Questions parents ask",
+      intro: "Short answers to what parents ask most.",
       items: [
         {
           question: "Can my child attend a demo class?",
           answer:
-            "Yes. The demo is free for offline classes. Your child can attend at our centre, {address}, until they are satisfied and ready to join.",
-        },
-        {
-          question: "Are there regular tests and study material?",
-          answer:
-            "Yes. Tests are held regularly, and study material is part of the tuition.",
+            "Yes. For offline classes, your child can attend free demo classes until you are satisfied. Then you decide.",
         },
         {
           question: "How many students are in a batch?",
-          answer: "Batches have about 10 to 20 students.",
+          answer:
+            "About 10 to 20 students, so every child gets attention in class.",
         },
         {
           question: "Are online classes or home tuition available?",
           answer:
-            "Yes. You can choose offline classes at the centre, online classes or home tuition. The free demo is for offline classes only.",
+            "Yes. Classes run offline at our centre in Delhi Cantt, online, and as home tuition.",
+        },
+        {
+          question: "Do you give study material?",
+          answer: "Yes. Study material is part of the tuition.",
         },
         {
           question: "What are the fees?",
