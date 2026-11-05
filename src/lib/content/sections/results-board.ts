@@ -12,6 +12,9 @@ export const resultsBoardBase = {
   intro: z.string().optional(),
   // Lettered at the head of the board, above the year switcher.
   boardTitle: z.string().min(1),
+  // Size of the large year numeral between the rules. "display" (the default)
+  // is the home board; "heading" keeps it below a page's h1 (course pages).
+  yearSize: z.enum(["display", "heading"]).optional(),
   actions: z.array(ButtonSchema).optional(),
 }
 
@@ -37,7 +40,8 @@ export const ResolvedResultsBoardSectionSchema = z.strictObject({
             z.strictObject({
               id: z.string(),
               name: z.string(),
-              meta: z.string(),
+              // Absent when every row of the board shares the same meta.
+              meta: z.string().optional(),
               course: z.string(),
               // "96.2%" for board results; entrance results carry an outcome.
               score: z.string().optional(),
@@ -78,9 +82,7 @@ export function resolveResultsBoard(
   const years = [...new Set<number>(results.map((r) => r.year))]
     .sort((a, b) => b - a)
     .slice(0, yearCount)
-  return {
-    ...rest,
-    years: years.map((year) => ({
+  const resolvedYears = years.map((year) => ({
       year,
       items: results
         .filter((r) => r.year === year)
@@ -111,7 +113,20 @@ export function resolveResultsBoard(
           subjects: r.subjects?.length ? r.subjects : undefined,
           photo: r.photo,
         })),
-    })),
+    }))
+  // A meta line every row repeats ("Class 10" on a one-class board) says
+  // nothing per row, so it is dropped when all rows share it.
+  const rows = resolvedYears.flatMap((y) => y.items)
+  const shared =
+    rows.length > 1 && rows.every((row) => row.meta === rows[0].meta)
+  return {
+    ...rest,
+    years: shared
+      ? resolvedYears.map((y) => ({
+          ...y,
+          items: y.items.map((item) => ({ ...item, meta: undefined })),
+        }))
+      : resolvedYears,
   }
 }
 

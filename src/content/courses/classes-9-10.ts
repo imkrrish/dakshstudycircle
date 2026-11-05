@@ -99,9 +99,9 @@ export const classes9To10: Course = {
     {
       id: "results",
       type: "results-board",
-      heading: "Recent board results",
-      intro: "Results from our Class 10 students.",
+      heading: "Class 10 board results",
       boardTitle: "Honour Board",
+      yearSize: "heading",
       perYear: 8,
       years: 1,
     },

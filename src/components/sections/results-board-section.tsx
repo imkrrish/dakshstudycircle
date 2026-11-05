@@ -44,7 +44,9 @@ function ResultRow({ item }: { item: Item }) {
               className="relative size-4 shrink-0 self-center text-foreground before:absolute before:inset-x-0 before:top-1/2 before:h-px before:bg-current after:absolute after:inset-y-0 after:left-1/2 after:w-px after:origin-center after:bg-current after:transition-transform after:duration-250 after:ease-out group-[[open]:not([data-closing])]:after:scale-y-0 motion-reduce:after:transition-none"
             />
           </span>
-          <span className="text-sm text-muted-foreground">{item.meta}</span>
+          {item.meta && (
+            <span className="text-sm text-muted-foreground">{item.meta}</span>
+          )}
           <span className="sr-only group-open:hidden">
             {item.subjects ? "Show subject marks" : "Show details"}
           </span>
@@ -97,7 +99,20 @@ function ResultRow({ item }: { item: Item }) {
 
 // One year of the board: the numeral set large between two rules (decorative,
 // the tab already names the panel), then the rows.
-function YearRows({ year, items }: { year: number; items: Item[] }) {
+const YEAR_SIZE = {
+  display: "text-display",
+  heading: "text-heading",
+} as const
+
+function YearRows({
+  year,
+  items,
+  size,
+}: {
+  year: number
+  items: Item[]
+  size: keyof typeof YEAR_SIZE
+}) {
   return (
     <>
       <div
@@ -107,7 +122,7 @@ function YearRows({ year, items }: { year: number; items: Item[] }) {
         <span className="h-px flex-1 bg-foreground/20" />
         <span
           data-board-year
-          className="font-heading text-display tabular-nums"
+          className={`font-heading tabular-nums ${YEAR_SIZE[size]}`}
         >
           {year}
         </span>
@@ -135,8 +150,17 @@ function ResultsBoardSection({
 }: {
   section: SectionOf<"results-board">
 }) {
-  const { id, eyebrow, heading, intro, boardTitle, tone, years, actions } =
-    section
+  const {
+    id,
+    eyebrow,
+    heading,
+    intro,
+    boardTitle,
+    yearSize = "display",
+    tone,
+    years,
+    actions,
+  } = section
 
   return (
     <Section
@@ -161,7 +185,11 @@ function ResultsBoardSection({
               // One year (a course page): no year index to switch, so no tabs.
               <div>
                 <p className={boardTitleClass}>{boardTitle}</p>
-                <YearRows year={years[0].year} items={years[0].items} />
+                <YearRows
+                  year={years[0].year}
+                  items={years[0].items}
+                  size={yearSize}
+                />
               </div>
             ) : (
               <ResultsBoardTabs
@@ -198,7 +226,7 @@ function ResultsBoardSection({
                     className="focus-ring"
                     keepMounted
                   >
-                    <YearRows year={year} items={items} />
+                    <YearRows year={year} items={items} size={yearSize} />
                   </TabsContent>
                 ))}
               </ResultsBoardTabs>
