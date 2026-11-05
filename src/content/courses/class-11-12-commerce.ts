@@ -55,42 +55,71 @@ export const class11To12Commerce: Course = {
         },
         shot: "Commerce · landscape 3:2 · camera at desk height, side-on, on a student's notebook and calculator · warm, even indoor light",
       },
-      eyebrow: "Class 11–12 Commerce",
+      eyebrow: "Classes 11–12 · Commerce",
       heading: ["Get comfortable with accounts, business and numbers"],
-      subheading:
-        "Accountancy, Business Studies and Economics for CBSE Classes 11 and 12. Maths is taught by our director, Anil Kumar.",
+      subheading: "Coaching CBSE students in Delhi Cantt since 2005.",
     },
     {
       id: "subjects",
       type: "subjects",
-      eyebrow: "Subjects",
-      heading: "Subjects you can take",
-      intro:
-        "Join the subjects you need, and no more. Check your school's combination first.",
+      heading: "What your child will study",
+      summaries: [
+        {
+          subject: "Accountancy",
+          text: "Accounting basics, financial statements, and partnership and company accounts.",
+        },
+        {
+          subject: "Business Studies",
+          text: "Nature of business, principles of management, marketing and finance.",
+        },
+        {
+          subject: "Economics",
+          text: "Microeconomics, macroeconomics, statistics for economics and Indian economic development.",
+        },
+        {
+          subject: "Mathematics",
+          text: "Sets and functions, algebra, calculus, vectors and 3D geometry, probability and statistics.",
+        },
+        {
+          subject: "English",
+          text: "Reading comprehension, writing skills and the literature chapters.",
+        },
+        {
+          subject: "Informatics Practices",
+          text: "Data handling with Python and Pandas, SQL databases and networking basics.",
+        },
+      ],
     },
     {
       id: "how-we-teach",
-      type: "reason-list",
-      eyebrow: "How we teach",
-      heading: "How we teach Commerce",
-      items: [
+      type: "teaching-plan",
+      heading: "Ready well before the boards",
+      steps: [
         {
-          title: "Syllabus finished early",
-          body: "We finish the syllabus early, so there is time to practise accounts and numerical questions.",
+          icon: "book",
+          lead: "Every chapter taught,",
+          title: "finished early",
         },
         {
-          title: "Revision all year",
-          body: "Revision continues through the year, so concepts stay fresh.",
+          icon: "note-edit",
+          lead: "Revision and regular tests",
+          title: "all year round",
         },
         {
-          title: "Regular tests",
-          body: "Regular tests show what is clear and what needs more work.",
-        },
-        {
-          title: "Study material",
-          body: "Study material is part of the tuition, for each subject you join.",
+          icon: "school",
+          lead: "On board exam day, your child",
+          title: "walks in prepared",
+          destination: true,
         },
       ],
+    },
+    {
+      id: "results",
+      type: "results-board",
+      heading: "Class 12 board results",
+      boardTitle: "Honour Board",
+      perYear: 8,
+      years: 1,
     },
     {
       id: "videos",
@@ -118,40 +147,32 @@ export const class11To12Commerce: Course = {
     {
       id: "faq",
       type: "faq",
-      eyebrow: "Questions",
-      heading: "Questions about Class 11–12 Commerce",
-      intro:
-        "Short answers for parents and students. If yours is not here, call or WhatsApp us on {phones}.",
+      heading: "Questions parents ask",
+      intro: "Short answers to what parents ask most.",
       items: [
         {
-          question: "Which Commerce subjects do you teach?",
+          question: "Can my child attend a demo class?",
           answer:
-            "Accountancy, Business Studies, Economics, Mathematics, English and Informatics Practices.",
+            "Yes. For offline classes, your child can attend free demo classes until you are satisfied. Then you decide.",
         },
         {
-          question: "Who teaches Maths for Commerce?",
+          question: "How many students are in a batch?",
           answer:
-            "Anil Kumar, the director. He also teaches Maths for Classes 9 to 12.",
+            "About 10 to 20 students, so every child gets attention in class.",
         },
         {
-          question: "Do I have to join every subject?",
+          question: "Are online classes or home tuition available?",
           answer:
-            "No. The fee is per subject, so you can join the subjects you need. Check your school's combination.",
+            "Yes. Classes run offline at our centre in Delhi Cantt, online, and as home tuition.",
         },
         {
-          question: "Does CBSE have a Commerce stream?",
-          answer:
-            "As per CBSE guidance, CBSE has no official streams. Schools offer subject combinations. Please check what your school offers.",
+          question: "Do you give study material?",
+          answer: "Yes. Study material is part of the tuition.",
         },
         {
-          question: "What is the fee for two subjects?",
+          question: "What are the fees?",
           answer:
-            "Rs 25,000 per subject, per session, up to the final exams. For two subjects, that is Rs 50,000.",
-        },
-        {
-          question: "Can I try a class first?",
-          answer:
-            "Yes, for offline classes at {address}. It is free until your child is satisfied and ready to join. Call us on {phones} ({hours}). Yes. You can choose offline classes at the centre, online classes or home tuition. The free demo is for offline classes only.",
+            "Fees depend on the class and course. Please call or WhatsApp us on {phones}, and we will share the details.",
         },
       ],
     },

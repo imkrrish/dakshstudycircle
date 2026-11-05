@@ -44,41 +44,59 @@ export const class11To12Humanities: Course = {
         },
         shot: "Humanities · landscape 3:2 · camera at eye level across a table, on students with open books · soft natural light",
       },
-      eyebrow: "Class 11–12 Humanities",
-      heading: ["Read with understanding. Write with clarity."],
-      subheading:
-        "Political Science, Economics and English for CBSE Classes 11 and 12, taught in small batches.",
+      eyebrow: "Classes 11–12 · Humanities",
+      heading: ["Getting ready for the Class 12 boards"],
+      subheading: "Coaching CBSE students in Delhi Cantt since 2005.",
     },
     {
       id: "subjects",
       type: "subjects",
-      eyebrow: "Subjects",
-      heading: "Three subjects for Humanities",
-      intro: "We teach Political Science, Economics and English.",
+      heading: "What your child will study",
+      summaries: [
+        {
+          subject: "Political Science",
+          text: "The Indian Constitution, political theory and world politics.",
+        },
+        {
+          subject: "Economics",
+          text: "Microeconomics, macroeconomics, statistics for economics and Indian economic development.",
+        },
+        {
+          subject: "English",
+          text: "Reading comprehension, writing skills and the literature chapters.",
+        },
+      ],
     },
     {
       id: "how-we-teach",
-      type: "reason-list",
-      eyebrow: "How we teach",
-      heading: "How we teach Humanities",
-      items: [
+      type: "teaching-plan",
+      heading: "Ready well before the boards",
+      steps: [
         {
-          title: "Syllabus finished early",
-          body: "We complete the syllabus early, so you have time to read, think and write.",
+          icon: "book",
+          lead: "Every chapter taught,",
+          title: "finished early",
         },
         {
-          title: "Revision all year",
-          body: "Revision runs through the year, so chapters are not left for the end.",
+          icon: "note-edit",
+          lead: "Revision and regular tests",
+          title: "all year round",
         },
         {
-          title: "Regular tests",
-          body: "Regular tests give you practice at writing answers.",
-        },
-        {
-          title: "Study material",
-          body: "Study material is part of the tuition, so your reading stays organised.",
+          icon: "school",
+          lead: "On board exam day, your child",
+          title: "walks in prepared",
+          destination: true,
         },
       ],
+    },
+    {
+      id: "results",
+      type: "results-board",
+      heading: "Class 12 board results",
+      boardTitle: "Honour Board",
+      perYear: 8,
+      years: 1,
     },
     {
       id: "fees",
@@ -89,39 +107,32 @@ export const class11To12Humanities: Course = {
     {
       id: "faq",
       type: "faq",
-      eyebrow: "Questions",
-      heading: "Questions about Class 11–12 Humanities",
-      intro:
-        "Short answers for parents and students. If yours is not here, call or WhatsApp us on {phones}.",
+      heading: "Questions parents ask",
+      intro: "Short answers to what parents ask most.",
       items: [
         {
-          question: "Which Humanities subjects do you teach?",
-          answer: "Political Science, Economics and English.",
+          question: "Can my child attend a demo class?",
+          answer:
+            "Yes. For offline classes, your child can attend free demo classes until you are satisfied. Then you decide.",
         },
         {
-          question: "Do I have to take English?",
+          question: "How many students are in a batch?",
           answer:
-            "CBSE guidance says English or Hindi is the first subject. Please check which one your school expects.",
+            "About 10 to 20 students, so every child gets attention in class.",
         },
         {
-          question: "Does CBSE have a Humanities stream?",
+          question: "Are online classes or home tuition available?",
           answer:
-            "As per CBSE guidance, CBSE has no official streams, only subject combinations chosen by the school. Check your school's list.",
+            "Yes. Classes run offline at our centre in Delhi Cantt, online, and as home tuition.",
         },
         {
-          question: "What is the fee?",
-          answer:
-            "Rs 25,000 per subject, per session, up to the final exams. The same applies to Class 11 and Class 12.",
+          question: "Do you give study material?",
+          answer: "Yes. Study material is part of the tuition.",
         },
         {
-          question: "Is there a free demo?",
+          question: "What are the fees?",
           answer:
-            "Yes, for offline classes at {address}. It is free until your child is satisfied and ready to join. Call us on {phones} ({hours}).",
-        },
-        {
-          question: "Can my child study at home or online?",
-          answer:
-            "Yes. You can choose offline classes at the centre, online classes or home tuition. The free demo is for offline classes only. Batches are about 10 to 20 students.",
+            "Fees depend on the class and course. Please call or WhatsApp us on {phones}, and we will share the details.",
         },
       ],
     },

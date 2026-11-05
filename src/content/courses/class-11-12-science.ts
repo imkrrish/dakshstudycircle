@@ -57,42 +57,75 @@ export const class11To12Science: Course = {
         },
         shot: "Science · landscape 3:2 · from the back of the room, over a student's shoulder towards the board · soft daylight from the window",
       },
-      eyebrow: "Class 11–12 Science",
+      eyebrow: "Classes 11–12 · Science",
       heading: ["Learn Science by solving problems, one step at a time"],
-      subheading:
-        "Physics, Chemistry, Mathematics and Biology for CBSE Classes 11 and 12. Maths is taught by our director, Anil Kumar.",
+      subheading: "Coaching CBSE students in Delhi Cantt since 2005.",
     },
     {
       id: "subjects",
       type: "subjects",
-      eyebrow: "Subjects",
-      heading: "Subjects you can take",
-      intro:
-        "Choose the subjects you need. Each one is taught separately. Check your school's combination first.",
+      heading: "What your child will study",
+      summaries: [
+        {
+          subject: "Physics",
+          text: "Mechanics, heat, electricity and magnetism, optics and modern physics.",
+        },
+        {
+          subject: "Chemistry",
+          text: "Physical, organic and inorganic chemistry, with numericals and reactions.",
+        },
+        {
+          subject: "Mathematics",
+          text: "Sets and functions, algebra, calculus, vectors and 3D geometry, probability and statistics.",
+        },
+        {
+          subject: "Biology",
+          text: "Cell biology, plant and human physiology, genetics, evolution and ecology.",
+        },
+        {
+          subject: "English",
+          text: "Reading comprehension, writing skills and the literature chapters.",
+        },
+        {
+          subject: "Computer Science",
+          text: "Programming in Python, data structures, SQL databases and computer networks.",
+        },
+        {
+          subject: "Informatics Practices",
+          text: "Data handling with Python and Pandas, SQL databases and networking basics.",
+        },
+      ],
     },
     {
       id: "how-we-teach",
-      type: "reason-list",
-      eyebrow: "How we teach",
-      heading: "How we teach Science",
-      items: [
+      type: "teaching-plan",
+      heading: "Ready well before the boards",
+      steps: [
         {
-          title: "Syllabus finished early",
-          body: "We complete the syllabus early, so you have time to practise problems before the exams.",
+          icon: "book",
+          lead: "Every chapter taught,",
+          title: "finished early",
         },
         {
-          title: "Revision all year",
-          body: "Revision runs through the whole year. Nothing is left for the last month.",
+          icon: "note-edit",
+          lead: "Revision and regular tests",
+          title: "all year round",
         },
         {
-          title: "Regular tests",
-          body: "Tests are held regularly. They show you where a topic still needs work.",
-        },
-        {
-          title: "Study material",
-          body: "Study material is part of the tuition, so you have material to work from.",
+          icon: "school",
+          lead: "On board exam day, your child",
+          title: "walks in prepared",
+          destination: true,
         },
       ],
+    },
+    {
+      id: "results",
+      type: "results-board",
+      heading: "Class 12 board results",
+      boardTitle: "Honour Board",
+      perYear: 8,
+      years: 1,
     },
     {
       id: "videos",
@@ -120,40 +153,32 @@ export const class11To12Science: Course = {
     {
       id: "faq",
       type: "faq",
-      eyebrow: "Questions",
-      heading: "Questions about Class 11–12 Science",
-      intro:
-        "Short answers for parents and students. If yours is not here, call or WhatsApp us on {phones}.",
+      heading: "Questions parents ask",
+      intro: "Short answers to what parents ask most.",
       items: [
         {
-          question: "Who teaches Maths?",
+          question: "Can my child attend a demo class?",
           answer:
-            "Anil Kumar, the director, teaches Mathematics for Classes 11 and 12. He also teaches Maths for Classes 9 to 12.",
+            "Yes. For offline classes, your child can attend free demo classes until you are satisfied. Then you decide.",
         },
         {
-          question: "How much is the fee?",
-          answer: "Rs 25,000 per subject, per session, up to the final exams.",
+          question: "How many students are in a batch?",
+          answer:
+            "About 10 to 20 students, so every child gets attention in class.",
         },
         {
-          question: "Which subjects can I join?",
+          question: "Are online classes or home tuition available?",
           answer:
-            "Physics, Chemistry, Mathematics, Biology, English, Computer Science and Informatics Practices. Pick the ones your school combination needs.",
+            "Yes. Classes run offline at our centre in Delhi Cantt, online, and as home tuition.",
         },
         {
-          question:
-            "Can I take both Computer Science and Informatics Practices?",
-          answer:
-            "As per CBSE guidance, only one of Informatics Practices, Computer Science and Information Technology can be taken. Please check your school's combinations.",
+          question: "Do you give study material?",
+          answer: "Yes. Study material is part of the tuition.",
         },
         {
-          question: "Is there a free demo?",
+          question: "What are the fees?",
           answer:
-            "Yes, for offline classes at {address}. It is free until your child is satisfied and ready to join. Call us on {phones} ({hours}).",
-        },
-        {
-          question: "Can I study online or at home?",
-          answer:
-            "Yes. You can choose offline classes at the centre, online classes or home tuition. The free demo is for offline classes only.",
+            "Fees depend on the class and course. Please call or WhatsApp us on {phones}, and we will share the details.",
         },
       ],
     },
