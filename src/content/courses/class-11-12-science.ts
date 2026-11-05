@@ -49,6 +49,12 @@ export const class11To12Science: Course = {
       type: "hero",
       size: "compact",
       media: {
+        image: {
+          src: "/images/classroom-test-day.avif",
+          alt: "Students writing a test at their desks in a Daksh Study Circle classroom",
+          width: 1280,
+          height: 958,
+        },
         shot: "Science · landscape 3:2 · from the back of the room, over a student's shoulder towards the board · soft daylight from the window",
       },
       eyebrow: "Class 11–12 Science",

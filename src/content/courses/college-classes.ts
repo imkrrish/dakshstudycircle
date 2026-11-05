@@ -27,6 +27,12 @@ export const collegeClasses: Course = {
       type: "hero",
       size: "compact",
       media: {
+        image: {
+          src: "/images/classroom-test-day.avif",
+          alt: "Students writing a test at their desks in a Daksh Study Circle classroom",
+          width: 1280,
+          height: 958,
+        },
         shot: "College study · landscape 3:2 · over the shoulder of a student with textbooks at a desk · daylight from a window",
       },
       eyebrow: "College classes",

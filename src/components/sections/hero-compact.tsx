@@ -14,9 +14,11 @@ import { HeroFacts } from "./hero-facts"
 import { HeroPhoto } from "./hero-photo"
 
 // The inner-page hero: text on the left, a photo (or the brief for one) on the
-// right from lg, with a small facts card laid over the photo's bottom-left
-// corner. Below lg it is one column: text, a photo strip, the facts card on the
-// strip's bottom edge. Without media the facts card stands alone on the right.
+// right from lg. A real photo always uses the photo-split layout (half and half,
+// vertically centred, the photo at its own 4:3); when the page has facts, a
+// small card is laid over the photo's bottom-left corner, a little outside the
+// frame. Below lg it is one column: text, photo, then the card on the photo's
+// bottom edge. Without media the facts card stands alone on the right.
 // The next section always has a different tone (see assignTones), so it keeps
 // its normal top padding.
 function HeroCompact({ section }: { section: SectionOf<"hero"> }) {
@@ -41,9 +43,9 @@ function HeroCompact({ section }: { section: SectionOf<"hero"> }) {
 
   const factsCard = facts && <HeroFacts facts={facts.items} />
 
-  // Photo-split: a real photo and no facts tile. Text left, a larger photo
-  // right from lg; the photo needs no tile laid over it.
-  const split = Boolean(media?.image && !facts)
+  // Photo-split: a real photo, with or without the facts tile laid over its
+  // corner. Text left, photo right from lg, both centred on each other.
+  const split = Boolean(media?.image)
 
   return (
     <Section
@@ -54,7 +56,11 @@ function HeroCompact({ section }: { section: SectionOf<"hero"> }) {
       aria-labelledby={`${id}-heading`}
       className={cn(
         "relative isolate overflow-clip pt-[calc(var(--navbar-height)+1.5rem)] md:pt-[calc(var(--navbar-height)+3rem)]",
-        split ? "pb-10 md:pb-14" : "pb-8 md:pb-10",
+        split
+          ? facts
+            ? "pb-10 md:pb-14 lg:pb-20"
+            : "pb-10 md:pb-14"
+          : "pb-8 md:pb-10",
       )}
     >
       <Container
@@ -166,7 +172,12 @@ function HeroCompact({ section }: { section: SectionOf<"hero"> }) {
             {facts && (
               <HeroFacts
                 facts={facts.items}
-                className="relative -mt-8 mr-3 ml-3 md:mr-0 md:ml-6 md:max-w-sm lg:absolute lg:bottom-0 lg:left-0 lg:m-0 lg:mt-0 lg:w-72 lg:max-w-none lg:-translate-x-14 lg:translate-y-8"
+                className={cn(
+                  "relative mx-3 md:mr-0 md:ml-6 md:max-w-sm",
+                  media.image
+                    ? "-mt-6 lg:absolute lg:bottom-0 lg:left-0 lg:m-0 lg:w-72 lg:max-w-none lg:-translate-x-8 lg:translate-y-6"
+                    : "-mt-8 lg:absolute lg:bottom-0 lg:left-0 lg:m-0 lg:w-72 lg:max-w-none lg:-translate-x-14 lg:translate-y-8",
+                )}
               />
             )}
           </div>

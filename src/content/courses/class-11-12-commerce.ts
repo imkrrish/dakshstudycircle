@@ -47,6 +47,12 @@ export const class11To12Commerce: Course = {
       type: "hero",
       size: "compact",
       media: {
+        image: {
+          src: "/images/classroom-test-day.avif",
+          alt: "Students writing a test at their desks in a Daksh Study Circle classroom",
+          width: 1280,
+          height: 958,
+        },
         shot: "Commerce · landscape 3:2 · camera at desk height, side-on, on a student's notebook and calculator · warm, even indoor light",
       },
       eyebrow: "Class 11–12 Commerce",

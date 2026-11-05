@@ -42,42 +42,57 @@ export const classes1To5: Course = {
       type: "hero",
       size: "compact",
       media: {
+        image: {
+          src: "/images/classroom-test-day.avif",
+          alt: "Students writing a test at their desks in a Daksh Study Circle classroom",
+          width: 1280,
+          height: 958,
+        },
         shot: "Maths · landscape 3:2 · from the side at child's eye level, a small group at a table with notebooks · soft daylight, tidy room",
       },
       eyebrow: "Classes 1–5 · CBSE",
       heading: ["A steady base for young learners"],
-      subheading:
-        "Maths, Science and English for Classes 1 to 5, taught in small batches in Delhi Cantt.",
+      subheading: "Coaching CBSE students in Delhi Cantt since 2005.",
     },
     {
       id: "subjects",
       type: "subjects",
-      eyebrow: "Subjects",
-      heading: "Three subjects for Classes 1 to 5",
-      intro:
-        "Maths, Science and English, taught together so your child builds a steady base.",
+      heading: "What your child will study",
+      summaries: [
+        {
+          subject: "Maths",
+          text: "Numbers, the four operations, fractions, shapes, measurement, money and time.",
+        },
+        {
+          subject: "Science",
+          text: "Environmental studies (EVS): plants, animals, our body, food, water and the world around us.",
+        },
+        {
+          subject: "English",
+          text: "Reading, phonics, grammar and simple writing.",
+        },
+      ],
     },
     {
       id: "how-we-teach",
-      type: "reason-list",
-      eyebrow: "How we teach",
-      heading: "Small steps, taken regularly",
-      items: [
+      type: "teaching-plan",
+      heading: "Ready well before the final exams",
+      steps: [
         {
-          title: "Syllabus finished early",
-          body: "We complete the syllabus early, so there is time to go over it again.",
+          icon: "book",
+          lead: "Every chapter taught,",
+          title: "finished early",
         },
         {
-          title: "Revision all year",
-          body: "Revision runs through the whole year, so what your child learns stays fresh.",
+          icon: "note-edit",
+          lead: "Revision and regular tests",
+          title: "all year round",
         },
         {
-          title: "Regular tests",
-          body: "Regular tests show what is clear and what needs more work.",
-        },
-        {
-          title: "Study material",
-          body: "Study material is part of the tuition, so your child has material to work from.",
+          icon: "school",
+          lead: "On final exam day, your child",
+          title: "walks in prepared",
+          destination: true,
         },
       ],
     },
@@ -90,37 +105,32 @@ export const classes1To5: Course = {
     {
       id: "faq",
       type: "faq",
-      eyebrow: "Questions",
-      heading: "Questions about Classes 1–5",
-      intro:
-        "Short answers for parents and students. If yours is not here, call or WhatsApp us on {phones}.",
+      heading: "Questions parents ask",
+      intro: "Short answers to what parents ask most.",
       items: [
-        {
-          question: "Which subjects are taught?",
-          answer: "Maths, Science and English.",
-        },
-        {
-          question: "How many children are in a batch?",
-          answer: "Batches are about 10 to 20 children.",
-        },
         {
           question: "Can my child attend a demo class?",
           answer:
-            "Yes. Offline demo classes are held at the centre, {address}. They are free until your child is satisfied and ready to join.",
+            "Yes. For offline classes, your child can attend free demo classes until you are satisfied. Then you decide.",
+        },
+        {
+          question: "How many students are in a batch?",
+          answer:
+            "About 10 to 20 students, so every child gets attention in class.",
         },
         {
           question: "Are online classes or home tuition available?",
           answer:
-            "Yes. You can choose offline classes at the centre, online classes or home tuition. The free demo is for offline classes only.",
+            "Yes. Classes run offline at our centre in Delhi Cantt, online, and as home tuition.",
+        },
+        {
+          question: "Do you give study material?",
+          answer: "Yes. Study material is part of the tuition.",
         },
         {
           question: "What are the fees?",
           answer:
-            "Rs 25,000 to 30,000 per session for all three subjects together. The exact fee depends on the class and on when in the session your child joins. Call or WhatsApp us on {phones}.",
-        },
-        {
-          question: "Are there regular tests and study material?",
-          answer: "Yes. Both are part of the tuition.",
+            "Fees depend on the class and course. Please call or WhatsApp us on {phones}, and we will share the details.",
         },
       ],
     },

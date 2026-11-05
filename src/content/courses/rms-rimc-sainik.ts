@@ -65,6 +65,12 @@ export const rmsRimcSainik: Course = {
       type: "hero",
       size: "compact",
       media: {
+        image: {
+          src: "/images/classroom-test-day.avif",
+          alt: "Students writing a test at their desks in a Daksh Study Circle classroom",
+          width: 1280,
+          height: 958,
+        },
         shot: "Teacher at the board explaining a Maths question to a small group at desks · landscape 3:2 · from the back corner at student eye level, teacher and board in frame · soft natural window light",
       },
       eyebrow: "Defence school entrance",

@@ -76,7 +76,12 @@ export function resolveSections(
       case "teaching-plan":
         return [resolveTeachingPlan(section, content)]
       case "results-board": {
-        const resolved = resolveResultsBoard(section, content, course)
+        // Course pages default the year numeral to "heading", below the h1.
+        const resolved = resolveResultsBoard(
+          course ? { yearSize: "heading", ...section } : section,
+          content,
+          course,
+        )
         return resolved.years.length > 0 ? [resolved] : []
       }
       default:

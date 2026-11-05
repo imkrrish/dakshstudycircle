@@ -36,6 +36,12 @@ export const class11To12Humanities: Course = {
       type: "hero",
       size: "compact",
       media: {
+        image: {
+          src: "/images/classroom-test-day.avif",
+          alt: "Students writing a test at their desks in a Daksh Study Circle classroom",
+          width: 1280,
+          height: 958,
+        },
         shot: "Humanities · landscape 3:2 · camera at eye level across a table, on students with open books · soft natural light",
       },
       eyebrow: "Class 11–12 Humanities",

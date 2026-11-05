@@ -37,6 +37,12 @@ export const spokenEnglish: Course = {
       type: "hero",
       size: "compact",
       media: {
+        image: {
+          src: "/images/classroom-test-day.avif",
+          alt: "Students writing a test at their desks in a Daksh Study Circle classroom",
+          width: 1280,
+          height: 958,
+        },
         shot: "Spoken English · landscape 3:2 · from the side at desk height, two students talking with the teacher nearby · warm daylight, no clutter",
       },
       eyebrow: "Spoken English",

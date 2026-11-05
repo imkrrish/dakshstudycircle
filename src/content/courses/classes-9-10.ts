@@ -101,7 +101,6 @@ export const classes9To10: Course = {
       type: "results-board",
       heading: "Class 10 board results",
       boardTitle: "Honour Board",
-      yearSize: "heading",
       perYear: 8,
       years: 1,
     },
