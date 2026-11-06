@@ -25,14 +25,14 @@ function PersonFeatureSection({
           decorative
           sizes="(min-width: 1024px) 18rem, (min-width: 768px) 15rem, 112px"
         />
-        <div className="contents md:flex md:flex-col md:gap-5">
+        <div className="contents md:flex md:flex-col md:gap-6">
           <div className="flex flex-col gap-1">
             <h2 id={`${id}-heading`} className="font-heading text-heading">
               {person.name}
             </h2>
             <p className="text-lead text-muted-foreground">{person.role}</p>
           </div>
-          <div className="col-span-full flex flex-col gap-5 md:col-span-1">
+          <div className="col-span-full flex flex-col gap-4 md:col-span-1">
             {person.bio && (
               <p className="max-w-prose text-lead text-foreground/80">
                 {person.bio}

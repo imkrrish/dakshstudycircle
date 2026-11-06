@@ -63,12 +63,8 @@ export type ResolvedPerson = {
   role: string
   photo?: Faculty["photo"]
   bio?: string
-  // "Mathematics · Classes 9–12"
-  teaches: string
   // "Teaches Mathematics in Classes 9–12"
   teachesLine: string
-  // "M.Sc. Physics, B.Ed. · 16 years teaching"; each part only if known.
-  background?: string
   // Card lines for the teacher grid. Subjects: "Physics and Science"; a
   // subject name never breaks. Quiet line: "Classes 9–12 · M.Sc. Physics,
   // B.Ed. · 16 years teaching"; each part never breaks inside, and the dot
@@ -80,9 +76,6 @@ export type ResolvedPerson = {
 export function resolvePerson(f: Faculty): ResolvedPerson {
   const subjects = subjectsLabel(f.subjects)
   const classes = classesLabel(f.classes)
-  const background = [f.qualification, experienceLabel(f.teachingSince)]
-    .filter(Boolean)
-    .join(" · ")
   const subjectsLine = new Intl.ListFormat("en-IN", { type: "conjunction" })
     .format(subjectNames(f.subjects).map(glue))
   const quietLine = [classes, f.qualification, experienceLabel(f.teachingSince)]
@@ -97,8 +90,6 @@ export function resolvePerson(f: Faculty): ResolvedPerson {
     ...(f.bio ? { bio: f.bio } : {}),
     subjectsLine,
     quietLine,
-    teaches: `${subjects} · ${classes}`,
     teachesLine: `Teaches ${subjects} in ${classes}`,
-    ...(background ? { background } : {}),
   }
 }

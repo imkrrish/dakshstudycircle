@@ -14,7 +14,7 @@ export const faculty: Faculty[] = [
     subjects: ["Maths", "Mathematics"],
     classes: ["Class 9", "Class 10", "Class 11", "Class 12"],
     // [CONFIRM] qualification, teachingSince and joinedYear: not in any source yet.
-    bio: "Students and parents know him as Anil Sir.",
+    bio: "Students and parents know him as Anil Sir.",
     photo: {
       src: "/images/people/anildaksh-portrait-crop.jpg",
       alt: "Anil Kumar, Director",

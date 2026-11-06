@@ -16,7 +16,7 @@ export const faculty: Page = {
       size: "compact",
       breadcrumbs: [{ label: "Home", href: "/" }, { label: "Faculty" }],
       heading: ["Who will teach", "your child"],
-      subheading: "Small batches of about 10–20 students, taught in Delhi Cantt.",
+      subheading: "Small batches of about 10–20 students, taught in Delhi Cantt.",
       media: {
         image: {
           src: "/images/classroom/classroom-test-day.avif",
