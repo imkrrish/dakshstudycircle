@@ -18,6 +18,8 @@ Code is grouped by feature rather than layer: each feature file holds its schema
 2. Add one line to `sections/index.ts` for the discriminated union.
 3. Register its component and renderer entry in `src/components/sections/section-renderer.tsx`.
 
+Faculty sections: `person-feature` (one faculty id, shown large) and `people-grid` (`show: "all" | "all-but-leads"`, in faculty `order`) both resolve through `faculty-display.ts` (one subject name, class ranges, "N years teaching"). Each is dropped when nobody is left to show (e.g. sample faculty in production).
+
 ## Add a collection
 1. Add `collections/<name>.ts` with its schema, validation, and resolution logic.
 2. Add data in `src/content/` and load it in `load.ts` (`loadContent`).

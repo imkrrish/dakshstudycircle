@@ -18,6 +18,8 @@ import { resolveFees } from "./sections/fees"
 import { resolveResultsGrid } from "./sections/results-grid"
 import { resolveResultsBoard } from "./sections/results-board"
 import { resolveTeachingPlan } from "./sections/teaching-plan"
+import { resolvePersonFeature } from "./sections/person-feature"
+import { resolvePeopleGrid } from "./sections/people-grid"
 import { assignTones } from "./tones"
 
 // ---------- Page ----------
@@ -75,6 +77,15 @@ export function resolveSections(
       }
       case "teaching-plan":
         return [resolveTeachingPlan(section, content)]
+      // Dropped when no one is left to show (sample faculty, in production).
+      case "person-feature": {
+        const resolved = resolvePersonFeature(section, content)
+        return resolved ? [resolved] : []
+      }
+      case "people-grid": {
+        const resolved = resolvePeopleGrid(section, content)
+        return resolved ? [resolved] : []
+      }
       case "results-board": {
         // Course pages default the year numeral to "heading", below the h1.
         const resolved = resolveResultsBoard(
@@ -107,6 +118,8 @@ function resolveOne(
         | "teaching-plan"
         | "results-grid"
         | "results-board"
+        | "person-feature"
+        | "people-grid"
     }
   >,
   content: LoadedContent,

@@ -27,6 +27,7 @@ import {
 import { checkTestimonialGrids } from "./sections/testimonial-grid"
 import { checkResultsGrids } from "./sections/results-grid"
 import { checkResultsBoards } from "./sections/results-board"
+import { checkPersonFeatures } from "./sections/person-feature"
 import { site as rawSite } from "@/content/site"
 import { pages as rawPages } from "@/content/pages"
 import { courses as rawCourses } from "@/content/courses"
@@ -194,6 +195,7 @@ function loadContent() {
     checkTestimonialGrids(`pages/${key}`, page.sections, testimonials, errors)
     checkResultsGrids(`pages/${key}`, page.sections, results, errors)
     checkResultsBoards(`pages/${key}`, page.sections, results, errors)
+    checkPersonFeatures(`pages/${key}`, page.sections, facultyIds, errors)
     checkSocialActions(`pages/${key}`, page.sections, socialPlatforms, errors)
   }
   for (const course of courses) {

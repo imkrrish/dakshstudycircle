@@ -10,6 +10,8 @@ import { FaqSection } from "./faq-section"
 import { FeesSection } from "./fees-section"
 import { HeroSection } from "./hero-section"
 import { LinkListSection } from "./link-list-section"
+import { PeopleGridSection } from "./people-grid-section"
+import { PersonFeatureSection } from "./person-feature-section"
 import { ReasonListSection } from "./reason-list-section"
 import { ResultsBoardSection } from "./results-board-section"
 import { ResultsGridSection } from "./results-grid-section"
@@ -39,6 +41,8 @@ const sectionComponents = {
   "teaching-plan": TeachingPlanSection,
   fees: FeesSection,
   "link-list": LinkListSection,
+  "person-feature": PersonFeatureSection,
+  "people-grid": PeopleGridSection,
 } satisfies SectionComponents
 
 function SectionRenderer({ sections }: { sections: ResolvedSection[] }) {

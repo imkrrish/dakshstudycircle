@@ -148,6 +148,8 @@ export interface LoadedContent {
     classes: string[]
     qualification?: string
     experience?: string
+    teachingSince?: number
+    joinedYear?: number
     bio?: string
     photo?: Image
     photoShot?: string

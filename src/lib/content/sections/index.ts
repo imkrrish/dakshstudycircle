@@ -13,6 +13,8 @@ import { SubjectsSectionSchema, type ResolvedSubjectsSection } from "./subjects"
 import { TeachingPlanSectionSchema } from "./teaching-plan"
 import { FeesSectionSchema, type ResolvedFeesSection } from "./fees"
 import { LinkListSectionSchema } from "./link-list"
+import { PersonFeatureSectionSchema, type ResolvedPersonFeatureSection } from "./person-feature"
+import { PeopleGridSectionSchema, type ResolvedPeopleGridSection } from "./people-grid"
 
 export const SectionSchema = z.discriminatedUnion("type", [
   HeroSectionSchema,
@@ -29,6 +31,8 @@ export const SectionSchema = z.discriminatedUnion("type", [
   TeachingPlanSectionSchema,
   FeesSectionSchema,
   LinkListSectionSchema,
+  PersonFeatureSectionSchema,
+  PeopleGridSectionSchema,
 ])
 
 export type Section = z.infer<typeof SectionSchema>
@@ -45,6 +49,8 @@ export type UntonedSection =
           | "testimonial-grid"
           | "subjects"
           | "fees"
+          | "person-feature"
+          | "people-grid"
       }
     >
   | ResolvedCourseGridSection
@@ -54,6 +60,8 @@ export type UntonedSection =
   | ResolvedTestimonialGridSection
   | ResolvedSubjectsSection
   | ResolvedFeesSection
+  | ResolvedPersonFeatureSection
+  | ResolvedPeopleGridSection
 
 // The background a section renders with (see tones.ts). "ink" is the dark CTA.
 export type ResolvedTone = "paper" | "muted" | "band" | "ink"

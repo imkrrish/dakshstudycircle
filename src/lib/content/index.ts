@@ -1,7 +1,12 @@
 import "server-only"
 import type { PageSlug } from "@/content/pages"
 import { content } from "./load"
-import { courseSlot, resolveSections, type Page, type ResolvedPage } from "./page"
+import {
+  courseSlot,
+  resolveSections,
+  type Page,
+  type ResolvedPage,
+} from "./page"
 import type { Site, NavItem } from "./site"
 import type { Button, Image, SocialPlatform, Seo } from "./shared"
 import type { Course, ResolvedCourse } from "./collections/courses"
@@ -47,6 +52,11 @@ async function getCourses(): Promise<Course[]> {
   return content.courses
 }
 
+// Resolved faculty, ordered; sample records are already stripped in production.
+async function getFaculty(): Promise<Faculty[]> {
+  return content.faculty
+}
+
 async function getCourse(slug: string): Promise<ResolvedCourse> {
   const course = content.courses.find((c) => c.slug === slug)
   if (!course) {
@@ -61,13 +71,9 @@ async function getCourse(slug: string): Promise<ResolvedCourse> {
   return { ...course, sections: resolveSections(shown, content, course) }
 }
 
-export {
-  getSite,
-  getNav,
-  getPage,
-  getCourses,
-  getCourse,
-}
+export { getSite, getNav, getPage, getCourses, getCourse, getFaculty }
+
+export { yearsOfTeaching } from "./collections/faculty"
 
 export type {
   Button,

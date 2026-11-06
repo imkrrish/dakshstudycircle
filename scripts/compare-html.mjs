@@ -17,6 +17,8 @@ function normalizeHtml(html) {
     .replace(/\/_next\/static\/chunks\/[a-zA-Z0-9_\-\.\/]+?(\.js|\.css)/g, (match) => {
       return match.replace(/-[a-zA-Z0-9_-]{8,}\.(js|css)$/, "-[HASH].$1")
     })
+    // Turbopack chunk file names are bare hashes (e.g. 3iy3ynnhub_rr.css)
+    .replace(/\/_next\/static\/chunks\/[a-zA-Z0-9_\-\.]+?\.(js|css)/g, "/_next/static/chunks/[CHUNK].$1")
     // Static CSS hashes
     .replace(/\/_next\/static\/css\/[a-zA-Z0-9_-]+\.css/g, "/_next/static/css/[HASH].css")
     // RSC chunk IDs in self.__next_f.push payloads

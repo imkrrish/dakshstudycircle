@@ -2,6 +2,7 @@ import type { Faculty } from "@/lib/content"
 
 // Anil Kumar is the only real record. Every other record is an invented
 // example (`sample: true`): shown in development, removed from production.
+// `order` drives the teachers grid: junior stage first, then Classes 9–12.
 // Replace each with the real teacher once the institute sends the details
 // (docs/content-requests.md).
 export const faculty: Faculty[] = [
@@ -13,7 +14,7 @@ export const faculty: Faculty[] = [
     subjects: ["Maths", "Mathematics"],
     classes: ["Class 9", "Class 10", "Class 11", "Class 12"],
     // [CONFIRM] qualification, teachingSince and joinedYear: not in any source yet.
-    bio: "Anil Kumar is the Director of Daksh Study Circle. He teaches Maths to Classes 9 to 12 himself. Students and parents know him as Anil Sir.",
+    bio: "Anil Kumar is the Director of Daksh Study Circle. Students and parents know him as Anil Sir.",
     photo: {
       src: "/images/people/anildaksh-portrait-crop.jpg",
       alt: "Anil Kumar, Director",
@@ -30,7 +31,7 @@ export const faculty: Faculty[] = [
     name: "Vivek Pathak",
     role: "Physics and Science teacher",
     // Science is for Classes 9–10, Physics for 11–12.
-    subjects: ["Science", "Physics"],
+    subjects: ["Physics", "Science"],
     classes: ["Class 9", "Class 10", "Class 11", "Class 12"],
     qualification: "M.Sc. Physics, B.Ed.",
     teachingSince: 2010,
@@ -43,7 +44,7 @@ export const faculty: Faculty[] = [
       height: 896,
     },
     isDirector: false,
-    order: 2,
+    order: 3,
   },
   {
     id: "shalini-mehra",
@@ -64,7 +65,7 @@ export const faculty: Faculty[] = [
       height: 784,
     },
     isDirector: false,
-    order: 3,
+    order: 5,
   },
   {
     id: "deepak-arora",
@@ -85,7 +86,7 @@ export const faculty: Faculty[] = [
       height: 740,
     },
     isDirector: false,
-    order: 4,
+    order: 6,
   },
   {
     id: "anjali-malhotra",
@@ -107,7 +108,7 @@ export const faculty: Faculty[] = [
       height: 688,
     },
     isDirector: false,
-    order: 5,
+    order: 4,
   },
   {
     id: "sanjay-bisht",
@@ -138,6 +139,6 @@ export const faculty: Faculty[] = [
       height: 337,
     },
     isDirector: false,
-    order: 6,
+    order: 2,
   },
 ]
