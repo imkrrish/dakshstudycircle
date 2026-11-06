@@ -4,7 +4,7 @@ import { SectionSchema, type ResolvedSection } from "../sections"
 import type { Video } from "./videos"
 
 // A fee in rupees: one amount, or a range (e.g. 25,000 to 30,000).
-export const AmountSchema = z.union([
+const AmountSchema = z.union([
   z.number().int().positive(),
   z
     .strictObject({
@@ -16,7 +16,7 @@ export const AmountSchema = z.union([
 
 // What a fee covers. `period` is required on purpose: a fee never renders
 // without saying how often it is paid ("course" = one fee for the whole course).
-export const FeesSchema = z.strictObject({
+const FeesSchema = z.strictObject({
   rows: z
     .array(
       z.strictObject({
@@ -52,7 +52,7 @@ export const CourseSchema = z.strictObject({
   sections: z.array(SectionSchema),
 })
 
-export type Fees = z.infer<typeof FeesSchema>
+type Fees = z.infer<typeof FeesSchema>
 export type Course = z.infer<typeof CourseSchema>
 export type ResolvedCourse = Omit<Course, "sections"> & {
   sections: ResolvedSection[]

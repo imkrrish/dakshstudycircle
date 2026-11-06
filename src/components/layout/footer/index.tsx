@@ -23,7 +23,7 @@ async function Footer() {
           <FooterContact site={site} className="col-span-2 lg:col-span-4" />
           <FooterVisit site={site} className="col-span-2 lg:col-span-3" />
           {/* Two-up on every width; Explore fills the row when there are no courses. */}
-          <div className="col-span-2 grid grid-cols-2 gap-x-6 gap-y-6 lg:col-span-5">
+          <div className="col-span-2 grid grid-cols-2 gap-x-3 gap-y-6 lg:col-span-5">
             <FooterColumn
               title="Explore"
               className={courses.length ? undefined : "col-span-2"}

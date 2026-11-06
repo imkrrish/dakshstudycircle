@@ -4,7 +4,7 @@ import { sectionBase } from "../shared"
 type CourseLike = { subjects: string[]; [k: string]: unknown }
 
 // Course pages only: one card per subject in the course record.
-export const subjectsBase = {
+const subjectsBase = {
   ...sectionBase,
   type: z.literal("subjects"),
   eyebrow: z.string().optional(),
@@ -31,13 +31,13 @@ export const SubjectsSectionSchema = z.strictObject({
     .optional(),
 })
 
-export const resolvedSubjectItem = z.strictObject({
+const resolvedSubjectItem = z.strictObject({
   name: z.string().min(1),
   summary: z.string().optional(),
 })
 
 // What the component receives: one card per item.
-export const ResolvedSubjectsSectionSchema = z.strictObject({
+const ResolvedSubjectsSectionSchema = z.strictObject({
   ...subjectsBase,
   items: z.array(resolvedSubjectItem),
 })

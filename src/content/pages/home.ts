@@ -86,24 +86,16 @@ export const home: Page = {
         "We also guide you as parents, because you are part of this too. If you would like to know how we can help your child, please come and meet us at our centre in Sadar Bazaar.",
       ],
       attribution: "Anil Kumar · Director, teaches Maths for Classes 9–12",
-      // PLACEHOLDER: AI-generated development image, cropped (Gemini watermark
-      // removed) from public/anildaksh-potrait-img.jpg. Replace with a real
-      // photo before launch. The other anildaksh-* files in public/ are AI
-      // development placeholders too (anildaksh-cutout.png,
-      // anildaksh-teaching-in-classroom.jpg).
+      // PLACEHOLDER: AI-generated development image. Replace with a real
+      // photo before launch.
       image: {
-        src: "/anildaksh-portrait-crop.jpg",
+        src: "/images/people/anildaksh-portrait-crop.jpg",
         alt: "Anil Kumar, Director of Daksh Study Circle",
         width: 960,
         height: 1200,
       },
       imagePosition: "left",
       actions: [
-        // {
-        //   label: "Get directions",
-        //   variant: "outline",
-        //   action: { type: "directions" },
-        // },
         {
           label: "Read our story",
           variant: "primary",
@@ -143,12 +135,11 @@ export const home: Page = {
           body: "One classroom has a smartboard for clearer explanations, and we are adding more.",
         },
       ],
-      // PLACEHOLDER: AI image (cropped, Gemini watermark removed, from
-      // public/anildaksh-teaching-in-classroom.jpg). The board's triangle
-      // angles are wrong. Replace with a real photo before launch.
+      // PLACEHOLDER: AI image. The board's triangle angles are wrong. Replace
+      // with a real photo before launch.
       figure: {
         image: {
-          src: "/why-daksh-classroom.jpg",
+          src: "/images/classroom/why-daksh-classroom.jpg",
           alt: "A teacher in a white shirt points at a triangle drawn on a large smartboard while students watch from their desks.",
           width: 1200,
           height: 800,

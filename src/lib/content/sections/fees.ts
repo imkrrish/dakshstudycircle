@@ -16,7 +16,7 @@ type CourseLike = {
 }
 
 // Course pages only: shows the course's `fees` record (see CourseSchema).
-export const feesBase = {
+const feesBase = {
   ...sectionBase,
   type: z.literal("fees"),
   eyebrow: z.string().optional(),
@@ -27,7 +27,7 @@ export const feesBase = {
 export const FeesSectionSchema = z.strictObject(feesBase)
 
 // What the component receives: amounts already formatted, e.g. "₹18,000".
-export const ResolvedFeesSectionSchema = z.strictObject({
+const ResolvedFeesSectionSchema = z.strictObject({
   ...feesBase,
   rows: z
     .array(

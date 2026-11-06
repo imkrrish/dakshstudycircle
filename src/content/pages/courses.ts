@@ -18,7 +18,7 @@ export const courses: Page = {
         "CBSE tuition for Classes 1–12, RMS, RIMC and Sainik School entrance preparation, Spoken English and college classes. Not sure which one fits? We'll help you choose.",
       media: {
         image: {
-          src: "/images/classroom-test-day.avif",
+          src: "/images/classroom/classroom-test-day.avif",
           alt: "Students from several classes writing a test at their desks in a Daksh Study Circle classroom",
           width: 1280,
           height: 958,

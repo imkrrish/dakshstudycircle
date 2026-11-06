@@ -15,7 +15,7 @@ export const testimonials: Testimonial[] = [
     name: "Rohit Singh",
     role: "student",
     text: "Good institute for study all the subject. A high quality and comfortable teacher who are very close to student.",
-    photo: photo("/testimonials/rohit-singh.jpg", "Rohit Singh", [75, 75]),
+    photo: photo("/images/testimonials/rohit-singh.jpg", "Rohit Singh", [75, 75]),
   },
   {
     id: "ishita-jain",
@@ -25,7 +25,7 @@ export const testimonials: Testimonial[] = [
     name: "Ishita Jain",
     role: "student",
     text: "Had such an amazing experience in the classes with Anil Sir. He is a best maths teacher who always guides at every step, and help solve doubts easily. Trust the Teacher, trust the Institute. Best go-to institute for better learning.",
-    photo: photo("/testimonials/ishita-jain.jpg", "Ishita Jain", [75, 75]),
+    photo: photo("/images/testimonials/ishita-jain.jpg", "Ishita Jain", [75, 75]),
   },
   {
     id: "utkarsh-sharma",
@@ -36,7 +36,7 @@ export const testimonials: Testimonial[] = [
     role: "student",
     text: "The best institute in the area, enriching studying experience along with Intrapersonal development. Had a great time while studying at Daksh and it really paid off.",
     photo: photo(
-      "/testimonials/utkarsh-sharma.jpg",
+      "/images/testimonials/utkarsh-sharma.jpg",
       "Utkarsh Sharma",
       [75, 75],
     ),

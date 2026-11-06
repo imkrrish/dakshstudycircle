@@ -14,7 +14,7 @@ export const IconSchema = z.enum(iconNames)
 export const SOCIAL_PLATFORMS = ["facebook", "x", "instagram", "youtube"] as const
 
 // Add new actions (e.g. "book-demo") here only; sections never change.
-export const ActionSchema = z.discriminatedUnion("type", [
+const ActionSchema = z.discriminatedUnion("type", [
   z.strictObject({ type: z.literal("link"), href: z.string().min(1) }),
   z.strictObject({ type: z.literal("contact-dialog") }),
   // Opens site.contact.mapUrl in a new tab.
@@ -41,7 +41,7 @@ export const LinkSchema = z.strictObject({
 // A section's background. In data it is a preference: `assignTones()`
 // (tones.ts) resolves clashes so neighbouring sections never share one.
 // "ink" (the dark CTA band) is never chosen in data.
-export const sectionTone = z.enum(["paper", "muted", "band"])
+const sectionTone = z.enum(["paper", "muted", "band"])
 
 export const sectionBase = { id: z.string().min(1), tone: sectionTone.optional() }
 
@@ -60,10 +60,10 @@ export const SeoSchema = z.strictObject({
 })
 
 export type Image = z.infer<typeof ImageSchema>
-export type Icon = z.infer<typeof IconSchema>
-export type Action = z.infer<typeof ActionSchema>
+type Icon = z.infer<typeof IconSchema>
+type Action = z.infer<typeof ActionSchema>
 export type Button = z.infer<typeof ButtonSchema>
-export type Link = z.infer<typeof LinkSchema>
+type Link = z.infer<typeof LinkSchema>
 export type SocialPlatform = (typeof SOCIAL_PLATFORMS)[number]
 export type Seo = z.infer<typeof SeoSchema>
 

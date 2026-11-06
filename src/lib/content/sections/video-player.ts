@@ -1,7 +1,7 @@
 import { z } from "zod"
 import { ButtonSchema, ImageSchema, sectionBase, type LoadedContent } from "../shared"
 
-export const videoPlayerBase = {
+const videoPlayerBase = {
   ...sectionBase,
   type: z.literal("video-player"),
   eyebrow: z.string().optional(),
@@ -20,7 +20,7 @@ export const VideoPlayerSectionSchema = z.strictObject({
 })
 
 // What the component receives: plain data, URLs already built.
-export const ResolvedVideoPlayerSectionSchema = z.strictObject({
+const ResolvedVideoPlayerSectionSchema = z.strictObject({
   ...videoPlayerBase,
   defaultVideo: z.string().min(1),
   items: z

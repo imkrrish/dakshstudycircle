@@ -2,7 +2,7 @@ import { z } from "zod"
 import { ButtonSchema, ImageSchema, sectionBase, type LoadedContent } from "../shared"
 import { findCourse } from "./course-grid"
 
-export const resultsGridBase = {
+const resultsGridBase = {
   ...sectionBase,
   type: z.literal("results-grid"),
   eyebrow: z.string().optional(),
@@ -20,7 +20,7 @@ export const ResultsGridSectionSchema = z.strictObject({
 })
 
 // What the component receives: plain data, text already built.
-export const ResolvedResultsGridSectionSchema = z.strictObject({
+const ResolvedResultsGridSectionSchema = z.strictObject({
   ...resultsGridBase,
   items: z
     .array(

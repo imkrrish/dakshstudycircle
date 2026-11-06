@@ -6,9 +6,9 @@ import { cn } from "cn"
 // Intrinsic pixel size of each source file in public/. The emblem is trimmed
 // to its visible pixels, so it is not square: size it by height via className.
 const logoVariants = {
-  "dark-text": { src: "/daksh-black-text.png", width: 750, height: 750 },
-  "light-text": { src: "/daksh-white-text.png", width: 1000, height: 1000 },
-  emblem: { src: "/daksh-emblem-trimmed.png", width: 528, height: 601 },
+  "dark-text": { src: "/images/brand/daksh-black-text.png", width: 750, height: 750 },
+  "light-text": { src: "/images/brand/daksh-white-text.png", width: 1000, height: 1000 },
+  emblem: { src: "/images/brand/emblem-trimmed.png", width: 528, height: 601 },
 } as const
 
 // "lockup" = emblem followed by the site name as real text.
@@ -52,4 +52,3 @@ function Logo({
 }
 
 export { Logo }
-export type { LogoVariant }

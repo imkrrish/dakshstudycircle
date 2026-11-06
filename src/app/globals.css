@@ -107,11 +107,9 @@
      entrance. Animate transform and opacity only. */
   --ease-settle: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out: ease-out;
-  --ease-scroll: linear;
   --dur-press: 120ms;
   --dur-base: 250ms;
   --dur-slow: 450ms;
-  --dur-base-exit: 150ms;
   --dur-slow-exit: 270ms;
   /* Warm paper and brown-black ink. Card/popover are a lighter paper (not pure
      white) so they lift off the page with the hairline border and stay warm. */

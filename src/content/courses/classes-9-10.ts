@@ -35,7 +35,7 @@ export const classes9To10: Course = {
       size: "compact",
       media: {
         image: {
-          src: "/images/classroom-test-day.avif",
+          src: "/images/classroom/classroom-test-day.avif",
           alt: "Students writing a test at their desks in a Daksh Study Circle classroom",
           width: 1280,
           height: 958,

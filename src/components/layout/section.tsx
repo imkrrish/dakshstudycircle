@@ -36,4 +36,4 @@ function Section({
   )
 }
 
-export { Section, sectionVariants }
+export { Section }

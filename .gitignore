@@ -19,6 +19,7 @@
 /.next/
 /.next-verify/
 /.next-test/
+/.html-baseline/
 /out/
 
 # production

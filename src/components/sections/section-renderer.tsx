@@ -4,7 +4,6 @@ import type {
   SectionOf,
   SectionType,
 } from "@/lib/content"
-import { CardGridSection } from "./card-grid-section"
 import { CourseGridSection } from "./course-grid-section"
 import { CtaBandSection } from "./cta-band-section"
 import { FaqSection } from "./faq-section"
@@ -28,7 +27,6 @@ type SectionComponents = {
 const sectionComponents = {
   hero: HeroSection,
   split: SplitSection,
-  "card-grid": CardGridSection,
   "reason-list": ReasonListSection,
   "course-grid": CourseGridSection,
   "video-player": VideoPlayerSection,

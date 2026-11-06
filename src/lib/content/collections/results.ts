@@ -1,7 +1,7 @@
 import { z } from "zod"
 import { ImageSchema, sampleField } from "../shared"
 
-export const RESULT_CLASSES = ["Class 10", "Class 12", "Entrance"] as const
+const RESULT_CLASSES = ["Class 10", "Class 12", "Entrance"] as const
 
 export const ResultSchema = z.strictObject({
   id: z.string().min(1),

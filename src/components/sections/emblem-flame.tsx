@@ -92,7 +92,7 @@ function EmblemFlame() {
     >
       {ready && (
         <Image
-          src="/daksh-emblem-flame.png"
+          src="/images/brand/emblem-flame.png"
           alt=""
           width={50}
           height={67}

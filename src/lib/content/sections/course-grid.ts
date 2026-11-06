@@ -2,7 +2,7 @@ import { z } from "zod"
 import { ButtonSchema, sectionBase, type LoadedContent } from "../shared"
 
 // Authoring shape: items refer to courses by slug. getPage() resolves them.
-export const CourseGridItemSchema = z.discriminatedUnion("kind", [
+const CourseGridItemSchema = z.discriminatedUnion("kind", [
   z.strictObject({ kind: z.literal("course"), course: z.string().min(1) }),
   // One card for several related courses (e.g. the Class 11–12 streams).
   z.strictObject({
@@ -13,7 +13,7 @@ export const CourseGridItemSchema = z.discriminatedUnion("kind", [
   }),
 ])
 
-export const courseGridBase = {
+const courseGridBase = {
   ...sectionBase,
   type: z.literal("course-grid"),
   eyebrow: z.string().optional(),
@@ -42,7 +42,7 @@ export const CourseGridSectionSchema = z.strictObject({
 })
 
 // What the component receives: plain data, hrefs already built.
-export const ResolvedCourseGridSectionSchema = z.strictObject({
+const ResolvedCourseGridSectionSchema = z.strictObject({
   ...courseGridBase,
   // Course titles in section order, when the ribbon is on.
   ribbon: z.array(z.string().min(1)).optional(),
@@ -87,7 +87,7 @@ export type ResolvedCourseGridSection = z.infer<
 // ---------- Resolving ----------
 
 // The only place course URLs are built.
-export function courseHref(slug: string) {
+function courseHref(slug: string) {
   return `/courses/${slug}`
 }
 

@@ -101,7 +101,7 @@ function LargeHero({ section }: { section: SectionOf<"hero"> }) {
               className="relative mt-[calc(var(--hero-emblem)*0.1267)] mb-[calc(var(--hero-emblem)*0.0747)] block h-[calc(var(--hero-emblem)*0.8013)] w-[calc(var(--hero-emblem)*0.704)]"
             >
               <Image
-                src="/daksh-emblem-trimmed.png"
+                src="/images/brand/emblem-trimmed.png"
                 alt=""
                 width={528}
                 height={601}

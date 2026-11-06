@@ -1,7 +1,6 @@
 import { z } from "zod"
 import { HeroSectionSchema } from "./hero"
 import { SplitSectionSchema } from "./split"
-import { CardGridSectionSchema } from "./card-grid"
 import { ReasonListSectionSchema } from "./reason-list"
 import { CourseGridSectionSchema, type ResolvedCourseGridSection } from "./course-grid"
 import { VideoPlayerSectionSchema, type ResolvedVideoPlayerSection } from "./video-player"
@@ -18,7 +17,6 @@ import { LinkListSectionSchema } from "./link-list"
 export const SectionSchema = z.discriminatedUnion("type", [
   HeroSectionSchema,
   SplitSectionSchema,
-  CardGridSectionSchema,
   ReasonListSectionSchema,
   CourseGridSectionSchema,
   VideoPlayerSectionSchema,

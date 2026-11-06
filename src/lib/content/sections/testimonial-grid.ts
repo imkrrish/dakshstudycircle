@@ -1,7 +1,7 @@
 import { z } from "zod"
 import { ImageSchema, sectionBase, type LoadedContent } from "../shared"
 
-export const testimonialGridBase = {
+const testimonialGridBase = {
   ...sectionBase,
   type: z.literal("testimonial-grid"),
   eyebrow: z.string().optional(),
@@ -17,7 +17,7 @@ export const TestimonialGridSectionSchema = z.strictObject({
   show: z.enum(["featured", "all"]),
 })
 
-export const ResolvedTestimonialGridSectionSchema = z.strictObject({
+const ResolvedTestimonialGridSectionSchema = z.strictObject({
   ...testimonialGridBase,
   // Google rating badge; absent when site.googleReviews is not set.
   rating: z

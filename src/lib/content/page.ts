@@ -36,7 +36,7 @@ export type ResolvedPage = Omit<Page, "sections"> & { sections: ResolvedSection[
 // What a course page renders, in this order. Section types left out (fees,
 // link-list, video-player) stay in the course data but are not shown; a
 // `reason-list` and a `teaching-plan` share the "how we teach" slot.
-export const COURSE_TEMPLATE: SectionType[][] = [
+const COURSE_TEMPLATE: SectionType[][] = [
   ["hero"],
   ["subjects"],
   ["teaching-plan", "reason-list"],

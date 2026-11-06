@@ -4,7 +4,7 @@ import { findCourse } from "./course-grid"
 
 type CourseLike = { slug: string; [k: string]: unknown }
 
-export const resultsBoardBase = {
+const resultsBoardBase = {
   ...sectionBase,
   type: z.literal("results-board"),
   eyebrow: z.string().optional(),
@@ -29,7 +29,7 @@ export const ResultsBoardSectionSchema = z.strictObject({
 })
 
 // What the component receives: one tab per year, text already built.
-export const ResolvedResultsBoardSectionSchema = z.strictObject({
+const ResolvedResultsBoardSectionSchema = z.strictObject({
   ...resultsBoardBase,
   years: z
     .array(

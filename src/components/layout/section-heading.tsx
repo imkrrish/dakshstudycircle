@@ -58,4 +58,4 @@ function SectionHeading({
   )
 }
 
-export { SectionHeading, sectionHeadingVariants }
+export { SectionHeading }

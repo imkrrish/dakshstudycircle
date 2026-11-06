@@ -17,13 +17,13 @@ export const FeaturesSchema = z.strictObject({
   showFees: z.boolean(),
 })
 
-export const DaySchema = z.enum(["mon", "tue", "wed", "thu", "fri", "sat", "sun"])
+const DaySchema = z.enum(["mon", "tue", "wed", "thu", "fri", "sat", "sun"])
 
 // 24-hour "HH:MM".
-export const TimeSchema = z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/)
+const TimeSchema = z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/)
 
 // One row of opening hours: a single day (`from` only) or a range `from`–`to`.
-export const OpeningHoursSchema = z.strictObject({
+const OpeningHoursSchema = z.strictObject({
   from: DaySchema,
   to: DaySchema.optional(),
   opens: TimeSchema,
@@ -31,7 +31,7 @@ export const OpeningHoursSchema = z.strictObject({
 })
 
 // `feature` hides the item when that site feature is off.
-export const NavItemSchema = z.strictObject({
+const NavItemSchema = z.strictObject({
   label: z.string().min(1),
   href: z.string().min(1),
   feature: FeaturesSchema.keyof().optional(),
