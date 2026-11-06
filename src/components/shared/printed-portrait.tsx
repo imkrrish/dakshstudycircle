@@ -8,10 +8,16 @@ import type { Image as ImageData } from "@/lib/content"
 function PrintedPortrait({
   photo,
   sizes,
+  priority = false,
+  decorative = false,
   className,
 }: {
   photo?: ImageData
   sizes: string
+  // Preload the image (above-the-fold portraits only).
+  priority?: boolean
+  // alt="" when the person's name sits right beside the photo.
+  decorative?: boolean
   className?: string
 }) {
   return (
@@ -23,8 +29,9 @@ function PrintedPortrait({
         {photo && (
           <Image
             src={photo.src}
-            alt={photo.alt}
+            alt={decorative ? "" : photo.alt}
             fill
+            preload={priority}
             sizes={sizes}
             className="object-cover"
           />

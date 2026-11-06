@@ -33,7 +33,7 @@ function classesLabel(classes: string[]): string {
     }
     prev = n
   }
-  return `${nums.length === 1 ? "Class" : "Classes"} ${runs.join(", ")}`
+  return `${nums.length === 1 ? "Class" : "Classes"}\u00a0${runs.join(", ")}`
 }
 
 function experienceLabel(teachingSince?: number): string | undefined {

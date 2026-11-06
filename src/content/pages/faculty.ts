@@ -5,7 +5,7 @@ import type { Page } from "@/lib/content"
 export const faculty: Page = {
   slug: "faculty",
   seo: {
-    title: "Faculty: Anil Kumar and Our Teachers, Delhi Cantt",
+    title: "Our teachers and director, Delhi Cantt",
     description:
       "Meet Anil Kumar, Director of Daksh Study Circle, who teaches Mathematics to Classes 9–12. CBSE coaching at Sadar Bazaar, Delhi Cantt since 2005.",
   },
@@ -15,8 +15,8 @@ export const faculty: Page = {
       type: "hero",
       size: "compact",
       breadcrumbs: [{ label: "Home", href: "/" }, { label: "Faculty" }],
-      heading: ["The teachers", "of Daksh Study Circle"],
-      subheading: "Coaching CBSE students in Delhi Cantt since 2005.",
+      heading: ["Who will teach", "your child"],
+      subheading: "Small batches of about 10–20 students, taught in Delhi Cantt.",
       media: {
         image: {
           src: "/images/classroom/classroom-test-day.avif",

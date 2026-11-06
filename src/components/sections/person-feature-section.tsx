@@ -18,9 +18,11 @@ function PersonFeatureSection({
       id={id}
       aria-labelledby={`${id}-heading`}
     >
-      <Container className="grid grid-cols-[7rem_1fr] items-center gap-x-4 gap-y-6 md:grid-cols-[15rem_1fr] md:items-start md:gap-x-12 lg:grid-cols-[18rem_1fr] lg:gap-x-16">
+      <Container className="grid grid-cols-[7rem_1fr] items-center gap-x-4 gap-y-6 md:grid-cols-[15rem_1fr] md:items-center md:gap-x-12 lg:grid-cols-[18rem_1fr] lg:gap-x-16">
         <PrintedPortrait
           photo={person.photo}
+          priority
+          decorative
           sizes="(min-width: 1024px) 18rem, (min-width: 768px) 15rem, 112px"
         />
         <div className="contents md:flex md:flex-col md:gap-5">
@@ -32,7 +34,7 @@ function PersonFeatureSection({
           </div>
           <div className="col-span-full flex flex-col gap-5 md:col-span-1">
             {person.bio && (
-              <p className="max-w-prose text-intro text-foreground/80">
+              <p className="max-w-prose text-lead text-foreground/80">
                 {person.bio}
               </p>
             )}
