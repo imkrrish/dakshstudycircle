@@ -248,7 +248,19 @@ Quiet tonal block (`bg-footer`), no red. Three groups: contact, visit, and Explo
 
 ### Portrait (split section)
 
-Portraits are rounded rectangles (`rounded-xl`), head-and-shoulders, `aspect-4/5`, `object-cover`, no glow, shadow or mask. The face fills about 45–50% of the frame height and the crop never cuts the forehead; crop the source file, do not zoom in CSS. Size: `max-w-80` (20rem) on mobile, centred above the text; `md:max-w-100` (25rem) on desktop. Lazy `next/image` with a `sizes` that matches.
+Portraits are rounded rectangles (`rounded-xl`), head-and-shoulders, `aspect-4/5`, `object-cover`, no glow, shadow or mask. The face fills about 45–50% of the frame height and the crop never cuts the forehead; crop the source file, do not zoom in CSS. Size: `max-w-80` (20rem) on desktop split sections (`md:max-w-100`, 25rem). On phones the portrait sits beside the name, not centred above the text (see Person feature and People grid). Lazy `next/image` with a `sizes` that matches; above-the-fold portraits preload.
+
+### Printed-portrait mat
+
+`PrintedPortrait` (`src/components/shared/printed-portrait.tsx`) is the one frame for people photos: a `card` mat (`p-1.5`) with a hairline border and `rounded-xl`, the picture `rounded-lg` inside at a fixed 4:5 (`aspect-4/5`, `object-cover`), like the hero photo's printed frame. Without a photo the mat holds an empty `muted` tone. Same mat as the hero photos (`HeroPhoto`, at their own ratios); `PrintedPortrait` itself is used in the director feature and on every teacher card. `decorative` sets `alt=""` when the person's name sits right beside the photo (always the case in the feature and grid); otherwise the photo's own alt is used. `priority` preloads above-the-fold portraits only. No glow, shadow or mask.
+
+### Person feature
+
+`person-feature` (the director on `/faculty`): one person, large. From `md` a two-column grid, portrait left (15rem, 18rem from `lg`), all text in one column on the right and centred vertically against the portrait (`items-center`). Name and role are one group (`gap-1`): name an `h2` in `text-heading`, role `text-lead` muted. Below it, `gap-6` from `md`, the bio in `text-lead` at `foreground/80` (`max-w-prose`) and then the one Garamond line in `text-title`: "Teaches Mathematics in Classes 9–12", built from the faculty record. Each fact appears once: the role is not repeated in the bio and subjects and classes live only in the teaches line. No quiet line, no buttons. **Phone:** the portrait (7rem) sits beside the name and role; the bio and teaches line run full width below.
+
+### People grid
+
+`people-grid` (the teachers on `/faculty`; the director is shown above in the feature, so is not repeated). A card shows no role line: the order is name (`h3`, Garamond `text-subtitle`, `text-title` from `md`), subjects line (Nunito Sans 600, `text-base`, e.g. "Physics and Science"), quiet line (`text-sm` muted: "Classes 9–12 · M.Sc. Physics, B.Ed. · 16 years teaching"), then the bio (`text-base`, `foreground/80`). **Layout:** a 4-column list at `sm` and 6 at `lg`, each card spanning two, so five teachers are 3 + 2 with the short last row centred (structural `nth-` selectors, no per-count markup). From `sm` each card is a five-row subgrid of the list (photo, name, subjects, quiet line, bio), so every row lines up across a line of cards whatever wraps. Spacing between those rows is padding on the row elements; the gap between card rows is the list's row gap (`gap-y-12`), never card padding. **Phone:** one column; the portrait (6.5rem) sits beside the name and subjects, the quiet line and bio full width below. **No-break rules:** a subject name and "Classes 9–12", "16 years teaching" and each single degree ("M.Sc. Physics") never break inside (no-break spaces). A line may break only between parts, and after the comma between degrees. Each dot separator is glued to the part before it, so no line starts with "·". **Empty:** teachers are mostly sample records; the section is dropped when nobody is left after sample stripping, so production never shows an orphan heading, and the neighbouring tones are reassigned.
 
 ### Cards
 

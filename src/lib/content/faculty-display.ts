@@ -44,6 +44,13 @@ function classesLabel(classes: string[]): string {
   return `${nums.length === 1 ? "Class" : "Classes"}\u00a0${runs.join(", ")}`
 }
 
+// "M.Sc. Physics, B.Ed." → each degree unbreakable, a line may break after the
+// comma between degrees.
+function qualificationLabel(qualification?: string): string | undefined {
+  if (!qualification) return undefined
+  return qualification.split(/,\s*/).filter(Boolean).map(glue).join(", ")
+}
+
 function experienceLabel(teachingSince?: number): string | undefined {
   if (teachingSince === undefined) return undefined
   // The build year (inlined by next.config.ts), not `new Date()`: a bare
@@ -76,11 +83,17 @@ export type ResolvedPerson = {
 export function resolvePerson(f: Faculty): ResolvedPerson {
   const subjects = subjectsLabel(f.subjects)
   const classes = classesLabel(f.classes)
-  const subjectsLine = new Intl.ListFormat("en-IN", { type: "conjunction" })
-    .format(subjectNames(f.subjects).map(glue))
-  const quietLine = [classes, f.qualification, experienceLabel(f.teachingSince)]
+  const subjectsLine = new Intl.ListFormat("en-IN", {
+    type: "conjunction",
+  }).format(subjectNames(f.subjects).map(glue))
+  // Classes and experience are unbreakable; the qualification keeps a break
+  // point after each comma. The dot is glued to the part before it.
+  const quietLine = [
+    glue(classes),
+    qualificationLabel(f.qualification),
+    experienceLabel(f.teachingSince),
+  ]
     .filter((part): part is string => Boolean(part))
-    .map(glue)
     .join("\u00a0· ")
   return {
     id: f.id,

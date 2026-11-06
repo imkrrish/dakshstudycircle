@@ -13,15 +13,17 @@ For each teacher, please send:
 3. **Subjects** they teach, using the same names as the courses (Maths, Science, English, Hindi, Social Studies, Physics, …).
 4. **Classes** they take (Class 9, Class 10, …).
 5. **Qualifications**, one line (degrees, B.Ed., other certificates).
-6. **Teaching experience**, one line (for example "12 years of teaching"; only what is true and can be checked).
+6. **Teaching experience**: the **year they started teaching** (the site works out "N years teaching" from it) and the **year they joined Daksh**. Only what is true and can be checked.
 7. **A short bio**, two or three true sentences about how they teach. No ranks, no "best".
-8. **A photo**: head and shoulders, daylight, plain background, taken at the centre. We never use
+8. **A photo** and **permission to use it**: head and shoulders, daylight, plain background, taken at the centre. We never use
    AI-made or stock photos of people. Also say if they do not want a photo shown.
 9. **Whether they are the director** (only one person).
 10. **Order** they should appear in on the faculty page.
 
 Still needed from the owner: Pathak Sir's full name, subject(s) and classes (we only know "Pathak Sir,
 Science / Physics"); who teaches English, Hindi and Social Studies for Classes 9–10.
+
+For Anil Kumar's bio: does he personally look after the lectures, the study material and the tests? (The site says nothing about this until you confirm.)
 
 ## Results (one record per student result)
 
@@ -47,7 +49,7 @@ Classes 1–8
 2. The exact fee for each class (1 to 8), and a simple example of how a mid-session joining changes it. The site now says Rs 25,000–30,000 per session, depending on the class and the joining time.
 
 Spoken English 3. Level (beginner, intermediate, both)? Is "under 20" a firm age limit? 4. Which months does a batch start and end, and at what time of day? 5. Is a certificate given? Is grammar or personality development part of it?
-   Also: the owner's facts file says "Classes 1–12 only, usually June–August", but the site says under 20. Which is right? Can college students join? Are batches about 10–20, and is study material given?
+Also: the owner's facts file says "Classes 1–12 only, usually June–August", but the site says under 20. Which is right? Can college students join? Are batches about 10–20, and is study material given?
 
 College classes 6. Which degrees exactly? The site shows B.A. and B.Com. DU SOL has no general B.Sc. (only B.Sc. (Hons) Computer Science): do you teach B.Sc.? 7. Which universities: DU SOL only, or also IGNOU or others? 8. Subjects, batch days and timings, and the fee. Also: batch size and study material for college classes, and does the free demo apply to them?
 
