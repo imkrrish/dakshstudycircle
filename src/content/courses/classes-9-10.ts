@@ -14,7 +14,11 @@ export const classes9To10: Course = {
   cardNote: "Five subjects, leading up to the Class 10 boards",
   classes: ["Class 9", "Class 10"],
   subjects: ["Maths", "Science", "English", "Hindi", "Social Studies"],
-  facultyIds: ["anil-kumar", "pathak-sir"],
+  facultyIds: [
+    "anil-kumar",
+    "vivek-pathak",
+    "anjali-malhotra",
+  ],
   // Pamphlet: Rs 18,000 per subject, per session up to the final exams.
   fees: {
     rows: [

@@ -4,7 +4,7 @@ import { courseCta } from "./shared"
 // Open [CONFIRM] items:
 // - Hindi / Social Studies for Classes 1–8 (the pamphlet cover says "I–VIII all subjects")
 // - Exact fee per class, batch timings
-// - Teachers are SAMPLE records (shown in development only): docs/content-requests.md
+// - Teachers other than Anil Kumar are invented records (sample: true, development only).
 
 export const classes1To5: Course = {
   slug: "classes-1-5",
@@ -15,9 +15,7 @@ export const classes1To5: Course = {
   classes: ["Class 1", "Class 2", "Class 3", "Class 4", "Class 5"],
   subjects: ["Maths", "Science", "English"],
   facultyIds: [
-    "sample-maths-junior",
-    "sample-science-junior",
-    "sample-english-teacher",
+    "sanjay-bisht",
   ],
   fees: {
     rows: [

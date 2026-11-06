@@ -4,7 +4,7 @@ import { courseCta } from "./shared"
 // Open [CONFIRM] items (docs/content-requests.md):
 // - Level, start months, daily timing, certificate
 // - Whether batch size (about 10–20) and study material apply to this course
-// - The teacher is a SAMPLE record (shown in development only)
+// - The teacher is an invented record (sample: true, development only)
 // - `classes` is empty on purpose: the course is by age (under 20), not class.
 // Course pages render only the types in COURSE_TEMPLATE (src/lib/content/page.ts):
 // the fees section below is kept but not shown.
@@ -17,7 +17,9 @@ export const spokenEnglish: Course = {
   cardNote: "3 months · 5 classes a week",
   classes: [],
   subjects: ["Spoken English"],
-  facultyIds: ["sample-english-teacher"],
+  facultyIds: [
+    "anjali-malhotra",
+  ],
   fees: {
     rows: [
       {

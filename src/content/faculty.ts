@@ -1,126 +1,122 @@
 import type { Faculty } from "@/lib/content"
 
+// Anil Kumar is the only real record. Every other record is an invented
+// example (`sample: true`): shown in development, removed from production.
+// Replace each with the real teacher once the institute sends the details
+// (docs/content-requests.md).
 export const faculty: Faculty[] = [
   {
     id: "anil-kumar",
     name: "Anil Kumar",
     role: "Director",
+    // "Maths" matches Classes 9–10; "Mathematics" matches Classes 11–12.
     subjects: ["Maths", "Mathematics"],
     classes: ["Class 9", "Class 10", "Class 11", "Class 12"],
+    // [CONFIRM] qualification, teachingSince and joinedYear: not in any source yet.
+    bio: "Anil Kumar is the Director of Daksh Study Circle. He teaches Maths to Classes 9 to 12 himself. Students and parents know him as Anil Sir.",
+    photo: {
+      src: "/images/people/anildaksh-portrait-crop.jpg",
+      alt: "Anil Kumar, Director",
+      width: 960,
+      height: 1200,
+    },
     isDirector: true,
     order: 1,
   },
-  // SAMPLE: a full example of a real record, every field filled. Everything
-  // below except `subjects` (recorded as "Science / Physics") is invented
-  // placeholder text. Shows in development only; delete `sample` and replace
-  // each value once the institute sends the real details
-  // (see docs/content-requests.md).
   {
-    // Lowercase name with hyphens; never changes once courses refer to it.
-    id: "pathak-sir",
+    id: "vivek-pathak",
     sample: true,
-    // NEEDED: his full name as he wants it printed (we only know "Pathak Sir").
-    name: "SAMPLE Full Name Pathak",
-    // NEEDED: his job title, as the institute uses it.
-    role: "Science teacher (SAMPLE)",
-    // NEEDED: confirm the subjects. Recorded as "Science / Physics": Science for
-    // Classes 9–10 is what puts him on the Science row; Physics is for 11–12.
+    // [CONFIRM] Only "Pathak Sir" and his subjects are known; the rest is invented.
+    name: "Vivek Pathak",
+    role: "Physics and Science teacher",
+    // Science is for Classes 9–10, Physics for 11–12.
     subjects: ["Science", "Physics"],
-    // NEEDED: which classes he teaches (unknown; 9–10 assumed for this example).
     classes: ["Class 9", "Class 10", "Class 11", "Class 12"],
-    // NEEDED: degrees and certificates, one line.
-    qualification: "SAMPLE M.Sc. Physics, B.Ed.",
-    // NEEDED: how long he has taught, in his words or the director's.
-    experience: "SAMPLE 10 years of teaching",
-    // NEEDED: two or three true sentences about how he teaches; no claims we
-    // cannot back up (no ranks or "best").
-    bio: "SAMPLE: Teaches Science to Classes 9 and 10 and Physics to older students. Replace with a real bio from the institute.",
-    // NEEDED: a real photo ({ src, alt, width, height }) once taken. Leave out
-    // until then; the shot brief below is shown in development.
-    photoShot:
-      "SAMPLE: Pathak Sir at the board explaining a Science diagram · portrait 4:5 · head and shoulders, daylight, plain background",
-    // Only the director is true.
+    qualification: "M.Sc. Physics, B.Ed.",
+    teachingSince: 2010,
+    joinedYear: 2012,
+    bio: "Starts each chapter with a daily-life example before the formulas. Numericals are solved step by step in class, so students know how to begin on their own.",
+    photo: {
+      src: "/images/people/sample/faculty-vivek-pathak.jpg",
+      alt: "Vivek Pathak, Physics and Science teacher",
+      width: 717,
+      height: 896,
+    },
     isDirector: false,
-    // Order on the faculty page: the director first, then 2, 3, …
     order: 2,
   },
-  // SAMPLE records below: invented placeholders so every subject row shows a
-  // teacher in development. They are removed in production. Replace each with
-  // the real teacher (docs/content-requests.md).
   {
-    id: "sample-maths-junior",
+    id: "shalini-mehra",
     sample: true,
-    // NEEDED: the teacher's full name as they want it printed.
-    name: "SAMPLE Full Name Maths Junior",
-    // NEEDED: job title, as the institute uses it.
-    role: "Maths teacher (SAMPLE)",
-    // NEEDED: confirm the subjects, named as in the course data.
-    subjects: ["Maths"],
-    // NEEDED: which classes they take.
-    classes: [
-      "Class 1",
-      "Class 2",
-      "Class 3",
-      "Class 4",
-      "Class 5",
-      "Class 6",
-      "Class 7",
-      "Class 8",
-    ],
-    // NEEDED: degrees and certificates, one line.
-    qualification: "SAMPLE B.Sc. Mathematics, B.Ed.",
-    // NEEDED: how long they have taught.
-    experience: "SAMPLE 8 years of teaching",
-    // NEEDED: two or three true sentences about how they teach; no ranks or "best".
-    bio: "SAMPLE: Teaches Maths to Classes 1 to 8. Replace with a real bio from the institute.",
-    // NEEDED: a real photo once taken; this brief shows in development only.
-    photoShot:
-      "SAMPLE: Maths teacher at the board with a junior batch · portrait 4:5 · head and shoulders, daylight, plain background",
+    // [CONFIRM] Teacher, subjects and classes are not known yet.
+    name: "Shalini Mehra",
+    role: "Chemistry and Biology teacher",
+    subjects: ["Chemistry", "Biology"],
+    classes: ["Class 11", "Class 12"],
+    qualification: "M.Sc. Chemistry, B.Ed.",
+    teachingSince: 2015,
+    joinedYear: 2017,
+    bio: "Breaks long chapters into short topics with clear diagrams. Reactions and NCERT lines are revised often, so nothing is left for the last week.",
+    photo: {
+      src: "/images/people/sample/faculty-shalini-mehra.jpg",
+      alt: "Shalini Mehra, Chemistry and Biology teacher",
+      width: 627,
+      height: 784,
+    },
     isDirector: false,
     order: 3,
   },
   {
-    id: "sample-science-junior",
+    id: "deepak-arora",
     sample: true,
-    // NEEDED: the teacher's full name as they want it printed.
-    name: "SAMPLE Full Name Science Junior",
-    // NEEDED: job title, as the institute uses it.
-    role: "Science teacher (SAMPLE)",
-    // NEEDED: confirm the subjects, named as in the course data.
-    subjects: ["Science"],
-    // NEEDED: which classes they take.
-    classes: [
-      "Class 1",
-      "Class 2",
-      "Class 3",
-      "Class 4",
-      "Class 5",
-      "Class 6",
-      "Class 7",
-      "Class 8",
-    ],
-    // NEEDED: degrees and certificates, one line.
-    qualification: "SAMPLE B.Sc. Chemistry, B.Ed.",
-    // NEEDED: how long they have taught.
-    experience: "SAMPLE 7 years of teaching",
-    // NEEDED: two or three true sentences about how they teach; no ranks or "best".
-    bio: "SAMPLE: Teaches Science to Classes 1 to 8. Replace with a real bio from the institute.",
-    // NEEDED: a real photo once taken; this brief shows in development only.
-    photoShot:
-      "SAMPLE: Science teacher holding a classroom model · portrait 4:5 · head and shoulders, daylight, plain background",
+    // [CONFIRM] Teacher, subjects and classes are not known yet.
+    name: "Deepak Arora",
+    role: "Commerce teacher",
+    subjects: ["Accountancy", "Economics", "Business Studies"],
+    classes: ["Class 11", "Class 12"],
+    qualification: "M.Com., B.Ed.",
+    teachingSince: 2012,
+    joinedYear: 2015,
+    bio: "Teaches accounts through worked entries from small shop examples. Students write answers in the board-exam format from the first month.",
+    photo: {
+      src: "/images/people/sample/faculty-deepak-arora.jpg",
+      alt: "Deepak Arora, Commerce teacher",
+      width: 592,
+      height: 740,
+    },
     isDirector: false,
     order: 4,
   },
   {
-    id: "sample-english-teacher",
+    id: "anjali-malhotra",
     sample: true,
-    // NEEDED: the teacher's full name as they want it printed.
-    name: "SAMPLE Full Name English",
-    // NEEDED: job title, as the institute uses it.
-    role: "English teacher (SAMPLE)",
-    // NEEDED: confirm the subjects, named as in the course data.
+    // [CONFIRM] Teacher, subjects and classes are not known yet. Spoken English
+    // is a course for students under 20, not for a class range.
+    name: "Anjali Malhotra",
+    role: "English teacher",
     subjects: ["English", "Spoken English"],
-    // NEEDED: which classes they take.
+    classes: ["Class 9", "Class 10", "Class 11", "Class 12"],
+    qualification: "M.A. English, B.Ed.",
+    teachingSince: 2017,
+    joinedYear: 2019,
+    bio: "Helps students write clear answers, letters and essays in their own words. In Spoken English, every student speaks in every class, in small groups first.",
+    photo: {
+      src: "/images/people/sample/faculty-anjali-malhotra.jpg",
+      alt: "Anjali Malhotra, English teacher",
+      width: 550,
+      height: 688,
+    },
+    isDirector: false,
+    order: 5,
+  },
+  {
+    id: "sanjay-bisht",
+    sample: true,
+    // [CONFIRM] Teacher, subjects and classes are not known yet. Science is
+    // called EVS in Classes 1–5; courses use "Science" for Classes 1–8.
+    name: "Sanjay Bisht",
+    role: "Junior classes teacher",
+    subjects: ["Maths", "Science", "English"],
     classes: [
       "Class 1",
       "Class 2",
@@ -130,136 +126,18 @@ export const faculty: Faculty[] = [
       "Class 6",
       "Class 7",
       "Class 8",
-      "Class 9",
-      "Class 10",
-      "Class 11",
-      "Class 12",
     ],
-    // NEEDED: degrees and certificates, one line.
-    qualification: "SAMPLE M.A. English, B.Ed.",
-    // NEEDED: how long they have taught.
-    experience: "SAMPLE 9 years of teaching",
-    // NEEDED: two or three true sentences about how they teach; no ranks or "best".
-    bio: "SAMPLE: Teaches English and Spoken English. Replace with a real bio from the institute.",
-    // NEEDED: a real photo once taken; this brief shows in development only.
-    photoShot:
-      "SAMPLE: English teacher with a book in hand · portrait 4:5 · head and shoulders, daylight, plain background",
-    isDirector: false,
-    order: 5,
-  },
-  {
-    id: "sample-college-teacher",
-    sample: true,
-    // NEEDED: the teacher's full name as they want it printed.
-    name: "SAMPLE Full Name College",
-    // NEEDED: job title, as the institute uses it.
-    role: "College classes teacher (SAMPLE)",
-    // NEEDED: confirm the subjects, named as in the course data.
-    subjects: ["B.A.", "B.Com."],
-    // NEEDED: which classes they take.
-    classes: ["College"],
-    // NEEDED: degrees and certificates, one line.
-    qualification: "SAMPLE M.A., M.Com.",
-    // NEEDED: how long they have taught.
-    experience: "SAMPLE 6 years of teaching",
-    // NEEDED: two or three true sentences about how they teach; no ranks or "best".
-    bio: "SAMPLE: Teaches college students of open and distance degrees. Replace with a real bio from the institute.",
-    // NEEDED: a real photo once taken; this brief shows in development only.
-    photoShot:
-      "SAMPLE: College classes teacher at a table with books · portrait 4:5 · head and shoulders, daylight, plain background",
+    qualification: "B.Sc., B.Ed.",
+    teachingSince: 2019,
+    joinedYear: 2020,
+    bio: "Keeps lessons simple and patient, with short daily practice. Younger children learn EVS through things they see at home and around them.",
+    photo: {
+      src: "/images/people/sample/faculty-sanjay-bisht.jpg",
+      alt: "Sanjay Bisht, teacher for Classes 1 to 8",
+      width: 270,
+      height: 337,
+    },
     isDirector: false,
     order: 6,
-  },
-  {
-    id: "sample-chem-bio-teacher",
-    sample: true,
-    // NEEDED: the teacher's full name as they want it printed.
-    name: "SAMPLE Full Name Chemistry Biology",
-    // NEEDED: job title, as the institute uses it.
-    role: "Chemistry and Biology teacher (SAMPLE)",
-    // NEEDED: confirm the subjects, named as in the course data.
-    subjects: ["Chemistry", "Biology"],
-    // NEEDED: which classes they take.
-    classes: ["Class 11", "Class 12"],
-    // NEEDED: degrees and certificates, one line.
-    qualification: "SAMPLE M.Sc. Chemistry, B.Ed.",
-    // NEEDED: how long they have taught.
-    experience: "SAMPLE 9 years of teaching",
-    // NEEDED: two or three true sentences about how they teach; no ranks or "best".
-    bio: "SAMPLE: Teaches Chemistry and Biology to Classes 11 and 12. Replace with a real bio from the institute.",
-    // NEEDED: a real photo once taken; this brief shows in development only.
-    photoShot:
-      "SAMPLE: Chemistry teacher with a model on the desk · portrait 4:5 · head and shoulders, daylight, plain background",
-    isDirector: false,
-    order: 7,
-  },
-  {
-    id: "sample-computer-teacher",
-    sample: true,
-    // NEEDED: the teacher's full name as they want it printed.
-    name: "SAMPLE Full Name Computer",
-    // NEEDED: job title, as the institute uses it.
-    role: "Computer teacher (SAMPLE)",
-    // NEEDED: confirm the subjects, named as in the course data.
-    subjects: ["Computer Science", "Informatics Practices"],
-    // NEEDED: which classes they take.
-    classes: ["Class 11", "Class 12"],
-    // NEEDED: degrees and certificates, one line.
-    qualification: "SAMPLE M.C.A., B.Ed.",
-    // NEEDED: how long they have taught.
-    experience: "SAMPLE 6 years of teaching",
-    // NEEDED: two or three true sentences about how they teach; no ranks or "best".
-    bio: "SAMPLE: Teaches Computer Science and Informatics Practices to Classes 11 and 12. Replace with a real bio from the institute.",
-    // NEEDED: a real photo once taken; this brief shows in development only.
-    photoShot:
-      "SAMPLE: Computer teacher at a desk with a laptop · portrait 4:5 · head and shoulders, daylight, plain background",
-    isDirector: false,
-    order: 8,
-  },
-  {
-    id: "sample-commerce-teacher",
-    sample: true,
-    // NEEDED: the teacher's full name as they want it printed.
-    name: "SAMPLE Full Name Commerce",
-    // NEEDED: job title, as the institute uses it.
-    role: "Commerce teacher (SAMPLE)",
-    // NEEDED: confirm the subjects, named as in the course data.
-    subjects: ["Accountancy", "Business Studies", "Economics"],
-    // NEEDED: which classes they take.
-    classes: ["Class 11", "Class 12"],
-    // NEEDED: degrees and certificates, one line.
-    qualification: "SAMPLE M.Com., B.Ed.",
-    // NEEDED: how long they have taught.
-    experience: "SAMPLE 10 years of teaching",
-    // NEEDED: two or three true sentences about how they teach; no ranks or "best".
-    bio: "SAMPLE: Teaches Accountancy, Business Studies and Economics to Classes 11 and 12. Replace with a real bio from the institute.",
-    // NEEDED: a real photo once taken; this brief shows in development only.
-    photoShot:
-      "SAMPLE: Commerce teacher at the board with an accounts table · portrait 4:5 · head and shoulders, daylight, plain background",
-    isDirector: false,
-    order: 9,
-  },
-  {
-    id: "sample-humanities-teacher",
-    sample: true,
-    // NEEDED: the teacher's full name as they want it printed.
-    name: "SAMPLE Full Name Humanities",
-    // NEEDED: job title, as the institute uses it.
-    role: "Humanities teacher (SAMPLE)",
-    // NEEDED: confirm the subjects, named as in the course data.
-    subjects: ["Political Science", "Economics"],
-    // NEEDED: which classes they take.
-    classes: ["Class 11", "Class 12"],
-    // NEEDED: degrees and certificates, one line.
-    qualification: "SAMPLE M.A. Political Science, B.Ed.",
-    // NEEDED: how long they have taught.
-    experience: "SAMPLE 8 years of teaching",
-    // NEEDED: two or three true sentences about how they teach; no ranks or "best".
-    bio: "SAMPLE: Teaches Political Science and Economics to Classes 11 and 12. Replace with a real bio from the institute.",
-    // NEEDED: a real photo once taken; this brief shows in development only.
-    photoShot:
-      "SAMPLE: Humanities teacher with a book in hand · portrait 4:5 · head and shoulders, daylight, plain background",
-    isDirector: false,
-    order: 10,
   },
 ]

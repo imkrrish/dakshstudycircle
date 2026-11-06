@@ -6,7 +6,7 @@ import { courseCta } from "./shared"
 //   CBSE groupings from the pamphlet's subject list (docs/content-requests.md).
 // - Computer Science language (C++ or Python) and whether Informatics Practices is taught
 //   for this stream.
-// - Teachers other than Anil Kumar are SAMPLE records (shown in development only).
+// - Teachers other than Anil Kumar are invented records (sample: true, development only).
 
 export const class11To12Humanities: Course = {
   slug: "class-11-12-humanities",
@@ -16,7 +16,10 @@ export const class11To12Humanities: Course = {
   cardNote: "Political Science, Economics and English",
   classes: ["Class 11", "Class 12"],
   subjects: ["Political Science", "Economics", "English"],
-  facultyIds: ["sample-humanities-teacher", "sample-english-teacher"],
+  facultyIds: [
+    "deepak-arora",
+    "anjali-malhotra",
+  ],
   // Pamphlet: Rs 25,000 per subject, per session up to the final exams.
   fees: {
     rows: [

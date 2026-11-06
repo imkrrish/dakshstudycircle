@@ -14,8 +14,11 @@ export const FacultySchema = z.strictObject({
   classes: z.array(z.string()),
   // Degrees and certificates, one line, e.g. "M.Sc. Physics, B.Ed.".
   qualification: z.string().optional(),
-  // Teaching experience, one line, e.g. "12 years of teaching".
-  experience: z.string().optional(),
+  // Year the teacher started teaching (anywhere). Experience is worked out from
+  // it with `yearsOfTeaching()`, so it never goes stale.
+  teachingSince: z.number().int().min(1980).max(2026).optional(),
+  // Year the teacher joined the institute (it started in 2005).
+  joinedYear: z.number().int().min(2005).max(2026).optional(),
   // Two or three sentences in the teacher's own style; facts only.
   bio: z.string().optional(),
   photo: ImageSchema.optional(),
@@ -28,3 +31,11 @@ export const FacultySchema = z.strictObject({
 
 export type Faculty = z.infer<typeof FacultySchema>
 
+
+// Whole years of teaching as of `now` (build time by default).
+export function yearsOfTeaching(
+  teachingSince: number,
+  now: number = new Date().getFullYear(),
+): number {
+  return Math.max(0, now - teachingSince)
+}

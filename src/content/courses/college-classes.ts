@@ -4,7 +4,7 @@ import { courseCta } from "./shared"
 // Open [CONFIRM] items (docs/content-requests.md):
 // - B.Sc.? (DU SOL has only B.Sc. (Hons) Computer Science), IGNOU or other universities
 // - Subjects, mode, timings, fee; batch size and study material for this course
-// - The teacher is a SAMPLE record (shown in development only)
+// - Teachers: no faculty record covers these classes yet
 // Course pages render only the types in COURSE_TEMPLATE (src/lib/content/page.ts):
 // the official-links section below is kept but not shown.
 
@@ -16,7 +16,7 @@ export const collegeClasses: Course = {
   cardNote: "B.A. and B.Com. · DU SOL and similar",
   classes: ["College"],
   subjects: ["B.A.", "B.Com."],
-  facultyIds: ["sample-college-teacher"],
+  facultyIds: [],
   order: 9,
   seo: {
     title: "DU SOL B.A. & B.Com. Classes, Delhi Cantt",

@@ -62,6 +62,15 @@ function loadContent() {
     if (facultyIds.has(parsed.id)) {
       errors.push(`faculty: duplicate id "${parsed.id}"`)
     }
+    if (
+      parsed.teachingSince !== undefined &&
+      parsed.joinedYear !== undefined &&
+      parsed.teachingSince > parsed.joinedYear
+    ) {
+      errors.push(
+        `faculty "${parsed.id}": teachingSince (${parsed.teachingSince}) is after joinedYear (${parsed.joinedYear})`,
+      )
+    }
     facultyIds.add(parsed.id)
     faculty.push(parsed)
   })
