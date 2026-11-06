@@ -29,7 +29,7 @@ export const faculty: Faculty[] = [
     sample: true,
     // [CONFIRM] Only "Pathak Sir" and his subjects are known; the rest is invented.
     name: "Vivek Pathak",
-    role: "Physics and Science teacher",
+    role: "Teacher",
     // Science is for Classes 9–10, Physics for 11–12.
     subjects: ["Physics", "Science"],
     classes: ["Class 9", "Class 10", "Class 11", "Class 12"],
@@ -51,7 +51,7 @@ export const faculty: Faculty[] = [
     sample: true,
     // [CONFIRM] Teacher, subjects and classes are not known yet.
     name: "Shalini Mehra",
-    role: "Chemistry and Biology teacher",
+    role: "Teacher",
     subjects: ["Chemistry", "Biology"],
     classes: ["Class 11", "Class 12"],
     qualification: "M.Sc. Chemistry, B.Ed.",
@@ -72,7 +72,7 @@ export const faculty: Faculty[] = [
     sample: true,
     // [CONFIRM] Teacher, subjects and classes are not known yet.
     name: "Deepak Arora",
-    role: "Commerce teacher",
+    role: "Teacher",
     subjects: ["Accountancy", "Economics", "Business Studies"],
     classes: ["Class 11", "Class 12"],
     qualification: "M.Com., B.Ed.",
@@ -94,7 +94,7 @@ export const faculty: Faculty[] = [
     // [CONFIRM] Teacher, subjects and classes are not known yet. Spoken English
     // is a course for students under 20, not for a class range.
     name: "Anjali Malhotra",
-    role: "English teacher",
+    role: "Teacher",
     subjects: ["English", "Spoken English"],
     classes: ["Class 9", "Class 10", "Class 11", "Class 12"],
     qualification: "M.A. English, B.Ed.",
@@ -116,7 +116,7 @@ export const faculty: Faculty[] = [
     // [CONFIRM] Teacher, subjects and classes are not known yet. Science is
     // called EVS in Classes 1–5; courses use "Science" for Classes 1–8.
     name: "Sanjay Bisht",
-    role: "Junior classes teacher",
+    role: "Teacher",
     subjects: ["Maths", "Science", "English"],
     classes: [
       "Class 1",

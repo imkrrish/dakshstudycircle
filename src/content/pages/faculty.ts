@@ -35,7 +35,7 @@ export const faculty: Page = {
     {
       id: "teachers",
       type: "people-grid",
-      heading: "Who teaches at Daksh",
+      heading: "Subject teachers",
       show: "all-but-leads",
     },
     {

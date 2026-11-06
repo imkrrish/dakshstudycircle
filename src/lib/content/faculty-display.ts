@@ -7,10 +7,18 @@ import { yearsOfTeaching, type Faculty } from "./collections/faculty"
 // "Mathematics" for 11–12); a visitor sees one name, once.
 const SUBJECT_NAMES: Record<string, string> = { Maths: "Mathematics" }
 
-function subjectsLabel(subjects: string[]): string {
-  const names = [...new Set(subjects.map((s) => SUBJECT_NAMES[s] ?? s))]
-  return new Intl.ListFormat("en-IN", { type: "conjunction" }).format(names)
+function subjectNames(subjects: string[]): string[] {
+  return [...new Set(subjects.map((s) => SUBJECT_NAMES[s] ?? s))]
 }
+
+function subjectsLabel(subjects: string[]): string {
+  return new Intl.ListFormat("en-IN", { type: "conjunction" }).format(
+    subjectNames(subjects),
+  )
+}
+
+// No-break spaces inside a phrase, so a line can only break between phrases.
+const glue = (text: string) => text.replace(/ /g, "\u00a0")
 
 function classNumbers(classes: string[]): number[] {
   return classes
@@ -45,7 +53,7 @@ function experienceLabel(teachingSince?: number): string | undefined {
     Number(process.env.NEXT_PUBLIC_BUILD_YEAR),
   )
   if (years < 1) return undefined
-  return years === 1 ? "1 year teaching" : `${years} years teaching`
+  return glue(years === 1 ? "1 year teaching" : `${years} years teaching`)
 }
 
 // Fields every person card or feature shows.
@@ -61,6 +69,12 @@ export type ResolvedPerson = {
   teachesLine: string
   // "M.Sc. Physics, B.Ed. · 16 years teaching"; each part only if known.
   background?: string
+  // Card lines for the teacher grid. Subjects: "Physics and Science"; a
+  // subject name never breaks. Quiet line: "Classes 9–12 · M.Sc. Physics,
+  // B.Ed. · 16 years teaching"; each part never breaks inside, and the dot
+  // stays with the part before it, so a line never starts with a separator.
+  subjectsLine: string
+  quietLine: string
 }
 
 export function resolvePerson(f: Faculty): ResolvedPerson {
@@ -69,12 +83,20 @@ export function resolvePerson(f: Faculty): ResolvedPerson {
   const background = [f.qualification, experienceLabel(f.teachingSince)]
     .filter(Boolean)
     .join(" · ")
+  const subjectsLine = new Intl.ListFormat("en-IN", { type: "conjunction" })
+    .format(subjectNames(f.subjects).map(glue))
+  const quietLine = [classes, f.qualification, experienceLabel(f.teachingSince)]
+    .filter((part): part is string => Boolean(part))
+    .map(glue)
+    .join("\u00a0· ")
   return {
     id: f.id,
     name: f.name,
     role: f.role,
     ...(f.photo ? { photo: f.photo } : {}),
     ...(f.bio ? { bio: f.bio } : {}),
+    subjectsLine,
+    quietLine,
     teaches: `${subjects} · ${classes}`,
     teachesLine: `Teaches ${subjects} in ${classes}`,
     ...(background ? { background } : {}),
