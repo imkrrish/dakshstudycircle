@@ -55,3 +55,4 @@ scratch/
 detect*.txt
 # Local-only sample teacher photos, never deployed
 public/images/people/sample/
+public/images/results/sample/
