@@ -1,6 +1,6 @@
 # What to collect from the institute
 
-Plain-word lists, one per content type, matching the fields in `src/lib/content-schema.ts`.
+Plain-word lists, one per content type, matching the fields in `src/lib/content/` (section and collection schemas).
 Items marked `sample: true` in the data are examples; they show in development and are left out of
 production until replaced with real data. `pnpm build` lists the ones still left.
 

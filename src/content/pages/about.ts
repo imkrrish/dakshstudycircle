@@ -5,9 +5,10 @@ import type { Page } from "@/lib/content"
 export const about: Page = {
   slug: "about",
   seo: {
-    title: "About us, Sadar Bazaar, Delhi Cantt",
+    title: "About Daksh Study Circle, Sadar Bazaar, Delhi Cantt",
+    absoluteTitle: true,
     description:
-      "Daksh Study Circle has taught CBSE students in Sadar Bazaar, Delhi Cantt, since July 2005. See how batches, revision, study material and tests run through the year.",
+      "Daksh Study Circle has taught school and college students in Sadar Bazaar, Delhi Cantt, since July 2005. See how batches, revision, study material and tests run through the year.",
   },
   sections: [
     {

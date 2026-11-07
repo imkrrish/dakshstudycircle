@@ -21,7 +21,7 @@ MVP, frontend only. No backend, database, or auth yet.
 ## Architecture
 
 - Pages are built from data: each page is `{ seo, sections: [] }` in `src/content/pages/`,
-  read only through `getPage()` / `getSite()` in `src/lib/content.ts`. Later this becomes a
+  read only through `getPage()` / `getSite()` in `src/lib/content/index.ts`. Later this becomes a
   CMS fetched at build time, so components never import content files directly.
 - Sections are modular components controlled by props. The order of the sections array is
   the order on the page.

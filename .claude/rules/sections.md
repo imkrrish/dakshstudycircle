@@ -2,15 +2,15 @@
 paths:
   - "src/components/sections/**"
   - "src/content/**"
-  - "src/lib/content.ts"
-  - "src/lib/content-schema.ts"
+  - "src/lib/content/**"
 ---
 
 # Sections and page data
 
 ## Data
 
-- All content schemas live in `src/lib/content-schema.ts` (zod). Types are inferred from the
+- All content schemas live in `src/lib/content/` (zod; public API `index.ts`): one file per section type in
+  `sections/<name>.ts` with the union in `sections/index.ts`, collections in `collections/<name>.ts`. Types are inferred from the
   schemas (`z.infer`); never write a content type by hand.
 - Sections: a `z.discriminatedUnion` on `type`, each with a unique `id`. Use `SectionOf<"hero">`
   to get one section's type.
@@ -20,7 +20,7 @@ paths:
   through the shared action button component; never hard-code button behaviour in a section.
 - Sample records are realistic and marked `sample: true` (dropped from production). No visible
   SAMPLE/MOCK/PLACEHOLDER text; `load.ts` fails the build on mock/placeholder wording.
-- Validation runs when `src/lib/content.ts` loads and fails the build on: schema errors, duplicate
+- Validation runs when `src/lib/content/load.ts` loads and fails the build on: schema errors, duplicate
   section ids, more than one dark `cta-band` per page/course, duplicate slugs/ids, unknown facultyIds.
 - Sections that show collection data (courses, faculty) store a reference; `getPage()`/`getCourse()`
   resolve it so components receive plain data.
@@ -38,14 +38,13 @@ paths:
 
 ## Registry
 
-- `section-renderer.tsx` maps each `type` to its component with a lookup object, typed so a missing component is a TypeScript error.
+- `src/components/sections/section-renderer.tsx` maps each `type` to its component with a lookup object, typed so a missing component is a TypeScript error.
 
 ## Adding a section type
 
-1. Add its zod schema to the union in `content-schema.ts`
+1. Add `sections/<type>.ts` (zod schema) and one line to the union in `sections/index.ts`
 2. Create the component (a stub is fine until it's designed)
-3. Register it in the renderer
+3. Register it in `src/components/sections/section-renderer.tsx`
 4. Use it in page data
 
-Starting types: hero, split, card-grid, cta-band (currently stubs, replaced in place when designed).
 Add new types only when a page needs them.
