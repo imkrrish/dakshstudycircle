@@ -13,6 +13,7 @@ function ValuesSection({ section }: { section: SectionOf<"values"> }) {
       data-slot="values-section"
       id={id}
       tone={tone}
+      className="[--section-y:4rem] md:[--section-y-md:6rem]"
       aria-labelledby={`${id}-heading`}
     >
       <Container>
@@ -30,7 +31,7 @@ function ValuesSection({ section }: { section: SectionOf<"values"> }) {
               title={heading}
               className="max-w-prose"
             />
-            <SettleIn className="mt-6 flex max-w-prose flex-col gap-5 md:mt-8 md:gap-6">
+            <SettleIn className="mt-6 flex max-w-prose flex-col gap-3 md:mt-8">
               {lines.map((line) => (
                 <li key={line} className="text-lead text-foreground/80">
                   {line}
@@ -39,7 +40,7 @@ function ValuesSection({ section }: { section: SectionOf<"values"> }) {
             </SettleIn>
           </div>
           {pullLine && (
-            <p className="font-heading text-page-title text-balance lg:col-span-5 lg:col-start-8">
+            <p className="font-heading text-title text-balance lg:col-span-5 lg:col-start-8 lg:text-heading">
               {pullLine}
             </p>
           )}

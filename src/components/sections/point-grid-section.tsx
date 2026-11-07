@@ -12,6 +12,7 @@ function PointGridSection({ section }: { section: SectionOf<"point-grid"> }) {
       data-slot="point-grid-section"
       id={id}
       tone={tone}
+      className="[--section-y:4rem] md:[--section-y-md:6rem]"
       aria-labelledby={`${id}-heading`}
     >
       <Container>
@@ -26,7 +27,7 @@ function PointGridSection({ section }: { section: SectionOf<"point-grid"> }) {
           {items.map((item) => (
             <li key={item.title} className="flex flex-col gap-2 md:gap-3">
               <h3 className="font-heading text-title">{item.title}</h3>
-              <p className="max-w-md text-base text-foreground/80 md:text-lead">
+              <p className="max-w-md text-base text-foreground/80">
                 {item.body}
               </p>
             </li>

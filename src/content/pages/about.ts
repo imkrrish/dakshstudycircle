@@ -33,6 +33,7 @@ export const about: Page = {
       id: "story",
       type: "prose",
       heading: "How Daksh began",
+      leadParagraph: true,
       paragraphs: [
         "Daksh Study Circle started in July 2005. Since then, the aim has been to give students good teaching, and over the years it has become a name in coaching that families rely on.",
         "It has come a long way. It still feels like a beginning.",
