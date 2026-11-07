@@ -78,3 +78,19 @@ College classes 6. Which degrees exactly? The site shows B.A. and B.Com. DU SOL 
 2. Computer Science: is it taught in C++ or Python? (CBSE's current syllabus is Python-based; the pamphlet says "C++".) The site says only "Computer Science" until you answer.
 3. Is Informatics Practices taught for Science and Commerce, or only one? Is Computer Science also offered to Commerce students?
 4. Which teachers take Physics, Chemistry, Biology, Computer Science, Accountancy, Business Studies, Economics, Political Science and English for Classes 11–12? (Sample records show in development only.)
+
+## Open questions: About
+
+1. How and why Daksh started in July 2005; who else was involved.
+2. Dated milestones (move to the current centre, online classes, smart classroom, college classes).
+3. Whether "thousands of students" can be used, and the real number.
+4. Whether to use "a home away from home" or "not for jobs but to follow their dreams" as stated values.
+5. What "Mission Possible" means; keep or drop.
+6. How tests and the test series run (how often, when in the year).
+7. Whether study material is included in the fee.
+8. Whether the director wants a photo or a short first-person note on /about.
+9. Permission to quote pamphlet testimonials; evidence for the IIT/NIT/NDA alumni claim.
+10. Meaning of the logo (open book with a flame).
+11. Pamphlet cover says "Since 2006"; fix on the next print.
+12. College classes: B.Sc. appears on the pamphlet, but the site says B.A. and B.Com. only; confirm.
+13. Confirm "4 classrooms" is current.

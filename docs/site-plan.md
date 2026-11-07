@@ -75,11 +75,13 @@ Slugs: classes-1-5, classes-6-8, classes-9-10, class-11-12-science, class-11-12-
 
 ### About `/about`
 
-1. hero: since 2005
-2. split: our story
-3. split (image other side): director
-4. card-grid: values
-5. cta-band
+Status: data added, design pending.
+
+1. hero (compact, with breadcrumbs Home › About)
+2. reason-list: how a year runs (4 items)
+3. cta-band (dark)
+   The story and director sections come later, after the owner's review with the director
+   (open questions: `docs/content-requests.md`, "Open questions: About").
 
 ### Gallery `/gallery`
 
