@@ -188,7 +188,7 @@ At 1280: h1 76 → h2 44 → title 26 → subtitle 22 → lead 19 → intro 18 �
 **The Heading Level Rule.** `h1` only in the hero, `h2` for sections, `h3` for cards. Section headings are h2 in EB Garamond. Footer and utility headings may be h2 styled as small Nunito Sans labels.
 **The Floor Rule.** Minimum text size is 0.9375rem. Do not use `text-xs` or arbitrary sizes.
 **The Figures Rule.** Serif numerals are lining (set on `--font-heading`); figures that align or change are also `tabular-nums`.
-**The Wrap Rule.** `h1`–`h3` use `text-wrap: balance`; `p`, `li`, `blockquote`, `figcaption` use `text-wrap: pretty` (both in `globals.css`). Where that cannot save a lone word in a narrow card, join the last words with a no-break space in the copy (`\u00a0`, e.g. course notes "8 or 9", "usually June–August").
+**The Wrap Rule.** `h1`–`h3` use `text-wrap: balance`; `p`, `li`, `blockquote`, `figcaption` use `text-wrap: pretty` (both in `globals.css`). Where that cannot save a lone word in a narrow card, join the last words with a no-break space in the copy (`\u00a0`, e.g. course notes "8 or 9", "usually June–August"). On result cards a class, stream, subject, mark or exam name never breaks inside, and a school breaks only after its comma; no line starts with "·". **Exception, names:** a student's name (board and entrance cards, result popup) may wrap between its words only when it cannot fit on one line (`text-wrap: balance`), never inside a word and never with a hyphen.
 **Line length.** Intro paragraphs cap at `max-w-prose`; hero supporting line at `max-w-xl`.
 
 ## Layout
@@ -287,7 +287,7 @@ Order: hero, subjects, how we teach, results, FAQ, dark CTA (`COURSE_TEMPLATE` i
 
 ### Results honour board
 
-Home results (`results-board`, from `src/content/results.ts`). A printed honour board in warm paper, like the boards in school halls: a framed sheet with a lettered title, a year index and rows of name, dotted leader and score. Section tone `muted`; heading centred (`SectionHeading align="center"`) so heading, board and "See all results" share one axis. `getPage()` builds one tab per year present in the data (newest first, default the newest); within a year, highlights first, then higher percentage, entrance results last, at most `perYear` (6) rows. The full list belongs to `/results` (`results-grid`, below).
+Home results (`results-board`, from `src/content/results.ts`). A printed honour board in warm paper, like the boards in school halls: a framed sheet with a lettered title, a year index and rows of name, dotted leader and score. Section tone `muted`; heading centred (`SectionHeading align="center"`) so heading, board and "See all results" share one axis. `getPage()` builds one tab per year present in the data (newest first, default the newest); within a year, highlights first, then higher percentage, entrance results last, at most `perYear` (6) rows. The full list belongs to `/results` (see Board results and Entrance results, below).
 
 **Frame.** One board, centred, `max-w-3xl` (48rem), `bg-card` (paper raised on the muted section), square corners (printed, a deliberate exception to the card radii). From `sm` a thin double rule like a certificate border: an outer `foreground/20` hairline, 0.375rem of paper, an inner one. Below `sm` the board is full width with the inner rule only, a lighter frame. Padding `px-4 py-8`, `sm:px-8 sm:py-10`, `md:px-14 md:py-12`. Tokens only, no new colours.
 
@@ -295,7 +295,7 @@ Home results (`results-board`, from `src/content/results.ts`). A printed honour 
 
 **Row.** A native `<details>`; hairline rules between rows and at both ends. The `summary` (min `2.75rem`, `py-3.5`, `focus-ring`) has two lines. Line one: the student's name, a dotted leader, the score, a plus. Line two: one muted `text-sm` meta line ("Class 12 · Science", entrance "Entrance · AISSEE"). The course taken is not in the summary any more.
 
-- Name: `h3` in EB Garamond `text-subtitle`. This reverses the Nunito Sans 600 name rule for this section only (a lettered board sets names in the serif); the FAQ and results grid keep theirs.
+- Name: `h3` in EB Garamond `text-subtitle`. This reverses the Nunito Sans 600 name rule for this section only (a lettered board sets names in the serif); the FAQ keeps its own.
 - Score: EB Garamond `text-title`, lining + tabular figures, one decimal ("93.0%", so figures line up), `whitespace-nowrap`, right-aligned in a `min-w-18` column.
 - Admission: EB Garamond small caps (`font-variant-caps: small-caps`), `text-lead` from `sm`, `text-sm` below, never wraps: "Admitted · Sainik School" ("Selected · RIMC" for a selection). `status` defaults to "Admitted"; the school is `outcome.school`, falling back to `outcome.title`.
 - Expand mark: a CSS plus (two 1px bars, ink, `size-4`, `aria-hidden`) that becomes a minus when open (the vertical bar scales out, 250ms, instant with reduced motion). No chevron and no medallion. A visually hidden "Show subject marks" ("Show details" with no marks) completes the summary's accessible name: name, score, meta, hint; `aria-expanded` is native.
@@ -312,13 +312,30 @@ Home results (`results-board`, from `src/content/results.ts`). A printed honour 
 
 **Action.** "See all results" (`quiet`, from section data) sits once under the board, centred. No red.
 
-### Results grid
+### Board results
 
-Not on home any more: the card grid is kept for the `/results` page. Recent results (`results-grid`, from `src/content/results.ts`, resolved to `{ name, photo, headline, meta }`; highlights only, newest year first). Tone is `muted`: why-daksh above and testimonials below are paper, so the results get their own surface and the raised cards lift off it with a hairline. One markup for every width; cards are not links and have no hover or motion.
+`/results`, first section (`board-results`, muted). The newest year is a set of printed-mat cards; earlier years are quieter honour boards.
 
-Card: photo `aspect-4/5`, `rounded-xl`, no effects (initials in EB Garamond when there is no photo, decorative `alt=""` because the name sits beside it). Then the score or admission (`headline`: "96.2%", or the school's short name, "Sainik", "RMS", "RIMC", so it stays on one line in a five-across card) in EB Garamond with lining tabular figures, `text-title` on mobile and `text-heading` from `md`; then the student's name as an `h3`; then a muted `text-sm` meta line ("Class 12 · Science · CBSE 2026 · Classes 11–12 tuition" or "Admitted · AISSEE 2026 · RMS/RIMC/Sainik prep"). The meta line breaks only between its parts, never inside one. DOM order is name, score, meta; the score is shown first. The student name is an `h3` in Nunito Sans 600 (`text-base`, `text-lead` from `md`), not EB Garamond: with the score set in the serif at heading size, a second serif line would compete with it. This is a deliberate exception to "h3 is EB Garamond", like the FAQ questions. Subject marks are not shown on home (`variant: "compact"`).
+**Latest year.** Cards are the printed mat (`card` paper, hairline, `rounded-xl`, `p-1.5`) around a 4:5 photo, with a lettered chin under it: the percentage in EB Garamond (`text-title`, `text-heading` from `lg`, lining and tabular), the name in EB Garamond 500 (`text-lead`, `text-subtitle` from `lg`), and a quiet `text-sm` muted stream line for Class 12. "View marksheet" is a plain text cue (`text-sm`, 500, no arrow) shown only on students who have marks; the whole card is one button stretched over the mat that opens the result popup, with a focus ring around the card. Students without marks have no cue and no button. A card with no photo is a same-size paper plate (`background` inside the mat): percentage, name and stream sit centred in the 4:5 area where the picture would be, the cue at the bottom where a photo card's cue sits. Groups are labelled by class, with the label above the cards.
 
-Layout: below `md`, one raised `card` panel of rows (4.5rem photo left, hairline dividers). At `md`, six columns with cards spanning two, so 3 + 2 with the short row centred (structural `nth-` selectors, no per-count markup). At `lg`, five equal cards in one row. From `md` each card is a four-row subgrid (photo, score, name, meta), so a percentage card and an admission card line up even when "Rashtriya Military School" wraps. No red.
+**Earlier years.** Year tabs (the honour board's index), each panel a two-column honour board: name with the stream inline, then the percentage only. Rows with marks open the popup; there is no visible row cue. Rows without marks are plain.
+
+**Phone rule.** Below `md` the first four cards of each class show as mats; the rest are honour rows.
+
+### Result popup
+
+One shared dialog for the section (`BoardResultsSheet`): a bottom sheet on phones (swipe, tap outside or Close), a centred dialog from `md`. It is the institute's own printed result card: a lettered issuer line, the student's print in a small mat beside the name, class and year, the marks as two aligned columns (subject, mark in EB Garamond), and the overall percentage on a `muted` plate. It never imitates a CBSE marksheet: no board logo, seal, roll number, signature or "statement of marks". "Close" is the only button. It is mounted only while open and filled from data, so it is not pre-rendered: it has no SEO value and keeps marks out of search.
+
+### Entrance results
+
+Second section of `/results` (`entrance-results`), grouped by exam; each group's label comes from page data (`groups[].label`) and sits above its cards. Cards use the same mat; the chin holds the name and the school ("Sainik School, Kunjpura", breaking only after the comma), then the quiet line "Admitted · Class 6 · 2026", every dot glued to the part before it so no line starts with "·". Without a photo the plate letters the school's place. Cards are not clickable: no button, link, hover or cue.
+
+### Shared results rules
+
+- Labels sit on top of the cards in both sections.
+- The card list is capped at 60rem from `lg`.
+- **Spacing scale:** heading to first group 48, label to cards 20, between groups 56, latest year to "Earlier years" 80, section padding 112 (px).
+- When a section has no results, its empty-state line becomes the heading's intro. Sections are never dropped when empty.
 
 ### Testimonial grid
 
@@ -394,6 +411,12 @@ Real photos of the institute and people only. Never AI-generated people. Decorat
 - Full keyboard use; the navbar CTA is always in the tab order.
 - Decorative images and icons use `alt=""` / `aria-hidden`.
 - Content rules: no unverified claims ("best", "top", results) per `PRODUCT.md`. Sample data is realistic and marked `sample: true` (dropped from production); missing facts are left out. No visible SAMPLE/MOCK/PLACEHOLDER text.
+
+## Rejected
+
+- A paper tile laid over the photo corner to carry the marks.
+- Expand-in-place marks (`<details>`) on the result cards.
+- Arrows on text cues ("View marksheet" stays plain text).
 
 ## Do's and Don'ts
 

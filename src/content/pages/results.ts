@@ -22,7 +22,7 @@ export const results: Page = {
           width: 1280,
           height: 958,
         },
-        shot: "Classroom test day, students writing at their desks · landscape 3:2 · daylight with the lights on",
+        shot: "Classroom test day, students writing at their desks · landscape 4:3 · daylight with the lights on",
       },
     },
     {

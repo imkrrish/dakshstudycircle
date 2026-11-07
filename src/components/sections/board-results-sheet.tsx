@@ -42,7 +42,7 @@ const SheetContext = createContext<SheetContextValue | null>(null)
 // The name in the serif at title size. The ui titles set their own size and
 // leading, so the tokens go through explicit lengths (as in the contact dialog).
 const titleClass =
-  "font-heading text-[length:var(--text-title)] leading-(--text-title--line-height) font-medium tracking-(--text-title--letter-spacing) whitespace-nowrap"
+  "font-heading text-[length:var(--text-title)] leading-(--text-title--line-height) font-medium tracking-(--text-title--letter-spacing) text-balance"
 
 // Warm ink scrim, no blur.
 const OVERLAY =

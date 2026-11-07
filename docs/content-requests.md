@@ -41,6 +41,15 @@ Only real results the student or parent has agreed to publish. For each one, ple
 10. **A photo** (optional): with the student's or parent's written yes.
 11. **Whether to feature it on the home page** (a handful of the best-known results).
 
+## Results (for the /results page)
+
+Could you please send the following? Students are minors, so nothing is shown without permission.
+
+1. **Board toppers for recent years:** each student's name, class (10 or 12), stream for Class 12, year, overall percentage, and subject-wise marks if available.
+2. **Entrance admissions:** each student's name, exam (RMS CET, RIMC or AISSEE), school and campus, entry class, and year.
+3. **Written permission from parents** to show each student's name, marks and photo on the website. A message is enough.
+4. **Photos:** one portrait per student, if the student and parents agree (see the portrait brief in `docs/shot-list.md`).
+
 ## Open questions for the institute (courses)
 
 Classes 1–8

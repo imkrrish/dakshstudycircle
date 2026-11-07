@@ -58,12 +58,13 @@ Slugs: classes-1-5, classes-6-8, classes-9-10, class-11-12-science, class-11-12-
 7. cta-band
    Each course needs genuinely unique copy (no find-and-replace pages).
 
-### Results `/results`
+### Results `/results` (built)
 
-1. hero (small)
-2. results-grid ★ (full + filter: year, class, subject)
-3. testimonials ★
-4. cta-band
+1. hero (compact, with breadcrumbs Home › Results)
+2. board-results: latest year as printed-mat cards by class, earlier years as year tabs with honour boards; students with marks open the result popup
+3. entrance-results: cards grouped by exam (RMS CET, RIMC, AISSEE)
+4. cta-band (dark)
+   Both result sections stay when empty, showing a one-line empty state. Real data is still to come (see `docs/content-requests.md`).
 
 ### Faculty `/faculty`
 

@@ -21,9 +21,9 @@ import { HonourRow } from "./honour-row"
 
 // The name: Garamond at weight 500 (the lead token carries Nunito's 400). It
 // steps up to the subtitle size only where the percentage above it is large
-// enough (lg) and a 4-up card is wide enough to hold it.
-const NAME =
-  "font-heading text-lead font-medium whitespace-nowrap lg:text-subtitle"
+// enough (lg) and a 4-up card is wide enough to hold it. A name stays on one
+// line when it fits; if not it wraps between words (balanced), never inside one.
+const NAME = "font-heading text-lead font-medium text-balance lg:text-subtitle"
 
 type MatPhoto = NonNullable<BoardResultItem["photo"]>
 
