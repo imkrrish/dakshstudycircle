@@ -30,12 +30,16 @@ function ClassCards({ label, items }: { label: string; items: Item[] }) {
   return (
     <div className="flex flex-col gap-5">
       <h4 className="font-heading text-title">{label}</h4>
-      <SettleIn className="flex flex-wrap justify-center gap-x-3 gap-y-6 md:justify-start">
+      {/* No row gap on a phone: the cards carry their own bottom margin, so the
+        rows after them keep the honour-board rhythm of the earlier years. */}
+      <SettleIn className="flex flex-wrap justify-center gap-x-3 md:justify-start md:gap-y-6">
         {items.map((item, i) => (
           <li
             key={item.id}
             className={cn(
-              i < CARDS_ON_PHONE ? "w-[calc(50%-0.375rem)]" : "w-full",
+              i < CARDS_ON_PHONE
+                ? "w-[calc(50%-0.375rem)] max-md:mb-6"
+                : "w-full",
               "md:w-[calc((100%-1.5rem)/3)] lg:w-[calc((100%-2.25rem)/4)]",
             )}
           >
@@ -133,8 +137,10 @@ function BoardResultsSection({
                 <h3 className="font-heading text-display tabular-nums">
                   {latest.year}
                 </h3>
-                <ClassCards label={CLASS_10} items={latest.class10} />
-                <ClassCards label={CLASS_12} items={latest.class12} />
+                <div className="flex flex-col gap-10 md:gap-12">
+                  <ClassCards label={CLASS_10} items={latest.class10} />
+                  <ClassCards label={CLASS_12} items={latest.class12} />
+                </div>
               </div>
               {earlier.length > 0 && <EarlierYears years={earlier} />}
             </div>

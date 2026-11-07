@@ -38,7 +38,7 @@ function HonourRow({
         sheetId={item.id}
         data-slot="honour-row"
         className={cn(
-          "-mx-2 flex w-[calc(100%+1rem)] cursor-pointer items-baseline gap-x-3 rounded-md px-2 py-1.5 text-left focus-ring transition-colors duration-(--dur-base) hover:bg-secondary/60 motion-reduce:transition-none",
+          "-mx-2 flex w-[calc(100%+1rem)] cursor-pointer items-baseline gap-x-3 rounded-md px-2 py-1.5 text-left focus-ring transition-colors duration-(--dur-base) hover:bg-secondary/60 active:bg-accent motion-reduce:transition-none",
           className,
         )}
       >

@@ -1,6 +1,7 @@
 "use client"
 
 import {
+  Fragment,
   createContext,
   useContext,
   useLayoutEffect,
@@ -96,7 +97,7 @@ function SheetBody({
       </p>
       <div
         className={cn(
-          "grid gap-x-5 gap-y-6 md:gap-x-8",
+          "grid gap-x-5 gap-y-5 md:gap-x-8",
           photo
             ? "grid-cols-[6rem_minmax(0,1fr)] md:grid-cols-[10rem_minmax(0,1fr)]"
             : "grid-cols-1",
@@ -122,25 +123,28 @@ function SheetBody({
         )}
         <div className="flex min-w-0 flex-col gap-1 self-center md:col-start-2 md:self-start">
           {title}
-          <p className="flex flex-wrap gap-x-2 text-sm text-muted-foreground">
+          {/* One line of text: each dot is glued to the part before it with a
+            no-break space, then a normal space, so the line can only break
+            after a dot and no part ever splits. */}
+          <p className="text-sm text-muted-foreground">
             {sheet.classParts.map((part) => (
-              <span key={part} className="whitespace-nowrap">
-                {part} ·
-              </span>
+              <Fragment key={part}>
+                <span className="whitespace-nowrap">{part}&nbsp;·</span>{" "}
+              </Fragment>
             ))}
             <span className="whitespace-nowrap tabular-nums">{sheet.year}</span>
           </p>
         </div>
         <dl
           className={cn(
-            "grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-1 md:col-start-2",
+            "mt-2 grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-4 gap-y-1.5 md:col-start-2",
             photo && "col-span-2 md:col-span-1",
           )}
         >
           {sheet.subjects.map((subject) => (
             <div key={subject.name} className="contents">
               <dt className="text-base whitespace-nowrap">{subject.name}</dt>
-              <dd className="text-right font-heading text-lead whitespace-nowrap tabular-nums">
+              <dd className="text-right font-heading text-subtitle whitespace-nowrap tabular-nums">
                 {subject.marks}
               </dd>
             </div>
