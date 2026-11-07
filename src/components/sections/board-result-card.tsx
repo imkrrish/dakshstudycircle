@@ -1,3 +1,4 @@
+import type { ReactNode } from "react"
 import Image from "next/image"
 import { cn } from "cn"
 
@@ -24,9 +25,9 @@ import { HonourRow } from "./honour-row"
 const NAME =
   "font-heading text-lead font-medium whitespace-nowrap lg:text-subtitle"
 
-function Photo({ item, sizes }: { item: BoardResultItem; sizes: string }) {
-  const photo = item.photo
-  if (!photo) return null
+type MatPhoto = NonNullable<BoardResultItem["photo"]>
+
+function Photo({ photo, sizes }: { photo: MatPhoto; sizes: string }) {
   return (
     <div className="relative aspect-4/5 overflow-clip rounded-lg bg-muted">
       <Image
@@ -37,6 +38,44 @@ function Photo({ item, sizes }: { item: BoardResultItem; sizes: string }) {
         className="object-cover object-top transition-transform duration-(--dur-base) ease-(--ease-settle) motion-safe:group-hover/card:scale-103"
         style={photo.position ? { objectPosition: photo.position } : undefined}
       />
+    </div>
+  )
+}
+
+// The printed mat shared by the board and entrance cards: with a photo, the 4:5
+// picture and then the `chin`; without one, a paper plate that fills the mat
+// and holds `plate`. Either way the card is the same size as its neighbours.
+function ResultMat({
+  photo,
+  sizes,
+  chin,
+  plate,
+  className,
+}: {
+  photo?: MatPhoto
+  sizes: string
+  chin: ReactNode
+  plate: ReactNode
+  className?: string
+}) {
+  return (
+    <div
+      data-slot="result-mat"
+      className={cn(
+        "group/card relative flex flex-1 flex-col rounded-xl border bg-card p-1.5",
+        className,
+      )}
+    >
+      {photo ? (
+        <>
+          <Photo photo={photo} sizes={sizes} />
+          {chin}
+        </>
+      ) : (
+        <div className="flex flex-1 flex-col rounded-lg bg-background">
+          {plate}
+        </div>
+      )}
     </div>
   )
 }
@@ -70,30 +109,26 @@ function BoardResultCard({
       data-slot="board-result-card"
       className={cn("flex h-full flex-col", className)}
     >
-      <div
-        className={cn(
-          "group/card relative flex flex-1 flex-col rounded-xl border bg-card p-1.5",
-          rowOnPhone && "max-md:hidden",
-        )}
-      >
-        {item.photo ? (
-          <>
-            <Photo item={item} sizes={sizes} />
-            <div className="flex flex-1 flex-col px-1.5 pt-3 pb-2">
-              <p className="font-heading text-title whitespace-nowrap tabular-nums lg:text-heading">
-                {item.score}
+      <ResultMat
+        photo={item.photo}
+        sizes={sizes}
+        className={rowOnPhone ? "max-md:hidden" : undefined}
+        chin={
+          <div className="flex flex-1 flex-col px-1.5 pt-3 pb-2">
+            <p className="font-heading text-title whitespace-nowrap tabular-nums lg:text-heading">
+              {item.score}
+            </p>
+            <p className={cn("mt-0.5", NAME)}>{item.name}</p>
+            {item.stream && (
+              <p className="text-sm whitespace-nowrap text-muted-foreground">
+                {item.stream}
               </p>
-              <p className={cn("mt-0.5", NAME)}>{item.name}</p>
-              {item.stream && (
-                <p className="text-sm whitespace-nowrap text-muted-foreground">
-                  {item.stream}
-                </p>
-              )}
-              <Cue item={item} />
-            </div>
-          </>
-        ) : (
-          <div className="flex flex-1 flex-col rounded-lg bg-background">
+            )}
+            <Cue item={item} />
+          </div>
+        }
+        plate={
+          <>
             <div className="flex aspect-4/5 flex-col items-center justify-center gap-1 px-1 text-center">
               <p className="font-heading text-heading whitespace-nowrap tabular-nums">
                 {item.score}
@@ -110,12 +145,12 @@ function BoardResultCard({
                 <Cue item={item} />
               </div>
             )}
-          </div>
-        )}
-      </div>
+          </>
+        }
+      />
       {rowOnPhone && <HonourRow item={item} className="md:hidden" />}
     </div>
   )
 }
 
-export { BoardResultCard }
+export { BoardResultCard, NAME, ResultMat }

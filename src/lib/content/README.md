@@ -21,6 +21,8 @@ Code is grouped by feature rather than layer: each feature file holds its schema
 
 `board-results` (the /results board section) resolves the board records into the latest year (cards), earlier years (honour rows) and the `sheets` the shared result popup reads. It is never dropped: with no records it shows its `empty` line. It replaced the old `results-grid`.
 
+`entrance-results` (the /results entrance section) resolves the `Entrance` records into groups by exam, in the order the section's `groups` lists them (`{ exam, label }`; labels are page data). Empty groups are skipped, years run newest first, and an entrance record whose exam has no group fails the build. Like `board-results` it is never dropped: with no records it shows its `empty` line. Its cards are not clickable.
+
 Faculty sections: `person-feature` (one faculty id, shown large) and `people-grid` (`show: "all" | "all-but-leads"`, in faculty `order`) both resolve through `faculty-display.ts` (one subject name, class ranges, "N years teaching"). Each is dropped when nobody is left to show (e.g. sample faculty in production).
 
 ## Add a collection

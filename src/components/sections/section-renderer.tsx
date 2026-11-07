@@ -3,6 +3,7 @@ import type { ResolvedSection, SectionOf, SectionType } from "@/lib/content"
 import { BoardResultsSection } from "./board-results-section"
 import { CourseGridSection } from "./course-grid-section"
 import { CtaBandSection } from "./cta-band-section"
+import { EntranceResultsSection } from "./entrance-results-section"
 import { FaqSection } from "./faq-section"
 import { FeesSection } from "./fees-section"
 import { HeroSection } from "./hero-section"
@@ -29,6 +30,7 @@ const sectionComponents = {
   "course-grid": CourseGridSection,
   "video-player": VideoPlayerSection,
   "board-results": BoardResultsSection,
+  "entrance-results": EntranceResultsSection,
   "results-board": ResultsBoardSection,
   "testimonial-grid": TestimonialGridSection,
   faq: FaqSection,

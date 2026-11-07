@@ -11,7 +11,12 @@ export const ImageSchema = z.strictObject({
 
 export const IconSchema = z.enum(iconNames)
 
-export const SOCIAL_PLATFORMS = ["facebook", "x", "instagram", "youtube"] as const
+export const SOCIAL_PLATFORMS = [
+  "facebook",
+  "x",
+  "instagram",
+  "youtube",
+] as const
 
 // Add new actions (e.g. "book-demo") here only; sections never change.
 const ActionSchema = z.discriminatedUnion("type", [
@@ -43,7 +48,10 @@ export const LinkSchema = z.strictObject({
 // "ink" (the dark CTA band) is never chosen in data.
 const sectionTone = z.enum(["paper", "muted", "band"])
 
-export const sectionBase = { id: z.string().min(1), tone: sectionTone.optional() }
+export const sectionBase = {
+  id: z.string().min(1),
+  tone: sectionTone.optional(),
+}
 
 // `sample: true` marks an example record: it shows in development and the
 // resolver removes it in production (see content.ts). Collection items that can
@@ -102,22 +110,47 @@ export interface LoadedContent {
     url: string
     seo: { titleTemplate: string; description: string; ogImage?: Image }
     contact: {
-      phones: Array<{ label?: string; e164: string; display: string; whatsapp: boolean }>
+      phones: Array<{
+        label?: string
+        e164: string
+        display: string
+        whatsapp: boolean
+      }>
       emails: string[]
-      hours: Array<{ from: "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun"; to?: "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun"; opens: string; closes: string }>
+      hours: Array<{
+        from: "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun"
+        to?: "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun"
+        opens: string
+        closes: string
+      }>
       whatsappMessage: string
       landmark?: string
       nearestMetro?: string
-      address: { line1: string; line2?: string; locality: string; city: string; state: string; postalCode: string }
+      address: {
+        line1: string
+        line2?: string
+        locality: string
+        city: string
+        state: string
+        postalCode: string
+      }
       mapUrl?: string
       mapEmbedUrl?: string
     }
     socials: Array<{ platform: SocialPlatform; url: string }>
     googleReviews?: { rating: number; count: number; asOf: string; url: string }
     footer: { exploreExtra: Link[]; legal: Link[] }
-    nav: Array<{ label: string; href: string; feature?: "showFaculty" | "showShotCards" | "showFees" }>
+    nav: Array<{
+      label: string
+      href: string
+      feature?: "showFaculty" | "showShotCards" | "showFees"
+    }>
     navCta: Button
-    features: { showFaculty: boolean; showShotCards: boolean; showFees: boolean }
+    features: {
+      showFaculty: boolean
+      showShotCards: boolean
+      showFees: boolean
+    }
   }
   courses: Array<{
     slug: string
@@ -185,11 +218,24 @@ export interface LoadedContent {
     stream?: "Science" | "Commerce" | "Humanities"
     percentage?: number
     subjects?: Array<{ name: string; marks: number }>
-    outcome?: { title: string; note: string; school?: string; status?: "Admitted" | "Selected" }
+    outcome?: {
+      title: string
+      note: string
+      school?: string
+      status?: "Admitted" | "Selected"
+    }
+    entryClass?: 6 | 8 | 9
     course: string
     photo?: Image
     highlight?: boolean
     sample?: boolean
   }>
-  pages: Map<string, { slug: string; seo: Seo; sections: Array<{ type: string; id: string; [key: string]: unknown }> }>
+  pages: Map<
+    string,
+    {
+      slug: string
+      seo: Seo
+      sections: Array<{ type: string; id: string; [key: string]: unknown }>
+    }
+  >
 }

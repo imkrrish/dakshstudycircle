@@ -16,6 +16,7 @@ import { resolveTestimonialGrid } from "./sections/testimonial-grid"
 import { resolveSubjects } from "./sections/subjects"
 import { resolveFees } from "./sections/fees"
 import { resolveBoardResults } from "./sections/board-results"
+import { resolveEntranceResults } from "./sections/entrance-results"
 import { resolveResultsBoard } from "./sections/results-board"
 import { resolveTeachingPlan } from "./sections/teaching-plan"
 import { resolvePersonFeature } from "./sections/person-feature"
@@ -78,6 +79,9 @@ export function resolveSections(
       // Kept even with no records: it then shows its one empty line.
       case "board-results":
         return [resolveBoardResults(section, content)]
+      // Kept even with no records, like board-results.
+      case "entrance-results":
+        return [resolveEntranceResults(section, content)]
       case "teaching-plan":
         return [resolveTeachingPlan(section, content)]
       // Dropped when no one is left to show (sample faculty, in production).
@@ -120,6 +124,7 @@ function resolveOne(
         | "fees"
         | "teaching-plan"
         | "board-results"
+        | "entrance-results"
         | "results-board"
         | "person-feature"
         | "people-grid"

@@ -15,6 +15,10 @@ import {
   type ResolvedBoardResultsSection,
 } from "./board-results"
 import {
+  EntranceResultsSectionSchema,
+  type ResolvedEntranceResultsSection,
+} from "./entrance-results"
+import {
   ResultsBoardSectionSchema,
   type ResolvedResultsBoardSection,
 } from "./results-board"
@@ -44,6 +48,7 @@ export const SectionSchema = z.discriminatedUnion("type", [
   CourseGridSectionSchema,
   VideoPlayerSectionSchema,
   BoardResultsSectionSchema,
+  EntranceResultsSectionSchema,
   ResultsBoardSectionSchema,
   TestimonialGridSectionSchema,
   FaqSectionSchema,
@@ -66,6 +71,7 @@ export type UntonedSection =
           | "course-grid"
           | "video-player"
           | "board-results"
+          | "entrance-results"
           | "results-board"
           | "testimonial-grid"
           | "subjects"
@@ -77,6 +83,7 @@ export type UntonedSection =
   | ResolvedCourseGridSection
   | ResolvedVideoPlayerSection
   | ResolvedBoardResultsSection
+  | ResolvedEntranceResultsSection
   | ResolvedResultsBoardSection
   | ResolvedTestimonialGridSection
   | ResolvedSubjectsSection

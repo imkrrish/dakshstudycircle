@@ -33,6 +33,17 @@ export const results: Page = {
       empty: "Board results will be added here.",
     },
     {
+      id: "entrance-results",
+      type: "entrance-results",
+      heading: "RMS, RIMC and Sainik School entrance",
+      empty: "Entrance results will be added here.",
+      groups: [
+        { exam: "RMS CET", label: "Rashtriya Military Schools" },
+        { exam: "RIMC", label: "Rashtriya Indian Military College" },
+        { exam: "AISSEE", label: "Sainik Schools" },
+      ],
+    },
+    {
       id: "cta",
       type: "cta-band",
       variant: "dark",

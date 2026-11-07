@@ -23,6 +23,7 @@ import type {
 import type { ResolvedCourseGridSection } from "./sections/course-grid"
 import type { ResolvedVideoPlayerSection } from "./sections/video-player"
 import type { ResolvedBoardResultsSection } from "./sections/board-results"
+import type { ResolvedEntranceResultsSection } from "./sections/entrance-results"
 import type { ResolvedResultsBoardSection } from "./sections/results-board"
 import type { ResolvedTestimonialGridSection } from "./sections/testimonial-grid"
 
@@ -97,6 +98,7 @@ export type {
   Page,
   ResolvedBoardResultsSection,
   ResolvedCourseGridSection,
+  ResolvedEntranceResultsSection,
   ResolvedResultsBoardSection,
   ResolvedSection,
   ResolvedTestimonialGridSection,
