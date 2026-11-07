@@ -2,19 +2,40 @@ import { z } from "zod"
 import { HeroSectionSchema } from "./hero"
 import { SplitSectionSchema } from "./split"
 import { ReasonListSectionSchema } from "./reason-list"
-import { CourseGridSectionSchema, type ResolvedCourseGridSection } from "./course-grid"
-import { VideoPlayerSectionSchema, type ResolvedVideoPlayerSection } from "./video-player"
-import { ResultsGridSectionSchema, type ResolvedResultsGridSection } from "./results-grid"
-import { ResultsBoardSectionSchema, type ResolvedResultsBoardSection } from "./results-board"
-import { TestimonialGridSectionSchema, type ResolvedTestimonialGridSection } from "./testimonial-grid"
+import {
+  CourseGridSectionSchema,
+  type ResolvedCourseGridSection,
+} from "./course-grid"
+import {
+  VideoPlayerSectionSchema,
+  type ResolvedVideoPlayerSection,
+} from "./video-player"
+import {
+  BoardResultsSectionSchema,
+  type ResolvedBoardResultsSection,
+} from "./board-results"
+import {
+  ResultsBoardSectionSchema,
+  type ResolvedResultsBoardSection,
+} from "./results-board"
+import {
+  TestimonialGridSectionSchema,
+  type ResolvedTestimonialGridSection,
+} from "./testimonial-grid"
 import { FaqSectionSchema } from "./faq"
 import { CtaBandSectionSchema } from "./cta-band"
 import { SubjectsSectionSchema, type ResolvedSubjectsSection } from "./subjects"
 import { TeachingPlanSectionSchema } from "./teaching-plan"
 import { FeesSectionSchema, type ResolvedFeesSection } from "./fees"
 import { LinkListSectionSchema } from "./link-list"
-import { PersonFeatureSectionSchema, type ResolvedPersonFeatureSection } from "./person-feature"
-import { PeopleGridSectionSchema, type ResolvedPeopleGridSection } from "./people-grid"
+import {
+  PersonFeatureSectionSchema,
+  type ResolvedPersonFeatureSection,
+} from "./person-feature"
+import {
+  PeopleGridSectionSchema,
+  type ResolvedPeopleGridSection,
+} from "./people-grid"
 
 export const SectionSchema = z.discriminatedUnion("type", [
   HeroSectionSchema,
@@ -22,7 +43,7 @@ export const SectionSchema = z.discriminatedUnion("type", [
   ReasonListSectionSchema,
   CourseGridSectionSchema,
   VideoPlayerSectionSchema,
-  ResultsGridSectionSchema,
+  BoardResultsSectionSchema,
   ResultsBoardSectionSchema,
   TestimonialGridSectionSchema,
   FaqSectionSchema,
@@ -44,7 +65,7 @@ export type UntonedSection =
         type:
           | "course-grid"
           | "video-player"
-          | "results-grid"
+          | "board-results"
           | "results-board"
           | "testimonial-grid"
           | "subjects"
@@ -55,7 +76,7 @@ export type UntonedSection =
     >
   | ResolvedCourseGridSection
   | ResolvedVideoPlayerSection
-  | ResolvedResultsGridSection
+  | ResolvedBoardResultsSection
   | ResolvedResultsBoardSection
   | ResolvedTestimonialGridSection
   | ResolvedSubjectsSection
@@ -66,11 +87,15 @@ export type UntonedSection =
 // The background a section renders with (see tones.ts). "ink" is the dark CTA.
 export type ResolvedTone = "paper" | "muted" | "band" | "ink"
 
-type WithTone<T> = T extends unknown ? Omit<T, "tone"> & { tone: ResolvedTone } : never
+type WithTone<T> = T extends unknown
+  ? Omit<T, "tone"> & { tone: ResolvedTone }
+  : never
 
 // Sections as components receive them: references resolved, tone assigned.
 export type ResolvedSection = WithTone<UntonedSection>
 
 export type SectionType = ResolvedSection["type"]
-export type SectionOf<T extends SectionType> = Extract<ResolvedSection, { type: T }>
-
+export type SectionOf<T extends SectionType> = Extract<
+  ResolvedSection,
+  { type: T }
+>

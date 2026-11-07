@@ -1,9 +1,6 @@
 import type { ReactNode } from "react"
-import type {
-  ResolvedSection,
-  SectionOf,
-  SectionType,
-} from "@/lib/content"
+import type { ResolvedSection, SectionOf, SectionType } from "@/lib/content"
+import { BoardResultsSection } from "./board-results-section"
 import { CourseGridSection } from "./course-grid-section"
 import { CtaBandSection } from "./cta-band-section"
 import { FaqSection } from "./faq-section"
@@ -14,7 +11,6 @@ import { PeopleGridSection } from "./people-grid-section"
 import { PersonFeatureSection } from "./person-feature-section"
 import { ReasonListSection } from "./reason-list-section"
 import { ResultsBoardSection } from "./results-board-section"
-import { ResultsGridSection } from "./results-grid-section"
 import { SplitSection } from "./split-section"
 import { SubjectsSection } from "./subjects-section"
 import { TeachingPlanSection } from "./teaching-plan-section"
@@ -32,7 +28,7 @@ const sectionComponents = {
   "reason-list": ReasonListSection,
   "course-grid": CourseGridSection,
   "video-player": VideoPlayerSection,
-  "results-grid": ResultsGridSection,
+  "board-results": BoardResultsSection,
   "results-board": ResultsBoardSection,
   "testimonial-grid": TestimonialGridSection,
   faq: FaqSection,

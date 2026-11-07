@@ -22,7 +22,7 @@ import type {
 } from "./sections"
 import type { ResolvedCourseGridSection } from "./sections/course-grid"
 import type { ResolvedVideoPlayerSection } from "./sections/video-player"
-import type { ResolvedResultsGridSection } from "./sections/results-grid"
+import type { ResolvedBoardResultsSection } from "./sections/board-results"
 import type { ResolvedResultsBoardSection } from "./sections/results-board"
 import type { ResolvedTestimonialGridSection } from "./sections/testimonial-grid"
 
@@ -57,6 +57,11 @@ async function getFaculty(): Promise<Faculty[]> {
   return content.faculty
 }
 
+// All results, newest year first; sample records are already stripped in production.
+async function getResults(): Promise<Result[]> {
+  return content.results
+}
+
 async function getCourse(slug: string): Promise<ResolvedCourse> {
   const course = content.courses.find((c) => c.slug === slug)
   if (!course) {
@@ -71,7 +76,15 @@ async function getCourse(slug: string): Promise<ResolvedCourse> {
   return { ...course, sections: resolveSections(shown, content, course) }
 }
 
-export { getSite, getNav, getPage, getCourses, getCourse, getFaculty }
+export {
+  getSite,
+  getNav,
+  getPage,
+  getCourses,
+  getCourse,
+  getFaculty,
+  getResults,
+}
 
 export { yearsOfTeaching } from "./collections/faculty"
 
@@ -82,9 +95,9 @@ export type {
   Image,
   NavItem,
   Page,
+  ResolvedBoardResultsSection,
   ResolvedCourseGridSection,
   ResolvedResultsBoardSection,
-  ResolvedResultsGridSection,
   ResolvedSection,
   ResolvedTestimonialGridSection,
   ResolvedVideoPlayerSection,

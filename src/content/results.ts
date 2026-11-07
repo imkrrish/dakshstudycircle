@@ -147,13 +147,6 @@ export const results: Result[] = [
     studentName: "Aditya Yadav",
     year: 2026,
     percentage: 87.2,
-    subjects: sub(
-      ["Maths", 91],
-      ["Science", 86],
-      ["English", 84],
-      ["Hindi", 87],
-      ["Social Studies", 88],
-    ),
     photo: pic("03"),
   },
   {
@@ -177,13 +170,6 @@ export const results: Result[] = [
     studentName: "Kunal Mehra",
     year: 2026,
     percentage: 84.6,
-    subjects: sub(
-      ["Maths", 89],
-      ["Science", 82],
-      ["English", 83],
-      ["Hindi", 84],
-      ["Social Studies", 85],
-    ),
   },
 
   // ---------- 2025 · Class 10 ----------
@@ -211,7 +197,6 @@ export const results: Result[] = [
     studentName: "Devansh Kapoor",
     year: 2025,
     percentage: 88.0,
-    subjects: sub(["Maths", 92], ["Science", 86]),
   },
   {
     ...class10,
@@ -236,7 +221,6 @@ export const results: Result[] = [
     studentName: "Lakshmi Iyer",
     year: 2025,
     percentage: 83.4,
-    subjects: sub(["Maths", 85], ["Science", 82], ["English", 86]),
     photo: pic("02"),
   },
 
@@ -256,7 +240,6 @@ export const results: Result[] = [
     studentName: "Gurpreet Singh",
     year: 2024,
     percentage: 90.6,
-    subjects: sub(["Maths", 93], ["Science", 90], ["English", 87]),
   },
   {
     ...class10,
@@ -273,7 +256,6 @@ export const results: Result[] = [
     studentName: "Samuel D'Souza",
     year: 2024,
     percentage: 84.2,
-    subjects: sub(["Maths", 86], ["Science", 82], ["English", 88]),
     photo: pic("07"),
   },
   {
@@ -315,7 +297,6 @@ export const results: Result[] = [
     studentName: "Pallavi Nair",
     year: 2023,
     percentage: 89.0,
-    subjects: sub(["Maths", 91], ["Science", 88], ["English", 90]),
   },
   {
     ...class10,
@@ -390,7 +371,6 @@ export const results: Result[] = [
     studentName: "Kavya Negi",
     year: 2026,
     percentage: 90.6,
-    subjects: sub(["Accountancy", 94], ["Economics", 91]),
     photo: pic("08"),
   },
   {
@@ -450,7 +430,6 @@ export const results: Result[] = [
     studentName: "Mohit Pundir",
     year: 2025,
     percentage: 89.2,
-    subjects: sub(["Physics", 88], ["Chemistry", 90], ["Maths", 93]),
   },
   {
     ...commerce,
@@ -512,7 +491,6 @@ export const results: Result[] = [
     studentName: "Karan Bisht",
     year: 2024,
     percentage: 85.2,
-    subjects: sub(["Physics", 83], ["Chemistry", 85], ["Mathematics", 88]),
     photo: pic("06"),
   },
   {
@@ -566,11 +544,6 @@ export const results: Result[] = [
     studentName: "Rohit Aggarwal",
     year: 2023,
     percentage: 88.2,
-    subjects: sub(
-      ["Accountancy", 91],
-      ["Business Studies", 87],
-      ["Economics", 86],
-    ),
     photo: pic("01"),
   },
   {
@@ -600,7 +573,6 @@ export const results: Result[] = [
     studentName: "Abhay Pal",
     year: 2023,
     percentage: 86.0,
-    subjects: sub(["Political Science", 88], ["History", 85], ["English", 84]),
   },
 
   // ---------- Entrance ----------

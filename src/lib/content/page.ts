@@ -15,7 +15,7 @@ import { resolveVideoPlayer } from "./sections/video-player"
 import { resolveTestimonialGrid } from "./sections/testimonial-grid"
 import { resolveSubjects } from "./sections/subjects"
 import { resolveFees } from "./sections/fees"
-import { resolveResultsGrid } from "./sections/results-grid"
+import { resolveBoardResults } from "./sections/board-results"
 import { resolveResultsBoard } from "./sections/results-board"
 import { resolveTeachingPlan } from "./sections/teaching-plan"
 import { resolvePersonFeature } from "./sections/person-feature"
@@ -31,7 +31,9 @@ export const PageSchema = z.strictObject({
 })
 
 export type Page = z.infer<typeof PageSchema>
-export type ResolvedPage = Omit<Page, "sections"> & { sections: ResolvedSection[] }
+export type ResolvedPage = Omit<Page, "sections"> & {
+  sections: ResolvedSection[]
+}
 
 // ---------- Course Page Slot / Template ----------
 
@@ -66,15 +68,16 @@ export function resolveSections(
       case "subjects":
         return [resolveSubjects(section, requireCourse(section.id, course))]
       case "fees": {
-        const fees = resolveFees(section, content, requireCourse(section.id, course))
+        const fees = resolveFees(
+          section,
+          content,
+          requireCourse(section.id, course),
+        )
         return fees ? [fees] : []
       }
-      // A section with nothing left to show (e.g. only sample results, in
-      // production) is dropped rather than rendered empty.
-      case "results-grid": {
-        const resolved = resolveResultsGrid(section, content)
-        return resolved.items.length > 0 ? [resolved] : []
-      }
+      // Kept even with no records: it then shows its one empty line.
+      case "board-results":
+        return [resolveBoardResults(section, content)]
       case "teaching-plan":
         return [resolveTeachingPlan(section, content)]
       // Dropped when no one is left to show (sample faculty, in production).
@@ -116,7 +119,7 @@ function resolveOne(
         | "subjects"
         | "fees"
         | "teaching-plan"
-        | "results-grid"
+        | "board-results"
         | "results-board"
         | "person-feature"
         | "people-grid"
@@ -145,7 +148,11 @@ function resolveOne(
 
 // ---------- Validation ----------
 
-export function checkSections(label: string, sections: Section[], errors: string[]) {
+export function checkSections(
+  label: string,
+  sections: Section[],
+  errors: string[],
+) {
   if (sections[0]?.type !== "hero") {
     errors.push(
       `${label}: first section must be a hero (got ${sections[0] ? `"${sections[0].type}"` : "no sections"})`,
@@ -179,7 +186,10 @@ export function checkSections(label: string, sections: Section[], errors: string
     if (hero.facts) errors.push(`${label}: facts belong on a compact hero`)
   }
   for (const section of sections) {
-    if ((section.type === "hero" || section.type === "cta-band") && section.tone) {
+    if (
+      (section.type === "hero" || section.type === "cta-band") &&
+      section.tone
+    ) {
       errors.push(
         `${label}: "${section.id}" (${section.type}) has a fixed tone, remove "tone"`,
       )
@@ -193,7 +203,11 @@ export function checkSections(label: string, sections: Section[], errors: string
   }
 }
 
-export function checkPageSections(label: string, sections: Section[], errors: string[]) {
+export function checkPageSections(
+  label: string,
+  sections: Section[],
+  errors: string[],
+) {
   for (const section of sections) {
     if (
       section.type === "subjects" ||

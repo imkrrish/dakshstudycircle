@@ -6,10 +6,7 @@ import { SectionHeading } from "@/components/layout/section-heading"
 import { ActionButton } from "@/components/shared/action-button"
 import { DetailsList } from "@/components/shared/details-list"
 import { TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import type {
-  ResolvedResultsBoardSection,
-  SectionOf,
-} from "@/lib/content"
+import type { ResolvedResultsBoardSection, SectionOf } from "@/lib/content"
 
 import { ResultsBoardIndicator, ResultsBoardTabs } from "./results-board-tabs"
 
@@ -22,6 +19,33 @@ type Item = ResolvedResultsBoardSection["years"][number]["items"][number]
 // text and nothing extra is read out. The summary's accessible name is its
 // content: name, score, meta and the hidden "show ..." hint.
 function ResultRow({ item }: { item: Item }) {
+  // A record with no subject marks has nothing to expand: a plain row, with
+  // no plus and no hint.
+  if (!item.subjects) {
+    return (
+      <li>
+        <div className="flex min-h-11 w-full flex-col gap-0.5 py-3.5">
+          <span className="flex flex-wrap items-baseline gap-x-1.5 sm:flex-nowrap sm:gap-x-3">
+            <span className="flex min-w-0 flex-1 items-baseline gap-2 after:leader after:min-w-2 after:flex-1 sm:after:min-w-4">
+              <h3 className="font-heading text-subtitle">{item.name}</h3>
+            </span>
+            {item.outcome ? (
+              <span className="order-last basis-full font-heading text-sm tracking-tight [font-variant-caps:small-caps] sm:order-none sm:basis-auto sm:text-lead sm:tracking-normal sm:whitespace-nowrap">
+                {item.outcome.status} · {item.outcome.school}
+              </span>
+            ) : (
+              <span className="min-w-18 text-right font-heading text-title whitespace-nowrap tabular-nums">
+                {item.score}
+              </span>
+            )}
+          </span>
+          {item.meta && (
+            <span className="text-sm text-muted-foreground">{item.meta}</span>
+          )}
+        </div>
+      </li>
+    )
+  }
   return (
     <li>
       <details className="group">
@@ -47,11 +71,9 @@ function ResultRow({ item }: { item: Item }) {
           {item.meta && (
             <span className="text-sm text-muted-foreground">{item.meta}</span>
           )}
-          <span className="sr-only group-open:hidden">
-            {item.subjects ? "Show subject marks" : "Show details"}
-          </span>
+          <span className="sr-only group-open:hidden">Show subject marks</span>
           <span className="sr-only hidden group-open:inline">
-            {item.subjects ? "Hide subject marks" : "Hide details"}
+            Hide subject marks
           </span>
         </summary>
         <div data-details-body className="overflow-hidden">

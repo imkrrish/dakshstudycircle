@@ -9,10 +9,7 @@ import {
 } from "./collections/courses"
 import { FacultySchema, type Faculty } from "./collections/faculty"
 import { VideoSchema, type Video } from "./collections/videos"
-import {
-  TestimonialSchema,
-  type Testimonial,
-} from "./collections/testimonials"
+import { TestimonialSchema, type Testimonial } from "./collections/testimonials"
 import { ResultSchema, type Result } from "./collections/results"
 import {
   contactPlaceholders,
@@ -20,12 +17,8 @@ import {
   checkPlaceholders,
 } from "./placeholders"
 import { checkCourseGrids } from "./sections/course-grid"
-import {
-  checkVideoPlayers,
-  checkSocialActions,
-} from "./sections/video-player"
+import { checkVideoPlayers, checkSocialActions } from "./sections/video-player"
 import { checkTestimonialGrids } from "./sections/testimonial-grid"
-import { checkResultsGrids } from "./sections/results-grid"
 import { checkResultsBoards } from "./sections/results-board"
 import { checkPersonFeatures } from "./sections/person-feature"
 import { site as rawSite } from "@/content/site"
@@ -215,7 +208,6 @@ function loadContent() {
     checkCourseGrids(`pages/${key}`, page.sections, courseSlugs, errors)
     checkVideoPlayers(`pages/${key}`, page.sections, videoIds, errors)
     checkTestimonialGrids(`pages/${key}`, page.sections, testimonials, errors)
-    checkResultsGrids(`pages/${key}`, page.sections, results, errors)
     checkResultsBoards(`pages/${key}`, page.sections, results, errors)
     checkPersonFeatures(`pages/${key}`, page.sections, facultyIds, errors)
     checkSocialActions(`pages/${key}`, page.sections, socialPlatforms, errors)
@@ -245,12 +237,6 @@ function loadContent() {
       `courses/${course.slug}`,
       course.sections,
       testimonials,
-      errors,
-    )
-    checkResultsGrids(
-      `courses/${course.slug}`,
-      course.sections,
-      results,
       errors,
     )
     checkResultsBoards(

@@ -26,6 +26,13 @@ export const results: Page = {
       },
     },
     {
+      id: "board-results",
+      type: "board-results",
+      tone: "muted",
+      heading: "Class 10 and 12 board exams",
+      empty: "Board results will be added here.",
+    },
+    {
       id: "cta",
       type: "cta-band",
       variant: "dark",
