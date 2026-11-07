@@ -10,6 +10,8 @@ import { HeroSection } from "./hero-section"
 import { LinkListSection } from "./link-list-section"
 import { PeopleGridSection } from "./people-grid-section"
 import { PersonFeatureSection } from "./person-feature-section"
+import { PointGridSection } from "./point-grid-section"
+import { ProseSection } from "./prose-section"
 import { ReasonListSection } from "./reason-list-section"
 import { ResultsBoardSection } from "./results-board-section"
 import { SplitSection } from "./split-section"
@@ -27,6 +29,8 @@ const sectionComponents = {
   hero: HeroSection,
   split: SplitSection,
   "reason-list": ReasonListSection,
+  "point-grid": PointGridSection,
+  prose: ProseSection,
   "course-grid": CourseGridSection,
   "video-player": VideoPlayerSection,
   "board-results": BoardResultsSection,

@@ -18,7 +18,7 @@ export const about: Page = {
       eyebrow: "About Daksh Study Circle",
       heading: ["Your quest for knowledge", "ends here."],
       subheading:
-        "Teaching CBSE students in Sadar Bazaar, Delhi Cantt, since July 2005.",
+        "Coaching for school and college students in Sadar Bazaar, Delhi Cantt.",
       media: {
         image: {
           src: "/images/classroom/classroom-test-day.avif",
@@ -30,13 +30,22 @@ export const about: Page = {
       },
     },
     {
+      id: "story",
+      type: "prose",
+      heading: "How Daksh began",
+      paragraphs: [
+        "Daksh Study Circle started in July 2005. Since then, the aim has been to give students good teaching, and over the years it has become a name in coaching that families rely on.",
+        "It has come a long way. It still feels like a beginning.",
+      ],
+    },
+    {
       id: "year",
-      type: "reason-list",
+      type: "point-grid",
       heading: "How a year runs at Daksh",
       items: [
         {
           title: "Batches at different times",
-          body: "Classes run in 4 classrooms, with batches at different timings to suit students.",
+          body: "Classes run in 4 classrooms, with batches at different timings to suit students.",
         },
         {
           title: "Syllabus first, then revision",
@@ -44,7 +53,7 @@ export const about: Page = {
         },
         {
           title: "Study material and tests",
-          body: "Students get study material and take regular tests, including a test series.",
+          body: "Students get study material and take regular tests, including a test series.",
         },
         {
           title: "Parents stay in touch",
