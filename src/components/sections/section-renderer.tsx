@@ -16,6 +16,7 @@ import { ReasonListSection } from "./reason-list-section"
 import { ResultsBoardSection } from "./results-board-section"
 import { SplitSection } from "./split-section"
 import { SubjectsSection } from "./subjects-section"
+import { ValuesSection } from "./values-section"
 import { TeachingPlanSection } from "./teaching-plan-section"
 import { TestimonialGridSection } from "./testimonial-grid-section"
 import { VideoPlayerSection } from "./video-player-section"
@@ -31,6 +32,7 @@ const sectionComponents = {
   "reason-list": ReasonListSection,
   "point-grid": PointGridSection,
   prose: ProseSection,
+  values: ValuesSection,
   "course-grid": CourseGridSection,
   "video-player": VideoPlayerSection,
   "board-results": BoardResultsSection,

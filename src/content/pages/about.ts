@@ -39,6 +39,17 @@ export const about: Page = {
       ],
     },
     {
+      id: "values",
+      type: "values",
+      heading: "What Daksh believes",
+      lines: [
+        "Learning should be easy, interesting and meaningful.",
+        "Students should grow into aware citizens, not only educated ones.",
+        "Students are guided towards their own dreams and careers, not only towards a job.",
+      ],
+      pullLine: "A home away from home.",
+    },
+    {
       id: "year",
       type: "point-grid",
       heading: "How a year runs at Daksh",

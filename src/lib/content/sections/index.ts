@@ -4,6 +4,7 @@ import { SplitSectionSchema } from "./split"
 import { ReasonListSectionSchema } from "./reason-list"
 import { PointGridSectionSchema } from "./point-grid"
 import { ProseSectionSchema } from "./prose"
+import { ValuesSectionSchema } from "./values"
 import {
   CourseGridSectionSchema,
   type ResolvedCourseGridSection,
@@ -49,6 +50,7 @@ export const SectionSchema = z.discriminatedUnion("type", [
   ReasonListSectionSchema,
   PointGridSectionSchema,
   ProseSectionSchema,
+  ValuesSectionSchema,
   CourseGridSectionSchema,
   VideoPlayerSectionSchema,
   BoardResultsSectionSchema,
