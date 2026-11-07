@@ -36,6 +36,13 @@ import { videos as rawVideos } from "@/content/videos"
 import { testimonials as rawTestimonials } from "@/content/testimonials"
 import { results as rawResults } from "@/content/results"
 
+// Entry classes each entrance exam admits to.
+const ENTRY_CLASSES: Record<string, number[]> = {
+  "RMS CET": [6, 9],
+  AISSEE: [6, 9],
+  RIMC: [8],
+}
+
 // ---------- Validation (runs once, when this module loads) ----------
 
 function loadContent() {
@@ -136,6 +143,21 @@ function loadContent() {
       errors.push(
         `${label}: stream is required for Class 12 and only for Class 12`,
       )
+    }
+    if ((parsed.class === "Entrance") !== (parsed.entryClass !== undefined)) {
+      errors.push(
+        `${label}: entryClass is required for entrance results and only for them`,
+      )
+    }
+    if (parsed.entryClass !== undefined) {
+      const allowed = ENTRY_CLASSES[parsed.exam]
+      if (!allowed) {
+        errors.push(`${label}: unknown entrance exam "${parsed.exam}"`)
+      } else if (!allowed.includes(parsed.entryClass)) {
+        errors.push(
+          `${label}: ${parsed.exam} does not admit to class ${parsed.entryClass} (allowed: ${allowed.join(" or ")})`,
+        )
+      }
     }
     if (parsed.photo && !parsed.photo.src.startsWith("/")) {
       errors.push(`${label}: photo src must start with "/"`)

@@ -87,6 +87,11 @@ function ResultRow({ item }: { item: Item }) {
                   fill
                   sizes="7rem"
                   className="object-cover object-top"
+                  style={
+                    item.photo.position
+                      ? { objectPosition: item.photo.position }
+                      : undefined
+                  }
                 />
               </div>
             )}

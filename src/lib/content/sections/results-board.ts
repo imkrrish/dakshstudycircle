@@ -1,5 +1,6 @@
 import { z } from "zod"
 import { ButtonSchema, ImageSchema, sectionBase, type LoadedContent } from "../shared"
+import { ResultPhotoSchema } from "../collections/results"
 import { findCourse } from "./course-grid"
 
 type CourseLike = { slug: string; [k: string]: unknown }
@@ -51,7 +52,7 @@ const ResolvedResultsBoardSectionSchema = z.strictObject({
               subjects: z
                 .array(z.strictObject({ name: z.string(), marks: z.number() }))
                 .optional(),
-              photo: ImageSchema.optional(),
+              photo: ResultPhotoSchema.optional(),
             }),
           )
           .min(1),

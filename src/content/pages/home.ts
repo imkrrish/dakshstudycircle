@@ -157,6 +157,7 @@ export const home: Page = {
         "A few board results and school admissions from the last three years.",
       boardTitle: "Honour Board",
       perYear: 6,
+      years: 3,
       actions: [
         {
           label: "See all results",

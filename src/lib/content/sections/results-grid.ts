@@ -1,5 +1,6 @@
 import { z } from "zod"
 import { ButtonSchema, ImageSchema, sectionBase, type LoadedContent } from "../shared"
+import { ResultPhotoSchema } from "../collections/results"
 import { findCourse } from "./course-grid"
 
 const resultsGridBase = {
@@ -27,7 +28,7 @@ const ResolvedResultsGridSectionSchema = z.strictObject({
       z.strictObject({
         id: z.string(),
         name: z.string(),
-        photo: ImageSchema.optional(),
+        photo: ResultPhotoSchema.optional(),
         headline: z.string(),
         meta: z.string(),
         subjects: z.string().optional(),

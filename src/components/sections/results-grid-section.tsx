@@ -59,6 +59,11 @@ function ResultItem({ item }: { item: Item }) {
             fill
             sizes="(min-width: 1024px) 13rem, (min-width: 768px) 30vw, 4.5rem"
             className="object-cover object-top"
+            style={
+              item.photo.position
+                ? { objectPosition: item.photo.position }
+                : undefined
+            }
           />
         ) : (
           <span

@@ -13,7 +13,7 @@ export const results: Page = {
       type: "hero",
       size: "compact",
       breadcrumbs: [{ label: "Home", href: "/" }, { label: "Results" }],
-      heading: ["Board marks and", "entrance selections"],
+      heading: ["Class 10, Class 12 and", "defence school entrance"],
       subheading: "Coaching CBSE students in Delhi Cantt since 2005.",
       media: {
         image: {
