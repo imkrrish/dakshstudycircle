@@ -1,6 +1,4 @@
 import Image from "next/image"
-import { HugeiconsIcon } from "@hugeicons/react"
-import { ArrowRight01Icon } from "@hugeicons/core-free-icons"
 import { cn } from "cn"
 
 import type { BoardResultItem } from "@/lib/content/sections/board-results"
@@ -11,7 +9,7 @@ import { HonourRow } from "./honour-row"
 // The newest year's card: a printed mat (card paper, hairline edge, the
 // picture at 4:5 inside) with the percentage and name lettered in the chin
 // under the picture, and the stream in a quiet line for Class 12. A student
-// with subject marks gets a text cue, "View marksheet" and an arrow, on a
+// with subject marks gets a text cue, "View marksheet", on a
 // button stretched over the whole card; one without has neither cue nor button.
 //
 // Without a photo the inside of the mat is one paper plate that fills it, so
@@ -49,15 +47,9 @@ function Cue({ item }: { item: BoardResultItem }) {
     <ResultSheetButton
       sheetId={item.id}
       aria-label={`View marksheet, ${item.name}`}
-      className="mt-auto inline-flex cursor-pointer items-center gap-1 self-start pt-2 text-left text-sm font-medium whitespace-nowrap text-foreground/80 transition-colors duration-(--dur-base) group-hover/card:text-foreground after:absolute after:inset-0 after:rounded-xl focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-offset-2 focus-visible:after:outline-ring motion-reduce:transition-none"
+      className="mt-auto inline-flex cursor-pointer items-center self-start pt-2 text-left text-sm font-medium whitespace-nowrap text-foreground/80 transition-colors duration-(--dur-base) group-hover/card:text-foreground after:absolute after:inset-0 after:rounded-xl focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-offset-2 focus-visible:after:outline-ring motion-reduce:transition-none"
     >
       View marksheet
-      <HugeiconsIcon
-        icon={ArrowRight01Icon}
-        strokeWidth={2}
-        aria-hidden
-        className="size-4 transition-transform duration-(--dur-base) ease-(--ease-settle) motion-safe:group-hover/card:translate-x-1 motion-reduce:transition-none"
-      />
     </ResultSheetButton>
   )
 }
