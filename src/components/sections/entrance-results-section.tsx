@@ -11,8 +11,8 @@ import { SettleIn } from "./settle-in"
 type Group = ResolvedEntranceResultsSection["groups"][number]
 type Item = Group["items"][number]
 
-// The same card sizes as the board section's 4-up cards.
-const CARD_SIZES = "(min-width: 1024px) 17rem, (min-width: 768px) 15rem, 50vw"
+// The same card sizes as the board section's cards.
+const CARD_SIZES = "(min-width: 768px) 15rem, 50vw"
 
 // "Sainik School, Kunjpura": the comma may break the line, but "Sainik School"
 // and the place never split inside. A longer head ("Rashtriya Military
@@ -32,8 +32,9 @@ function SchoolLine({ school }: { school: Item["school"] }) {
 }
 
 // The name and the quiet line under the picture ("Admitted · Class 6 · 2026"),
-// pinned to the bottom so the lines align across a row of unequal chins. The
-// line can only break before a dot, never inside "Class 6".
+// pinned to the bottom so the lines align across a row of unequal chins. Each
+// dot is glued to the part before it (no-break space), so the line can only
+// break after a dot, never inside "Class 6" and never before one.
 function Chin({ item, showSchool }: { item: Item; showSchool: boolean }) {
   return (
     <div className="flex flex-1 flex-col px-1.5 pt-3 pb-2">
@@ -44,9 +45,9 @@ function Chin({ item, showSchool }: { item: Item; showSchool: boolean }) {
         </p>
       )}
       <p className="mt-auto pt-2 text-sm text-muted-foreground">
-        <span className="whitespace-nowrap">{item.status}</span>{" "}
-        <span className="whitespace-nowrap">· {item.entryClass}</span>{" "}
-        <span className="whitespace-nowrap">· {item.year}</span>
+        <span className="whitespace-nowrap">{item.status}&nbsp;·</span>{" "}
+        <span className="whitespace-nowrap">{item.entryClass}&nbsp;·</span>{" "}
+        <span className="whitespace-nowrap tabular-nums">{item.year}</span>
       </p>
     </div>
   )
@@ -84,39 +85,18 @@ function EntranceResultCard({ item }: { item: Item }) {
   )
 }
 
-// One exam: its label on the left from md (the first column of the board's
-// grid), the cards in the other columns; on a phone the label sits above the
-// cards. A group of one card keeps the label beside it on a phone too, so it
-// reads as a plaque, not an orphan.
+// One exam: its label on top (the same placement as the board section's class
+// labels), then the cards on the board's grid: 2 across on a phone, 3 from md,
+// 4 from lg, capped at the board's width.
 function EntranceGroup({ group }: { group: Group }) {
-  const single = group.items.length === 1
   return (
-    <div
-      data-slot="entrance-group"
-      className={cn(
-        "md:grid md:grid-cols-3 md:gap-x-3 lg:grid-cols-4",
-        single ? "grid grid-cols-2 gap-x-3" : "flex flex-col gap-5",
-      )}
-    >
-      <div className="flex flex-col gap-0.5">
-        <h3 className="font-heading text-title text-balance">{group.label}</h3>
-        <p className="text-sm whitespace-nowrap text-muted-foreground">
-          {group.exam}
-        </p>
-      </div>
-      <SettleIn
-        className={cn(
-          "flex flex-wrap gap-x-3 gap-y-6 md:col-span-2 md:justify-start lg:col-span-3",
-          !single && "justify-center",
-        )}
-      >
+    <div data-slot="entrance-group" className="flex flex-col gap-5">
+      <h3 className="font-heading text-title text-balance">{group.label}</h3>
+      <SettleIn className="flex flex-wrap justify-start gap-x-3 gap-y-6 lg:max-w-240">
         {group.items.map((item) => (
           <li
             key={item.id}
-            className={cn(
-              single ? "w-full" : "w-[calc(50%-0.375rem)]",
-              "md:w-[calc((100%-0.75rem)/2)] lg:w-[calc((100%-1.5rem)/3)]",
-            )}
+            className="w-[calc(50%-0.375rem)] md:w-[calc((100%-1.5rem)/3)] lg:w-[calc((100%-2.25rem)/4)]"
           >
             <EntranceResultCard item={item} />
           </li>
@@ -143,15 +123,18 @@ function EntranceResultsSection({
       aria-labelledby={`${id}-heading`}
     >
       <Container className="flex flex-col gap-10 md:gap-12">
-        <SectionHeading id={`${id}-heading`} title={heading} />
-        {groups.length > 0 ? (
+        {/* The empty line is the heading's own intro (see the board section). */}
+        <SectionHeading
+          id={`${id}-heading`}
+          title={heading}
+          intro={groups.length > 0 ? undefined : empty}
+        />
+        {groups.length > 0 && (
           <div className="flex flex-col gap-12 md:gap-14">
             {groups.map((group) => (
               <EntranceGroup key={group.exam} group={group} />
             ))}
           </div>
-        ) : (
-          <p className="text-intro text-muted-foreground">{empty}</p>
         )}
       </Container>
     </Section>

@@ -18,7 +18,7 @@ type Item = YearData["class10"][number]
 // class turns into honour rows, so the newest year is never a wall of cards.
 // From md every record is a card.
 const CARDS_ON_PHONE = 4
-const CARD_SIZES = "(min-width: 1024px) 17rem, (min-width: 768px) 15rem, 50vw"
+const CARD_SIZES = "(min-width: 768px) 15rem, 50vw"
 
 // No-break spaces, so "Class 12" never splits across lines.
 const CLASS_10 = "Class 10"
@@ -32,7 +32,7 @@ function ClassCards({ label, items }: { label: string; items: Item[] }) {
       <h4 className="font-heading text-title">{label}</h4>
       {/* No row gap on a phone: the cards carry their own bottom margin, so the
         rows after them keep the honour-board rhythm of the earlier years. */}
-      <SettleIn className="flex flex-wrap justify-center gap-x-3 md:justify-start md:gap-y-6">
+      <SettleIn className="flex flex-wrap justify-start gap-x-3 md:gap-y-6 lg:max-w-240">
         {items.map((item, i) => (
           <li
             key={item.id}
@@ -129,15 +129,21 @@ function BoardResultsSection({
       aria-labelledby={`${id}-heading`}
     >
       <Container className="flex flex-col gap-10 md:gap-12">
-        <SectionHeading id={`${id}-heading`} title={heading} />
-        {latest ? (
+        {/* The empty line is the heading's own intro, so with no results the
+          section reads as a heading and one quiet line, not an orphan block. */}
+        <SectionHeading
+          id={`${id}-heading`}
+          title={heading}
+          intro={latest ? undefined : empty}
+        />
+        {latest && (
           <BoardResultsSheet sheets={sheets} issuer={issuer}>
-            <div className="flex flex-col gap-12 md:gap-14">
+            <div className="flex flex-col gap-16 md:gap-20">
               <div className="flex flex-col gap-8">
                 <h3 className="font-heading text-display tabular-nums">
                   {latest.year}
                 </h3>
-                <div className="flex flex-col gap-10 md:gap-12">
+                <div className="flex flex-col gap-12 md:gap-14">
                   <ClassCards label={CLASS_10} items={latest.class10} />
                   <ClassCards label={CLASS_12} items={latest.class12} />
                 </div>
@@ -145,8 +151,6 @@ function BoardResultsSection({
               {earlier.length > 0 && <EarlierYears years={earlier} />}
             </div>
           </BoardResultsSheet>
-        ) : (
-          <p className="text-intro text-muted-foreground">{empty}</p>
         )}
       </Container>
     </Section>
