@@ -144,6 +144,11 @@ async function WhatsappButton(props: {
       href={whatsappHref(primary.e164, whatsappMessage)}
       icon={WhatsappIcon}
       {...props}
+      button={{ ...props.button, variant: "outline" }}
+      className={cn(
+        "border-whatsapp-ink/40 text-whatsapp-ink hover:text-whatsapp-ink [&_svg]:text-whatsapp",
+        props.className,
+      )}
     />
   )
 }

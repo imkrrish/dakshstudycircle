@@ -44,6 +44,8 @@
   --color-flame: var(--flame);
   --color-flame-light: var(--flame-light);
   --color-saffron: var(--saffron);
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-ink: var(--whatsapp-ink);
   /* EB Garamond has old-style figures by default; headings get lining ones. */
   --font-heading--font-feature-settings: "lnum";
   /* Type scale. Minimum text is 0.9375rem. EB Garamond tokens (display to
@@ -153,6 +155,12 @@
   --flame-light: oklch(0.92 0.13 95); /* yellow */
   --flame: oklch(0.8 0.165 72.3); /* amber */
   --saffron: oklch(0.71 0.177 50.9); /* orange */
+
+  /* WhatsApp's own greens, for the WhatsApp button only: the bright green is
+     the logo, the dark brand green is the label and border (fails nothing on
+     paper; the bright one is never used for text). */
+  --whatsapp: oklch(0.76 0.19 152); /* #25D366 */
+  --whatsapp-ink: oklch(0.41 0.07 183); /* #075E54 */
 }
 
 .dark {
@@ -194,6 +202,9 @@
   --flame-light: oklch(0.92 0.13 95);
   --flame: oklch(0.8 0.165 72.3);
   --saffron: oklch(0.71 0.177 50.9);
+
+  --whatsapp: oklch(0.76 0.19 152);
+  --whatsapp-ink: oklch(0.76 0.19 152);
 }
 
 /* One focus style for every custom interactive element: solid, 2px offset. */
