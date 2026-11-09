@@ -37,6 +37,9 @@ export type ResolvedContactVisitSection = Omit<ContactVisitSection, "map"> & {
   map?: ContactVisitSection["map"] & { embedUrl: string }
 }
 
+// The resolved map data (present only when the site has an embed URL).
+export type ContactVisitMap = NonNullable<ResolvedContactVisitSection["map"]>
+
 // ---------- Resolving ----------
 
 export function resolveContactVisit(
