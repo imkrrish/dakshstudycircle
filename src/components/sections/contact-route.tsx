@@ -60,7 +60,7 @@ function ContactRoute({
   return (
     <ContactRouteMotion
       style={{ "--n": stations.length } as CSSProperties}
-      className="grid gap-y-(--gap-y) [--disc:4.5rem] [--gap-x:4rem] [--gap-y:3rem] [--rise:0px] md:[--disc:6rem] lg:grid-cols-[repeat(var(--n),minmax(0,1fr))] lg:gap-x-(--gap-x) lg:gap-y-0 lg:[--disc:8.5rem] lg:[--rise:2rem]"
+      className="grid gap-y-(--gap-y) [--disc:4.5rem] [--gap-x:4rem] [--gap-y:3rem] [--rise:0px] md:[--disc:6rem] lg:grid-cols-[repeat(var(--n),minmax(0,1fr))] lg:gap-x-(--gap-x) lg:gap-y-0 lg:[--disc:8.5rem] lg:[--rise:3.5rem]"
     >
       {stations.map((station, i) => (
         <li
@@ -127,8 +127,12 @@ function ContactRoute({
             </p>
           </div>
           {station.toNext && (
-            <p className="col-start-2 mt-4 max-w-56 text-sm text-muted-foreground lg:absolute lg:top-[calc(var(--pad)-var(--rise)/2+var(--disc)/2)] lg:left-[calc(100%+var(--gap-x)/2)] lg:z-10 lg:mt-0 lg:w-40 lg:-translate-1/2 lg:bg-(--caption-bg) lg:px-2 lg:py-1 lg:text-center">
-              <Unbroken text={station.toNext} keep="tail" />
+            <p className="col-start-2 mt-4 max-w-56 text-sm text-muted-foreground lg:absolute lg:top-[calc(var(--pad)-var(--rise)/2+var(--disc)/2)] lg:left-[calc(100%+var(--gap-x)/2)] lg:z-10 lg:mt-0 lg:w-44 lg:-translate-1/2 lg:text-center lg:leading-5">
+              {/* The paper sits only behind the words, line by line, so the
+                  curve stays visible right up to the letters. */}
+              <span className="lg:bg-(--caption-bg) lg:box-decoration-clone lg:px-1">
+                <Unbroken text={station.toNext} keep="tail" />
+              </span>
             </p>
           )}
         </li>

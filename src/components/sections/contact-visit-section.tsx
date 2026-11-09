@@ -47,29 +47,35 @@ function ContactVisitSection({
       id={id}
       aria-labelledby={`${id}-heading`}
     >
-      <Container className="flex flex-col gap-12 lg:gap-16">
+      <Container className="flex flex-col gap-10 md:gap-12">
         <SectionHeading id={`${id}-heading`} title={heading} />
         <ContactRoute stations={route.stations} />
-        <div className="grid gap-14 lg:grid-cols-12 lg:gap-x-8">
-          <div className="flex max-w-lg flex-col gap-6 lg:col-span-6">
-            {/* The printed mat of the hero photo, holding a paper plate. */}
+        <div className="mt-2 grid gap-14 md:mt-0 lg:mt-4 lg:grid-cols-12 lg:items-start lg:gap-x-8">
+          <div className="max-w-xl lg:col-span-6">
+            {/* A printed address card: the mat of the hero photo (ring) holding
+                a plate of a different tone. The map and the buttons live
+                inside it, under the address. */}
             <div className="rounded-xl border bg-card p-1.5">
-              <div className="flex flex-col gap-2 rounded-lg bg-background px-5 py-5 md:px-7 md:py-6">
-                <p className={labelClass}>{labels.address}</p>
-                <address className="font-heading text-subtitle not-italic">
-                  {addressLines.map((line) => (
-                    <span key={line} className="block">
-                      <Unbroken text={line} />
-                    </span>
-                  ))}
-                </address>
+              <div className="flex flex-col gap-8 rounded-lg bg-muted px-6 py-7 md:px-10 md:py-10">
+                <div className="flex flex-col gap-2">
+                  <p className={labelClass}>{labels.address}</p>
+                  <address className="font-heading text-title not-italic">
+                    {addressLines.map((line) => (
+                      <span key={line} className="block">
+                        <Unbroken text={line} />
+                      </span>
+                    ))}
+                  </address>
+                </div>
+                {map ? (
+                  <MapFacade {...map}>{buttons}</MapFacade>
+                ) : (
+                  <div className="flex flex-col gap-3 sm:flex-row">
+                    {buttons}
+                  </div>
+                )}
               </div>
             </div>
-            {map ? (
-              <MapFacade {...map}>{buttons}</MapFacade>
-            ) : (
-              <div className="flex flex-col gap-3 sm:flex-row">{buttons}</div>
-            )}
           </div>
           <div className="flex flex-col gap-2 lg:col-span-5 lg:col-start-8">
             <p className={labelClass}>{labels.hours}</p>
@@ -85,7 +91,7 @@ function ContactVisitSection({
                 </div>
               ))}
             </dl>
-            <p className="mt-6 max-w-prose text-foreground/80">{note}</p>
+            <p className="mt-3 max-w-prose text-foreground/80">{note}</p>
           </div>
         </div>
       </Container>

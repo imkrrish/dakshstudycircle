@@ -55,7 +55,7 @@ function ContactReachSection({
                     button={button}
                     size="lg"
                     showNumber={false}
-                    className="h-11 w-full px-5 text-base sm:w-auto"
+                    className="h-11 w-full px-5 text-base sm:w-auto md:h-12 md:px-6 md:text-lead md:[&_svg:not([class*='size-'])]:size-5"
                   />
                 ))}
               </div>
