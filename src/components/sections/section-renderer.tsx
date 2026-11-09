@@ -8,6 +8,7 @@ import { CtaBandSection } from "./cta-band-section"
 import { EntranceResultsSection } from "./entrance-results-section"
 import { FaqSection } from "./faq-section"
 import { FeesSection } from "./fees-section"
+import { GallerySection } from "./gallery-section"
 import { HeroSection } from "./hero-section"
 import { LinkListSection } from "./link-list-section"
 import { PeopleGridSection } from "./people-grid-section"
@@ -51,6 +52,7 @@ const sectionComponents = {
   "people-grid": PeopleGridSection,
   "contact-reach": ContactReachSection,
   "contact-visit": ContactVisitSection,
+  gallery: GallerySection,
 } satisfies SectionComponents
 
 function SectionRenderer({ sections }: { sections: ResolvedSection[] }) {

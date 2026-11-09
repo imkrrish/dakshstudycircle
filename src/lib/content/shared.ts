@@ -235,6 +235,18 @@ export interface LoadedContent {
     highlight?: boolean
     sample?: boolean
   }>
+  gallery: {
+    groups: Array<{ id: string; name: string }>
+    photos: Array<{
+      id: string
+      src: string
+      width: number
+      height: number
+      alt: string
+      group: string
+      focus?: "top" | "center" | "bottom" | "left" | "right"
+    }>
+  }
   pages: Map<
     string,
     {

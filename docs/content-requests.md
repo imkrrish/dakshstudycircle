@@ -102,3 +102,7 @@ College classes 6. Which degrees exactly? The site shows B.A. and B.Com. DU SOL 
 3. Is Hall No. H-1 correct, and is the signboard/Google spelling Kalpatru or Kalpataru?
 4. Is a free demo offered for online classes or home tuition?
 5. Does the old site's "1 week free demo" still apply to anything?
+
+## Open questions: Gallery
+
+1. Permission for photos showing students (classrooms, tests, events).

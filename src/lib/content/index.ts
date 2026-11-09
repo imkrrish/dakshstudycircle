@@ -14,6 +14,8 @@ import type { Faculty } from "./collections/faculty"
 import type { Video } from "./collections/videos"
 import type { Testimonial } from "./collections/testimonials"
 import type { Result } from "./collections/results"
+import type { GalleryGroup, GalleryPhoto } from "./collections/gallery"
+import type { ResolvedGallerySection } from "./sections/gallery"
 import type {
   Section,
   ResolvedSection,
@@ -63,6 +65,14 @@ async function getResults(): Promise<Result[]> {
   return content.results
 }
 
+// The photo groups (display order) and all photos (best first within a group).
+async function getGallery(): Promise<{
+  groups: GalleryGroup[]
+  photos: GalleryPhoto[]
+}> {
+  return content.gallery
+}
+
 async function getCourse(slug: string): Promise<ResolvedCourse> {
   const course = content.courses.find((c) => c.slug === slug)
   if (!course) {
@@ -84,6 +94,7 @@ export {
   getCourses,
   getCourse,
   getFaculty,
+  getGallery,
   getResults,
 }
 
@@ -93,12 +104,15 @@ export type {
   Button,
   Course,
   Faculty,
+  GalleryGroup,
+  GalleryPhoto,
   Image,
   NavItem,
   Page,
   ResolvedBoardResultsSection,
   ResolvedCourseGridSection,
   ResolvedEntranceResultsSection,
+  ResolvedGallerySection,
   ResolvedResultsBoardSection,
   ResolvedSection,
   ResolvedTestimonialGridSection,

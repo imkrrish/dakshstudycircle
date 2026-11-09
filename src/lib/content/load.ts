@@ -12,6 +12,13 @@ import { VideoSchema, type Video } from "./collections/videos"
 import { TestimonialSchema, type Testimonial } from "./collections/testimonials"
 import { ResultSchema, type Result } from "./collections/results"
 import {
+  GalleryGroupSchema,
+  GalleryPhotoSchema,
+  type GalleryGroup,
+  type GalleryPhoto,
+} from "./collections/gallery"
+import { checkGalleries } from "./sections/gallery"
+import {
   contactPlaceholders,
   heroPlaceholders,
   checkPlaceholders,
@@ -28,6 +35,10 @@ import { faculty as rawFaculty } from "@/content/faculty"
 import { videos as rawVideos } from "@/content/videos"
 import { testimonials as rawTestimonials } from "@/content/testimonials"
 import { results as rawResults } from "@/content/results"
+import {
+  gallery as rawGallery,
+  galleryGroups as rawGalleryGroups,
+} from "@/content/gallery"
 
 // Entry classes each entrance exam admits to.
 const ENTRY_CLASSES: Record<string, number[]> = {
@@ -168,6 +179,42 @@ function loadContent() {
     results.push(parsed)
   })
 
+  const galleryGroups: GalleryGroup[] = []
+  const galleryGroupIds = new Set<string>()
+  rawGalleryGroups.forEach((raw, i) => {
+    const parsed = parseOrCollect(
+      GalleryGroupSchema,
+      raw,
+      `gallery.groups[${i}]`,
+      errors,
+    )
+    if (!parsed) return
+    if (galleryGroupIds.has(parsed.id)) {
+      errors.push(`gallery: duplicate group id "${parsed.id}"`)
+    }
+    galleryGroupIds.add(parsed.id)
+    galleryGroups.push(parsed)
+  })
+
+  const galleryPhotos: GalleryPhoto[] = []
+  const galleryPhotoIds = new Set<string>()
+  rawGallery.forEach((raw, i) => {
+    const label = `gallery[${i}]`
+    const parsed = parseOrCollect(GalleryPhotoSchema, raw, label, errors)
+    if (!parsed) return
+    if (galleryPhotoIds.has(parsed.id)) {
+      errors.push(`gallery: duplicate id "${parsed.id}"`)
+    }
+    galleryPhotoIds.add(parsed.id)
+    if (!galleryGroupIds.has(parsed.group)) {
+      errors.push(`${label}: unknown group "${parsed.group}"`)
+    }
+    if (!parsed.src.startsWith("/")) {
+      errors.push(`${label}: src must start with "/"`)
+    }
+    galleryPhotos.push(parsed)
+  })
+
   const courses: Course[] = []
   const courseSlugs = new Set<string>()
   rawCourses.forEach((raw, i) => {
@@ -211,6 +258,25 @@ function loadContent() {
     checkResultsBoards(`pages/${key}`, page.sections, results, errors)
     checkPersonFeatures(`pages/${key}`, page.sections, facultyIds, errors)
     checkSocialActions(`pages/${key}`, page.sections, socialPlatforms, errors)
+    checkGalleries(`pages/${key}`, page.sections, galleryGroupIds, errors)
+    // A hero photo taken from the gallery must match its gallery entry, so the
+    // alt text and size are stated once.
+    const hero = page.sections[0]
+    const heroImage = hero?.type === "hero" ? hero.media?.image : undefined
+    const entry = heroImage
+      ? galleryPhotos.find((p) => p.src === heroImage.src)
+      : undefined
+    if (heroImage && entry) {
+      if (
+        heroImage.alt !== entry.alt ||
+        heroImage.width !== entry.width ||
+        heroImage.height !== entry.height
+      ) {
+        errors.push(
+          `pages/${key}: hero image differs from gallery entry "${entry.id}" (alt, width and height must match)`,
+        )
+      }
+    }
   }
   for (const course of courses) {
     checkPlaceholders(
@@ -265,6 +331,7 @@ function loadContent() {
     pages,
     videos,
     testimonials,
+    gallery: { groups: galleryGroups, photos: galleryPhotos },
     // Year descending; Array.sort is stable, so data order breaks ties.
     results: real(results).sort((a, b) => b.year - a.year),
     courses: courses.sort((a, b) => a.order - b.order),

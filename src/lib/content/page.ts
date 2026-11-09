@@ -23,6 +23,7 @@ import { resolvePersonFeature } from "./sections/person-feature"
 import { resolvePeopleGrid } from "./sections/people-grid"
 import { resolveContactReach } from "./sections/contact-reach"
 import { resolveContactVisit } from "./sections/contact-visit"
+import { resolveGallery } from "./sections/gallery"
 import { assignTones } from "./tones"
 
 // ---------- Page ----------
@@ -95,6 +96,11 @@ export function resolveSections(
         const resolved = resolvePeopleGrid(section, content)
         return resolved ? [resolved] : []
       }
+      // Dropped when no photos are left to show.
+      case "gallery": {
+        const resolved = resolveGallery(section, content)
+        return resolved ? [resolved] : []
+      }
       case "results-board": {
         // Course pages default the year numeral to "heading", below the h1.
         const resolved = resolveResultsBoard(
@@ -130,6 +136,7 @@ function resolveOne(
         | "results-board"
         | "person-feature"
         | "people-grid"
+        | "gallery"
     }
   >,
   content: LoadedContent,
