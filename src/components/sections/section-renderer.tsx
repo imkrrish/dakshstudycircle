@@ -1,6 +1,8 @@
 import type { ReactNode } from "react"
 import type { ResolvedSection, SectionOf, SectionType } from "@/lib/content"
 import { BoardResultsSection } from "./board-results-section"
+import { ContactReachSection } from "./contact-reach-section"
+import { ContactVisitSection } from "./contact-visit-section"
 import { CourseGridSection } from "./course-grid-section"
 import { CtaBandSection } from "./cta-band-section"
 import { EntranceResultsSection } from "./entrance-results-section"
@@ -47,6 +49,8 @@ const sectionComponents = {
   "link-list": LinkListSection,
   "person-feature": PersonFeatureSection,
   "people-grid": PeopleGridSection,
+  "contact-reach": ContactReachSection,
+  "contact-visit": ContactVisitSection,
 } satisfies SectionComponents
 
 function SectionRenderer({ sections }: { sections: ResolvedSection[] }) {

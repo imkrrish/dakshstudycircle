@@ -17,7 +17,7 @@ Until real data arrives, results and testimonials are realistic sample records (
 
 ## Button actions
 
-- `link` (href) · `contact-dialog` (opens Talk to us dialog) · `directions` (map, new tab) · `social` (platform; opens the site.socials url in a new tab) · later: `book-demo`
+- `link` (href) · `contact-dialog` (opens Talk to us dialog) · `call` (tel: link to phones[0]) · `whatsapp` (wa.me chat with phones[0], prefilled with site.contact.whatsappMessage; new tab) · `directions` (map, new tab) · `social` (platform; opens the site.socials url in a new tab) · later: `book-demo`
 - Talk to us dialog: title "Call or WhatsApp us"; per number: label, Call, WhatsApp, Copy; office hours line. Data from getSite().
 
 ## Pages
@@ -93,9 +93,10 @@ Status: built.
 
 ### Contact `/contact`
 
-1. hero (small)
-2. contact ★: details + form (submits to WhatsApp prefilled; "or email us" link) + map facade
-3. faq
+1. hero (compact, with breadcrumbs Home › Contact, photo-split, no facts tile)
+2. contact-reach: Call (the one red button) and WhatsApp (both `phones[0]`), the second number as a text link, both emails, "Both numbers are on WhatsApp." The WhatsApp prefill form (no backend, nothing stored; course options from the courses collection plus "Not sure yet") is data and schema only; its UI comes in the design run.
+3. contact-visit: address, landmark, nearest metro, hours (`formatHours`), one free-demo note, "Get directions" (cid link). The click-to-load map ("Show map", iframe created only after the tap) is data and schema only; its facade comes in the design run.
+   No CTA band and no FAQ on this page.
 
 ### Privacy `/privacy`, 404
 

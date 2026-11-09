@@ -290,7 +290,7 @@ A ruled `<ol>` of 3–8 reasons (`reason-list`). Numerals are CSS counters (EB G
 
 ### Course page
 
-Order: hero, subjects, how we teach, results, FAQ, dark CTA (`COURSE_TEMPLATE` in `content.ts`; fees, link-list and video-player stay in the data but are not rendered). The page wrapper tightens `--section-y` to 3rem (4rem from `md`); the rest of the site keeps 5rem / 7rem. Body text on these sections is `text-base text-foreground/80`, not muted grey.
+Order: hero, subjects, how we teach, results, FAQ, dark CTA (`COURSE_TEMPLATE` in `src/lib/content/page.ts`; fees, link-list and video-player stay in the data but are not rendered). The page wrapper tightens `--section-y` to 3rem (4rem from `md`); the rest of the site keeps 5rem / 7rem. Body text on these sections is `text-base text-foreground/80`, not muted grey.
 
 - **Hero, photo-split** (a real photo): text in columns 1–6, photo in 7–12 at its own 4:3 (`HeroPhoto layout="split"`), no caption. With `facts` (the Courses page) the same layout gets the corner tile; without, no tile. Below `lg` text then photo. One-line audience sentence, no button.
 - **Subjects:** one paper card per subject (name in `text-title`, one summary line), six-column grid from `md`: five subjects are 3 + 3 over 2 + 2 + 2. No icons, initials, chevrons or teachers.
@@ -361,7 +361,7 @@ Reviews on home (`testimonial-grid`, `layout: "carousel"`, `show: "featured"`): 
 
 ### Lesson player
 
-Free YouTube playlists as a player with a playlist list (`video-player`, videos from `src/content/videos.ts`, `defaultVideo` chosen in the section data, resolved to `items: { id, title, href, embedSrc, thumbnail, meta }`; the playlist and embed URLs are built only in `content.ts`). It replaced the earlier card grid (`video-grid`, removed). The section is a Server Component; one client island (`LessonPlayer`) holds the selection and play state. Thumbnails go through `next/image` (`i.ytimg.com` in `remotePatterns`), full colour (no filter), lazy, decorative (`alt=""`).
+Free YouTube playlists as a player with a playlist list (`video-player`, videos from `src/content/videos.ts`, `defaultVideo` chosen in the section data, resolved to `items: { id, title, href, embedSrc, thumbnail, meta }`; the playlist and embed URLs are built only in `src/lib/content/sections/video-player.ts`). It replaced the earlier card grid (`video-grid`, removed). The section is a Server Component; one client island (`LessonPlayer`) holds the selection and play state. Thumbnails go through `next/image` (`i.ytimg.com` in `remotePatterns`), full colour (no filter), lazy, decorative (`alt=""`).
 
 **Player.** A click-to-play facade: the selected playlist's thumbnail in a 16:9 `rounded-xl` box with a centred round play button (`size-16`, `size-20` from `md`, paper disc, ink Hugeicons `PlayIcon`, no red) over a faint ink scrim. The facade is a real link to the playlist (`target="_blank"`, accessible name "Play Class 10 Maths lessons"); with JavaScript a plain click swaps it for an iframe (`youtube-nocookie.com/embed/videoseries?list=…&autoplay=1`, descriptive `title`, `allow` list, `referrerPolicy`) and moves focus into it. Nothing is requested from YouTube before that click. Under it: the playlist title (`text-subtitle`) and an "Open on YouTube" link (new tab, underlined, arrow icon, `hit-area`).
 

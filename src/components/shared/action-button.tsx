@@ -4,6 +4,7 @@ import {
   InstagramIcon,
   Location01Icon,
   NewTwitterIcon,
+  WhatsappIcon,
   YoutubeIcon,
 } from "@hugeicons/core-free-icons"
 import type { IconSvgElement } from "@hugeicons/react"
@@ -15,6 +16,7 @@ import { DialogTriggerButton } from "@/components/shared/dialog-trigger-button"
 import { Button as UiButton, buttonVariants } from "@/components/ui/button"
 import { getSite } from "@/lib/content"
 import type { Button, SocialPlatform } from "@/lib/content"
+import { whatsappHref } from "@/lib/utils"
 
 const socialIcons = {
   facebook: Facebook01Icon,
@@ -92,6 +94,58 @@ async function DirectionsButton(props: {
   const { mapUrl } = (await getSite()).contact
   if (!mapUrl) return null
   return <ExternalButton href={mapUrl} icon={Location01Icon} {...props} />
+}
+
+// A tel: link to the primary number (site.contact.phones[0]).
+async function CallButton({
+  button,
+  className,
+  size,
+  ...dataAttributes
+}: {
+  button: Button
+  className?: string
+  size?: ComponentProps<typeof UiButton>["size"]
+  [attribute: `data-${string}`]: string | boolean | undefined
+}) {
+  const [primary] = (await getSite()).contact.phones
+  if (!primary) return null
+  return (
+    <a
+      data-slot="action-button"
+      href={`tel:${primary.e164}`}
+      className={cn(
+        buttonVariants({
+          variant: variantMap[button.variant ?? "primary"],
+          size,
+        }),
+        "focus-ring",
+        className,
+      )}
+      {...dataAttributes}
+    >
+      <Label button={button} /> {primary.display}
+    </a>
+  )
+}
+
+// WhatsApp chat with the primary number, prefilled with the site message.
+async function WhatsappButton(props: {
+  button: Button
+  className?: string
+  size?: ComponentProps<typeof UiButton>["size"]
+  [attribute: `data-${string}`]: string | boolean | undefined
+}) {
+  const { phones, whatsappMessage } = (await getSite()).contact
+  const [primary] = phones
+  if (!primary) return null
+  return (
+    <ExternalButton
+      href={whatsappHref(primary.e164, whatsappMessage)}
+      icon={WhatsappIcon}
+      {...props}
+    />
+  )
 }
 
 async function SocialButton({
@@ -183,6 +237,24 @@ function ActionButton({
           variant={variant}
           size={size}
           className={cn("focus-ring", className)}
+          {...dataAttributes}
+        />
+      )
+    case "call":
+      return (
+        <CallButton
+          button={button}
+          size={size}
+          className={className}
+          {...dataAttributes}
+        />
+      )
+    case "whatsapp":
+      return (
+        <WhatsappButton
+          button={button}
+          size={size}
+          className={className}
           {...dataAttributes}
         />
       )

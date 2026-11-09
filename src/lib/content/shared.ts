@@ -22,6 +22,11 @@ export const SOCIAL_PLATFORMS = [
 const ActionSchema = z.discriminatedUnion("type", [
   z.strictObject({ type: z.literal("link"), href: z.string().min(1) }),
   z.strictObject({ type: z.literal("contact-dialog") }),
+  // tel: link to the primary number (site.contact.phones[0]).
+  z.strictObject({ type: z.literal("call") }),
+  // Opens WhatsApp chat with the primary number (phones[0]) in a new tab,
+  // prefilled with site.contact.whatsappMessage.
+  z.strictObject({ type: z.literal("whatsapp") }),
   // Opens site.contact.mapUrl in a new tab.
   z.strictObject({ type: z.literal("directions") }),
   // Opens the site.socials url for that platform in a new tab.
@@ -54,7 +59,7 @@ export const sectionBase = {
 }
 
 // `sample: true` marks an example record: it shows in development and the
-// resolver removes it in production (see content.ts). Collection items that can
+// loader removes it in production (see real() below, used in load.ts). Collection items that can
 // be examples carry it.
 export const sampleField = { sample: z.boolean().optional() }
 

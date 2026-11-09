@@ -1,7 +1,7 @@
 import type { Page } from "@/lib/content"
 
-// [CONFIRM] The story and director sections are added after the owner's review
-// with the director. Open questions: docs/content-requests.md ("About").
+// [CONFIRM] The director section is added after the owner's review with the
+// director. Open questions: docs/content-requests.md ("About").
 export const about: Page = {
   slug: "about",
   seo: {

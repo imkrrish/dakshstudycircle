@@ -46,7 +46,9 @@ export const site: Site = {
       state: "Delhi",
       postalCode: "110010",
     },
-    mapUrl: "https://maps.app.goo.gl/CfvNuGANjBQsmxCi9",
+    mapUrl: "https://www.google.com/maps?cid=9277486054616781108",
+    mapEmbedUrl:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.1567707790828!2d77.11980367567234!3d28.59507338577982!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1cbee151d107%3A0x80c040699612d134!2sDaksh%20Study%20Circle!5e0!3m2!1sen!2sin!4v1794236865555!5m2!1sen!2sin",
   },
   socials: [
     {

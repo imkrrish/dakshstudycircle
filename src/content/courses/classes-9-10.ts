@@ -3,7 +3,7 @@ import { courseCta } from "./shared"
 
 // Open [CONFIRM] items:
 // - Batch timings, duration
-// Course pages render only the types in COURSE_TEMPLATE (src/lib/content.ts):
+// Course pages render only the types in COURSE_TEMPLATE (src/lib/content/page.ts):
 // the videos, fees and official-links sections below are kept but not shown.
 
 export const classes9To10: Course = {

@@ -21,6 +21,8 @@ import { resolveResultsBoard } from "./sections/results-board"
 import { resolveTeachingPlan } from "./sections/teaching-plan"
 import { resolvePersonFeature } from "./sections/person-feature"
 import { resolvePeopleGrid } from "./sections/people-grid"
+import { resolveContactReach } from "./sections/contact-reach"
+import { resolveContactVisit } from "./sections/contact-visit"
 import { assignTones } from "./tones"
 
 // ---------- Page ----------
@@ -143,6 +145,10 @@ function resolveOne(
         return resolveCourseGrid(section, content)
       case "video-player":
         return resolveVideoPlayer(section, content)
+      case "contact-reach":
+        return resolveContactReach(section, content)
+      case "contact-visit":
+        return resolveContactVisit(section, content)
       case "testimonial-grid":
         return resolveTestimonialGrid(section, content)
       default:

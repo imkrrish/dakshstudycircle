@@ -94,3 +94,11 @@ College classes 6. Which degrees exactly? The site shows B.A. and B.Com. DU SOL 
 11. Pamphlet cover says "Since 2006"; fix on the next print.
 12. College classes: B.Sc. appears on the pamphlet, but the site says B.A. and B.Com. only; confirm.
 13. Confirm "4 classrooms" is current.
+
+## Open questions: Contact
+
+1. Hours: are Mon–Sat 9 am – 8 pm and Sun 9 am – 6 pm correct and current?
+2. Can parents walk in without calling first?
+3. Is Hall No. H-1 correct, and is the signboard/Google spelling Kalpatru or Kalpataru?
+4. Is a free demo offered for online classes or home tuition?
+5. Does the old site's "1 week free demo" still apply to anything?

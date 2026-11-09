@@ -55,14 +55,18 @@ export const SiteSchema = z.strictObject({
     ogImage: ImageSchema.optional(),
   }),
   contact: z.strictObject({
-    phones: z.array(
-      z.strictObject({
-        label: z.string().optional(),
-        e164: z.string(),
-        display: z.string(),
-        whatsapp: z.boolean(),
-      }),
-    ),
+    // phones[0] is the primary number: the "call" and "whatsapp" button
+    // actions (and the /contact WhatsApp form) use it.
+    phones: z
+      .array(
+        z.strictObject({
+          label: z.string().optional(),
+          e164: z.string(),
+          display: z.string(),
+          whatsapp: z.boolean(),
+        }),
+      )
+      .min(1),
     emails: z.array(z.string()),
     // Rows are rendered by formatHours() in src/lib/hours.ts, everywhere hours appear.
     hours: z.array(OpeningHoursSchema).min(1),
@@ -78,8 +82,19 @@ export const SiteSchema = z.strictObject({
       state: z.string(),
       postalCode: z.string(),
     }),
-    mapUrl: z.string().optional(),
-    mapEmbedUrl: z.string().optional(),
+    // The pin's own Google Maps link (the "directions" action and the footer).
+    mapUrl: z
+      .string()
+      .regex(/^https:\/\//, "mapUrl must be an https link")
+      .optional(),
+    // The embed src only (no iframe markup). Loaded on a tap, never on page load.
+    mapEmbedUrl: z
+      .string()
+      .regex(
+        /^https:\/\/www\.google\.com\/maps\/embed/,
+        "mapEmbedUrl must start with https://www.google.com/maps/embed",
+      )
+      .optional(),
   }),
   socials: z.array(
     z.strictObject({ platform: z.enum(SOCIAL_PLATFORMS), url: z.string() }),
@@ -105,4 +120,3 @@ export const SiteSchema = z.strictObject({
 
 export type Site = z.infer<typeof SiteSchema>
 export type NavItem = z.infer<typeof NavItemSchema>
-
