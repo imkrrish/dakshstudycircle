@@ -35,6 +35,12 @@ function ContactReachSection({
     form,
   } = section
 
+  // The first primary button is the page's call to action; the navbar's
+  // "Talk to us" goes outline while it is on screen (see NavCtaTone).
+  const ctaIndex = actions.findIndex(
+    (button) => (button.variant ?? "primary") === "primary",
+  )
+
   return (
     <Section
       data-slot="contact-reach-section"
@@ -49,12 +55,13 @@ function ContactReachSection({
             <div className="mt-10 flex flex-col">
               <p className={numberClass}>{primary.display}</p>
               <div className="mt-4 flex flex-col gap-3 sm:flex-row">
-                {actions.map((button) => (
+                {actions.map((button, i) => (
                   <ActionButton
                     key={button.label}
                     button={button}
                     size="lg"
                     showNumber={false}
+                    data-hero-cta={i === ctaIndex ? "" : undefined}
                     className="h-11 w-full px-5 text-base sm:w-auto md:h-12 md:px-6 md:text-lead md:[&_svg:not([class*='size-'])]:size-5"
                   />
                 ))}
@@ -78,7 +85,7 @@ function ContactReachSection({
               <p className="text-sm font-medium text-muted-foreground">
                 {emailLabel}
               </p>
-              <ul className="flex flex-col">
+              <ul className="-mt-0.5 flex flex-col">
                 {emails.map((email) => (
                   <li key={email} className="wrap-anywhere">
                     <a href={`mailto:${email}`} className={emailLink}>

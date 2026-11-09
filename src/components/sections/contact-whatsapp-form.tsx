@@ -99,6 +99,9 @@ function ContactWhatsappForm({
     question: "",
   })
   const [submitted, setSubmitted] = useState(false)
+  // Screen-reader announcement of the errors after a failed submit. The visible
+  // error paragraphs are not live, so typing never announces anything.
+  const [announcement, setAnnouncement] = useState("")
 
   // Checked on submit, then live, so a fixed field loses its error as you type.
   const errors = submitted
@@ -112,14 +115,21 @@ function ContactWhatsappForm({
   const onSubmit: ComponentProps<"form">["onSubmit"] = (event) => {
     event.preventDefault()
     setSubmitted(true)
-    if (clean(values.name).length < rules.name.min) {
-      nameRef.current?.focus()
+    const nameInvalid = clean(values.name).length < rules.name.min
+    const courseInvalid = values.course === ""
+    if (nameInvalid || courseInvalid) {
+      // A trailing no-break space changes the text so a repeat submit with the
+      // same errors is announced again.
+      const message = [nameInvalid && NAME_ERROR, courseInvalid && COURSE_ERROR]
+        .filter(Boolean)
+        .join(" ")
+      setAnnouncement((previous) =>
+        previous.endsWith("\u00a0") ? message : `${message}\u00a0`,
+      )
+      ;(nameInvalid ? nameRef : courseRef).current?.focus()
       return
     }
-    if (values.course === "") {
-      courseRef.current?.focus()
-      return
-    }
+    setAnnouncement("")
     window.open(
       whatsappHref(phone, buildMessage(form, rules, values)),
       "_blank",
@@ -142,6 +152,9 @@ function ContactWhatsappForm({
       {...props}
     >
       <div className="flex flex-col gap-5 px-4 py-8 sm:px-8 sm:py-10">
+        <div role="status" className="sr-only">
+          {announcement}
+        </div>
         <h3 id={`${id}-heading`} className="font-heading text-title">
           {form.heading}
         </h3>

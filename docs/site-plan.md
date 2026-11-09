@@ -91,12 +91,15 @@ Status: built.
 2. gallery ★ (lightbox)
 3. cta-band (light)
 
-### Contact `/contact`
+### Contact `/contact` (built)
 
-1. hero (compact, with breadcrumbs Home › Contact, photo-split, no facts tile)
-2. contact-reach: Call (the one red button) and WhatsApp (both `phones[0]`), the second number as a text link, both emails, "Both numbers are on WhatsApp." The WhatsApp prefill form (no backend, nothing stored; course options from the courses collection plus "Not sure yet") is data and schema only; its UI comes in the design run.
-3. contact-visit: address, landmark, nearest metro, hours (`formatHours`), one free-demo note, "Get directions" (cid link). The click-to-load map ("Show map", iframe created only after the tap) is data and schema only; its facade comes in the design run.
-   No CTA band and no FAQ on this page.
+Section order:
+
+1. hero (compact, breadcrumbs Home › Contact, photo-split, no facts tile; no CTA button)
+2. contact-reach (muted): the primary number large with Call (the one red button, marked `data-hero-cta` so the navbar CTA goes outline while it shows) and WhatsApp (outline), the second number as a large `tel:` link, "Both numbers are on WhatsApp.", both emails, and the WhatsApp enquiry slip (no backend, nothing stored; class options from the courses collection plus "Not sure yet"; hidden without JS).
+3. contact-visit (paper): the route (Metro, Mother Dairy booth, Kalpatru Complex), the address card with click-to-load map ("Show map", iframe created only after the tap) and "Get directions", hours as a timetable (`formatHours`), the free-demo note.
+
+No CTA band and no FAQ on this page.
 
 ### Privacy `/privacy`, 404
 
