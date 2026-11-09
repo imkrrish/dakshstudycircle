@@ -21,7 +21,11 @@ const ContactFormSchema = z
     submitLabel: z.string().min(1),
     fields: z.strictObject({
       name: z.strictObject({ label: z.string().min(1) }),
-      course: z.strictObject({ label: z.string().min(1) }),
+      course: z.strictObject({
+        label: z.string().min(1),
+        // The disabled first option of the picker. Never submitted.
+        placeholder: z.string().min(1),
+      }),
       question: z.strictObject({
         label: z.string().min(1),
         // Shown after the label, e.g. "(optional)".
@@ -76,6 +80,8 @@ export const CONTACT_FORM_RULES = {
 export type ContactReachSection = z.infer<typeof ContactReachSectionSchema>
 
 export type ResolvedContactReachSection = Omit<ContactReachSection, "form"> & {
+  // phones[0]: the number the call, WhatsApp and form target.
+  primary: { e164: string; display: string } | null
   // Every phone after the primary one.
   otherPhones: Array<{ e164: string; display: string }>
   emails: string[]
@@ -94,6 +100,9 @@ export function resolveContactReach(
   const { notSure } = section.form
   return {
     ...section,
+    primary: phones[0]
+      ? { e164: phones[0].e164, display: phones[0].display }
+      : null,
     otherPhones: phones
       .slice(1)
       .map(({ e164, display }) => ({ e164, display })),

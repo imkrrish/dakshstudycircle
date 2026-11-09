@@ -55,7 +55,10 @@ export const contact: Page = {
         submitLabel: "Open WhatsApp",
         fields: {
           name: { label: "Your name" },
-          course: { label: "Class or course" },
+          course: {
+            label: "Class or course",
+            placeholder: "Choose a class or course",
+          },
           question: { label: "Your question", optionalNote: "(optional)" },
         },
         notSure: { label: "Not sure yet", message: "classes" },

@@ -13,6 +13,7 @@ import { cn } from "cn"
 import Link from "next/link"
 
 import { DialogTriggerButton } from "@/components/shared/dialog-trigger-button"
+import { whatsappButtonClass } from "@/components/shared/whatsapp-styles"
 import { Button as UiButton, buttonVariants } from "@/components/ui/button"
 import { getSite } from "@/lib/content"
 import type { Button, SocialPlatform } from "@/lib/content"
@@ -101,11 +102,14 @@ async function CallButton({
   button,
   className,
   size,
+  showNumber = true,
   ...dataAttributes
 }: {
   button: Button
   className?: string
   size?: ComponentProps<typeof UiButton>["size"]
+  // False when the number is already set large next to the button.
+  showNumber?: boolean
   [attribute: `data-${string}`]: string | boolean | undefined
 }) {
   const [primary] = (await getSite()).contact.phones
@@ -124,7 +128,8 @@ async function CallButton({
       )}
       {...dataAttributes}
     >
-      <Label button={button} /> {primary.display}
+      <Label button={button} />
+      {showNumber && ` ${primary.display}`}
     </a>
   )
 }
@@ -145,10 +150,7 @@ async function WhatsappButton(props: {
       icon={WhatsappIcon}
       {...props}
       button={{ ...props.button, variant: "outline" }}
-      className={cn(
-        "border-whatsapp-ink/40 text-whatsapp-ink hover:text-whatsapp-ink [&_svg]:text-whatsapp",
-        props.className,
-      )}
+      className={cn(whatsappButtonClass, props.className)}
     />
   )
 }
@@ -192,11 +194,14 @@ function ActionButton({
   button,
   className,
   size,
+  showNumber,
   ...dataAttributes
 }: {
   button: Button
   className?: string
   size?: ComponentProps<typeof UiButton>["size"]
+  // Call button only: show the number in the label (default) or just the word.
+  showNumber?: boolean
   [attribute: `data-${string}`]: string | boolean | undefined
 }) {
   const variant = variantMap[button.variant ?? "primary"]
@@ -250,6 +255,7 @@ function ActionButton({
         <CallButton
           button={button}
           size={size}
+          showNumber={showNumber}
           className={className}
           {...dataAttributes}
         />
