@@ -159,14 +159,15 @@ export const gallery: GalleryPhoto[] = [
     group: "tests",
   },
   {
-    // 2.17:1 CCTV frame; the students sit right of centre.
+    // 2.17:1 CCTV frame, shown at 2:1. The students sit right of centre, but only
+    // about 8% of the width is trimmed; a right crop keeps the frame's dark edge.
     id: "test-cctv-seated",
     src: `${dir}/10-img.avif`,
     width: 1280,
     height: 591,
     alt: "A CCTV view of students seated at desks in a classroom",
     group: "tests",
-    focus: "right",
+    focus: "center",
   },
 
   // ---- Events ----

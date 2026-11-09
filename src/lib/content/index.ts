@@ -15,7 +15,10 @@ import type { Video } from "./collections/videos"
 import type { Testimonial } from "./collections/testimonials"
 import type { Result } from "./collections/results"
 import type { GalleryGroup, GalleryPhoto } from "./collections/gallery"
-import type { ResolvedGallerySection } from "./sections/gallery"
+import type {
+  ResolvedGalleryPhoto,
+  ResolvedGallerySection,
+} from "./sections/gallery"
 import type {
   Section,
   ResolvedSection,
@@ -112,6 +115,7 @@ export type {
   ResolvedBoardResultsSection,
   ResolvedCourseGridSection,
   ResolvedEntranceResultsSection,
+  ResolvedGalleryPhoto,
   ResolvedGallerySection,
   ResolvedResultsBoardSection,
   ResolvedSection,

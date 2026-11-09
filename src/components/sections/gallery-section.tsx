@@ -1,21 +1,24 @@
-import Image from "next/image"
-
 import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
 import { SectionHeading } from "@/components/layout/section-heading"
-import type { GalleryPhoto, SectionOf } from "@/lib/content"
+import { GalleryLightbox } from "@/components/sections/gallery-lightbox"
+import { GalleryPrint } from "@/components/sections/gallery-print"
+import type { SectionOf } from "@/lib/content"
 
-const FOCUS_CLASS: Record<NonNullable<GalleryPhoto["focus"]>, string> = {
-  top: "object-top",
-  center: "object-center",
-  bottom: "object-bottom",
-  left: "object-left",
-  right: "object-right",
-}
-
-// Plain layout for now: each group is an h2 and a wrapping list of photos.
+// An album: each group is a page of prints in justified rows. Every print in a
+// row shares one height and keeps its own shape (see GalleryPrint). The row
+// height (--row-h) and the mat's total width (--mat: border plus padding on
+// both sides) are the same for every group, so the groups read as one book.
+// The last row of a group is not stretched: an empty item with a huge grow
+// factor takes up the free space after its prints. Keep --row-h in step with
+// ROW_HEIGHTS in gallery-print.tsx (it feeds the image `sizes`).
+//
+// Clicking a print opens GalleryLightbox, which steps through every photo in
+// page order (the groups run on), so each print gets its running index.
 function GallerySection({ section }: { section: SectionOf<"gallery"> }) {
   const { id, heading, intro, groups } = section
+  const all = groups.flatMap(({ photos }) => photos)
+  const indexOf = new Map(all.map((photo, index) => [photo.id, index]))
   return (
     <Section
       data-slot="gallery-section"
@@ -23,31 +26,44 @@ function GallerySection({ section }: { section: SectionOf<"gallery"> }) {
       id={id}
       aria-labelledby={heading ? `${id}-heading` : undefined}
     >
-      <Container className="flex flex-col gap-10 md:gap-12">
-        {heading && (
-          <SectionHeading id={`${id}-heading`} title={heading} intro={intro} />
-        )}
-        {groups.map(({ group, heading: groupHeading, photos }) => (
-          <div key={group} className="flex flex-col gap-6">
-            <h2 className="font-heading text-heading">{groupHeading}</h2>
-            <ul className="flex flex-wrap gap-4">
-              {photos.map((photo) => (
-                <li key={photo.id} className="w-full sm:w-[45%] lg:w-80">
-                  <Image
-                    src={photo.src}
-                    alt={photo.alt}
-                    width={photo.width}
-                    height={photo.height}
-                    loading="lazy"
-                    sizes="(min-width: 1024px) 20rem, (min-width: 640px) 45vw, calc(100vw - 2rem)"
-                    className={`h-auto w-full ${photo.focus ? FOCUS_CLASS[photo.focus] : ""}`}
+      <GalleryLightbox
+        photos={all.map(({ id: photoId, src, width, height, alt }) => ({
+          id: photoId,
+          src,
+          width,
+          height,
+          alt,
+        }))}
+      >
+        <Container className="flex flex-col gap-16 md:gap-24">
+          {heading && (
+            <SectionHeading
+              id={`${id}-heading`}
+              title={heading}
+              intro={intro}
+            />
+          )}
+          {groups.map(({ group, heading: groupHeading, photos }) => (
+            <div key={group} className="flex flex-col gap-6 md:gap-8">
+              <h2 id={`${id}-${group}`} className="font-heading text-heading">
+                {groupHeading}
+              </h2>
+              <ul
+                aria-labelledby={`${id}-${group}`}
+                className="flex flex-wrap gap-2 [--mat:0.625rem] [--row-h:6.25rem] after:grow-999999 after:basis-0 after:content-[''] sm:[--mat:0.875rem] sm:[--row-h:9rem] md:gap-3 md:[--row-h:10.5rem] lg:[--row-h:12rem]"
+              >
+                {photos.map((photo) => (
+                  <GalleryPrint
+                    key={photo.id}
+                    photo={photo}
+                    index={indexOf.get(photo.id) ?? 0}
                   />
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </Container>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </Container>
+      </GalleryLightbox>
     </Section>
   )
 }

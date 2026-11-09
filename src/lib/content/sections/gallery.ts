@@ -18,8 +18,34 @@ export const GallerySectionSchema = z.strictObject({
 })
 
 export type GallerySection = z.infer<typeof GallerySectionSchema>
+// A photo plus its display ratio: the real ratio clamped to 0.75–2.0, so a very
+// tall or very wide photo gets a frame that crops it (object-fit cover) instead
+// of a sliver. `cropped` is true when the clamp actually trims the picture.
+export type ResolvedGalleryPhoto = GalleryPhoto & {
+  ratio: number
+  cropped: boolean
+}
 export type ResolvedGallerySection = Omit<GallerySection, "groups"> & {
-  groups: Array<{ group: string; heading: string; photos: GalleryPhoto[] }>
+  groups: Array<{
+    group: string
+    heading: string
+    photos: ResolvedGalleryPhoto[]
+  }>
+}
+
+const MIN_RATIO = 0.75
+const MAX_RATIO = 2
+// Less than 1% of trim is not worth calling a crop.
+const CROP_TOLERANCE = 0.01
+
+function withRatio(photo: GalleryPhoto): ResolvedGalleryPhoto {
+  const natural = photo.width / photo.height
+  const ratio = Math.min(MAX_RATIO, Math.max(MIN_RATIO, natural))
+  return {
+    ...photo,
+    ratio,
+    cropped: Math.abs(ratio - natural) / natural > CROP_TOLERANCE,
+  }
 }
 
 // ---------- Resolving ----------
@@ -34,7 +60,9 @@ export function resolveGallery(
     .map(({ group, heading }) => ({
       group,
       heading,
-      photos: content.gallery.photos.filter((photo) => photo.group === group),
+      photos: content.gallery.photos
+        .filter((photo) => photo.group === group)
+        .map(withRatio),
     }))
     .filter((g) => g.photos.length > 0)
   return groups.length > 0 ? { ...section, groups } : undefined
