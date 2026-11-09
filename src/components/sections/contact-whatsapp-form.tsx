@@ -138,13 +138,10 @@ function ContactWhatsappForm({
       aria-labelledby={`${id}-heading`}
       onSubmit={onSubmit}
       // The fields need JavaScript; without it the buttons above are the way in.
-      className={cn(
-        "bg-background sm:border sm:border-foreground/20 sm:p-1.5 noscript:hidden",
-        className,
-      )}
+      className={cn("rounded-sm bg-background noscript:hidden", className)}
       {...props}
     >
-      <div className="flex flex-col gap-5 border border-foreground/20 px-4 py-8 sm:px-8 sm:py-10">
+      <div className="flex flex-col gap-5 px-4 py-8 sm:px-8 sm:py-10">
         <h3 id={`${id}-heading`} className="font-heading text-title">
           {form.heading}
         </h3>
