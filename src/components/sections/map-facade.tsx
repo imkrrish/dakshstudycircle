@@ -1,24 +1,24 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import { MapsLocation01Icon } from "@hugeicons/core-free-icons"
-import { HugeiconsIcon } from "@hugeicons/react"
+import { useEffect, useRef, useState, type ReactNode } from "react"
 import { cn } from "cn"
 
 import { Button } from "@/components/ui/button"
 import type { ContactVisitMap } from "@/lib/content/sections/contact-visit"
 
-// A click-to-load map. The panel is a printed mat (as the hero photo) with a
-// fixed 4:3 box, so nothing shifts when the map arrives. Nothing is requested
-// from Google until the visitor taps "Show map": then the iframe takes the
-// box's place and gets focus. Without JavaScript the panel is hidden and
-// "Get directions" is the way in.
+// A click-to-load map. Nothing is requested from Google until the visitor taps
+// "Show map": then the button goes, the map opens below the actions in a
+// printed mat (the same frame as the hero photo) and the iframe gets focus.
+// `children` are the section's own action buttons (Get directions); they stay
+// where they are. Without JavaScript "Show map" is hidden and the directions
+// button is the way in.
 function MapFacade({
   embedUrl,
   title,
   showMapLabel,
+  children,
   className,
-}: ContactVisitMap & { className?: string }) {
+}: ContactVisitMap & { children?: ReactNode; className?: string }) {
   const [loaded, setLoaded] = useState(false)
   const iframeRef = useRef<HTMLIFrameElement>(null)
 
@@ -29,41 +29,36 @@ function MapFacade({
   return (
     <div
       data-slot="map-facade"
-      className={cn(
-        "rounded-xl border bg-card p-1.5 noscript:hidden",
-        className,
-      )}
+      className={cn("flex flex-col gap-6", className)}
     >
-      <div className="relative aspect-4/3 overflow-clip rounded-lg bg-muted">
-        {loaded ? (
-          <iframe
-            ref={iframeRef}
-            src={embedUrl}
-            title={title}
-            loading="lazy"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen
-            className="absolute inset-0 size-full border-0 focus-ring"
-          />
-        ) : (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-            <HugeiconsIcon
-              icon={MapsLocation01Icon}
-              strokeWidth={1.5}
-              aria-hidden="true"
-              className="size-12 text-muted-foreground"
-            />
-            <Button
-              variant="outline"
-              size="lg"
-              className="h-11 focus-ring lg:h-10"
-              onClick={() => setLoaded(true)}
-            >
-              {showMapLabel}
-            </Button>
-          </div>
+      <div className="flex flex-col gap-3 sm:flex-row">
+        {!loaded && (
+          <Button
+            variant="outline"
+            size="lg"
+            className="h-11 w-full focus-ring sm:w-auto lg:h-10 noscript:hidden"
+            onClick={() => setLoaded(true)}
+          >
+            {showMapLabel}
+          </Button>
         )}
+        {children}
       </div>
+      {loaded && (
+        <div className="rounded-xl border bg-card p-1.5">
+          <div className="relative aspect-4/3 overflow-clip rounded-lg bg-muted lg:aspect-video">
+            <iframe
+              ref={iframeRef}
+              src={embedUrl}
+              title={title}
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+              className="absolute inset-0 size-full border-0 focus-ring"
+            />
+          </div>
+        </div>
+      )}
     </div>
   )
 }

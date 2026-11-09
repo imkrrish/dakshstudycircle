@@ -1,11 +1,14 @@
 import {
   Award01Icon,
   BookOpen01Icon,
+  Building03Icon,
   Call02Icon,
   Location01Icon,
   Mail01Icon,
+  MetroIcon,
   NoteEditIcon,
   School01Icon,
+  Store01Icon,
   UserGroupIcon,
 } from "@hugeicons/core-free-icons"
 
@@ -13,11 +16,14 @@ import {
 export const iconRegistry = {
   award: Award01Icon,
   book: BookOpen01Icon,
+  building: Building03Icon,
   phone: Call02Icon,
   location: Location01Icon,
   mail: Mail01Icon,
+  metro: MetroIcon,
   "note-edit": NoteEditIcon,
   school: School01Icon,
+  store: Store01Icon,
   users: UserGroupIcon,
 } as const
 

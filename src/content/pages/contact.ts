@@ -76,11 +76,30 @@ export const contact: Page = {
       heading: "Visit the centre",
       labels: {
         address: "Address",
-        landmark: "Landmark",
-        metro: "Nearest metro",
         hours: "Hours",
       },
-      metroNote: "It is a short auto ride, not walking distance.",
+      // The way in, one fact per station (landmark and metro live here only).
+      // The last station is the destination. Icon keys: src/lib/icons.ts.
+      route: {
+        stations: [
+          {
+            title: "Sadar Bazar Cantonment",
+            line: "Metro station, Magenta Line",
+            icon: "metro",
+            toNext: "A short auto ride, about 2 km",
+          },
+          {
+            title: "Mother Dairy booth",
+            line: "Opposite Sadar Bazaar bus stand",
+            icon: "store",
+          },
+          {
+            title: "Kalpatru Complex",
+            line: "The building behind the booth, 2nd floor",
+            icon: "building",
+          },
+        ],
+      },
       note: "Demo classes at the centre are free until you are satisfied enough to join.",
       actions: [
         {
@@ -89,7 +108,6 @@ export const contact: Page = {
           action: { type: "directions" },
         },
       ],
-      // Data only for now: the click-to-load facade comes with the design run.
       map: {
         showMapLabel: "Show map",
         title: "Map showing Daksh Study Circle in Sadar Bazaar, Delhi Cantt",

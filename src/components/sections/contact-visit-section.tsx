@@ -1,31 +1,17 @@
-import { Fragment } from "react"
-
 import { Container } from "@/components/layout/container"
 import { Section } from "@/components/layout/section"
 import { SectionHeading } from "@/components/layout/section-heading"
+import { ContactRoute, Unbroken } from "@/components/sections/contact-route"
 import { MapFacade } from "@/components/sections/map-facade"
 import { ActionButton } from "@/components/shared/action-button"
 import type { SectionOf } from "@/lib/content"
-import { cn } from "cn"
-
-// A line that may break only between its parts: after a comma, or before a
-// bracket. Each part stays whole, so a name, "(Magenta Line)", "about 2 km" or
-// the pincode line never splits across lines.
-function Unbroken({ text }: { text: string }) {
-  const parts = text.split(/(?<=,) | (?=\()/)
-  return parts.map((part, index) => (
-    <Fragment key={part}>
-      {index > 0 ? " " : null}
-      <span className="whitespace-nowrap">{part}</span>
-    </Fragment>
-  ))
-}
 
 const labelClass = "text-sm font-medium text-muted-foreground"
 
-// Left: the visit details, the free-demo note and the directions button.
-// Right from lg (below the rest on phones): the click-to-load map. Without map
-// data the section is one plain column.
+// The way to the centre. The route comes first (stations joined by a curve,
+// in the board-year language); under it, the address on a printed label with
+// the map and directions (left), and the hours as a small timetable with the
+// free-demo note (right). Stacked on phones, address first.
 function ContactVisitSection({
   section,
 }: {
@@ -36,82 +22,72 @@ function ContactVisitSection({
     tone,
     heading,
     labels,
+    route,
     addressLines,
-    landmark,
-    metro,
-    metroNote,
     hours,
     note,
     actions,
     map,
   } = section
 
+  const buttons = actions.map((button) => (
+    <ActionButton
+      key={button.label}
+      button={button}
+      size="lg"
+      className="h-11 w-full sm:w-auto lg:h-10"
+    />
+  ))
+
   return (
     <Section
       data-slot="contact-visit-section"
+      className="[--caption-bg:var(--background)] data-[tone=muted]:[--caption-bg:var(--muted)]"
       tone={tone}
       id={id}
       aria-labelledby={`${id}-heading`}
     >
-      <Container
-        className={cn(map && "grid gap-12 lg:grid-cols-12 lg:items-start")}
-      >
-        <div className={cn("flex flex-col", map && "lg:col-span-5")}>
-          <SectionHeading id={`${id}-heading`} title={heading} />
-          <dl className="mt-8 flex flex-col gap-6 md:gap-7">
-            <div className="flex flex-col gap-1">
-              <dt className={labelClass}>{labels.address}</dt>
-              <dd>
-                <address className="text-lead not-italic">
+      <Container className="flex flex-col gap-12 lg:gap-16">
+        <SectionHeading id={`${id}-heading`} title={heading} />
+        <ContactRoute stations={route.stations} />
+        <div className="grid gap-14 lg:grid-cols-12 lg:gap-x-8">
+          <div className="flex max-w-lg flex-col gap-6 lg:col-span-6">
+            {/* The printed mat of the hero photo, holding a paper plate. */}
+            <div className="rounded-xl border bg-card p-1.5">
+              <div className="flex flex-col gap-2 rounded-lg bg-background px-5 py-5 md:px-7 md:py-6">
+                <p className={labelClass}>{labels.address}</p>
+                <address className="font-heading text-subtitle not-italic">
                   {addressLines.map((line) => (
                     <span key={line} className="block">
                       <Unbroken text={line} />
                     </span>
                   ))}
                 </address>
-              </dd>
-            </div>
-            {landmark && (
-              <div className="flex flex-col gap-1">
-                <dt className={labelClass}>{labels.landmark}</dt>
-                <dd className="text-balance">{landmark}</dd>
               </div>
-            )}
-            {metro && (
-              <div className="flex flex-col gap-1">
-                <dt className={labelClass}>{labels.metro}</dt>
-                <dd>
-                  <span className="block">
-                    <Unbroken text={metro} />
-                  </span>
-                  <span className="block text-foreground/80">{metroNote}</span>
-                </dd>
-              </div>
-            )}
-            <div className="flex flex-col gap-1">
-              <dt className={labelClass}>{labels.hours}</dt>
-              <dd className="tabular-nums">
-                {hours.map((row) => (
-                  <span key={row} className="block whitespace-nowrap">
-                    {row}
-                  </span>
-                ))}
-              </dd>
             </div>
-          </dl>
-          <p className="mt-8 max-w-prose text-foreground/80">{note}</p>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            {actions.map((button) => (
-              <ActionButton
-                key={button.label}
-                button={button}
-                size="lg"
-                className="h-11 w-full sm:w-auto lg:h-10"
-              />
-            ))}
+            {map ? (
+              <MapFacade {...map}>{buttons}</MapFacade>
+            ) : (
+              <div className="flex flex-col gap-3 sm:flex-row">{buttons}</div>
+            )}
+          </div>
+          <div className="flex flex-col gap-2 lg:col-span-5 lg:col-start-8">
+            <p className={labelClass}>{labels.hours}</p>
+            <dl className="grid grid-cols-[auto_auto] items-baseline justify-start gap-x-8 gap-y-2">
+              {hours.map(({ days, times }) => (
+                <div key={days} className="contents">
+                  <dt className="text-base whitespace-nowrap text-foreground/80">
+                    {days}
+                  </dt>
+                  <dd className="font-heading text-subtitle whitespace-nowrap tabular-nums">
+                    {times}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+            <p className="mt-6 max-w-prose text-foreground/80">{note}</p>
           </div>
         </div>
-        {map && <MapFacade {...map} className="lg:col-span-6 lg:col-start-7" />}
       </Container>
     </Section>
   )
